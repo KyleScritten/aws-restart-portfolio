@@ -3,20 +3,20 @@
 
 <img width="408" height="326" alt="Introduction to Amazon EC2" src="https://github.com/user-attachments/assets/1ac6bb76-4e80-4bbe-9fe2-661071e873bd" />
 
-This lab provides you with a basic overview of launching, resizing, managing, and monitoring an Amazon EC2 instance.
+In this lab, I explored the fundamentals of Amazon EC2 by learning how to launch, resize, manage, and monitor virtual servers in the AWS Cloud.
 
-Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.
+Amazon Elastic Compute Cloud (EC2) is a cloud computing service that provides scalable and on-demand compute capacity. It allows developers and organizations to quickly deploy virtual machines without the need to invest in physical hardware.
 
-Amazon EC2's simple web service interface allows you to obtain and configure capacity with minimal friction. It provides you with complete control of your computing resources and lets you run on Amazon's proven computing environment. Amazon EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capacity, both up and down, as your computing requirements change.
+Through this lab, I gained hands-on experience with the EC2 management process, including instance deployment, configuration, monitoring, and resizing. One of the key advantages of EC2 is its flexibility, enabling resources to be scaled up or down based on changing requirements.
 
-Amazon EC2 changes the economics of computing by allowing you to pay only for capacity that you actually use. Amazon EC2 provides developers the tools to build failure resilient applications and isolate themselves from common failure scenarios.
+EC2 also follows a pay-as-you-go pricing model, meaning you only pay for the resources you use. This makes it a cost-effective solution for running applications while providing the reliability, performance, and fault-tolerant infrastructure of AWS.
 
 ## Topics covered
 
 Through this lab I have learnt to:
 - Launch a web server with termination protection enabled
-- Monitor Your EC2 instance
-- Modify the security group that your web server is using to allow HTTP access
-- Resize your Amazon EC2 instance to scale
+- Monitor an EC2 instance
+- Modify the security group that a web server is using to allow HTTP access
+- Resize an Amazon EC2 instance to scale
 - Test termination protection
-- Terminate your EC2 instance
+- Terminate an EC2 instance
