@@ -1,6 +1,8 @@
 # Introduction to Amazon Elastic Compute Cloud (EC2)
 
+<p align="center">
 <img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600">
+</p>
 
 ## Overview
 In this lab, I explored the fundamentals of Amazon EC2 by learning how to launch, resize, manage, and monitor virtual servers in the AWS Cloud.
