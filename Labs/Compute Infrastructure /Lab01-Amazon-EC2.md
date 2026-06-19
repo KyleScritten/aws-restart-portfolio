@@ -63,14 +63,15 @@ To fix this, I updated the inbound rules by following the steps below:
 - Type: HTTP
 - Port: 80
 - Source: Anywhere (IPv4)
-4. Save the rule and refresh the browser. You should now see the message in the new browser tab: 
+4. Save the rule and refresh the browser. You should now see the message in the new browser tab:
+   
 *Hello From Your Web Server!*
 
 ## Task 4 – Resizing the EC2 Instance
 
 I learned that EC2 instances can be resized if more resources are required.
 
-### How to change the EBS volume of an instance type
+How to change the EBS volume of an instance type:
 
 1. Stopped the instance
 2. Changed the **instance type**
