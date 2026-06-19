@@ -12,7 +12,7 @@ In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and wil
 
 I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP 52.42.122.142. From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
 
-### Connect to the EC2 Instance
+#### Connect to the EC2 Instance
 
 ```bash
 kylescritten@Kyles-MacBook-Air ~ % cd ~/Downloads
@@ -23,7 +23,7 @@ ED25519 key fingerprint is: SHA256:iR8ngHw5JuO15w804j32BygrHWl2D3DPLbZ7yhCAoc8
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 ```
-### Terminal Output
+#### Terminal Output
 ```text
 Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
 ** WARNING: connection is not using a post-quantum key exchange algorithm.
@@ -42,3 +42,21 @@ Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
 
 [ec2-user@ip-10-0-10-165 ~]$ 
 ```
+
+## Task 2: Exercise - Explore the Linux man pages
+In this exercise, I used my bash terminal to view the Linux standard help system. This system is generally referred to as the manual pages (or man pages).
+
+To open the manual pages for the man program, enter the following command in the terminal window, and press Enter:
+```text
+man man
+```
+
+#### Terminal Input
+```bash
+[ec2-user@ip-10-0-10-165 ~]$ man man
+```
+
+#### Terminal Output
+
+
+The terminal window then displays the man page utilities or man page with various help sections identifiable by the man page headers. To exit the man pages, enter q.
