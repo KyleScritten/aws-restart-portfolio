@@ -1,6 +1,6 @@
 # Cloud Foundations - Introduction to Amazon Elastic Compute Cloud (EC2)
 ## Overview
-<img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600" align="center">
+<img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600">
 
 In this lab, I explored the fundamentals of Amazon EC2 by learning how to launch, resize, manage, and monitor virtual servers in the AWS Cloud.
 
@@ -61,6 +61,8 @@ To fix this, I updated the inbound rules by following the steps below:
 - Type: HTTP
 - Port: 80
 - Source: Anywhere (IPv4)
+4. Save the rule and refresh the browser. You should now see the message in the new browser tab: 
+*Hello From Your Web Server!*
 
 ## Task 4 – Resizing the EC2 Instance
 
