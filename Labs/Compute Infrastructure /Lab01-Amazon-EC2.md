@@ -53,7 +53,9 @@ I was able to view the **Monitoring** tab, which shows metrics from **Amazon Clo
 
 You can **Get an Instance Screenshot** as shown below:
 
+<p align="center">
 <img src="images/get-instance-screenshot.png" alt="Instance screenshot" width="600">
+</p>
 
 ## Task 3: Update The Security Group and Access the Web Server
 
