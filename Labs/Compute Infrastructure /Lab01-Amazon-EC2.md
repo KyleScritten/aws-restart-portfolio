@@ -47,7 +47,9 @@ Monitoring is an important part of maintaining the reliability, availability, an
 
 In the **Status checks** tab, I confirmed **System reachability** and **Instance reachability** checks have passed.
 
-I was able to view the **Monitoring** tab, which shows metrics from **Amazon CloudWatch**, such as CPU utilization. You can **Get an Instance Screenshot** as shown below:
+I was able to view the **Monitoring** tab, which shows metrics from **Amazon CloudWatch**, such as CPU utilization. 
+
+You can **Get an Instance Screenshot** as shown below:
 
 <img src="images/get-instance-screenshot.png" alt="Instance screenshot" width="600">
 
