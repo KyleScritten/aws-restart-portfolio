@@ -60,6 +60,8 @@ man man
 <img src="images/man_command_synopsis.png" alt="The terminal window displaying the man page utilities or man page." width="600">
 
 The terminal window then displays the man page utilities or man page with various help sections identifiable by the man page headers. 
+
 > [!NOTE]
 > You can move in the man pages by pressing the up and down arrow keys.
+
 To exit the man pages, enter q.
