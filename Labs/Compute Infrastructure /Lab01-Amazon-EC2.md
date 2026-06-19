@@ -1,4 +1,4 @@
-# Cloud Foundations - Introduction to Amazon Elastic Compute Cloud (EC2)
+# Introduction to Amazon Elastic Compute Cloud (EC2)
 
 <img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600">
 
