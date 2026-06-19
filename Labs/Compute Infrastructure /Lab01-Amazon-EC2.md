@@ -1,7 +1,8 @@
 # Cloud Foundations - Introduction to Amazon Elastic Compute Cloud (EC2)
-## Overview
+
 <img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600">
 
+## Overview
 In this lab, I explored the fundamentals of Amazon EC2 by learning how to launch, resize, manage, and monitor virtual servers in the AWS Cloud.
 
 Amazon Elastic Compute Cloud (EC2) is a cloud computing service that provides scalable and on-demand compute capacity. It allows developers and organizations to quickly deploy virtual machines without the need to invest in physical hardware.
@@ -45,6 +46,7 @@ echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.h
 Monitoring is an important part of maintaining the reliability, availability, and performance of the Amazon Elastic Compute Cloud (Amazon EC2) instances.
 
 In the **Status checks** tab, I confirmed **System reachability** and **Instance reachability** checks have passed.
+
 I was able to view the **Monitoring** tab, which shows metrics from **Amazon CloudWatch**, such as CPU utilization. You can **Get an Instance Screenshot** as shown below:
 
 <img src="images/get-instance-screenshot.png" alt="Instance screenshot" width="600">
