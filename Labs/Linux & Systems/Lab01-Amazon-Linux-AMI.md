@@ -57,6 +57,6 @@ man man
 ```
 
 #### Terminal Output
-
+![The terminal window displaying the man page utilities or man page.](images/man_command_synopsis.png)
 
 The terminal window then displays the man page utilities or man page with various help sections identifiable by the man page headers. To exit the man pages, enter q.
