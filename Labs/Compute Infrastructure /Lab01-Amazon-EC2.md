@@ -74,7 +74,7 @@ I learned that EC2 instances can be resized if more resources are required.
 2. Changed the **instance type**
 3. Increased the **EBS volume size**
    
-#### Summary of Changes made
+### Summary of Changes made
 
 | Resource      |  Before  |   After  |
 |:-------------:|:--------:|:--------:|
