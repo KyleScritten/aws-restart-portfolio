@@ -1,6 +1,6 @@
 # Introduction to an Amazon Linux Amazon Machine Image (AMI)
 
-### Lab Objectives
+## Lab Objectives
 In this lab, I learnt how to:
 - Use Secure Shell (SSH) to access an Amazon Linux AMI within Vocareum labs
 - Understand the purpose of the man command
