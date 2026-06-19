@@ -1,6 +1,6 @@
 # Cloud Foundations - Introduction to Amazon Elastic Compute Cloud (EC2)
 ## Overview
-<img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600">
+<img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600" align="center">
 
 In this lab, I explored the fundamentals of Amazon EC2 by learning how to launch, resize, manage, and monitor virtual servers in the AWS Cloud.
 
@@ -46,6 +46,7 @@ Monitoring is an important part of maintaining the reliability, availability, an
 
 In the **Status checks** tab, I confirmed **System reachability** and **Instance reachability** checks have passed.
 I was able to view the **Monitoring** tab, which shows metrics from **Amazon CloudWatch**, such as CPU utilization. You can **Get an Instance Screenshot** as shown below:
+
 <img src="images/get-instance-screenshot.png" alt="Instance screenshot" width="600">
 
 ## Task 3: Update The Security Group and Access the Web Server
@@ -76,7 +77,6 @@ I learned that EC2 instances can be resized if more resources are required.
 | Resource      |  Before  |   After  |
 |:-------------:|:--------:|:--------:|
 | Instance Type	| t3.micro | t3.small |
-|:-------------:|:--------:|:--------:|
 | Storage	      | 8 GiB    | 10 GiB   |
 
 This process helps scale resources depending on application requirements.
@@ -91,13 +91,3 @@ To terminate the instance:
 2. Select **Terminate Instance**
    
 The instance is successfully deleted.
-
-## Topics Covered
-In this lab, I learned how to use Amazon EC2 to deploy and manage a cloud-based server.
-
-Through this lab I have learnt to:
-- Launching and configuring EC2 instances
-- Monitoring instance health
-- Managing security groups
-- Scaling instance resources
-- Using termination protection
