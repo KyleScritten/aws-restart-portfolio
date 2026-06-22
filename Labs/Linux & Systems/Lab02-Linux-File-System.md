@@ -128,7 +128,9 @@ drwxrwxr-x 5 ec2-user ec2-user 49 Jun 22 09:58 ..
 ## Task 3: Delete and reorganize folders
 Reorganize the system folders and content as follows:
 
-
+<p align="center">
+  <img src="images/reorgarnize-folders.png" alt="Reorganize folder structure to accommodate a new folder and file system" width="600">
+</p>
 
 1. I copied the ```Finance``` folder and its content to the ```HR``` folder and verify that the folder and the content was copied
 ```bash
@@ -157,7 +159,7 @@ HR  Management
 [ec2-user@ip-10-0-10-94 CompanyA]$ ls HR
 Assessments.csv  Finance  Management  TrialPeriod.csv
 ```
-6. To navigate inside the ```HR``` folder and create the ```Employees``` where the ```Assessments.csv TrialPeriod.csv``` will be moved to.
+6. To navigate inside the ```HR``` folder and create the ```Employees``` where the ```Assessments.csv TrialPeriod.csv``` files will be moved to.
 ```bash
 [ec2-user@ip-10-0-10-94 CompanyA]$ cd HR
 [ec2-user@ip-10-0-10-94 HR]$ mkdir Employees
