@@ -81,3 +81,86 @@ ec2-user  2957  0.0  0.4 124736  3956 pts/0    Ss   23:00   0:00 -bash
 ```
 
 ## Task 3: List the processes using the top command
+In this exercise, I used the `top` command to display the processes and threads that were active on the system. I then observed and analyzed the output provided by the command.
+
+1. In the main terminal I ran the command `top`
+This command provided me with a live view of the system’s activity, allowing me to monitor the total number of processes, running and sleeping tasks, and overall CPU and memory usage. I was also able to observe the system’s swap usage in real time.
+
+#### Terminal Output
+```
+top - 23:33:46 up 38 min,  1 user,  load average: 0.22, 0.07, 0.02
+Tasks:  87 total,   1 running,  48 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem :   962708 total,   265524 free,    91280 used,   605904 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   721136 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                        
+    1 root      20   0  189052   5420   3884 S   0.0  0.6   0:01.63 systemd                        
+    2 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kthreadd                       
+    4 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/0:0H                   
+    5 root      20   0       0      0      0 I   0.0  0.0   0:00.04 kworker/u4:0                   
+    6 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 mm_percpu_wq                   
+    7 root      20   0       0      0      0 S   0.0  0.0   0:00.04 ksoftirqd/0                    
+    8 root      20   0       0      0      0 I   0.0  0.0   0:00.09 rcu_sched                      
+    9 root      20   0       0      0      0 I   0.0  0.0   0:00.00 rcu_bh                         
+   10 root      rt   0       0      0      0 S   0.0  0.0   0:00.00 migration/0                    
+   11 root      rt   0       0      0      0 S   0.0  0.0   0:00.00 watchdog/0                     
+   12 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/0                        
+   13 root      20   0       0      0      0 S   0.0  0.0   0:00.00 cpuhp/1                        
+   14 root      rt   0       0      0      0 S   0.0  0.0   0:00.00 watchdog/1                     
+   15 root      rt   0       0      0      0 S   0.0  0.0   0:00.20 migration/1                    
+   16 root      20   0       0      0      0 S   0.0  0.0   0:00.05 ksoftirqd/1                    
+   18 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 kworker/1:0H                   
+   20 root      20   0       0      0      0 S   0.0  0.0   0:00.00 kdevtmpfs                      
+   21 root       0 -20       0      0      0 I   0.0  0.0   0:00.00 netns                          
+  202 root      20   0       0      0      0 S   0.0  0.0   0:00.00 khungtaskd                     
+  203 root      20   0       0      0      0 S   0.0  0.0   0:00.00 oom_reaper 
+```
+3. I observed the task states displayed on the second line of the top command output to monitor the status of processes running on the system.
+
+```
+Tasks:  89 total,   1 running,  50 sleeping,   0 stopped,   0 zombie
+```
+
+To interpret the task states:
+
+| State    | Meaning                                   |
+| :------: | :---------------------------------------: |
+| Running  | Processes currently executing             |
+| Sleeping | Processes waiting for resources           |
+| Stopped  | Suspended processes                       |
+| Zombie   | Completed processes waiting to be removed |
+
+4. I exited `top` by pressing `q`
+
+## Task 4: Create a Cron Job
+In this task, I learned how to automate a task using `cron`. I created a cron job that generates an audit file covering all `.csv` files. The output file was `SharedFolders/filteredAudit.csv`
+
+1. I opened the Cron default text editor by running the following command
+```bash
+sudo crontab -e
+```
+
+2. Since the editor opened in `vi`, I entered insert mode by pressing `i`
+3. The changes I made to configure the cron file were as follows:
+```
+SHELL=/bin/bash
+PATH=/usr/bin:/bin:/usr/local/bin
+MAILTO=root
+0 * * * * ls -la $(find .) | sed -e 's/..csv/#####.csv/g' > /home/ec2-user/companyA/SharedFolders/filteredAudit.csv
+```
+
+4. To save and close the file, I pressed ESC. Then entered `:wq`
+5. To validate that the file was configured and saved correctly I ran the command
+```
+sudo crontab -l
+```
+
+#### Terminal Output
+```bash
+[ec2-user@ip-10-0-10-238 companyA]$ sudo crontab -l
+SHELL=/bin/bash 
+PATH=/usr/bin:/bin:/usr/local/bin
+MAILTO=root
+0 * * * * ls -la $(find .) | sed -e 's/..csv/#####.csv/g' > /home/ec2-user/companyA/SharedFolders/filteredAudit.csv
+```
