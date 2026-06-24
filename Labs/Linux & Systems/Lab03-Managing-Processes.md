@@ -42,3 +42,42 @@ Warning: Permanently added '54.191.47.252' (ED25519) to the list of known hosts.
 
 [ec2-user@ip-10-0-10-238 ~]$ 
 ```
+## Task 2: Create List of Processes
+In this task, I learned how to generate a log file of running processes while filtering out unwanted entries. I created a file named `processes.csv` that excluded processes owned by the `root` user and commands containing `[` or `]` .
+
+The log file was stored in the `SharedFolders` directory.
+
+1. Verify that I am in working directory `/home/ec2-user/companyA` by running the `pwd` command. I have not received the expected output and therefore needed to change directories.
+
+```bash
+[ec2-user@ip-10-0-10-238 ~]$ pwd
+/home/ec2-user
+[ec2-user@ip-10-0-10-238 ~]$ cd companyA
+[ec2-user@ip-10-0-10-238 companyA]$ 
+```
+2. I ran the following command to list all processes, whilst excluding the `root` user
+```bash
+[ec2-user@ip-10-0-10-238 companyA]$ sudo ps -aux | grep -v root | sudo tee SharedFolders/processes.csv
+```
+This command allows me to display all running processes (`ps -aux`), filter out `root` processes (`grep -v root`) and finally save the output to a file while also viewing it (`tee`). The file was saved as `SharedFolders/processes.csv` .
+
+3. To validate that the file correctly listed the processes and excluded the unwanted entries, I rand the command below
+```bash
+cat SharedFolders/processes.csv
+```
+
+#### Terminal Output
+```bash
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+libstor+  1705  0.0  0.1  12628  1804 ?        Ss   22:55   0:00 /usr/bin/lsmd -d
+rpc       1708  0.0  0.3  67356  3444 ?        Ss   22:55   0:00 /sbin/rpcbind -w
+dbus      1719  0.0  0.4  58352  4040 ?        Ss   22:55   0:00 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+chrony    1727  0.0  0.3 120184  3048 ?        S    22:55   0:00 /usr/sbin/chronyd -F 2
+rngd      1749  0.0  0.5  96464  4948 ?        Ss   22:55   0:00 /sbin/rngd -f --fill-watermark=0 --exclude=jitter
+postfix   2159  0.0  0.6  90396  6548 ?        S    22:55   0:00 pickup -l -t unix -u
+postfix   2160  0.0  0.7  90468  6824 ?        S    22:55   0:00 qmgr -l -t unix -u
+ec2-user  2956  0.0  0.4 150748  4456 ?        S    23:00   0:00 sshd: ec2-user@pts/0
+ec2-user  2957  0.0  0.4 124736  3956 pts/0    Ss   23:00   0:00 -bash
+```
+
+## Task 3: List the processes using the top command
