@@ -53,7 +53,7 @@ Warning: Permanently added '35.86.247.199' (ED25519) to the list of known hosts.
 touch bash_script.sh
 ```
 
-2. Inserted the code using the `vi` editor and pressing `i`
+2. Inserted the code using the `vi` editor, `vi bash_script.sh`, and pressing `i`
 ```bash
 #!/bin/bash
 
@@ -70,7 +70,7 @@ touch ${prefix}$(($i+$max))
 done
 ```
 
-> [!Logic Note]
+> [!Note]
 > `ls ${prefix}*` lists existing files; `2>/dev/null` suppresses errors if none exist yet
 > `sed 's/[^0-9]//g'` strips the prefix, leaving only numbers
 > `sort -n | tail -1` picks the highest number
