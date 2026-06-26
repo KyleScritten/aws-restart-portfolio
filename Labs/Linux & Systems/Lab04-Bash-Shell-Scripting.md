@@ -70,7 +70,13 @@ touch ${prefix}$(($i+$max))
 done
 ```
 
-3. Save and exited the editor by pressing ESC then `:wq` and Enter 
+> [!Logic Note]
+> `ls ${prefix}*` lists existing files; `2>/dev/null` suppresses errors if none exist yet
+> `sed 's/[^0-9]//g'` strips the prefix, leaving only numbers
+> `sort -n | tail -1` picks the highest number
+> `${max:-0}` defaults to `0` if no files exist yet, so the first run creates `Kyle1`–`Kyle25`, the second creates `Kyle26`–`Kyle50`, and so on
+
+3. Saved and exited the editor by pressing ESC then `:wq` and Enter 
 
 3. I made the file executable and ran it using the following commands:
 ```bash
@@ -80,8 +86,95 @@ chmod 744 bash_script.sh
 
 4. After the first run, below is the content displayed of my directory
 ```bash
+[ec2-user@ip-10-0-10-84 ~]$ ./bash_script.sh
+Previous number: 0
+[ec2-user@ip-10-0-10-84 ~]$ ll -v
+total 4
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle1
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle2
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle3
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle4
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle5
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle6
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle7
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle8
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle9
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle10
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle11
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle12
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle13
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle14
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle15
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle16
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle17
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle18
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle19
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle20
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle21
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle22
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle23
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle24
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle25
+-rwxr--r--  1 ec2-user ec2-user  226 Jun 26 21:27 bash_script.sh
+drwxr-xr-x 11 ec2-user Personnel 184 Jun 26 20:58 companyA
 ```
 
 5. The content of the directory after the second run is as shown below
 ```bash
+[ec2-user@ip-10-0-10-84 ~]$ ./bash_script.sh
+Previous number: 25
+[ec2-user@ip-10-0-10-84 ~]$ ll -v
+total 4
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle1
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle2
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle3
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle4
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle5
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle6
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle7
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle8
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle9
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle10
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle11
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle12
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle13
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle14
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle15
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle16
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle17
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle18
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle19
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle20
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle21
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle22
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle23
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle24
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:27 Kyle25
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle26
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle27
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle28
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle29
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle30
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle31
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle32
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle33
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle34
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle35
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle36
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle37
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle38
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle39
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle40
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle41
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle42
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle43
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle44
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle45
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle46
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle47
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle48
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle49
+-rw-rw-r--  1 ec2-user ec2-user    0 Jun 26 21:29 Kyle50
+-rwxr--r--  1 ec2-user ec2-user  226 Jun 26 21:27 bash_script.sh
+drwxr-xr-x 11 ec2-user Personnel 184 Jun 26 20:58 companyA
 ```
