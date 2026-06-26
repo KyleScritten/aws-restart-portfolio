@@ -13,7 +13,7 @@ Write a Bash script based on the following requirements:
 
 In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
 
-I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP PLACEHOLDER From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
+I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP 35.86.247.199 From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
 
 #### Connect to the EC2 Instance
 
