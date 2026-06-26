@@ -53,7 +53,7 @@ Warning: Permanently added '35.86.247.199' (ED25519) to the list of known hosts.
 touch bash_script.sh
 ```
 
-2. Inserted the code using the `vi` editor, `vi bash_script.sh`, and pressing `i`
+2. Inserted the code using the `vi` editor by running `vi bash_script.sh` and pressing `i`
 ```bash
 #!/bin/bash
 
@@ -71,10 +71,10 @@ done
 ```
 
 > [!Note]
-> `ls ${prefix}*` lists existing files; `2>/dev/null` suppresses errors if none exist yet
-> `sed 's/[^0-9]//g'` strips the prefix, leaving only numbers
-> `sort -n | tail -1` picks the highest number
-> `${max:-0}` defaults to `0` if no files exist yet, so the first run creates `Kyle1`–`Kyle25`, the second creates `Kyle26`–`Kyle50`, and so on
+> - `ls ${prefix}*` lists existing files; `2>/dev/null` suppresses errors if none exist yet
+> - `sed 's/[^0-9]//g'` strips the prefix, leaving only numbers
+> - `sort -n | tail -1` picks the highest number
+> - `${max:-0}` defaults to `0` if no files exist yet, so the first run creates `Kyle1`–`Kyle25`, the second creates `Kyle26`–`Kyle50`, and so on
 
 3. Saved and exited the editor by pressing ESC then `:wq` and Enter 
 
