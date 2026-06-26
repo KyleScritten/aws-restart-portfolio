@@ -76,7 +76,7 @@ done
 > - `sort -n | tail -1` picks the highest number
 > - `${max:-0}` defaults to `0` if no files exist yet, so the first run creates `Kyle1`–`Kyle25`, the second creates `Kyle26`–`Kyle50`, and so on
 
-3. Saved and exited the editor by pressing ESC then `:wq` and Enter 
+3. Saved and exited the editor by pressing `ESC` then `:wq` and `Enter` 
 
 3. I made the file executable and ran it using the following commands:
 ```bash
