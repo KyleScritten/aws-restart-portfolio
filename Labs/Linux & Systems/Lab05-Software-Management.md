@@ -346,7 +346,7 @@ In this task, I'll be installing the AWS CLI on Amazon Elastic Compute Cloud (Am
 [ec2-user@ip-10-0-10-134 companyA]$ python3 --version
 Python 3.7.16
 ```
-I have Python Python 3 version 3.7.16, so I can continue with the AWS CLI installation.
+I have Python 3 version 3.7.16, so I can continue with the AWS CLI installation.
 2. To see if the pip package manager is already installed, I entered the following command:
 ```bash
 [ec2-user@ip-10-0-10-134 companyA]$ pip3 --version
