@@ -446,7 +446,7 @@ AWS Secret Access Key [None]:
 Default region name [None]: us-west-2
 Default output format [None]: json
 ```
-2. In the file `~/.aws/credentials` I copied the `aws_access_key_id` and `aws_secret_access_key` for my lab. It followed this general structure.
+2. In the file `~/.aws/credentials` I copied the `aws_access_key_id` and `aws_secret_access_key` for my lab. It followed this general structure:
 ```
 [default]
 aws_access_key_id=ASIAZA7YDIIDBJ4MNADN
