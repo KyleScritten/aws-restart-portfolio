@@ -395,7 +395,10 @@ drwxr-xr-x 2 ec2-user Shipping         6 Jun 27 19:40 Shipping
 [ec2-user@ip-10-0-10-134 companyA]$ sudo ./aws/install
 You can now run: /usr/local/bin/aws --version
 ```
-The installation command uses a file named `install` in the newly unzipped `aws` directory. By default, the files are all installed to `/usr/local/aws-cli`, and a symbolic link is created in `/usr/local/bin`. The command includes `sudo` to grant write permissions to those directories.
+
+>[!Note]
+>The installation command uses a file named `install` in the newly unzipped `aws` directory. By default, the files are all installed to `/usr/local/aws-cli`, and a symbolic link is created in `/usr/local/bin`. The command includes `sudo` to grant write permissions to those directories.
+
 
 6. To verify that the AWS CLI is now working, I typed `aws help`. The `help` command displayed the help information for the AWS CLI.
 ```bash
