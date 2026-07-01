@@ -58,9 +58,40 @@ Besides, *lambda.amazonaws.com* is listed as a trusted entity.
 - Custom layers: `pymysqlLibrary`
 - Version: `1`
 
-4. In the Runtime settings panel, I updated the **Handler** with `salesAnalysisReportDataExtractor.lambda_handler`. 
-Then imported the code `salesAnalysisReportDataExtractor.py` file (previously downloaded) for the data extractor Lambda function.
+4. In the Runtime settings panel, I updated the **Handler** with `salesAnalysisReportDataExtractor.lambda_handler`. Then imported the code `salesAnalysisReportDataExtractor.py` file (previously downloaded) for the data extractor Lambda function.
 
 >[!Note]
 >The AWS Lambda function connects to a MySQL database and retrieves aggregated sales data. It uses **pymysql** to establish a connection using credentials passed in the event. If the connection fails, it prints an error and exits. Once connected, it executes an SQL query that joins three tables (order_item, product, product_group) to calculate total quantities sold per product group and product. The results are fetched as a list of dictionaries. The database connection is then closed, and the function returns the query results in a JSON-like response with a status code.
 
+5. The function expects these input parameters (from event):
+- **dbUrl**: Database host (endpoint)
+- **dbName**: Database name
+- **dbUser**: Username
+- **dbPassword**: Password
+
+These inputs allow the Lambda function to securely connect to the database dynamically.
+
+6. In the Configuring tab, I edit the VPC network settings for the function:
+- VPC: option with `Cafe VPC` as the Name
+- Subnets: option with `Cafe Public Subnet 1` as the Name
+- Security groups: option with `CafeSecurityGroup` as the Name
+
+## Task 3: Testing the data extractor Lambda function
+
+To invoke the salesAnalysisReportDataExtractor function, I need to supply values for the café database connection parameters. Note that these values are stored in Parameter Store.
+
+1. Launching a test of the Lambda function. I found the values for the parameters in **Parameter Store** under AWS Systems Manager.
+
+<p align="center">
+  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="600">
+</p>
+
+2. In the Event JSON plane, I replaced the JSON object with a JSON object in the following format:
+```bash
+{
+  "dbUrl": "<value of /cafe/dbUrl parameter>",
+  "dbName": "<value of /cafe/dbName parameter>",
+  "dbUser": "<value of /cafe/dbUser parameter>",
+  "dbPassword": "<value of /cafe/dbPassword parameter>"
+}
+```
