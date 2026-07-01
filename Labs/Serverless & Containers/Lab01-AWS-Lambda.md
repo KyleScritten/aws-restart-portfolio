@@ -38,3 +38,29 @@ The **salesAnalysisReportDERole** IAM role has 2 policies:
 - **AWSLambdaBasicRunRole** provides write permissions to CloudWatch logs.
 - **AWSLambdaVPCAccessRunRole** provides permissions to manage elastic network interfaces to connect a function to a virtual private cloud (VPC).
 Besides, *lambda.amazonaws.com* is listed as a trusted entity.
+
+## Task 2: Creating a Lambda layer and a data extractor Lambda function
+
+1. In the AWS Lambda console, I create a **Lambda Layer** with these configurations:
+- Name: `pymysqlLibrary`
+- Description: `PyMySQL library modules`
+- Upload a .zip file: `pymysql-v3.zip` (previously downloaded)
+- Compatible runtimes: `Python 3.10`
+
+2. In the AWS Lambda fuctions overview, I create a data extractor **Lambda Function** with these configuration settings:
+- Select `Author from scratch`
+- Name: `salesAnalysisReportDataExtractor`
+- Runtime: `Python 3.10`
+- Execution role: `salesAnalysisReportDERole` (existing role)
+
+3. At the bottom of the page of the new function, in the Layers panel, I selected edit and then added a layer with these options:
+- Layer: `Custom layers`
+- Custom layers: `pymysqlLibrary`
+- Version: `1`
+
+4. In the Runtime settings panel, I updated the **Handler** with `salesAnalysisReportDataExtractor.lambda_handler`. 
+Then imported the code `salesAnalysisReportDataExtractor.py` file (previously downloaded) for the data extractor Lambda function.
+
+>[!Note]
+>The AWS Lambda function connects to a MySQL database and retrieves aggregated sales data. It uses **pymysql** to establish a connection using credentials passed in the event. If the connection fails, it prints an error and exits. Once connected, it executes an SQL query that joins three tables (order_item, product, product_group) to calculate total quantities sold per product group and product. The results are fetched as a list of dictionaries. The database connection is then closed, and the function returns the query results in a JSON-like response with a status code.
+
