@@ -17,7 +17,7 @@ I will use the following AWS services:
 - Bucket Name: `amzn-s3-lambda-20260702`
 All other options set to their default values and choose **Create bucket**.
 <p align="center">
-  <img src="images/s3-bucket-init.png" alt="Initialization of the AWS S3 Bucket" width="600">
+  <img src="images/s3-bucket-init.png" alt="Initialization of the AWS S3 Bucket" width="800">
 </p>
 
 2. I generated lorem ipsum text files with `225` words and upload it to my S3 bucket as test object.
@@ -128,11 +128,54 @@ The SNS Topic ARN for use later is `arn:aws:sns:us-west-2:615046972183:WordCount
   <img src="images/subscription-confirmed.png" alt="Simple Notification Service Subscription confirmed" width="600">
 </p>
 
+9. I changed the Lambda function to include the details:
+- Email Subject: ` Word Count Result`
+- Email Message: `The word count in the <textFileName> file is <N>`.
+```python
+subject = "Word Count Result"
+
+sns.publish(
+    TopicArn=SNS_TOPIC_ARN,
+    Message=message,
+    Subject=subject  # <-- This sets the email subject
+)
+```
+
+10. Additionally, I edited the Lambda function input to automatically invoke the function when a text file is uploaded to my S3 bucket.
+Since S3 sends the event in a nested Records list containing bucket and object info, I used:
+```python
+bucket = event['Records'][0]['s3']['bucket']['name']
+key = event['Records'][0]['s3']['object']['key']
+```
+
+11. I tested the final version of the Lambda function and it initial failed due to insufficient runtime and the Lambda code was modified to read the SNS topic ARN from an environment variable `(os.environ['SNS_TOPIC_ARN'])` instead of hardcoding it — but that environment variable was never set, so it fails at import time before the handler even runs.
+
+First, I configured the runtime variable:
+- Go to Lambda console → Select Function from the left navigation plane
+- Selected the function `s3-trigger-wordcount`
+- Edit Basic Settings
+- Changed the timeout to 60 seconds
+
+
+Second, I configured the environment variable:
+- Go to Lambda console → my function → Configuration tab → Environment variables
+- Click Edit → Add environment variable
+- Key: SNS_TOPIC_ARN
+- Value: `arn:aws:sns:us-west-2:615046972183:WordCountTopic`
+- Click Save
+
+12. I re-tested by uploading a the text file to my S3 Bucket again. I received an Email notification as the test passed with the details:
+```json
+{
+  "statusCode": 200,
+  "body": "{\"file\": \"test1.txt\", \"word_count\": 502, \"message\": \"The word count in the test1.txt file is 502.\"}"
+}
+```
+<p align="center">
+  <img src="images/test1-text-email.png" alt="Simple Notification Service WCTopic Email Test1" width="800">
+</p>
 
 
 
 
-
-
-## 
 
