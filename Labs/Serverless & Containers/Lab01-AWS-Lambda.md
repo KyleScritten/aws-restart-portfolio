@@ -83,7 +83,7 @@ To invoke the salesAnalysisReportDataExtractor function, I need to supply values
 1. Launching a test of the Lambda function. I found the values for the parameters in **Parameter Store** under AWS Systems Manager.
 
 <p align="center">
-  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="700">
+  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="800">
 </p>
 
 2. In the Event JSON plane, I replaced the JSON object with a JSON object in the following format before running a test on the function:
