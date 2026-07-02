@@ -114,7 +114,7 @@ REPORT RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee	Duration: 3000.00 ms	Bill
 4. To fix the Lambda function I added a new custom inboud rule `port 3306` for the security group **CafeSecurityGroup** that is used by the EC2 instance running the database and then test the function again. This time, the execution succedded with `statusCode 200`.
 
 5. I open the café website in a new tabe with the url `http://35.93.34.171/cafe/` and placed an order. 
-I tested the Lambda function again. Now the result is code 200 and the product quantity information in the body:
+I tested the Lambda function again. Now the result is `statusCode 200` and the product quantity information in the body:
 ```
 {
   "statusCode": 200,
@@ -219,7 +219,7 @@ The **Log output** section outputs:
 I then tested it with another order from the cafe website.
 
 <p align="center">
-  <img src="images/sales-analysis-report-email.png" alt="Daily Sales Analysis Report Email" width="800">
+  <img src="images/sales-analysis-report-email.png" alt="Daily Sales Analysis Report Email" width="900">
 </p>
 
 7. Adding a trigger to the salesAnalysisReport Lambda function.
@@ -231,7 +231,7 @@ through Saturday at 8 PM each day. To do so, I use a CloudWatch Events event as 
 - **Rule type**: `Schedule expression`
 - **Schedule expression**: cron(00 35 ? * MON-SAT *)
 
-I scheduled the function to run 5 minutes from the current time to ensure that the scheduling works. 
+I scheduled the function to run 5 minutes from the current time (02:30 AM UTC+2 or 00:30 AM UTC) to ensure that the scheduling works. 
 
 >[!Note]
 >All times in a cron expression are based on the `UTC` time zone, and the format is:
@@ -241,7 +241,7 @@ I scheduled the function to run 5 minutes from the current time to ensure that t
 I checked my email inbox and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
 
 <p align="center">
-  <img src="images/trigger-report.png" alt="Adding a Trigger to the Daily Sales Analysis Report Email" width="800">
+  <img src="images/trigger-report.png" alt="Adding a Trigger to the Daily Sales Analysis Report Email" width="900">
 </p>
 
 ## Conclusions
