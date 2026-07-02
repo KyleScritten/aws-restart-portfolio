@@ -124,9 +124,16 @@ I tested the Lambda function again. Now the result is code 200 and the product q
       "product_group_name": "Pastries",
       "product_id": 1,
       "product_name": "Croissant",
+      "quantity": 1
+    },
+    {
+      "product_group_number": 2,
+      "product_group_name": "Drinks",
+      "product_id": 8,
+      "product_name": "Hot Chocolate",
       "quantity": 2
-    }
-  ]
+     }
+    ]
 }
 ```
 ## Task 4: Configuring notifications
@@ -145,5 +152,74 @@ After confirming the subscription using the link in the email with the subsject 
 
 <p align="center">
   <img src="images/subscription-confirm.png" alt="You have successfully subscribed. Simple Notification Service" width="700">
+</p>
+
+## Task 5: Creating the salesAnalysisReport Lambda function
+Here I create and configure the salesAnalysisReport Lambda function. This function is the main driver of the sales analysis report flow. 
+It does the following:
+- Retrieves the database connection information from Parameter Store
+- Invokes the salesAnalysisReportDataExtractor Lambda function, which retrieves the report data from the database
+- Formats and publishes a message containing the report data to the SNS topic
+
+1. I connect to the CLI Host instance using the EC2 Management Console.
+2. Configured the AWS CLI with the command `asw confugure` and the parameters provided in the lab.
+3. I create the salesAnalysisReport Lambda function using the AWS CLI:
+```bash
+[ec2-user@ip-10-200-0-20 ~]$ cd activity-files
+[ec2-user@ip-10-200-0-20 activity-files]$ ls
+salesAnalysisReport-v2.zip
+[ec2-user@ip-10-200-0-20 activity-files]$ aws lambda create-function \
+> --function-name salesAnalysisReport \
+> --runtime python3.9 \
+> --zip-file fileb://salesAnalysisReport-v2.zip \
+> --handler salesAnalysisReport.lambda_handler \
+> --region us-west-2 \
+> --role arn:aws:iam::116464400627:role/salesAnalysisReportRole
+{
+    "FunctionName": "salesAnalysisReport", 
+    "LastModified": "2026-07-01T00:12:16.082+0000", 
+    "RevisionId": "1f60b20c-8ed7-41ed-9945-08dcafcc74ee", 
+    "MemorySize": 128, 
+    "State": "Pending", 
+    "Version": "$LATEST", 
+    "Role": "arn:aws:iam::116464400627:role/salesAnalysisReportRole", 
+    "Timeout": 3, 
+    "StateReason": "The function is being created.", 
+    "Runtime": "python3.9", 
+    "StateReasonCode": "Creating", 
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    }, 
+    "CodeSha256": "FOQaNphpQr/canEnzctygYFVreHKiABxYNh8X8lOpnE=", 
+    "Description": "", 
+    "CodeSize": 1643, 
+    "FunctionArn": "arn:aws:lambda:us-west-2:116464400627:function:salesAnalysisReport", 
+    "Handler": "salesAnalysisReport.lambda_handler"
+}
+[ec2-user@ip-10-200-0-20 activity-files]$  
+```
+4. I configure the salesAnalysisReport Lambda function by adding the enviromental variale:
+- **Key**: `topicARN`
+- **Value**: `arn:aws:iam::116464400627:role/salesAnalysisReportRole`
+
+5. I created a test for the salesAnalysisReport Lambda function:
+- **Test event action**: `Create new event`
+- **Event name**:, `SARTestEvent`
+- **Template**: `hello-world`
+The function does not require any input parameters, the JSON file requires no changes.
+
+6. I received a timeout error the first time, but ran the test the second time and it was successful.
+The **Log output** section outputs:
+```
+{
+  "statusCode": 200,
+  "body": "\"Sale Analysis Report sent.\""
+}
+```
+7. I checked my email inbox and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
+I then tested it with another order from the cafe website.
+
+<p align="center">
+  <img src="images/sales-analysis-report-email.png" alt="Daily Sales Analysis Report Email" width="700">
 </p>
 
