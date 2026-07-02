@@ -5,7 +5,7 @@ In this lab, I will deploy and configure an AWS Lambda based serverless computin
 The following diagram shows the architecture of the sales analysis report solution and illustrates the order in which actions occur.
 
 <p align="center">
-  <img src="images/lambda-solution.png" alt="AWS Lambda Architecture Lab Scenario" width="600">
+  <img src="images/lambda-solution.png" alt="AWS Lambda Architecture Lab Scenario" width="700">
 </p>
 
 The diagram includes the following function steps:
@@ -83,7 +83,7 @@ To invoke the salesAnalysisReportDataExtractor function, I need to supply values
 1. Launching a test of the Lambda function. I found the values for the parameters in **Parameter Store** under AWS Systems Manager.
 
 <p align="center">
-  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="800">
+  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="700">
 </p>
 
 2. In the Event JSON plane, I replaced the JSON object with a JSON object in the following format before running a test on the function:
@@ -144,6 +144,6 @@ The subscription is created and has a Status of *Pending confirmation*.
 After confirming the subscription using the link in the email with the subsject line *AWS Notification - Subscription Confirmation*, the status changes to *Confirmed*.
 
 <p align="center">
-  <img src="images/subscription-confirm.png" alt="You have successfully subscribed. Simple Notification Service" width="800">
+  <img src="images/subscription-confirm.png" alt="You have successfully subscribed. Simple Notification Service" width="700">
 </p>
 
