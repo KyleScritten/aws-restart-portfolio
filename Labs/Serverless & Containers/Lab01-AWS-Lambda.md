@@ -207,8 +207,7 @@ salesAnalysisReport-v2.zip
 - **Event name**:, `SARTestEvent`
 - **Template**: `hello-world`
 The function does not require any input parameters, the JSON file requires no changes.
-
-6. I received a timeout error the first time, but ran the test the second time and it was successful.
+I received a timeout error the first time, but ran the test the second time and it was successful.
 The **Log output** section outputs:
 ```
 {
@@ -216,10 +215,41 @@ The **Log output** section outputs:
   "body": "\"Sale Analysis Report sent.\""
 }
 ```
-7. I checked my email inbox and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
+6. I checked my email inbox and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
 I then tested it with another order from the cafe website.
 
 <p align="center">
   <img src="images/sales-analysis-report-email.png" alt="Daily Sales Analysis Report Email" width="700">
 </p>
 
+7. Adding a trigger to the salesAnalysisReport Lambda function.
+To complete the implementation of the salesAnalysisReport function, I configure the report to be initiated Monday
+through Saturday at 8 PM each day. To do so, I use a CloudWatch Events event as the trigger mechanism:
+- **Rule**: Create a new rule
+- **Rule name**: `salesAnalysisReportDailyTrigger`
+- **Rule description**: `Initiates report generation on a daily basis`
+- **Rule type**: `Schedule expression`
+- **Schedule expression**: cron(00 35 ? * MON-SAT *)
+
+I scheduled the function to run 5 minutes from the current time to ensure that the scheduling works. 
+
+>[!Note]
+>All times in a cron expression are based on the `UTC` time zone, and the format is:
+```
+cron(Minutes Hours Day-of-month Month Day-of-week Year)
+```
+In a cron expression, `*` means “every possible value,” while `?` means “no specific value” and is used to ignore either the day-of-month or day-of-week field.
+
+I checked my email inbox and I've received an email from AWS Notifications with the subject "Daily Sales Analysis Report."
+
+<p align="center">
+  <img src="images/trigger-report.png" alt="Adding a Trigger to the Daily Sales Analysis Report Email" width="700">
+</p>
+
+## Conclusions
+In this lab I learnt the followings:
+- Recognize necessary AWS Identity and Access Management (IAM) policy permissions to facilitate a Lambda function to other Amazon Web Services (AWS) resources.
+- Create a Lambda layer to satisfy an external library dependency.
+- Create Lambda functions that extracts data from database, and sends reports to user.
+- Deploy and test a Lambda function that is initiated based on a schedule and that invokes another function.
+- Use CloudWatch logs to troubleshoot any issues running a Lambda function.
