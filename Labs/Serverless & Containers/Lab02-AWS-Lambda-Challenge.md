@@ -189,3 +189,62 @@ I tested the `s3-trigger-wordcount` function by uploading a few more sample text
   <img src="images/test3-text-email.png" alt="Simple Notification Service WCTopic Email Test3" width="900">
 </p>
 
+## Conclusion
+In this lab, I learnt how to:
+- Create a Lambda function to count the number of words in a text file.
+- Configure an Amazon Simple Storage Service (Amazon S3) bucket to invoke a Lambda function when a text file is uploaded to the S3 bucket.
+- Create an Amazon Simple Notification Service (Amazon SNS) topic to report the word count in an email.
+
+## Python Code
+The final Python code for the Lambda function `wordcount.py`
+```python
+import boto3
+import json
+import os
+
+# Initialize clients
+s3 = boto3.client('s3')
+sns = boto3.client('sns')
+
+# Read SNS topic ARN from environment variable
+SNS_TOPIC_ARN = os.environ['SNS_TOPIC_ARN']
+
+def lambda_handler(event, context):
+    # Determine if triggered by S3 event or manual/test event
+    if 'Records' in event and event['Records'][0].get('s3'):
+        # S3 trigger
+        bucket = event['Records'][0]['s3']['bucket']['name']
+        key = event['Records'][0]['s3']['object']['key']
+    else:
+        # Manual/test event
+        bucket = event['bucket']
+        key = event['key']
+
+    # Read file from S3
+    response = s3.get_object(Bucket=bucket, Key=key)
+    text = response['Body'].read().decode('utf-8')
+
+    # Count words
+    word_count = len(text.split())
+
+    # Format message
+    message = f"The word count in the {key} file is {word_count}."
+    subject = "Word Count Result"
+
+    # Publish message to SNS
+    sns.publish(
+        TopicArn=SNS_TOPIC_ARN,
+        Message=message,
+        Subject=subject
+    )
+
+    # Return response
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "file": key,
+            "word_count": word_count,
+            "message": message
+        })
+    }
+```
