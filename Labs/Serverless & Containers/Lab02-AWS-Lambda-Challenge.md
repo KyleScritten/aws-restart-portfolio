@@ -8,5 +8,5 @@ After completing this lab, you will be able to do the following:
 
 I will use the following AWS services:
 <p align="center">
-  <img src="images/lab02-services.png" alt="AWS Lambda Challenge Lab Services" width="800">
+  <img src="images/lab02-services.png" alt="AWS Lambda Challenge Lab Services" width="600">
 </p>
