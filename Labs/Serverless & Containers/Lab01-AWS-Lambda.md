@@ -5,7 +5,7 @@ In this lab, I will deploy and configure an AWS Lambda based serverless computin
 The following diagram shows the architecture of the sales analysis report solution and illustrates the order in which actions occur.
 
 <p align="center">
-  <img src="images/lambda-solution.png" alt="AWS Lambda Architecture Lab Scenario" width="700">
+  <img src="images/lambda-solution.png" alt="AWS Lambda Architecture Lab Scenario" width="800">
 </p>
 
 The diagram includes the following function steps:
