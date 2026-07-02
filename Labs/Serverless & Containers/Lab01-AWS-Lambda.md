@@ -83,10 +83,10 @@ To invoke the salesAnalysisReportDataExtractor function, I need to supply values
 1. Launching a test of the Lambda function. I found the values for the parameters in **Parameter Store** under AWS Systems Manager.
 
 <p align="center">
-  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="600">
+  <img src="images/lambda-test-event.png" alt="AWS Lambda Console Test Event Panel" width="800">
 </p>
 
-2. In the Event JSON plane, I replaced the JSON object with a JSON object in the following format:
+2. In the Event JSON plane, I replaced the JSON object with a JSON object in the following format before running a test on the function:
 ```bash
 {
   "dbUrl": "<value of /cafe/dbUrl parameter>",
@@ -95,3 +95,55 @@ To invoke the salesAnalysisReportDataExtractor function, I need to supply values
   "dbPassword": "<value of /cafe/dbPassword parameter>"
 }
 ```
+After a few seconds, the page shows the message "Execution result: failed". 
+
+3. Troubleshooting the data extractor Lambda function.
+This error message indicates that the function timed out after 3 seconds.
+```
+{
+  "errorType": "Sandbox.Timedout",
+  "errorMessage": "RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee Error: Task timed out after 3.00 seconds"
+}
+```
+While the **Log output** section outputs:
+```
+START RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee Version: $LATEST
+END RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee
+REPORT RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee	Duration: 3000.00 ms	Billed Duration: 3403 ms	Memory Size: 128 MB	Max Memory Used: 73 MB	Init Duration: 402.04 ms	Status: timeout
+```
+4. To fix the Lambda function I added a new custom inboud rule `port 3306` for the security group **CafeSecurityGroup** that is used by the EC2 instance running the database and then test the function again. This time, the execution succedded with `statusCode 200`.
+
+5. I open the café website in a new tabe with the url `http://35.93.34.171/cafe/` and placed an order. 
+I tested the Lambda function again. Now the result is code 200 and the product quantity information in the body:
+```
+{
+  "statusCode": 200,
+  "body": [
+    {
+      "product_group_number": 1,
+      "product_group_name": "Pastries",
+      "product_id": 1,
+      "product_name": "Croissant",
+      "quantity": 2
+    }
+  ]
+}
+```
+## Task 4: Configuring notifications
+
+1. I created an SNS topic in **Simple Notification Service**:
+- **Type**: Standard
+- **Name**: `salesAnalysisReportTopic`
+- **Display name**: `SARTopic`
+This is the **ARN** value for this topic: `arn:aws:sns:us-west-2:116464400627:salesAnalysisReportTopic`.
+
+2. I subscribed to the SNS topic in the **Subscription** tab:
+- **Protocol**: `Email`
+- **Endpoint**: `<my email>`
+The subscription is created and has a Status of *Pending confirmation*.
+After confirming the subscription using the link in the email with the subsject line *AWS Notification - Subscription Confirmation*, the status changes to *Confirmed*.
+
+<p align="center">
+  <img src="images/subscription-confirm.png" alt="You have successfully subscribed. Simple Notification Service" width="800">
+</p>
+
