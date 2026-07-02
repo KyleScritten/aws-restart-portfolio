@@ -114,7 +114,7 @@ REPORT RequestId: b62a5257-ddf8-4f07-9e09-ffc6f841cd38	Duration: 3000.00 ms	Bill
 4. To fix the Lambda function I added a new custom inboud rule `port 3306` for the security group **CafeSecurityGroup** that is used by the EC2 instance running the database and then test the function again. This time, the execution succeeded with `statusCode 200`.
 
 <p align="center">
-  <img src="images/function-test-log.png" alt="AWS Lambda Console Test Event Panel" width="700">
+  <img src="images/function-test-log.png" alt="AWS Lambda Console Test Event Panel" width="900">
 </p>
 
 5. I open the café website in a new tabe with the url `http://35.93.34.171/cafe/` and placed an order. 
