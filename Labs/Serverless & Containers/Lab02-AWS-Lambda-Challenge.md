@@ -20,7 +20,7 @@ All other options set to their default values and choose **Create bucket**.
   <img src="images/s3-bucket-init.png" alt="Initialization of the AWS S3 Bucket" width="800">
 </p>
 
-2. I generated lorem ipsum text files with `225` words and upload it to my S3 bucket as test object.
+2. I generated lorem ipsum text files with `502` words and upload it to my S3 bucket as test object.
 
 >[!Note]
 > I need an AWS Identity and Access Management (IAM) role for the Lambda function to access other AWS services. Because the lab policy does not permit the creation of an IAM role, I used the LambdaAccessRole role. The LambdaAccessRole role provides the following permissions:
@@ -120,7 +120,7 @@ The SNS Topic ARN for use later is `arn:aws:sns:us-west-2:615046972183:WordCount
 8. Created subscription to the SNS Topic
 - Chose Create subscription, and configured the following options:
     * Protocol: Choose `Email`.
-    * Endpoint: <My Email Address>
+    * Endpoint: My email address
 - Chose `Create subscription`.  The subscription is created and has a Status of *Pending confirmation*.
 - Checked my inbox for the email address that I provided.  I received an email from WCTopic with the subject "AWS Notification - Subscription Confirmation."
 - I opened the email, and chose the Confirm subscription hyperlink.  A new browser tab opens and displays a page with the message "Subscription confirmed!" 
@@ -171,11 +171,21 @@ Second, I configured the environment variable:
   "body": "{\"file\": \"test1.txt\", \"word_count\": 502, \"message\": \"The word count in the test1.txt file is 502.\"}"
 }
 ```
+Checked my inbox for the email address that I provided.  I received an email from WCTopic with the subject "Word Count Result"
 <p align="center">
-  <img src="images/test1-text-email.png" alt="Simple Notification Service WCTopic Email Test1" width="800">
+  <img src="images/test1-text-email.png" alt="Simple Notification Service WCTopic Email Test1" width="900">
 </p>
 
+## Additonal Unit Test on the Amazon S3 Bucket
+I tested the `s3-trigger-wordcount` function by uploading a few more sample text files with different word counts to the S3 bucket.
 
-
-
+1. Lorem Ipsum text file `test2.txt` with 225 words:
+<p align="center">
+  <img src="images/test2-text-email.png" alt="Simple Notification Service WCTopic Email Test2" width="900">
+</p>
+  
+2. Lorem Ipsum text file `test3.txt` with 2000 words:
+<p align="center">
+  <img src="images/test3-text-email.png" alt="Simple Notification Service WCTopic Email Test3" width="900">
+</p>
 
