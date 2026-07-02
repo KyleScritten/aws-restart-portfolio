@@ -102,16 +102,20 @@ This error message indicates that the function timed out after 3 seconds.
 ```
 {
   "errorType": "Sandbox.Timedout",
-  "errorMessage": "RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee Error: Task timed out after 3.00 seconds"
+  "errorMessage": "RequestId: b62a5257-ddf8-4f07-9e09-ffc6f841cd38 Error: Task timed out after 3.00 seconds"
 }
 ```
 While the **Log output** section outputs:
 ```
-START RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee Version: $LATEST
-END RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee
-REPORT RequestId: 1f60b20c-8ed7-41ed-9945-08dcafcc74ee	Duration: 3000.00 ms	Billed Duration: 3403 ms	Memory Size: 128 MB	Max Memory Used: 73 MB	Init Duration: 402.04 ms	Status: timeout
+START RequestId: b62a5257-ddf8-4f07-9e09-ffc6f841cd38 Version: $LATEST
+END RequestId: b62a5257-ddf8-4f07-9e09-ffc6f841cd38
+REPORT RequestId: b62a5257-ddf8-4f07-9e09-ffc6f841cd38	Duration: 3000.00 ms	Billed Duration: 3403 ms	Memory Size: 128 MB	Max Memory Used: 86 MB	Init Duration: 402.04 ms	Status: timeout
 ```
-4. To fix the Lambda function I added a new custom inboud rule `port 3306` for the security group **CafeSecurityGroup** that is used by the EC2 instance running the database and then test the function again. This time, the execution succedded with `statusCode 200`.
+4. To fix the Lambda function I added a new custom inboud rule `port 3306` for the security group **CafeSecurityGroup** that is used by the EC2 instance running the database and then test the function again. This time, the execution succeeded with `statusCode 200`.
+
+<p align="center">
+  <img src="images/function-test-log.png" alt="AWS Lambda Console Test Event Panel" width="700">
+</p>
 
 5. I open the café website in a new tabe with the url `http://35.93.34.171/cafe/` and placed an order. 
 I tested the Lambda function again. Now the result is `statusCode 200` and the product quantity information in the body:
