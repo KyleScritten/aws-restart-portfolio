@@ -452,8 +452,8 @@ Default output format [None]: json
 2. In the file `~/.aws/credentials` I copied the `aws_access_key_id` and `aws_secret_access_key` for my lab. It followed this general structure:
 ```
 [default]
-aws_access_key_id=ASIAZA7YDIIDBJ4MNADN
-aws_secret_access_key=SmVqaQL1+unsgagwxET6vIVLyeuThV8qArL7y1Rh
+aws_access_key_id=<your access key id>
+aws_secret_access_key=<your secret access key>
 aws_session_token=<your session token>
 ```
 3. To edit the file I used the `nano` editor with `sudo`, `crl+o` and `enter` to save the file, `crl+x` to exit the editor.
