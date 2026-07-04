@@ -236,7 +236,7 @@ Through this lab, I learnt how to:
 - Create a snapshot of an EBS volume
 - Create an EBS volume from a snapshot
 
-## Bash script to mount a volume
+## Bash Script to Mount an EBS Volume to an EC2 instance
 ```bash
 #!/bin/bash
 
