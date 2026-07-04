@@ -3,7 +3,7 @@
 Amazon Elastic Block Store (Amazon EBS) is a scalable, high-performance block-storage service that is designed for Amazon Elastic Compute Cloud (Amazon EC2). In this lab, I will create an EBS volume and perform operations on it, such as attaching it to an instance, creating a file system, and taking a snapshot backup.
 
 <p align="center">
-  <img src="images/amazon-EBS-architecture.png" alt="Amazon EBS Architecture Lab Scenario" width="800">
+  <img src="images/amazon-EBS-architecture.png" alt="Amazon EBS Architecture Lab Scenario" width="900">
 </p>
 
 ## Objectives
@@ -24,22 +24,22 @@ I click **Create Volune** to add a new volume to the instance. I use the followi
     - **Value**: `My Volume`
 
 <p align="center">
-  <img src="images/ebs-create-volume.png" alt="Amazon EBS Volume creation" width="800">
+  <img src="images/ebs-create-volume.png" alt="Amazon EBS Volume creation" width="900">
 </p>
 
 I wait for the **Volume state** to became *Available*.
 
 <p align="center">
-  <img src="images/volume-state.png" alt="Amazon EBS Volume State View" width="800">
+  <img src="images/volume-state.png" alt="Amazon EBS Volume State View" width="900">
 </p>
 
 ## Task 2: Attaching the volume to an EC2 instance
-Now I attach my new volume to the EC2 instance. I use these options:
+Now I attach my new volume to the EC2 instance. Using the following configurations:
 - **Instance**: `Lab`
 - **Device name**: `/dev/sdb`
 
 <p align="center">
-  <img src="images/images/my-volume-attach.png" alt="Attaching an Amazon EC2 Instance" width="800">
+  <img src="images/images/my-volume-attach.png" alt="Attaching an Amazon EC2 Instance" width="900">
 </p>
 
 I wait for the **Volume state** to became *In Use*.
