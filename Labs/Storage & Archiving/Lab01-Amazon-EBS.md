@@ -156,4 +156,32 @@ some text has been written
 ```
 The output displays the text that this command copies to the file. 
 
+## Task 5: Creating an Amazon EBS snapshot
+Amazon EBS snapshots are stored in Amazon Simple Storage Service (Amazon S3) for durability. New EBS volumes can be created out of snapshots for cloning or restoring backups. Amazon EBS snapshots can also be shared among Amazon Web Services (AWS) accounts or copied over AWS Regions.
 
+1. I create a snapshot for my volume with options:
+- **Key**: `Name`
+- **Value**: `My Snapshot`
+
+<p align="center">
+  <img src="images/snapshot-options.png" alt="Amazon EBS snapshot options" width="1000">
+</p>
+
+2. The Snapshot status of my snapshot is *Pending*. 
+
+<p align="center">
+  <img src="images/snapshot-pending.png" alt="Amazon EBS Snapshot Pending" width="1000">
+</p>
+
+3. After completion, the status changes to *Completed*. Only used storage blocks are copied to snapshots, so empty blocks do not use any snapshot storage space.
+
+<p align="center">
+  <img src="images/snapshot-completed.png" alt="Amazon EBS Snapshot Completed" width="1000">
+</p>
+
+4. In my EC2 Instance Connect terminal window, I delete the file on my volume. I used the `ls` command for the text file path to validate it has been deleted. 
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ sudo rm /mnt/data-store/file.txt
+[ec2-user@ip-10-1-11-9 ~]$ ls /mnt/data-store/file.txt
+ls: cannot access /mnt/data-store/file.txt: No such file or directory
+```
