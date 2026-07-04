@@ -132,7 +132,28 @@ UUID=0ff5ac59-da1a-4403-8b6e-1c09a7e65c22     /           xfs    defaults,noatim
 
 6. I view the storage that is available on my instance using the command `df -h` again.
 ```bash
-
+[ec2-user@ip-10-1-11-9 ~]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        460M     0  460M   0% /dev
+tmpfs           471M     0  471M   0% /dev/shm
+tmpfs           471M  472K  470M   1% /run
+tmpfs           471M     0  471M   0% /sys/fs/cgroup
+/dev/nvme0n1p1  8.0G  1.8G  6.3G  22% /
+tmpfs            95M     0   95M   0% /run/user/0
+/dev/nvme1n1    975M   60K  924M   1% /mnt/data-store
+tmpfs            95M     0   95M   0% /run/user/1000
 ```
 
-7. 
+7. I create a file and add some text on the mounted volume.
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ sudo sh -c "echo some text has been written > /mnt/data-store/file.txt"
+```
+
+8. To verify that the text has been written to my volume, I ran the following command:
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ cat /mnt/data-store/file.txt
+some text has been written
+```
+The output displays the text that this command copies to the file. 
+
+
