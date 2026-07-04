@@ -185,3 +185,85 @@ Amazon EBS snapshots are stored in Amazon Simple Storage Service (Amazon S3) for
 [ec2-user@ip-10-1-11-9 ~]$ ls /mnt/data-store/file.txt
 ls: cannot access /mnt/data-store/file.txt: No such file or directory
 ```
+## Task 6: Restoring the Amazon EBS snapshot
+When I need to retrieve data stored in a snapshot, I can restore the snapshot to a new EBS volume.
+
+1. I create a volume by using the snapshot with options:
+- **Availability Zone**: `us-west-2a`
+- **Tag (optional)**:
+    - **Key**: `Name`
+    - **Value**: `Restored Volume`
+
+The Volume status of my volume is *Available*.
+
+<p align="center">
+  <img src="images/restored-volume-available.png" alt="Restored Volume Available" width="1000">
+</p>
+
+>![Note]
+> When restoring a snapshot to a volume, I can also modify the configuration, such as changing the volume type, size, or Availability Zone.
+
+2. Attached the restored volume to the EC2 instance
+
+Now I attach my restored volume to the EC2 instance. I use these options:
+- **Instance**: `Lab`
+- **Device name**: `/dev/sdc`
+
+<p align="center">
+  <img src="images/my-volume-attach.png" alt="Attach Volume To Instance" width="1000">
+</p>
+
+The **Volume state** is new *In Use*.
+
+<p align="center">
+  <img src="images/restored-volume-in-use.png" alt="Restored Volume In Use" width="1000">
+</p>
+
+3. Mounting the restored volume in the EC2 Instance Connect terminal, I create a directory for mounting the new storage volume, then mount the new volume. I also verify that the volume that I mounted has the file.
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ sudo mkdir /mnt/data-store2
+[ec2-user@ip-10-1-11-9 ~]$ sudo mount /dev/sdc /mnt/data-store2
+[ec2-user@ip-10-1-11-9 ~]$ ls /mnt/data-store2/file.txt
+/mnt/data-store2/file.txt
+[ec2-user@ip-10-1-11-9 ~]$ cat /mnt/data-store2/file.txt
+some text has been written
+```
+
+## Conclusion
+Through this lab, I learnt how to:
+- Create an EBS volume
+- Mount an EBS volume to an EC2 instance
+- Create a snapshot of an EBS volume
+- Create an EBS volume from a snapshot
+
+## Bash script to mount a volume
+```bash
+#!/bin/bash
+
+# Verify the available storage
+df -h
+
+# Create an ext3 file system on the new volume
+sudo mkfs -t ext3 /dev/sdb
+
+# Create the directory for mounting the new storage volume
+sudo mkdir /mnt/data-store
+
+# Mount the new volume
+sudo mount /dev/sdb /mnt/data-store
+
+# Ensures that the volume is mounted even after the instance is restarted.
+echo "/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2" | sudo tee -a /etc/fstab
+
+# View the configuration file
+cat /etc/fstab
+
+# Verify again the available storage
+df -h
+
+# Add some text
+sudo sh -c "echo some text has been written > /mnt/data-store/file.txt"
+
+# View the text
+cat /mnt/data-store/file.txt
+```
