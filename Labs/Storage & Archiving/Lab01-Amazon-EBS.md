@@ -45,5 +45,5 @@ Now I attach my new volume to the EC2 instance. Using the following configuratio
 I wait for the **Volume state** to became *In Use*.
 
 <p align="center">
-  <img src="images/images/volume-in-use.png" alt="Amazon EC2 Instance Volume State Change" width="800">
+  <img src="images/images/volume-in-use.png" alt="Amazon EC2 Instance Volume State Change" width="900">
 </p>
