@@ -47,3 +47,77 @@ I wait for the **Volume state** to became *In Use*.
 <p align="center">
   <img src="images/volume-in-use.png" alt="Amazon EC2 Instance Volume State Change" width="1000">
 </p>
+
+## Task 3: Connecting to the Lab EC2 instance
+I connect to the instance **Lab** using the **EC2 Instance Connect**.
+```bash
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-1-11-9 ~]$
+```
+## Task 4: Creating and configuring the file system
+Here I will add the ume to a Linux instance as an ext3 file system under the /mnt/data-store mount point.
+
+1. I view the storage that is available on my instance using the command `df -h`.
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        460M     0  460M   0% /dev
+tmpfs           471M     0  471M   0% /dev/shm
+tmpfs           471M  472K  470M   1% /run
+tmpfs           471M     0  471M   0% /sys/fs/cgroup
+/dev/nvme0n1p1  8.0G  1.8G  6.3G  22% /
+tmpfs            95M     0   95M   0% /run/user/0
+tmpfs            95M     0   95M   0% /run/user/1000
+```
+
+2. I create an ext3 file system on the new volume.
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ sudo mkfs -t ext3 /dev/sdb
+mke2fs 1.42.9 (28-Dec-2013)
+Filesystem label=
+OS type: Linux
+Block size=4096 (log=2)
+Fragment size=4096 (log=2)
+Stride=0 blocks, Stripe width=0 blocks
+65536 inodes, 262144 blocks
+13107 blocks (5.00%) reserved for the super user
+First data block=0
+Maximum filesystem blocks=268435456
+8 block groups
+32768 blocks per group, 32768 fragments per group
+8192 inodes per group
+Superblock backups stored on blocks: 
+        32768, 98304, 163840, 229376
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (8192 blocks): done
+Writing superblocks and filesystem accounting information: done
+```
+
+3. I create directory to mount the new storage volume, running the following command
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ sudo mkdir /mnt/data-store
+```
+
+4. To mount the new volume, run the following commands:
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ sudo mount /dev/sdb /mnt/data-store
+[ec2-user@ip-10-1-11-9 ~]$ echo "/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2" | sudo tee -a /etc/fstab
+/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2
+```
+
+>[!Note]
+>The second command ensures that the volume is mounted even after the instance is restarted.
+
+
