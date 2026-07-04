@@ -39,11 +39,11 @@ Now I attach my new volume to the EC2 instance. Using the following configuratio
 - **Device name**: `/dev/sdb`
 
 <p align="center">
-  <img src="images/images/my-volume-attach.png" alt="Attaching an Amazon EC2 Instance" width="900">
+  <img src="images/my-volume-attach.png" alt="Attaching an Amazon EC2 Instance" width="900">
 </p>
 
 I wait for the **Volume state** to became *In Use*.
 
 <p align="center">
-  <img src="images/images/volume-in-use.png" alt="Amazon EC2 Instance Volume State Change" width="900">
+  <img src="images/volume-in-use.png" alt="Amazon EC2 Instance Volume State Change" width="900">
 </p>
