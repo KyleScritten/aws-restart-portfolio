@@ -200,7 +200,7 @@ The Volume status of my volume is *Available*.
   <img src="images/restored-volume-available.png" alt="Restored Volume Available" width="1000">
 </p>
 
->![Note]
+>[!Note]
 > When restoring a snapshot to a volume, I can also modify the configuration, such as changing the volume type, size, or Availability Zone.
 
 2. Attached the restored volume to the EC2 instance
