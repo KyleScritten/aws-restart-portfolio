@@ -120,4 +120,19 @@ Writing superblocks and filesystem accounting information: done
 >[!Note]
 >The second command ensures that the volume is mounted even after the instance is restarted.
 
+5. Here is the configuration file.
+```bash
+[ec2-user@ip-10-1-11-9 ~]$ echo "/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2" | sudo tee -a /etc/fstab
+/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2
+[ec2-user@ip-10-1-11-9 ~]$ cat /etc/fstab
+#
+UUID=0ff5ac59-da1a-4403-8b6e-1c09a7e65c22     /           xfs    defaults,noatime  1   1
+/dev/sdb   /mnt/data-store ext3 defaults,noatime 1 2
+```
 
+6. I view the storage that is available on my instance using the command `df -h` again.
+```bash
+
+```
+
+7. 
