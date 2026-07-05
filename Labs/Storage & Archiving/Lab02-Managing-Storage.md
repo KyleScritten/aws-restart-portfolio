@@ -269,9 +269,25 @@ The command returns only **two** snapshot IDs.
 ## Task 3: Challenge: Synchronize files with Amazon S3
 Here I've been challenged to sync the contents of a directory with the Amazon S3 bucket that I created earlier.
 
-1. Downloading and unzipping sample files
+1. I start by downloading and unzipping the sample files:
 ```bash
+[ec2-user@ip-10-5-0-111 ~]$ wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-3-124627/183-lab-JAWS-managing-storage/s3/files.zip
+--2026-07-05 00:29:50--  https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-3-124627/183-lab-JAWS-managing-storage/s3/files.zip
+Resolving aws-tc-largeobjects.s3.us-west-2.amazonaws.com (aws-tc-largeobjects.s3.us-west-2.amazonaws.com)... 16.12.102.26, 52.92.205.42, 52.218.176.201, ...
+Connecting to aws-tc-largeobjects.s3.us-west-2.amazonaws.com (aws-tc-largeobjects.s3.us-west-2.amazonaws.com)|16.12.102.26|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 72110 (70K) [application/zip]
+Saving to: ‘files.zip’
 
+100%[=========================================================================================================================================================================>] 72,110      --.-K/s   in 0.006s  
+
+2026-07-05 00:29:50 (11.0 MB/s) - ‘files.zip’ saved [72110/72110]
+
+[ec2-user@ip-10-5-0-111 ~]$ unzip files.zip
+Archive:  files.zip
+  inflating: files/file1.txt         
+  inflating: files/file2.txt         
+  inflating: files/file3.txt 
 ```
 
 2. Syncing files
@@ -284,7 +300,7 @@ Here is the output on screen.
 
 ```
 
-There's no direct command in Amazon S3 to restore a previous version of a file. 
+3. There's no direct command in Amazon S3 to restore a previous version of a file. 
 So I download a previous version of the deleted file from Amazon S3, with the `aws s3api list-object-versions`.
 
 ```bash
