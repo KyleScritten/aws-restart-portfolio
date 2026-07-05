@@ -376,23 +376,8 @@ delete: s3://s3-bucket-lab02-050726/files/file1.txt
 ```
 
 The **Versions** block contains a list of all available versions. I save the value for VersionId.
-```bash
-[ec2-user@ip-10-5-0-111 ~]$ aws s3api get-object --bucket s3-bucket-lab02-050726 --key files/file1.txt --version-id IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT files/file1.txt
-{
-    "AcceptRanges": "bytes",
-    "LastModified": "Sun, 05 Jul 2026 00:34:16 GMT",
-    "ContentLength": 30318,
-    "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
-    "ChecksumCRC32": "qqrPtQ==",
-    "ChecksumType": "FULL_OBJECT",
-    "VersionId": "IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT",
-    "ContentType": "text/plain",
-    "ServerSideEncryption": "AES256",
-    "Metadata": {}
-}
-```
 
-Then I re-download the old version and sync again to Amazon S3.
+4. Then I re-download the old version and sync again to Amazon S3.
 ```bash
 #!/bin/bash
 # Download the previous version of file1.txt.
