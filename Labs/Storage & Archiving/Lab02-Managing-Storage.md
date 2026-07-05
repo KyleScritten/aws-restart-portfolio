@@ -72,20 +72,199 @@ You use this value for VolumeId throughout the lab steps when prompted.
 ```
 The instance ID is identified as `i-0568735cbb8bde453`.
 
-4. I schedule the creation of subsequent snapshots using the command `cron`.
+4. To shut down the "Processor" instance, I run the command `aws ec2 stop-instances --instance-ids INSTANCE-ID` and replace "INSTANCE-ID" with the instance-id that I retrieved earlier:
 ```bash
-
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 stop-instances --instance-ids i-0568735cbb8bde453
+{
+    "StoppingInstances": [
+        {
+            "InstanceId": "i-0568735cbb8bde453",
+            "CurrentState": {
+                "Code": 64,
+                "Name": "stopping"
+            },
+            "PreviousState": {
+                "Code": 16,
+                "Name": "running"
+            }
+        }
+    ]
+}
 ```
 
-5. I stop the cron job with the command `crontab -r`.
-
-6. I examine the contents of the Python script **snapshotter_v2.py** with the command `more /home/ec2-user/snapshotter_v2.py`.
+5. To verify that the "Processor" instance stopped, I run the command `aws ec2 wait instance-stopped --instance-id INSTANCE-ID` and replace "INSTANCE-ID" with my instance id. 
 ```bash
-
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 wait instance-stopped --instance-id i-0568735cbb8bde453
 ```
-The script finds all EBS volumes that are associated with the current user’s account and takes snapshots. 
-It then examines the number of snapshots that are associated with the volume, sorts the snapshots by date, 
-and removes all but the two most recent snapshots.
+When the instance stops, the command returns to a prompt.
+
+6. I create the first snapshot of the volume of the "Processor" instance.
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 create-snapshot --volume-id vol-06d5a9aed9be79243
+{
+    "Tags": [],
+    "SnapshotId": "snap-00aefacff7f7f65fc",
+    "VolumeId": "vol-06d5a9aed9be79243",
+    "State": "pending",
+    "StartTime": "2026-07-05T00:20:19.076Z",
+    "Progress": "",
+    "OwnerId": "114718016891",
+    "Description": "",
+    "VolumeSize": 8,
+    "Encrypted": false
+}
+```
+
+7. To check the status of your snapshot, run:
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 wait snapshot-completed --snapshot-id snap-00aefacff7f7f65fc
+```
+
+8. I restart the "Processor" instance, run the following command with the instance-id that I retrieved earlier:
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 start-instances --instance-ids i-0568735cbb8bde453
+{
+    "StartingInstances": [
+        {
+            "InstanceId": "i-0568735cbb8bde453",
+            "CurrentState": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "PreviousState": {
+                "Code": 80,
+                "Name": "stopped"
+            }
+        }
+    ]
+}
+```
+
+9. I schedule the creation of subsequent snapshots using the command `cron`.
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ echo "* * * * *  aws ec2 create-snapshot --volume-id vol-06d5a9aed9be79243 2>&1 >> /tmp/cronlog" > cronjob crontab cronjob
+```
+
+ 10. I verified that subsequent snapshots are being created:
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id,Values=vol-06d5a9aed9be79243"
+{
+    "Snapshots": [
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2026-07-05T00:24:43.507Z",
+            "FullSnapshotSizeInBytes": 2058878976,
+            "SnapshotId": "snap-034d03d15c92c253c",
+            "VolumeId": "vol-06d5a9aed9be79243",
+            "State": "completed",
+            "StartTime": "2026-07-05T00:24:03.886Z",
+            "Progress": "100%",
+            "OwnerId": "114718016891",
+            "Description": "",
+            "VolumeSize": 8,
+            "Encrypted": false
+        },
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2026-07-05T00:25:38.811Z",
+            "FullSnapshotSizeInBytes": 2058878976,
+            "SnapshotId": "snap-04d3e486fdfcd0abe",
+            "VolumeId": "vol-06d5a9aed9be79243",
+            "State": "completed",
+            "StartTime": "2026-07-05T00:25:02.441Z",
+            "Progress": "100%",
+            "OwnerId": "114718016891",
+            "Description": "",
+            "VolumeSize": 8,
+            "Encrypted": false
+        },
+        {
+            "StorageTier": "standard",
+            "TransferType": "standard",
+            "CompletionTime": "2026-07-05T00:21:02.996Z",
+            "FullSnapshotSizeInBytes": 2056781824,
+            "SnapshotId": "snap-00aefacff7f7f65fc",
+            "VolumeId": "vol-06d5a9aed9be79243",
+            "State": "completed",
+            "StartTime": "2026-07-05T00:20:19.076Z",
+            "Progress": "100%",
+            "OwnerId": "114718016891",
+            "Description": "",
+            "VolumeSize": 8,
+            "Encrypted": false
+        }
+    ]
+}
+```
+
+ 11. I stop the cron job with the command `crontab -r`.
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ crontab -r
+```
+
+12. I examine the contents of the Python script **snapshotter_v2.py** with the command `more /home/ec2-user/snapshotter_v2.py`.
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ more /home/ec2-user/snapshotter_v2.py
+#!/usr/bin/env python
+
+import boto3 
+
+MAX_SNAPSHOTS = 2   # Number of snapshots to keep
+
+# Create the EC2 resource
+ec2 = boto3.resource('ec2')
+
+# Get a list of all volumes
+volume_iterator = ec2.volumes.all()
+
+# Create a snapshot of each volume
+for v in volume_iterator:
+  v.create_snapshot()
+
+  # Too many snapshots?
+  snapshots = list(v.snapshots.all())
+  if len(snapshots) > MAX_SNAPSHOTS:
+
+    # Delete oldest snapshots, but keep MAX_SNAPSHOTS available
+    snap_sorted = sorted([(s.id, s.start_time, s) for s in snapshots], key=lambda k: k[1])
+    for s in snap_sorted[:-MAX_SNAPSHOTS]:
+      print("Deleting snapshot", s[0])
+      s[2].delete()
+```
+>[!Note]
+>The script finds all EBS volumes that are associated with the current user’s account and takes snapshots.
+>It then examines the number of snapshots that are associated with the volume, sorts the snapshots by date, and removes all but the two most recent snapshots.
+
+13. The following command returns the multiple snapshot IDs that were returned for the volume. These are the snapshots that were created by my `cron` job before I stopped it.
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id, Values=vol-06d5a9aed9be79243" --query 'Snapshots[*].SnapshotId'
+[
+    "snap-0acad13b71251e2dd",
+    "snap-034d03d15c92c253c",
+    "snap-04d3e486fdfcd0abe",
+    "snap-00aefacff7f7f65fc"
+]
+```
+
+14. Run the "snapshotter_v2.py" script using the command below. The script runs for a few seconds, and then it returns a list of all of the snapshots that it deleted:
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ python3.8 snapshotter_v2.py
+Deleting snapshot snap-00aefacff7f7f65fc
+Deleting snapshot snap-034d03d15c92c253c
+Deleting snapshot snap-04d3e486fdfcd0abe
+```
+
+15. To examine the new number of snapshots for the current volume, re-run the command:
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id, Values=vol-06d5a9aed9be79243" --query 'Snapshots[*].SnapshotId'
+[
+    "snap-0dba79f40bb217e3d",
+    "snap-0acad13b71251e2dd"
+]
+```
+The command returns only **two** snapshot IDs.
 
 ## Task 3: Challenge: Synchronize files with Amazon S3
 Here I've been challenged to sync the contents of a directory with the Amazon S3 bucket that I created earlier.
