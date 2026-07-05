@@ -313,8 +313,7 @@ rm files/file1.txt
 # Force Amazon S3 to delete any files that aren't present on the local drive but present in Amazon S3
 aws s3 sync files s3://$BUCKET_NAME/files/ --delete
 ```
-
-Here is the output on screen.
+Here is the terminal output
 ```bash
 [ec2-user@ip-10-5-0-111 ~]$ aws s3api put-bucket-versioning --bucket s3-bucket-lab02-050726 --versioning-configuration Status=Enabled
 [ec2-user@ip-10-5-0-111 ~]$ aws s3 sync files s3://s3-bucket-lab02-050726/files/
@@ -375,9 +374,9 @@ delete: s3://s3-bucket-lab02-050726/files/file1.txt
 }
 ```
 
-The **Versions** block contains a list of all available versions. I save the value for VersionId.
+The **Versions** block contains a list of all available versions. I save the value for `VersionId`.
 
-4. Then I re-download the old version and sync again to Amazon S3.
+4. I re-download the old version and synced again to my Amazon S3 bucket. I listed the Amazon S3 bucket contents to verify that it contains the correct files. 
 ```bash
 #!/bin/bash
 # Download the previous version of file1.txt.
@@ -392,7 +391,7 @@ aws s3 sync files s3://$BUCKET_NAME/files/
 # Verify that a new version of file1.txt was pushed to the S3 bucket.
 aws s3 ls s3://$BUCKET_NAME/files/
 ```
-Here is the output screen.
+Here is the terminal output
 ```bash
 [ec2-user@ip-10-5-0-111 ~]$ aws s3api get-object --bucket s3-bucket-lab02-050726 --key files/file1.txt --version-id IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT files/file1.txt
 {
@@ -420,6 +419,6 @@ upload: files/file1.txt to s3://s3-bucket-lab02-050726/files/file1.txt
 ## Conclusion
 In this lab I learnt how to:
 
-- create and maintain snapshots for Amazon EC2 instances.
-- use Amazon S3 sync to copy files from an EBS volume to an S3 bucket.
-- use Amazon S3 versioning to retrieve deleted files.
+- Create and maintain snapshots for Amazon EC2 instances.
+- Use Amazon S3 sync to copy files from an EBS volume to an S3 bucket.
+- Use Amazon S3 versioning to retrieve deleted files.
