@@ -290,247 +290,32 @@ Archive:  files.zip
   inflating: files/file3.txt 
 ```
 
-2. Syncing files
+2. Syncing files with my Amazon S3 bucket
 ```bash
+#!/bin/bash
 
+# Set bucket name
+BUCKET_NAME="s3-bucket-lab02-ct"
+echo $BUCKET_NAME
+
+# Activate versioning for the bucket
+aws s3api put-bucket-versioning --bucket $BUCKET_NAME --versioning-configuration Status=Enabled
+
+# Synch the local files with Amazon S3
+aws s3 sync files s3://$BUCKET_NAME/files/
+
+# Verify the status of the files
+aws s3 ls s3://$BUCKET_NAME/files/
+
+# Delete a local file.
+rm files/file1.txt
+
+# Force Amazon S3 to delete any files that aren't present on the local drive but present in Amazon S3
+aws s3 sync files s3://$BUCKET_NAME/files/ --delete
 ```
 
 Here is the output on screen.
 ```bash
-
-```
-
-3. There's no direct command in Amazon S3 to restore a previous version of a file. 
-So I download a previous version of the deleted file from Amazon S3, with the `aws s3api list-object-versions`.
-
-```bash
-
-```
-
-The **Versions** block contains a list of all available versions. I save the value for VersionId.
-```bash
-
-```
-
-Then I re-download the old version and sync again to Amazon S3.
-
-```bash
-
-```
-Here is the output screen.
-```bash
-
-```
-
-## Conclusion
-In this lab I learnt how to:
-
-- create and maintain snapshots for Amazon EC2 instances.
-- use Amazon S3 sync to copy files from an EBS volume to an S3 bucket.
-- use Amazon S3 versioning to retrieve deleted files.
-
-aws s3 ls s3://s3-bucket-lab02-050726/files/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```
-Last login: Sun Jul  5 00:07:56 2026 from ec2-18-237-140-163.us-west-2.compute.amazonaws.com
-   ,     #_
-   ~\_  ####_        Amazon Linux 2
-  ~~  \_#####\
-  ~~     \###|       AL2 End of Life is 2026-06-30.
-  ~~       \#/ ___
-   ~~       V~' '->
-    ~~~         /    A newer version of Amazon Linux is available!
-      ~~._.   _/
-         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
-       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
-
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-instances --filter 'Name=tag:Name,Values=Processor' --query 'Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.{VolumeId:VolumeId}'
-{
-    "VolumeId": "vol-06d5a9aed9be79243"
-}
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-instances --filters 'Name=tag:Name,Values=Processor' --query 'Reservations[0].Instances[0].InstanceId'
-"i-0568735cbb8bde453"
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 stop-instances --instance-ids i-0568735cbb8bde453
-{
-    "StoppingInstances": [
-        {
-            "InstanceId": "i-0568735cbb8bde453",
-            "CurrentState": {
-                "Code": 64,
-                "Name": "stopping"
-            },
-            "PreviousState": {
-                "Code": 16,
-                "Name": "running"
-            }
-        }
-    ]
-}
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 wait instance-stopped --instance-id i-0568735cbb8bde453
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 create-snapshot --volume-id vol-06d5a9aed9be79243
-{
-    "Tags": [],
-    "SnapshotId": "snap-00aefacff7f7f65fc",
-    "VolumeId": "vol-06d5a9aed9be79243",
-    "State": "pending",
-    "StartTime": "2026-07-05T00:20:19.076Z",
-    "Progress": "",
-    "OwnerId": "114718016891",
-    "Description": "",
-    "VolumeSize": 8,
-    "Encrypted": false
-}
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 wait snapshot-completed --snapshot-id snap-00aefacff7f7f65fc
-
-[ec2-user@ip-10-5-0-111 ~]$ 
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 start-instances --instance-ids i-0568735cbb8bde453
-{
-    "StartingInstances": [
-        {
-            "InstanceId": "i-0568735cbb8bde453",
-            "CurrentState": {
-                "Code": 0,
-                "Name": "pending"
-            },
-            "PreviousState": {
-                "Code": 80,
-                "Name": "stopped"
-            }
-        }
-    ]
-}
-[ec2-user@ip-10-5-0-111 ~]$ echo "* * * * *  aws ec2 create-snapshot --volume-id vol-06d5a9aed9be79243 2>&1 >> /tmp/cronlog" > cronjob
-[ec2-user@ip-10-5-0-111 ~]$ crontab cronjob
-[ec2-user@ip-10-5-0-111 ~]$ echo "* * * * *  aws ec2 create-snapshot --volume-id vol-06d5a9aed9be79243 2>&1 >> /tmp/cronlog" > cronjob crontab cronjob
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id,Values=VolumeId": "vol-06d5a9aed9be79243"
-
-Error parsing parameter '--filters': Expected: '=', received: 'EOF' for input:
-{self._error_location()}
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id,Values=vol-06d5a9aed9be79243"
-{
-    "Snapshots": [
-        {
-            "StorageTier": "standard",
-            "TransferType": "standard",
-            "CompletionTime": "2026-07-05T00:24:43.507Z",
-            "FullSnapshotSizeInBytes": 2058878976,
-            "SnapshotId": "snap-034d03d15c92c253c",
-            "VolumeId": "vol-06d5a9aed9be79243",
-            "State": "completed",
-            "StartTime": "2026-07-05T00:24:03.886Z",
-            "Progress": "100%",
-            "OwnerId": "114718016891",
-            "Description": "",
-            "VolumeSize": 8,
-            "Encrypted": false
-        },
-        {
-            "StorageTier": "standard",
-            "TransferType": "standard",
-            "CompletionTime": "2026-07-05T00:25:38.811Z",
-            "FullSnapshotSizeInBytes": 2058878976,
-            "SnapshotId": "snap-04d3e486fdfcd0abe",
-            "VolumeId": "vol-06d5a9aed9be79243",
-            "State": "completed",
-            "StartTime": "2026-07-05T00:25:02.441Z",
-            "Progress": "100%",
-            "OwnerId": "114718016891",
-            "Description": "",
-            "VolumeSize": 8,
-            "Encrypted": false
-        },
-        {
-            "StorageTier": "standard",
-            "TransferType": "standard",
-            "CompletionTime": "2026-07-05T00:21:02.996Z",
-            "FullSnapshotSizeInBytes": 2056781824,
-            "SnapshotId": "snap-00aefacff7f7f65fc",
-            "VolumeId": "vol-06d5a9aed9be79243",
-            "State": "completed",
-            "StartTime": "2026-07-05T00:20:19.076Z",
-            "Progress": "100%",
-            "OwnerId": "114718016891",
-            "Description": "",
-            "VolumeSize": 8,
-            "Encrypted": false
-        }
-    ]
-}
-[ec2-user@ip-10-5-0-111 ~]$ crontab -r
-[ec2-user@ip-10-5-0-111 ~]$ more /home/ec2-user/snapshotter_v2.py
-#!/usr/bin/env python
-
-import boto3 
-
-MAX_SNAPSHOTS = 2   # Number of snapshots to keep
-
-# Create the EC2 resource
-ec2 = boto3.resource('ec2')
-
-# Get a list of all volumes
-volume_iterator = ec2.volumes.all()
-
-# Create a snapshot of each volume
-for v in volume_iterator:
-  v.create_snapshot()
-
-  # Too many snapshots?
-  snapshots = list(v.snapshots.all())
-  if len(snapshots) > MAX_SNAPSHOTS:
-
-    # Delete oldest snapshots, but keep MAX_SNAPSHOTS available
-    snap_sorted = sorted([(s.id, s.start_time, s) for s in snapshots], key=lambda k: k[1])
-    for s in snap_sorted[:-MAX_SNAPSHOTS]:
-      print("Deleting snapshot", s[0])
-      s[2].delete()
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id, Values=vol-06d5a9aed9be79243" --query 'Snapshots[*].SnapshotId'
-[
-    "snap-0acad13b71251e2dd",
-    "snap-034d03d15c92c253c",
-    "snap-04d3e486fdfcd0abe",
-    "snap-00aefacff7f7f65fc"
-]
-[ec2-user@ip-10-5-0-111 ~]$ python3.8 snapshotter_v2.py
-Deleting snapshot snap-00aefacff7f7f65fc
-Deleting snapshot snap-034d03d15c92c253c
-Deleting snapshot snap-04d3e486fdfcd0abe
-[ec2-user@ip-10-5-0-111 ~]$ aws ec2 describe-snapshots --filters "Name=volume-id, Values=vol-06d5a9aed9be79243" --query 'Snapshots[*].SnapshotId'
-[
-    "snap-0dba79f40bb217e3d",
-    "snap-0acad13b71251e2dd"
-]
-[ec2-user@ip-10-5-0-111 ~]$ wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-3-124627/183-lab-JAWS-managing-storage/s3/files.zip
---2026-07-05 00:29:50--  https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/CUR-TF-100-RSJAWS-3-124627/183-lab-JAWS-managing-storage/s3/files.zip
-Resolving aws-tc-largeobjects.s3.us-west-2.amazonaws.com (aws-tc-largeobjects.s3.us-west-2.amazonaws.com)... 16.12.102.26, 52.92.205.42, 52.218.176.201, ...
-Connecting to aws-tc-largeobjects.s3.us-west-2.amazonaws.com (aws-tc-largeobjects.s3.us-west-2.amazonaws.com)|16.12.102.26|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 72110 (70K) [application/zip]
-Saving to: ‘files.zip’
-
-100%[=========================================================================================================================================================================>] 72,110      --.-K/s   in 0.006s  
-
-2026-07-05 00:29:50 (11.0 MB/s) - ‘files.zip’ saved [72110/72110]
-
-[ec2-user@ip-10-5-0-111 ~]$ unzip files.zip
-Archive:  files.zip
-  inflating: files/file1.txt         
-  inflating: files/file2.txt         
-  inflating: files/file3.txt         
 [ec2-user@ip-10-5-0-111 ~]$ aws s3api put-bucket-versioning --bucket s3-bucket-lab02-050726 --versioning-configuration Status=Enabled
 [ec2-user@ip-10-5-0-111 ~]$ aws s3 sync files s3://s3-bucket-lab02-050726/files/
 upload: files/file2.txt to s3://s3-bucket-lab02-050726/files/file2.txt
@@ -550,72 +335,10 @@ delete: s3://s3-bucket-lab02-050726/files/file1.txt
 [ec2-user@ip-10-5-0-111 ~]$ aws s3 ls s3://s3-bucket-lab02-050726/files/
 2026-07-05 00:34:16      43784 file2.txt
 2026-07-05 00:34:16      96675 file3.txt
-[ec2-user@ip-10-5-0-111 ~]$ aws s3api list-object-versions --bucket s3-bucket-lab02-050726 
-{
-    "Versions": [
-        {
-            "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
-            "ChecksumAlgorithm": [
-                "CRC32"
-            ],
-            "ChecksumType": "FULL_OBJECT",
-            "Size": 30318,
-            "StorageClass": "STANDARD",
-            "Key": "files/file1.txt",
-            "VersionId": "IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT",
-            "IsLatest": false,
-            "LastModified": "2026-07-05T00:34:16.000Z",
-            "Owner": {
-                "ID": "37bea78c09008f973b33e8b4908d28a6d7f1e32675200245bb19676b65e7975a"
-            }
-        },
-        {
-            "ETag": "\"3265fc3a6cf0337a5684731be0076dc2\"",
-            "ChecksumAlgorithm": [
-                "CRC32"
-            ],
-            "ChecksumType": "FULL_OBJECT",
-            "Size": 43784,
-            "StorageClass": "STANDARD",
-            "Key": "files/file2.txt",
-            "VersionId": "tcqPoDmyyKiuaGHM5XVPLk7Sv49hpVhX",
-            "IsLatest": true,
-            "LastModified": "2026-07-05T00:34:16.000Z",
-            "Owner": {
-                "ID": "37bea78c09008f973b33e8b4908d28a6d7f1e32675200245bb19676b65e7975a"
-            }
-        },
-        {
-            "ETag": "\"f491957bee64c931c32fc1d39ffc709f\"",
-            "ChecksumAlgorithm": [
-                "CRC32"
-            ],
-            "ChecksumType": "FULL_OBJECT",
-            "Size": 96675,
-            "StorageClass": "STANDARD",
-            "Key": "files/file3.txt",
-            "VersionId": "gOpmQy3sqgwJwzvRXvTNdFBFhUItU_Yy",
-            "IsLatest": true,
-            "LastModified": "2026-07-05T00:34:16.000Z",
-            "Owner": {
-                "ID": "37bea78c09008f973b33e8b4908d28a6d7f1e32675200245bb19676b65e7975a"
-            }
-        }
-    ],
-    "DeleteMarkers": [
-        {
-            "Owner": {
-                "ID": "37bea78c09008f973b33e8b4908d28a6d7f1e32675200245bb19676b65e7975a"
-            },
-            "Key": "files/file1.txt",
-            "VersionId": "51PcsxxODy1rGdSVdxNUS5dwcwb0rHU1",
-            "IsLatest": true,
-            "LastModified": "2026-07-05T00:36:32.000Z"
-        }
-    ],
-    "RequestCharged": null,
-    "Prefix": ""
-}
+```
+
+3. There's no direct command in Amazon S3 to restore a previous version of a file. I downloaded a previous version of the deleted file from Amazon S3, with the `aws s3api list-object-versions`.
+```bash
 [ec2-user@ip-10-5-0-111 ~]$ aws s3api list-object-versions --bucket s3-bucket-lab02-050726 --prefix files/file1.txt
 {
     "Versions": [
@@ -650,12 +373,42 @@ delete: s3://s3-bucket-lab02-050726/files/file1.txt
     "RequestCharged": null,
     "Prefix": "files/file1.txt"
 }
-[ec2-user@ip-10-5-0-111 ~]$ aws s3api get-object --bucket s3-bucket-lab02-050726 --key files/file1.txt --version-id VERSION-ID files/file1.txt
+```
 
-An error occurred (InvalidArgument) when calling the GetObject operation: Invalid version id specified
-[ec2-user@ip-10-5-0-111 ~]$ aws s3api get-object --bucket s3-bucket-lab02-050726 --key files/file1.txt --version-id 51PcsxxODy1rGdSVdxNUS5dwcwb0rHU1 files/file1.txt
+The **Versions** block contains a list of all available versions. I save the value for VersionId.
+```bash
+[ec2-user@ip-10-5-0-111 ~]$ aws s3api get-object --bucket s3-bucket-lab02-050726 --key files/file1.txt --version-id IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT files/file1.txt
+{
+    "AcceptRanges": "bytes",
+    "LastModified": "Sun, 05 Jul 2026 00:34:16 GMT",
+    "ContentLength": 30318,
+    "ETag": "\"b76b2b775023e60be16bc332496f8409\"",
+    "ChecksumCRC32": "qqrPtQ==",
+    "ChecksumType": "FULL_OBJECT",
+    "VersionId": "IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT",
+    "ContentType": "text/plain",
+    "ServerSideEncryption": "AES256",
+    "Metadata": {}
+}
+```
 
-An error occurred (MethodNotAllowed) when calling the GetObject operation: The specified method is not allowed against this resource.
+Then I re-download the old version and sync again to Amazon S3.
+```bash
+#!/bin/bash
+# Download the previous version of file1.txt.
+aws s3api get-object --bucket $BUCKET_NAME --key files/file1.txt --version-id $VERSION_ID files/file1.txt
+
+# Verify that the file was restored locally.
+ls files
+
+# Re-sync the contents of the files/ folder to Amazon S3.
+aws s3 sync files s3://$BUCKET_NAME/files/
+
+# Verify that a new version of file1.txt was pushed to the S3 bucket.
+aws s3 ls s3://$BUCKET_NAME/files/
+```
+Here is the output screen.
+```bash
 [ec2-user@ip-10-5-0-111 ~]$ aws s3api get-object --bucket s3-bucket-lab02-050726 --key files/file1.txt --version-id IHFoZHY_m4fo_lEAFXx0EifgrbwDBJsT files/file1.txt
 {
     "AcceptRanges": "bytes",
@@ -677,7 +430,11 @@ upload: files/file1.txt to s3://s3-bucket-lab02-050726/files/file1.txt
 2026-07-05 00:43:38      30318 file1.txt
 2026-07-05 00:34:16      43784 file2.txt
 2026-07-05 00:34:16      96675 file3.txt
-[ec2-user@ip-10-5-0-111 ~]$ 
-[ec2-user@ip-10-5-0-111 ~]$ 
-
 ```
+
+## Conclusion
+In this lab I learnt how to:
+
+- create and maintain snapshots for Amazon EC2 instances.
+- use Amazon S3 sync to copy files from an EBS volume to an S3 bucket.
+- use Amazon S3 versioning to retrieve deleted files.
