@@ -6,7 +6,10 @@ configure the S3 bucket to automatically send an email notification to the admin
 
 The following diagram shows the component architecture of the Amazon S3 file-sharing solution and illustrates its usage flow.
 
-![Working with Amazon S3 Archtecture](./images/lab03-archtecture.png)
+<p align="center">
+  <img src="images/s3-file-sharing.png" alt="Working with Amazon S3 Archtecture Lab Scenario" width="1000">
+</p>
+![](./images/lab03-archtecture.png)
 
 An AWS Identity and Access Management (IAM) user named mediacouser, which represents an external user at a media company, 
 has been pre-created with the appropriate Amazon S3 permissions to allow the user to add, change, or delete images from the bucket. 
