@@ -8,7 +8,6 @@ In this lab I used the AWS Command Line Interface (AWS CLI) commands from an Ama
 - Create a batch file that can be used to update the static website when you change any of the website files locally.
 
 <p align="center">
-<img src="images/lab-scenario.jpeg" alt="Amazon EC2 Lab Scenario" width="600">
+<img src="images/s3-website-overview.png" alt="S3 Website Architecture Lab Scenario" width="800">
 </p>
-![S3 Website Architecture](./images/s3-website-overview.png)
 
