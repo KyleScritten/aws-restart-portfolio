@@ -219,16 +219,17 @@ upload: images/Strawberry-&-Blueberry-Tarts.png to s3://kscr080726/images/Strawb
 3. To open the empty file in the VI editor. I entered edit mode in the VI editor, and pressed `i` to make changes to the file.
 
 4. To make the file an executable batch file, I ran:
-```
+```bash
 [ec2-user@ip-10-200-0-23 ~]$ chmod +x update-website.sh
 ```
 5. To open the local copy of the index.html file in a text editor, I ran:
-```
+```bash
 [ec2-user@ip-10-200-0-23 ~]$ vi sysops-activity-files/static-website/index.html
 ```
 <p align="center">
 <img src="images/vi-editor.png" alt="The vi Editor" width="800">
 </p>
+
 6. To update the website, run your batch file.
 ```bash
 [ec2-user@ip-10-200-0-23 ~]$ ./update-website.sh
