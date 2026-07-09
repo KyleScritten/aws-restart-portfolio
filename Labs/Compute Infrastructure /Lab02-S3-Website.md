@@ -190,3 +190,66 @@ upload: images/Strawberry-&-Blueberry-Tarts.png to s3://kscr080726/images/Strawb
 <p align="center">
 <img src="images/s3-website.png" alt="Cafe Website Hosted" width="800">
 </p>
+
+## Task 8: Create a batch file to make updating the website repeatable
+1. To pull up the history of recent commands, I ran the `history` command and received the following ouput from the console:
+```bash
+[ec2-user@ip-10-200-0-23 static-website]$ history
+    1  pwd
+    2  aws configure
+    3  aws s3api create-bucket --bucket kscr080726 --region us-west-2 --create-bucket-configuration LocationConstraint=us-west-2
+    4  aws iam create-user --user-name awsS3user
+    5  aws iam create-login-profile --user-name awsS3user --password Training123!
+    6  aws iam list-policies --query "Policies[?contains(PolicyName,'S3')]"
+    7  aws iam attach-user-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --user-name awsS3user
+    8  cd ~/sysops-activity-files
+    9  tar xvzf static-website-v2.tar.gz
+   10  cd static-website
+   11  ls
+   12  aws s3 website s3://kscr080726/ --index-document index.html
+   13  aws s3 cp /home/ec2-user/sysops-activity-files/static-website/ s3://kscr080726/ --recursive --acl public-read
+   14  aws s3 ls kscr080726
+   15  history
+```
+2. To change directories and create an empty file, I ran:
+```
+[ec2-user@ip-10-200-0-23 static-website]$ cd ~
+[ec2-user@ip-10-200-0-23 ~]$ touch update-website.sh
+```
+3. To open the empty file in the VI editor. I entered edit mode in the VI editor, and pressed `i` to make changes to the file.
+
+4. To make the file an executable batch file, I ran:
+```
+[ec2-user@ip-10-200-0-23 ~]$ chmod +x update-website.sh
+```
+5. To open the local copy of the index.html file in a text editor, I ran:
+```
+[ec2-user@ip-10-200-0-23 ~]$ vi sysops-activity-files/static-website/index.html
+```
+<p align="center">
+<img src="images/vi-editor.png" alt="The vi Editor" width="800">
+</p>
+6. To update the website, run your batch file.
+```bash
+[ec2-user@ip-10-200-0-23 ~]$ ./update-website.sh
+upload: sysops-activity-files/static-website/css/styles.css to s3://kscr080726/css/styles.css
+upload: sysops-activity-files/static-website/images/Coffee-Shop.png to s3://kscr080726/images/Coffee-Shop.png
+upload: sysops-activity-files/static-website/index.html to s3://kscr080726/index.html
+upload: sysops-activity-files/static-website/images/Cafe-Owners.png to s3://kscr080726/images/Cafe-Owners.png
+upload: sysops-activity-files/static-website/images/Strawberry-Tarts.png to s3://kscr080726/images/Strawberry-Tarts.png
+upload: sysops-activity-files/static-website/images/Cookies.png to s3://kscr080726/images/Cookies.png
+upload: sysops-activity-files/static-website/images/Strawberry-&-Blueberry-Tarts.png to s3://kscr080726/images/Strawberry-&-Blueberry-Tarts.png
+upload: sysops-activity-files/static-website/images/Coffee-and-Pastries.png to s3://kscr080726/images/Coffee-and-Pastries.png
+upload: sysops-activity-files/static-website/images/Cake-Vitrine.png to s3://kscr080726/images/Cake-Vitrine.png
+upload: sysops-activity-files/static-website/images/Cup-of-Hot-Chocolate.png to s3://kscr080726/images/Cup-of-Hot-Chocolate.png
+```
+Here is the updated static website:
+<p align="center">
+<img src="images/s3-website-new.png" alt="Updated Cafe Website Hosted With Colour Changes" width="800">
+</p>
+
+# Conclusion
+I have now successfully done the following:
+* Ran AWS CLI commands that use IAM and Amazon S3 services
+* Deployed a static website to an S3 bucket
+* Created a script that uses the AWS CLI to copy files in a local directory to Amazon S3
