@@ -128,10 +128,10 @@ I changed the permission for the S3 bucket:
 - Under Object Ownership, I acknowledge that ACLs will be restored: selected
 
 <p align="center">
-<img src="images/edit-block-access.png" alt="Block Public Access Disabled" width="800">
+<img src="images/edit-block-access.png" alt="Block Public Access Disabled" width="700">
 </p>
 <p align="center">
-<img src="images/acl-enabled.png" alt="Edit Object Ownership" width="800">
+<img src="images/acl-enabled.png" alt="Edit Object Ownership" width="700">
 </p>
 
 ## Task 6: Extract the files that you need for this lab
@@ -188,7 +188,7 @@ upload: images/Strawberry-&-Blueberry-Tarts.png to s3://kscr080726/images/Strawb
 ```
 4. Bucket website endpoint URL : `http://kscr080726.s3-website-us-west-2.amazonaws.com` deploys the website in a new browser tab.
 <p align="center">
-<img src="images/s3-website.png" alt="Cafe Website Hosted" width="800">
+<img src="images/s3-website.png" alt="Cafe Website Hosted" width="700">
 </p>
 
 ## Task 8: Create a batch file to make updating the website repeatable
@@ -246,7 +246,7 @@ upload: sysops-activity-files/static-website/images/Cup-of-Hot-Chocolate.png to 
 ```
 Here is the updated static website:
 <p align="center">
-<img src="images/s3-website-new.png" alt="Updated Cafe Website Hosted With Colour Changes" width="800">
+<img src="images/s3-website-new.png" alt="Updated Cafe Website Hosted With Colour Changes" width="700">
 </p>
 
 # Conclusion
