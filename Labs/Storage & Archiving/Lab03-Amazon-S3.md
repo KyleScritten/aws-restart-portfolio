@@ -28,7 +28,7 @@ of the changes to the contents of the bucket.
 > In real-world implementations, external users might not receive direct access to CLI Host as depicted in the diagram.
 
 ## Objectives
-- Use the s3api and s3 AWS CLI commands to create and configure an S3 bucket.
+- Use the `s3api` and `s3 AWS CLI commands to create and configure an S3 bucket.
 - Verify write permissions to a user on an S3 bucket.
 - Configure event notification on an S3 bucket.
 
