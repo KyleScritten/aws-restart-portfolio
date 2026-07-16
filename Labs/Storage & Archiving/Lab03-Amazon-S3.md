@@ -101,7 +101,7 @@ The mediaco IAM group has 2 permissions:
    Two additional operations are included for eventual version-related actions.
 
 <p align="center">
-<img src="images/lab03-IAM-group.png" alt="Mediaco IAM group" width="900">
+<img src="images/lab03-IAM-group.png" alt="Mediaco IAM group" width="1000">
 </p>
 
 2. The mediacouser IAM user has 2 policies:
@@ -113,7 +113,7 @@ I create an **Access Key** wwith the following options:
 - Select the check box for I understand the above recommendation and want to proceed to create an access key.
 
 <p align="center">
-<img src="images/access-key.png" alt="IAM User Access Key Creation” width="900">
+<img src="images/access-key.png" alt="IAM User Access Key Creation” width="1000">
 </p>
 
 3. Testing the mediacouser permissions
@@ -127,7 +127,7 @@ The external user is authorize to perform the view, upload, and delete operation
 
 While, the external user is not authorized to change the bucket permissions.
 <p align="center">
-<img src="images/unauthorised-actions.png" alt=“Unauthorise actions for external user” width="900">
+<img src="images/unauthorised-actions.png" alt=“Unauthorise actions for external user” width="1000">
 </p>
 
 ## Task 4: Configuring event notifications on the S3 share bucket
@@ -135,7 +135,7 @@ Here I will configure the S3 share bucket to generate an event notification to a
 
 1. I created the **s3NotificationTopic** SNS topic.
 <p align="center">
-<img src="images/SNS-topic.png" alt=“SNS Topic” width="900">
+<img src="images/SNS-topic.png" alt=“SNS Topic” width="1000">
 </p>
 
 2. I then granted Amazon S3 permission to publish to the topic. In the **Access policy (optional)**, I replicate the contents of the JSON editor with the following policy:
@@ -203,7 +203,7 @@ aws s3api put-bucket-notification-configuration --bucket $BUCKET_NAME --notifica
 ```
 C) I checked my email and received the following 
 <p align="center">
-<img src="images/test-event.png" alt=“Amazon S3 Notification Test Event” width="900">
+<img src="images/test-event.png" alt=“Amazon S3 Notification Test Event” width="1000">
 </p>
 
 >[!Note]
@@ -237,7 +237,7 @@ Default output format [json]: json
 > This notification indicates that a new object with a key of **images/Caramel-Delight.jpg** was added (put) into the S3 share bucket.
 
 <p align="center">
-<img src="images/put-test-event.png" alt=“Amazon S3 Notification PUT Test Event” width="900">
+<img src="images/put-test-event.png" alt=“Amazon S3 Notification PUT Test Event” width="1000">
 </p>
 
 
@@ -264,7 +264,7 @@ I receive an email with the subject *Amazon S3 Notification*. The **eventName** 
 In other words, the object with a key of images/Strawberry-Tarts.jpg was deleted from the S3 share bucket.
 
 <p align="center">
-<img src="images/delete-test-event.png" alt=“Amazon S3 Notification DELETE Test Event” width="900">
+<img src="images/delete-test-event.png" alt=“Amazon S3 Notification DELETE Test Event” width="1000">
 </p>
 
 5. I try to change the permission of the Donuts.jpg object so that it can be read publicly as an an example of an unauthorised use case.
