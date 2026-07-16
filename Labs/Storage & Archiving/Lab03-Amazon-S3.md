@@ -175,7 +175,7 @@ It grants the cafe S3 share bucket permission to publish messages to the s3Notif
 
 4. I added an event notification configuration to the S3 bucket.
 
-A) I copy the following json code into the newly created file `s3EventNotification.json`, through the CLI using the `vi` editor
+I copy the following json code into the newly created file `s3EventNotification.json`, through the CLI using the `vi` editor
 
 ```
 {
@@ -200,11 +200,11 @@ A) I copy the following json code into the newly created file `s3EventNotificati
 >[!Note]
 >The code requests that Amazon S3 publish an event notification to the s3NotificationTopic SNS topic whenever an ObjectCreated or ObjectRemoved event is performed on objects inside an Amazon S3 resource with a prefix of images/.
 
-B) Then I associate the event configuration file with the S3 share bucket:
+Then I associate the event configuration file with the S3 share bucket:
 ```bash
 aws s3api put-bucket-notification-configuration --bucket $BUCKET_NAME --notification-configuration file://s3EventNotification.json
 ```
-C) I checked my email and received the following 
+I checked my email and received the following 
 <p align="center">
 <img src="images/test-event.png" alt=“Amazon S3 Notification Test Event” width="1000">
 </p>
