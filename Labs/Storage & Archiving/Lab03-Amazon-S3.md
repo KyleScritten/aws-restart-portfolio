@@ -101,7 +101,7 @@ The mediaco IAM group has 2 permissions:
    Two additional operations are included for eventual version-related actions.
 
 <p align="center">
-<img src="images/lab03-IAM-group.png" alt="Mediaco IAM group" width="1000">
+<img src="images/lab03-IAM-group.png" alt="Mediaco IAM group" width="900">
 </p>
 
 2. The mediacouser IAM user has 2 policies:
@@ -167,10 +167,10 @@ It grants the cafe S3 share bucket permission to publish messages to the s3Notif
 
 3. I subscribed to the SNS topic I created
 <p align="center">
-<img src="images/SNS-topic-subscription.png" alt=“SNS Topic Subscription” width="900">
+<img src="images/SNS-topic-subscription.png" alt=“SNS Topic Subscription” width="800">
 </p>
 <p align="center">
-<img src="images/SNS-subscription-confirmed.png" alt=“SNS Topic Subscription Confirmation” width="900">
+<img src="images/SNS-subscription-confirmed.png" alt=“SNS Topic Subscription Confirmation” width="800">
 </p>
 
 4. I added an event notification configuration to the S3 bucket.
