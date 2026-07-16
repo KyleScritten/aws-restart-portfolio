@@ -139,6 +139,7 @@ Here I will configure the S3 share bucket to generate an event notification to a
 </p>
 
 2. I then granted Amazon S3 permission to publish to the topic. In the **Access policy (optional)**, I replicate the contents of the JSON editor with the following policy:
+   
 ```json
 {
   "Version": "2008-10-17",
@@ -161,6 +162,7 @@ Here I will configure the S3 share bucket to generate an event notification to a
   ]
 }
 ```
+
 It grants the cafe S3 share bucket permission to publish messages to the s3NotificationTopic SNS topic.
 
 3. I subscribed to the SNS topic I created
