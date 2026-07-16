@@ -177,7 +177,7 @@ It grants the cafe S3 share bucket permission to publish messages to the s3Notif
 
 A) I copy the following json code into the newly created file `s3EventNotification.json`, through the CLI using the `vi` editor
 
-```json
+```
 {
     "TopicConfigurations": [
       {
