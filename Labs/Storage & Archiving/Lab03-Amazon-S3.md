@@ -122,7 +122,7 @@ In an incognito window, I copy the **Console sign-in link** `https://52353072892
 
 The external user is authorize to perform the view, upload, and delete operations on the contents of the images folder in the S3 share bucket.
 <p align="center">
-<img src="images/authorised-actions.png" alt="Authorise actions for external user” width="900">
+<img src="images/authorised-actions.png" alt="Authorise actions for external user” width="1000">
 </p>
 
 While, the external user is not authorized to change the bucket permissions.
