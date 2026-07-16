@@ -176,11 +176,12 @@ It grants the cafe S3 share bucket permission to publish messages to the s3Notif
 4. I added an event notification configuration to the S3 bucket.
 
 A) I copy the following json code into the newly created file `s3EventNotification.json`, through the CLI using the `vi` editor
+
 ```json
 {
     "TopicConfigurations": [
       {
-        "TopicArn": "arn:aws:sns:us-west-2:523530728920:s3NotificationTopic",
+        "TopicArn": "<SNS Topic ARN>",
         "Events": ["s3:ObjectCreated:*","s3:ObjectRemoved:*"],
         "Filter": {
           "Key": {
