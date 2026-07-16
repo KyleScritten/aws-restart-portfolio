@@ -263,7 +263,7 @@ This operation does not generate an email notification because the share bucket 
 ```bash
 aws s3api delete-object --bucket $BUCKET_NAME --key images/Strawberry-Tarts.jpg
 ```
-I receive an email with the subject *Amazon S3 Notification*. The **eventName** is "ObjectRemoved:Delete" and **key** is "images/Strawberry-Tarts.jpg".
+I received an email with the subject *Amazon S3 Notification*. The **eventName** is "ObjectRemoved:Delete" and **key** is "images/Strawberry-Tarts.jpg".
 In other words, the object with a key of images/Strawberry-Tarts.jpg was deleted from the S3 share bucket.
 
 <p align="center">
