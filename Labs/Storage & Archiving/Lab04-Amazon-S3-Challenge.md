@@ -18,3 +18,17 @@ To start the challenge, I connect to the CLI Host instance that is already provi
 4. I choose **Connect**.
 5. On the **EC2 Instance Connect** tab, I choose **Connect**.
 
+## Task 2: Configuring the AWS CLI
+
+1. To set up the AWS CLI profile with credentials, I run the following command in the EC2 Instance Connect terminal:
+```bash
+aws configure
+```
+2. At the prompts, I copy the values I pasted into my text editor, and paste them into the terminal window as directed:
+   * **AWS Access Key ID:** Enter the value for AccessKey.
+   * **AWS Secret Access Key:** Enter the value for SecretKey.
+   * **Default region name:** Enter `us-west-2`.
+   * **Default output format:** Enter `json`.
+```bash
+
+```
