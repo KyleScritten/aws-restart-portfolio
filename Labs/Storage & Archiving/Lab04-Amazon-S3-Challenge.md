@@ -50,7 +50,7 @@ Default output format [None]: json
 ## Task 3: Finishing the challenge
 To finish the challenge, I do the following:
 
-1. I create an S3 bucket using the AWS CLI, replacing `<my-unique-bucket-name>` with a globally unique name:
+1. I create an S3 bucket using the AWS CLI by running the command `aws s3 mb s3://<my-unique-bucket-name> --region us-west-2`, replacing `<my-unique-bucket-name>` with a globally unique name:
 ```bash
 [ec2-user@ip-10-200-0-140 ~]$ aws s3 mb s3://challenge-ks-180726 --region us-west-2
 make_bucket: challenge-ks-180726
