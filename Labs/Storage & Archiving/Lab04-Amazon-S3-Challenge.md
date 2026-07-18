@@ -79,18 +79,21 @@ upload: sysops-activity-files/images/Mom-&-Pop.png to s3://challenge-ks-180726/i
 </Error>
 ```
 
-4. I make the object `Strawberry-Tarts.png` (not the bucket) publicly accessible. 
-First, I **enable Access control list (ACL)** and **disable Block all public access** on the bucket permissions tab.
-Then on the object permission tab, I edit the ACL and in the **Everyone (public access)** section, I choose **Objects Read** and saved the changes by typing *confirm*.
+4. I make the object `Strawberry-Tarts.png` (not the bucket) publicly accessible.
+
+>[!Note]
+> In the AWS Management console I performed the following to make the object publicly visible:
+> - I **enable Access control list (ACL)** and **disable Block all public access** on the bucket permissions tab.
+> - On the object permission tab, I edit the ACL and in the **Everyone (public access)** section.
+> - I chose **Objects Read** and saved the changes by typing *confirm*.
 
 <p align="center">
   <img src="images/object-visibility.png" alt="Notification Displaying Object Is Publicly Visible" width="1000">
 </p>
 
 5. I access the object again by using a web browser and confirm that it now loads successfully:
-
 <p align="center">
-  <img src="images/s3-file-sharing.png" alt="Object URL" width="1000">
+  <img src="images/cake-object-url.png" alt="Object URL" width="1000">
 </p>
 
 6. I list the contents of the S3 bucket by using the AWS CLI:
@@ -124,9 +127,9 @@ aws s3 ls s3://challenge-ks-180726/images/ --human-readable --summarize
 ```
 
 ## Conclusion
-In this lab I learnt how to:
-- Created an S3 bucket
-- Uploaded an object into this bucket
+In this lab I have learnt how to:
+- Create an S3 bucket
+- Upload an object into a S3 bucket
 - Accessed the object by using a web browser
 - Listed the contents of the S3 bucket by using AWS CLI
 
