@@ -88,12 +88,12 @@ upload: sysops-activity-files/images/Mom-&-Pop.png to s3://challenge-ks-180726/i
 > - I chose **Objects Read** and saved the changes by typing *confirm*.
 
 <p align="center">
-  <img src="images/object-visibility.png" alt="Notification Displaying Object Is Publicly Visible" width="1000">
+  <img src="images/object-visibility.png" alt="Notification Displaying Object Is Publicly Visible" width="900">
 </p>
 
 5. I access the object again by using a web browser and confirm that it now loads successfully:
 <p align="center">
-  <img src="images/cake-object-url.png" alt="Object URL" width="1000">
+  <img src="images/cake-object-url.png" alt="Object URL" width="900">
 </p>
 
 6. I list the contents of the S3 bucket by using the AWS CLI:
