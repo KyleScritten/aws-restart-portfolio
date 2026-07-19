@@ -41,11 +41,177 @@ MariaDB [(none)]>
 
 ## Task 2: Create a database and a table
 In this task, I create a database named `world` and a table named `country`. I then alter the `country` table.
+1. To show the existing databases, I run the following query, to determine the available databases and ensure I am working with the correct database instance:
 ```bash
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| world              |
++--------------------+
+4 rows in set (0.002 sec)
+```
+2. To create a new database named `world`, I run the following command, then verify it was created by running `SHOW DATABASES;` again:
+```bash
+MariaDB [(none)]> CREATE DATABASE world;
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| world              |
++--------------------+
+4 rows in set (0.002 sec)
+```
+3. To store data in a database, the database needs to contain one or more tables, and in an SQL database, a table needs a well-defined structure known as a table schema. To create a table named `country`, I run the following command:
+```bash
+MariaDB [(none)]> CREATE TABLE world.country (
+    ->   `Code` CHAR(3) NOT NULL DEFAULT '',
+    ->   `Name` CHAR(52) NOT NULL DEFAULT '',
+    ->   `Conitinent` enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South  America') NOT NULL DEFAULT 'Asia',
+    ->   `Region` CHAR(26) NOT NULL DEFAULT '',
+    ->   `SurfaceArea` FLOAT(10,2) NOT NULL DEFAULT '0.00',
+    ->   `IndepYear` SMALLINT(6) DEFAULT NULL,
+    ->   `Population` INT(11) NOT NULL DEFAULT '0',
+    ->   `LifeExpectancy` FLOAT(3,1) DEFAULT NULL,
+    ->   `GNP` FLOAT(10,2) DEFAULT NULL,
+    ->   `GNPOld` FLOAT(10,2) DEFAULT NULL,
+    ->   `LocalName` CHAR(45) NOT NULL DEFAULT '',
+    ->   `GovernmentForm` CHAR(45) NOT NULL DEFAULT '',
+    ->   `HeadOfState` CHAR(60) DEFAULT NULL,
+    ->   `Capital` INT(11) DEFAULT NULL,
+    ->   `Code2` CHAR(2) NOT NULL DEFAULT '',
+    ->   PRIMARY KEY (`Code`)
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+```
+4. To verify that the `country` table was created, I use the `USE` command to specify which database to run a query against, then run `SHOW TABLES;` to list the tables in the database:
+```bash
+MariaDB [(none)]> USE world;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [world]> SHOW TABLES;
++-----------------+
+| Tables_in_world |
++-----------------+
+| country         |
++-----------------+
+1 row in set (0.000 sec)
+```
+5. I use the `SHOW COLUMNS` query to list all the columns and their properties in the `country` table:
+```bash
+MariaDB [world]> SHOW COLUMNS FROM world.country;
++----------------+----------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field          | Type  | Null | Key | Default | Extra |
++----------------+----------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Code           | char(3)  | NO   | PRI |         |       |
+| Name           | char(52)  | NO   |     |         |       |
+| Conitinent     | enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South  America') | NO   |     | Asia    |       |
+| Region         | char(26)  | NO   |     |         |       |
+| SurfaceArea    | float(10,2)  | NO   |     | 0.00    |       |
+| IndepYear      | smallint(6)  | YES  |     | NULL    |       |
+| Population     | int(11)  | NO   |     | 0       |       |
+| LifeExpectancy | float(3,1)  | YES  |     | NULL    |       |
+| GNP            | float(10,2)  | YES  |     | NULL    |       |
+| GNPOld         | float(10,2)  | YES  |     | NULL    |       |
+| LocalName      | char(45)  | NO   |     |         |       |
+| GovernmentForm | char(45)  | NO   |     |         |       |
+| HeadOfState    | char(60)  | YES  |     | NULL    |       |
+| Capital        | int(11)  | YES  |     | NULL    |       |
+| Code2          | char(2)  | NO   |     |         |       |
++----------------+----------------------------------------------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.001 sec)
+```
+>[!Note]
+>I notice that the Continent column is spelled incorrectly as `Conitinent`.
+
+6. The `ALTER TABLE` command is used to alter the table's schema. To fix the incorrectly spelled `Continent` column, I run the following command, then verify the correction by running `SHOW COLUMNS` again:
+```bash
+MariaDB [world]> ALTER TABLE world.country RENAME COLUMN Conitinent TO Continent;
+Query OK, 0 rows affected (0.005 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [world]> SHOW COLUMNS FROM world.country;
++----------------+----------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field          | Type  | Null | Key | Default | Extra |
++----------------+----------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Code           | char(3)  | NO   | PRI |         |       |
+| Name           | char(52)  | NO   |     |         |       |
+| Continent      | enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South  America') | NO   |     | Asia    |       |
+| Region         | char(26)  | NO   |     |         |       |
+| SurfaceArea    | float(10,2)  | NO   |     | 0.00    |       |
+| IndepYear      | smallint(6)  | YES  |     | NULL    |       |
+| Population     | int(11)  | NO   |     | 0       |       |
+| LifeExpectancy | float(3,1)  | YES  |     | NULL    |       |
+| GNP            | float(10,2)  | YES  |     | NULL    |       |
+| GNPOld         | float(10,2)  | YES  |     | NULL    |       |
+| LocalName      | char(45)  | NO   |     |         |       |
+| GovernmentForm | char(45)  | NO   |     |         |       |
+| HeadOfState    | char(60)  | YES  |     | NULL    |       |
+| Capital        | int(11)  | YES  |     | NULL    |       |
+| Code2          | char(2)  | NO   |     |         |       |
++----------------+----------------------------------------------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.001 sec)
 ```
 
+### Challenge 1
+I create a table named `city` and add two columns named `Name` and `Region`. Both columns use the `CHAR` data type:
+```bash
+MariaDB [world]> CREATE TABLE world.city (`Name` CHAR(52), `Region` CHAR(26));
+Query OK, 0 rows affected (0.008 sec)
+```
+## Task 3: Delete a database and tables
+In this task, I delete the `world` database and the `country` table.
+
+1. The `DROP TABLE` command is used to delete (drop) a table in a database, and once a table has been dropped, it cannot be recovered unless a backup is available. To drop the `city` table, I run the following command:
+```bash
+MariaDB [world]> DROP TABLE world.city;
+Query OK, 0 rows affected (0.005 sec)
+```
+
+### Challenge 2
+
+I write a query to drop the `country` table:
+```bash
+MariaDB [world]> DROP TABLE world.country;
+Query OK, 0 rows affected (0.006 sec)
+```
+2. To verify that both tables have been dropped, I run the following query:
+```bash
+MariaDB [world]> SHOW TABLES;
+Empty set (0.000 sec)
+```
+3. To drop the `world` database, I run the following command:
+```bash
+MariaDB [world]> DROP DATABASE world;
+Query OK, 0 rows affected (0.003 sec)
+```
+4. To verify that the `world` database has been deleted, I run the following query:
+```bash
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+3 rows in set (0.000 sec)
+```
 
 ## Conclusion
+This lab demonstrates how to use some common database and table operations.
+
+After completing this lab, I have:
 - Used the **CREATE** statement to create databases and tables
 - Used the **SHOW** statement to view available databases and tables
 - Used the **ALTER** statement to alter the structure of a table
