@@ -187,8 +187,18 @@ MariaDB [world]> SHOW TABLES;
 ```bash
 MariaDB [world]> SELECT * FROM country;
 ```
-7. Similarly, I use the `SELECT` statement to query the `city` and `countrylanguage` tables that were created when I imported the backup file.
+7. Similarly, I use the `SELECT` statement to query the `city` and `countrylanguage` tables that were created when I imported the backup file, and count the number of entries in all three tables, displayed in a single table format:
 ```bash
+MariaDB [world]> SELECT
+    ->   (SELECT COUNT(*) FROM city) AS city_count,
+    ->   (SELECT COUNT(*) FROM country) AS country_count,
+    ->   (SELECT COUNT(*) FROM countrylanguage) AS countrylanguage_count;
++------------+---------------+-----------------------+
+| city_count | country_count | countrylanguage_count |
++------------+---------------+-----------------------+
+|       4079 |           237 |                   984 |
++------------+---------------+-----------------------+
+1 row in set (0.003 sec)
 ```
 
 ## MySQL command-line client
@@ -212,7 +222,6 @@ on February 4, 2022, with the [license CC BY 4.0](https://creativecommons.org/li
 The original data source is available from [Statistics Finland](https://tilastokeskus.fi/tup/kvportaali/index_en.html).
 
 - For more information about database functions and operators, see the following resources:
-
   - [INSERT statement](https://mariadb.com/kb/en/insert/)
   - [UPDATE statement](https://mariadb.com/kb/en/update/)
   - [DELETE statement](https://mariadb.com/kb/en/delete/)
