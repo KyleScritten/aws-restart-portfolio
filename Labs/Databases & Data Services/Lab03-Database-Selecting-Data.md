@@ -123,6 +123,9 @@ MariaDB [(none)]> SELECT Name, Capital, Region, SurfaceArea AS "Surface Area", P
 | China                                        |    1891 | Eastern Asia              |   9572900.00 | 1277558000 |
 | India                                        |    1109 | Southern and Central Asia |   3287263.00 | 1013662000 |
 | United States                                |    3813 | North America             |   9363520.00 |  278357000 |
+
+...
+239 rows in set (0.001 sec)
 ```
 9. I can add conditions to `SELECT` statements by using the `WHERE` clause. For example, to list all rows with a population greater than 50,000,000, I run the following query, using the `>` comparison operator (similarly, other comparison operators can be used to compare values):
 ```bash
