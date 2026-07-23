@@ -85,9 +85,40 @@ MariaDB [(none)]> SELECT * FROM world.country WHERE Code IN ('IRL', 'AUS');
 2 rows in set (0.000 sec)
 ```
 
+## Task 3: Update rows in a table
 
+In this task, I update both rows in the `country` table using an `UPDATE` statement.
 
+1. To set the value in the `Population` column to 0 for both rows in the `country` table, I run the following `UPDATE` statement, then verify the update with a `SELECT` query. All rows are updated because the `UPDATE` statement does not include a `WHERE` condition — a `WHERE` clause uses conditions to filter rows returned by a query, and is introduced in the next lab:
+```bash
+MariaDB [(none)]> UPDATE world.country SET Population = 0;
+Query OK, 2 rows affected (0.001 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
 
+MariaDB [(none)]> SELECT * FROM world.country;
++------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+-------------+-------------------------------------+---------+-------+
+| Code | Name      | Continent | Region                    | SurfaceArea | IndepYear | Population | LifeExpectancy | GNP       | GNPOld    | LocalName   | GovernmentForm                      | Capital | Code2 |
++------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+-------------+-------------------------------------+---------+-------+
+| AUS  | Australia | Oceania   | Australia and New Zealand |  7741220.00 |      1901 |          0 | 79.8 | 351182.00 | 392911.00 | Australia   | Constitutional Monarchy, Federation |     135 | AU    |
+| IRL  | Ireland   | Europe    | British Islands           |    70273.00 |      1921 |          0 | 76.8 |  75921.00 |  73132.00 | Ireland/ire | Republic                            |    1447 | IE    |
++------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+-------------+-------------------------------------+---------+-------+
+2 rows in set (0.000 sec)
+```
+2. To update the `Population` and `SurfaceArea` columns for all rows in the `country` table, I run the following `UPDATE` statement, then verify the update with a `SELECT` query:
+```bash
+MariaDB [(none)]> UPDATE world.country SET Population = 100, SurfaceArea = 100;
+Query OK, 2 rows affected (0.001 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [(none)]> SELECT * FROM world.country;
++------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+-------------+-------------------------------------+---------+-------+
+| Code | Name      | Continent | Region                    | SurfaceArea | IndepYear | Population | LifeExpectancy | GNP       | GNPOld    | LocalName   | GovernmentForm                      | Capital | Code2 |
++------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+-------------+-------------------------------------+---------+-------+
+| AUS  | Australia | Oceania   | Australia and New Zealand |      100.00 |      1901 |        100 | 79.8 | 351182.00 | 392911.00 | Australia   | Constitutional Monarchy, Federation |     135 | AU    |
+| IRL  | Ireland   | Europe    | British Islands           |      100.00 |      1921 |        100 | 76.8 |  75921.00 |  73132.00 | Ireland/ire | Republic                            |    1447 | IE    |
++------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+-------------+-------------------------------------+---------+-------+
+2 rows in set (0.000 sec)
+```
 
 
 
