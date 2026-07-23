@@ -218,7 +218,7 @@ After completing this lab, I have:
 - Used the **DROP** statement to delete databases and tables
 
 ## MySQL command-line client
-1. The MySQL command-line client is an SQL shell that you can use to interact with database engines.
+The MySQL command-line client is an SQL shell that you can use to interact with database engines.
 
 | Switch             | Description                                                     |
 |--------------------|-----------------------------------------------------------------|
