@@ -136,22 +136,60 @@ MariaDB [(none)]> SELECT * FROM world.country;
 Empty set (0.000 sec)
 ```
 
+## Task 5: Import data using an SQL file
+In this task, I import sample data into the `country` table using an SQL file.
 
+1. To exit the MySQL terminal, I run the following command:
+```bash
+MariaDB [(none)]> QUIT;
+Bye
+```
+2. To verify that the `world.sql` file has been downloaded, I run the following command:
+```bash
+[root@ip-10-1-11-35 ec2-user]# ls /home/ec2-user/world.sql
+/home/ec2-user/world.sql
+```
+3. Since it is time-consuming to insert individual rows into a table, I can instead use a SQL script file containing a group of SQL statements to quickly load data into a database. To load rows into the `country` table, I run the following command. This database file adds two additional tables and inserts data into all three tables:
+```bash
+[root@ip-10-1-11-35 ec2-user]# mysql -u root --password='re:St@rt!9' < /home/ec2-user/world.sql
+```
+4. To reconnect to the database, I run the following command:
+```bash
+[root@ip-10-1-11-35 ec2-user]# mysql -u root --password='re:St@rt!9'
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 16
+Server version: 10.5.29-MariaDB MariaDB Server
 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+```
+5. To verify that the script ran successfully, I run the following commands and observe that there are three tables named `city`, `country`, and `countrylanguage`:
+```bash
+MariaDB [(none)]> USE world;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+MariaDB [world]>
+MariaDB [world]> SHOW TABLES;
++-----------------+
+| Tables_in_world |
++-----------------+
+| city            |
+| country         |
+| countrylanguage |
++-----------------+
+3 rows in set (0.000 sec)
+```
+6. To verify that the rows were loaded successfully, I run the following command and notice that there are more entries in the `country` table:
+```bash
+MariaDB [world]> SELECT * FROM country;
+```
+7. Similarly, I use the `SELECT` statement to query the `city` and `countrylanguage` tables that were created when I imported the backup file.
 ```bash
 ```
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## MySQL command-line client
 The MySQL command-line client is an SQL shell that you can use to interact with database engines.
