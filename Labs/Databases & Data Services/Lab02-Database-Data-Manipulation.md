@@ -19,7 +19,6 @@ In this task, I connect to an instance containing a database client, which is us
 > If I do not see the Command Host, the lab is probably still being provisioned, or I may be using another Region.
 3. For **Connect to instance**, I choose the **Session Manager** tab and choose **Connect** to open a terminal window.
 4. To configure the terminal to access all required tools and resources, I run the following commands:
-
 ```bash
 sudo su
 cd /home/ec2-user/
@@ -56,7 +55,6 @@ MariaDB [(none)]> SHOW DATABASES;
 ```
 
 ## Task 2: Insert data into a table
-
 In this task, I insert sample data into the `country` table.
 
 1. To verify that the `country` table exists, I run the following command. The `SELECT` statement is used to identify the columns that should be included in the result set — the `*` denotes all columns — and the `FROM` clause specifies the database and table being queried:
@@ -86,7 +84,6 @@ MariaDB [(none)]> SELECT * FROM world.country WHERE Code IN ('IRL', 'AUS');
 ```
 
 ## Task 3: Update rows in a table
-
 In this task, I update both rows in the `country` table using an `UPDATE` statement.
 
 1. To set the value in the `Population` column to 0 for both rows in the `country` table, I run the following `UPDATE` statement, then verify the update with a `SELECT` query. All rows are updated because the `UPDATE` statement does not include a `WHERE` condition — a `WHERE` clause uses conditions to filter rows returned by a query, and is introduced in the next lab:
@@ -120,7 +117,18 @@ MariaDB [(none)]> SELECT * FROM world.country;
 2 rows in set (0.000 sec)
 ```
 
+## Task 4: Delete rows from a table
+In this task, I delete rows in the `country` table using a `DELETE` statement.
 
+**Caution:** I exercise caution when using data manipulation statements such as `UPDATE` and `DELETE` because these changes may not be reversible.
+>[!Caution]
+> I exercise caution when using data manipulation statements such as `UPDATE` and `DELETE` because these changes may not be reversible.
+
+1. To delete ALL rows from the `country` table, I run the following commands. Because the `DELETE` statement does not include a `WHERE` condition, all rows are deleted:
+
+```
+SET FOREIGN_KEY_CHECKS = 0;
+```
 
 
 
