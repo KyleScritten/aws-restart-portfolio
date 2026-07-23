@@ -119,21 +119,27 @@ MariaDB [(none)]> SELECT * FROM world.country;
 
 ## Task 4: Delete rows from a table
 In this task, I delete rows in the `country` table using a `DELETE` statement.
-
-**Caution:** I exercise caution when using data manipulation statements such as `UPDATE` and `DELETE` because these changes may not be reversible.
 >[!Caution]
 > I exercise caution when using data manipulation statements such as `UPDATE` and `DELETE` because these changes may not be reversible.
 
 1. To delete ALL rows from the `country` table, I run the following commands. Because the `DELETE` statement does not include a `WHERE` condition, all rows are deleted:
+```bash
+MariaDB [(none)]> SET FOREIGN_KEY_CHECKS = 0;
+Query OK, 0 rows affected (0.000 sec)
 
+MariaDB [(none)]> DELETE FROM world.country;
+Query OK, 2 rows affected (0.001 sec)
 ```
-SET FOREIGN_KEY_CHECKS = 0;
+2. To verify that all rows have been deleted from the `country` table, I run the following command:
+```bash
+MariaDB [(none)]> SELECT * FROM world.country;
+Empty set (0.000 sec)
 ```
 
 
 
-
-
+```bash
+```
 
 
 
