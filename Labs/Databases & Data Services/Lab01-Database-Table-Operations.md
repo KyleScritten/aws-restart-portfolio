@@ -11,7 +11,8 @@ In this task, I connect to an EC2 instance configured with a database client. Th
 
 1. In the AWS Management Console, I choose the **Services** menu, choose **Compute**, and then choose **EC2**.
 2. In the left navigation menu, I choose **Instances**, select the check box next to the instance labelled **Command Host**, and choose **Connect**.
-   * Note: If I do not see the Command Host, the lab is probably still being provisioned, or I may be using another Region.
+>[!Note]
+> If I do not see the Command Host, the lab is probably still being provisioned, or I may be using another Region.
 3. For **Connect to instance**, I choose the **Session Manager** tab and choose **Connect** to open a terminal window.
 4. To configure the terminal to access all required tools and resources, I run the following commands:
 
