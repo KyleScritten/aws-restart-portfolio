@@ -58,7 +58,7 @@ MariaDB [(none)]> SHOW DATABASES;
 ```
 2. To list all rows and columns in the `country` table, I run the following query:
 ```bash
-SELECT * FROM world.country;
+MariaDB [(none)]> SELECT * FROM world.country;
 ```
 3. To query the number of rows in a table, I can use the `COUNT()` function in a `SELECT` statement — `COUNT(*)` counts all rows, while including a column name as a parameter (e.g. `COUNT(Population)`) counts the rows that have a value in that specific column. To list the number of rows in the `country` table, I run the following query:
 ```bash
