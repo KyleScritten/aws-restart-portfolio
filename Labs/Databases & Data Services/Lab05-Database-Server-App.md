@@ -149,6 +149,7 @@ I now configure the application to connect to my database.
 </p>
 
 *Editing a contact in the Databases:* 
+
 I notice that I made an error when adding the second record to the table, so I edit the record by swapping the first and last name so that they are captured correctly.
 <p align="center">
   <img src="images/editing-database.png" alt="Editing a contact in the Databases” width="1000">
