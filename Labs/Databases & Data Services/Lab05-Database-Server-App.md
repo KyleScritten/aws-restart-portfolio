@@ -100,18 +100,22 @@ Amazon RDS Multi-AZ deployments provide enhanced availability and durability for
 > If prompted with the **Suggested add-ons for lab-db** window, I choose **Close**.
 
 16. I wait until the **Status** changes to **Modifying** or **Available**.
-
 <p align="center">
   <img src="images/database-waiting.png" alt="DB MySQL Database - waiting” width="1000">
 </p>
 
-18. I click on **lab-db** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
-
+17. I click on **lab-db** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
 <p align="center">
   <img src="images/database-success.png" alt="DB MySQL Database - success” width="1000">
 </p>
 
-The MySQL database endpoint is `ENDPOINT`.
+The MySQL database endpoint is `lab-db.cz3w3g3nuha3.us-west-2.rds.amazonaws.com`.
+
+
+
+
+
+
 
 
 
