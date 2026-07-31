@@ -203,41 +203,20 @@ Through this lab, I have now successfully:
 - [Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
 - [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
 
-## Lab Notes
-
-1.  Amazon RDS Multi-AZ deployments provide enhanced availability and durability for DB instances, making them a natural fit 
-for production database workloads. When you provision a Multi-AZ DB instance, Amazon RDS automatically creates a primary DB 
-instance and synchronously replicates the data to a standby instance in a different Availability Zone.
-
-2. Subnets are segments of a virtual private cloud (VPC) IP address range that you designate to group 
-your resources based on security and operational needs. A DB subnet group is a collection of subnets (typically private) 
-that you create in a VPC and that you then designate for your DB instances. With a DB subnet group, you can specify a particular 
-VPC when creating DB instances using the command line interface (CLI) or application programming interface (API); 
-if you use the console, you can select the VPC and subnets that you want to use.
-
-3. You can encrypt your Amazon RDS instances and snapshots at rest by enabling the encryption option for your RDS DB instance. 
-Data that is encrypted at rest includes the underlying storage for a DB instance, its automated backups, read replicas, and snapshots.
-
-4. An endpoint is represented as an Aurora specific URL that contains a host address and a port. The following types of endpoints are available from an Aurora DB cluster.
+>[!Note]
+> - Amazon RDS Multi-AZ deployments provide enhanced availability and durability for DB instances, making them a natural fit for production database workloads. When you provision a Multi-AZ DB instance, Amazon RDS automatically creates a primary DB instance and synchronously replicates the data to a standby instance in a different Availability Zone.
+> - Subnets are segments of a virtual private cloud (VPC) IP address range that you designate to group your resources based on security and operational needs. A DB subnet group is a collection of subnets (typically private) that you create in a VPC and that you then designate for your DB instances. With a DB subnet group, you can specify a particular VPC when creating DB instances using the command line interface (CLI) or application programming interface (API); if you use the console, you can select the VPC and subnets that you want to use.
+> - You can encrypt your Amazon RDS instances and snapshots at rest by enabling the encryption option for your RDS DB instance. Data that is encrypted at rest includes the underlying storage for a DB instance, its automated backups, read replicas, and snapshots.
+> - An endpoint is represented as an Aurora specific URL that contains a host address and a port. The following types of endpoints are available from an Aurora DB cluster.
   * **Cluster endpoint**
   
     * A cluster endpoint for an Aurora DB cluster connects to the current primary DB instance for that DB cluster. This endpoint is the only one that can perform write operations such as DDL statements. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster contains only a single DB instance.
-
-    * Each Aurora DB cluster has one cluster endpoint and one primary DB instance.
-
-    * You use the cluster endpoint for all write operations on the DB cluster, including inserts, updates, deletes, and DDL changes. You can also use the cluster endpoint for read operations, such as queries.
-
-    * The cluster endpoint provides failover support for read/write connections to the DB cluster. If the current primary DB instance of a DB cluster fails, Aurora automatically fails over to a new primary DB instance. During a failover, the DB cluster continues to serve connection requests to the cluster endpoint from the new primary DB instance, with minimal interruption of service.
 
     * The following example illustrates a cluster endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-123456789012.us-west-2.rds.amazonaws.com:3306*
 
   * **Reader endpoint**
 
     * A reader endpoint for an Aurora DB cluster connects to one of the available Aurora replicas for that DB cluster. Each Aurora DB cluster has one reader endpoint. If there is more than one Aurora replica, the reader endpoint directs each connection request to one of the Aurora replicas.
-  
-    * The reader endpoint provides load-balancing support for read-only connections to the DB cluster. Use the reader endpoint for read operations, such as queries. You can't use the reader endpoint for write operations.
-
-    * The DB cluster distributes connection requests to the reader endpoint among the available Aurora replicas. If the DB cluster contains only a primary DB instance, the reader endpoint serves connection requests from the primary DB instance. If one or more Aurora replicas are created for that DB cluster, subsequent connections to the reader endpoint are load balanced among the replicas.
 
     * The following example represents a reader endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-ro-123456789012.us-west-2.rds.amazonaws.com:3306*
 
