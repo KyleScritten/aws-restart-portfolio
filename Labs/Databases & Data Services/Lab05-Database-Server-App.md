@@ -11,7 +11,6 @@ This lab is designed to reinforce the concept of leveraging an AWS-managed datab
 </p>
 
 ## Task 1: Create a Security Group for the RDS DB Instance
-
 In this task, I create a security group to allow my web server to access my RDS DB instance. This security group will be used when I launch the database instance.
 
 1. In the AWS Management Console, in the search bar, I type `VPC` and select **VPC**.
@@ -36,7 +35,6 @@ I will use this security group when launching the Amazon RDS database.
 
 
 ## Task 2: Create a DB Subnet Group
-
 In this task, I create a DB subnet group that is used to tell RDS which subnets can be used for the database. Each DB subnet group requires subnets in at least two Availability Zones.
 
 1. In the AWS Management Console, in the search bar, I type `RDS` and select **Aurora and RDS**.
@@ -58,9 +56,62 @@ In this task, I create a DB subnet group that is used to tell RDS which subnets 
 
 This adds Private Subnet 1 (10.0.1.0/24) and Private Subnet 2 (10.0.3.0/24). I will use this DB subnet group when creating the database in the next task.
 
+## Task 3: Create an Amazon RDS DB Instance
+In this task, I configure and launch a Multi-AZ Amazon RDS for MySQL database instance.
 
+Amazon RDS Multi-AZ deployments provide enhanced availability and durability for Database (DB) instances, making them a natural fit for production database workloads. When I provision a Multi-AZ DB instance, Amazon RDS automatically creates a primary DB instance and synchronously replicates the data to a standby instance in a different Availability Zone (AZ).
 
+1. In the left navigation pane, I click **Databases**.
+2. I click the dropdown arrow on **Create database** and select **Full configuration**.
+3. Under **Engine options**, for **Engine type**, I choose **MySQL**.
+4. For **Templates**, I choose **Dev/Test**.
+5. For **Availability and durability**, I choose **Multi-AZ DB instance deployment (2 instances)**, and leave **Engine version** at default.
+6. Under **Settings**, I configure the following:
+   * **DB instance identifier:** `lab-db`
+   * **Master username:** `main`
+7. Under **Credential Settings**, for **Credentials management**, I select **Self managed**, then configure:
+   * I clear the **Auto generate a password** checkbox if selected.
+   * **Master password:** `lab-password`
+   * **Confirm master password:** `lab-password`
+8. For **Additional credential settings**, I ensure **Password authentication** is selected.
+9. Under **Instance configuration**, I configure the following:
+   * Select **Burstable classes (includes t classes)**.
+   * Select **db.t3.medium**.
+10. Under **Storage**, I configure:
+    * **Storage type:** General Purpose SSD (gp3)
+    * **Allocated storage:** `20`
+11. Under **Connectivity**, I configure:
+    * **Compute resource:** Don't connect to an EC2 compute resource
+    * **Virtual Private Cloud (VPC):** Lab VPC
+    * **DB subnet group:** DB Subnet Group
+    * **Public access:** No
+    * **VPC security group (firewall):** Choose existing
+    * **Existing VPC security groups:** Use X to remove default, then select **DB Security Group**
+12. Under **Monitoring**, I uncheck **Enable Enhanced monitoring**, and under **Performance Insights**, I uncheck **Enable Performance Insights**.
+13. I expand the **Additional configuration** section and configure:
+    * **Initial database name:** `lab`
+    * Under **Backup**, I uncheck **Enable automated backups**.
 
+    This turns off backups, which is not normally recommended, but makes the database deploy faster for this lab.
+14. I scroll to the bottom of the screen and click **Create database**. My database now launches.
+15. I click **lab-db** (the link itself), and wait approximately 4 minutes for the database to become available, since the deployment process is deploying a database in two different Availability Zones.
+
+>[!Note]
+> If prompted with the **Suggested add-ons for lab-db** window, I choose **Close**.
+
+16. I wait until the **Status** changes to **Modifying** or **Available**.
+
+<p align="center">
+  <img src="images/database-waiting.png" alt="DB MySQL Database - waiting” width="1000">
+</p>
+
+18. I click on **lab-db** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
+
+<p align="center">
+  <img src="images/database-success.png" alt="DB MySQL Database - success” width="1000">
+</p>
+
+The MySQL database endpoint is `ENDPOINT`.
 
 
 
