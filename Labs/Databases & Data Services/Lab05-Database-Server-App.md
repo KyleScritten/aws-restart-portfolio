@@ -111,17 +111,51 @@ Amazon RDS Multi-AZ deployments provide enhanced availability and durability for
 
 The MySQL database endpoint is `lab-db.cz3w3g3nuha3.us-west-2.rds.amazonaws.com`.
 
+## Task 4: Interact with Your Database
+In this task, I open a web application running on my web server and configure it to use the database.
 
+1. I copy the WebServer IP address `35.90.254.5` provided in the lab instructions.
+2. I open a new web browser tab, paste the WebServer IP address, and press Enter. The web application is displayed, showing information about the EC2 instance.
+3. At the top of the web application page, I click the **RDS** link.
 
+<p align="center">
+  <img src="images/rds-interface.png" alt="A picture displaying the web application interface.” width="1000">
+</p>
 
+I now configure the application to connect to my database.
 
+4. I configure the following settings:
+   * **Endpoint:** (Paste the Endpoint I copied to a text editor earlier) - `lab-db.cz3w3g3nuha3.us-west-2.rds.amazonaws.com`
+   * **Database:** `lab`
+   * **Username:** `main`
+   * **Password:** `lab-password`
+   * I click **Submit**.
+<p align="center">
+  <img src="images/connect-to-database.png" alt="Configure the application to connect to your database” width="1000">
+</p>
 
+   A message appears explaining that the application is running a command to copy information to the database. After a few seconds, the application displays an Address Book. The Address Book application uses the RDS database to store information.
+<p align="center">
+  <img src="images/address-book.png" alt="The Address Book application using the RDS database” width="1000">
+</p>
 
+5. I test the web application by adding, editing, and removing contacts.
+*Adding a contact to the Databases:* 
+<p align="center">
+  <img src="images/adding-to-database.png" alt="Adding a contact to the Databases” width="1000">
+</p>
 
+*Editing a contact in the Databases:* 
+<p align="center">
+  <img src="images/editing-database.png" alt="Editing a contact in the Databases” width="1000">
+</p>
 
+*Removing a contact from the Databases:* 
+<p align="center">
+  <img src="images/remove-from-database.png" alt="Removing a contact from the Databases” width="1000">
+</p>
 
-
-
+The data is being persisted to the database and is automatically replicating to the second Availability Zone.
 
 ## Conclusion
 
