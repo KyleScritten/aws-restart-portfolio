@@ -64,7 +64,11 @@ In this task, I log into my Amazon EC2 Linux instance. This instance was launche
 2. In the left navigation menu, I choose **Instances**, select the check box next to the instance labelled **Command Host**, and choose **Connect**.
 3. For **Connect to instance**, I choose the **Session Manager** tab and choose **Connect** to open a terminal window.
 
+## Task 3: Configure the Amazon EC2 Linux instance to connect to Aurora
 
+In this task, I use the yum package manager to install the MariaDB client and then configure the Amazon EC2 Linux instance to connect to the Aurora database.
+
+1. To install the MariaDB client, I run the following command. The MariaDB client is what I use in later steps to connect to the Aurora instance I just created:
 ```sql
 sh-4.2$ sudo yum install mariadb -y
 
@@ -87,6 +91,10 @@ Installed:
 Complete!
 
 ```
+2. Using a different browser tab, I go back to the AWS Management Console, search for and choose **RDS**, and in the left navigation menu, choose **Databases**. I wait for `aurora-instance-1` to display **Available**, then choose **aurora**.
+3. I choose the **Connectivity & security** tab, and in the **Endpoints** section, I copy the Endpoint name for the **Writer** instance to my text editor:
+`aurora.cluster-cl0denl5rvrv.us-west-2.rds.amazonaws.com`
+4. I return to the Session Manager browser tab used to connect to the Command Host, and to connect to the Aurora instance, I run the command:
 ```sql
 sh-4.2$ mysql -u admin --password='admin123' -h aurora.cluster-cl0denl5rvrv.us-west-2.rds.amazonaws.com
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -99,6 +107,12 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 MySQL [(none)]>
 ```
+
+## Task 4: Create a table and insert and query records
+
+In this task, I learn how to create a table in a database, load data, and run a query.
+
+1. To list the available databases, I run the following command:
 ```sql
 MySQL [(none)]> SHOW DATABASES;
 +--------------------+
@@ -114,13 +128,13 @@ MySQL [(none)]> SHOW DATABASES;
 
 MySQL [(none)]>
 ```
-
+2. To switch to the `world` database I created in Task 1 when I provisioned the Aurora instance, I run the following command:
 ```sql
 MySQL [(none)]> USE world;
 Database changed
 MySQL [world]>
 ```
-
+3. To create a new table in the `world` database, I run the following command:
 ```sql
 MySQL [world]> CREATE TABLE `country` (
     -> `Code` CHAR(3) NOT NULL DEFAULT '',
@@ -143,7 +157,7 @@ Query OK, 0 rows affected, 7 warnings (0.03 sec)
 
 MySQL [world]>
 ```
-
+4. To insert new records into the `country` table I just created, I run the following commands:
 ```sql
 INSERT INTO `country` VALUES ('GAB','Gabon','Africa','Central Africa',267668.00,1960,1226000,50.1,5493.00,5279.00,'Le Gabon','Republic',902,'GA');
 
@@ -155,7 +169,7 @@ INSERT INTO `country` VALUES ('CRI','Costa Rica','North America','Central Americ
 
 INSERT INTO `country` VALUES ('AUS','Australia','Oceania','Australia and New Zealand',7741220.00,1901,18886000,79.8,351182.00,392911.00,'Australia','Constitutional Monarchy, Federation',135,'AU');
 ```
-
+5. To query the table, I run the following `SELECT` statement:
 ```sql
 MySQL [world]> SELECT * FROM country WHERE GNP > 35000 and Population > 10000000;
 +------+-----------+-----------+---------------------------+-------------+-----------+------------+----------------+-----------+-----------+--------------+-------------------------------------+---------+-------+
