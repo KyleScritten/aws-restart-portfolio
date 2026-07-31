@@ -209,9 +209,9 @@ Through this lab, I have now successfully:
 > - You can encrypt your Amazon RDS instances and snapshots at rest by enabling the encryption option for your RDS DB instance. Data that is encrypted at rest includes the underlying storage for a DB instance, its automated backups, read replicas, and snapshots.
 > - An endpoint is represented as an Aurora specific URL that contains a host address and a port. The following types of endpoints are available from an Aurora DB cluster.
 >   - **Cluster endpoint**
->     * * A cluster endpoint for an Aurora DB cluster connects to the current primary DB instance for that DB cluster. This endpoint is the only one that can perform write operations such as DDL statements. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster contains only a single DB instance.
->       *  * The following example illustrates a cluster endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-123456789012.us-west-2.rds.amazonaws.com:3306*
+>     - A cluster endpoint for an Aurora DB cluster connects to the current primary DB instance for that DB cluster. This endpoint is the only one that can perform write operations such as DDL statements. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster contains only a single DB instance.
+>       - The following example illustrates a cluster endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-123456789012.us-west-2.rds.amazonaws.com:3306*
 >  - **Reader endpoint**
->  - * A reader endpoint for an Aurora DB cluster connects to one of the available Aurora replicas for that DB cluster. Each Aurora DB cluster has one reader endpoint. If there is more than one Aurora replica, the reader endpoint directs each connection request to one of the Aurora replicas.
->    * * The following example represents a reader endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-ro-123456789012.us-west-2.rds.amazonaws.com:3306*
+>  - A reader endpoint for an Aurora DB cluster connects to one of the available Aurora replicas for that DB cluster. Each Aurora DB cluster has one reader endpoint. If there is more than one Aurora replica, the reader endpoint directs each connection request to one of the Aurora replicas.
+>    - The following example represents a reader endpoint for an Aurora MySQL DB cluster: *mydbcluster.cluster-ro-123456789012.us-west-2.rds.amazonaws.com:3306*
 
