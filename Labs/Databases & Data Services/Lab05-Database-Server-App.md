@@ -134,7 +134,9 @@ I now configure the application to connect to my database.
   <img src="images/connect-to-database.png" alt="Configure the application to connect to your database” width="1000">
 </p>
 
-   A message appears explaining that the application is running a command to copy information to the database. After a few seconds, the application displays an Address Book. The Address Book application uses the RDS database to store information.
+>[!Note]
+> A message appears explaining that the application is running a command to copy information to the database. After a few seconds, the application displays an Address Book. The Address Book application uses the RDS database to store information.
+
 <p align="center">
   <img src="images/address-book.png" alt="The Address Book application using the RDS database” width="1000">
 </p>
@@ -147,6 +149,7 @@ I now configure the application to connect to my database.
 </p>
 
 *Editing a contact in the Databases:* 
+I notice that I made an error when adding the second record to the table, so I edit the record by swapping the first and last name so that they are captured correctly.
 <p align="center">
   <img src="images/editing-database.png" alt="Editing a contact in the Databases” width="1000">
 </p>
