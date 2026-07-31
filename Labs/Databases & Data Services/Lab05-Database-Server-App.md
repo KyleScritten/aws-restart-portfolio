@@ -28,7 +28,12 @@ In this task, I create a security group to allow my web server to access my RDS 
    This configures the Database security group to permit inbound traffic on port 3306 from any EC2 instance associated with the Web Security Group.
 5. I scroll to the bottom of the screen and click **Create security group**.
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 I will use this security group when launching the Amazon RDS database.
+
 
 ## Task 2: Create a DB Subnet Group
 
@@ -46,6 +51,10 @@ In this task, I create a DB subnet group that is used to tell RDS which subnets 
    * 10.0.1.0/24 (Private Subnet 1)
    * 10.0.3.0/24 (Private Subnet 2)
 6. I click **Create**.
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
 
 This adds Private Subnet 1 (10.0.1.0/24) and Private Subnet 2 (10.0.3.0/24). I will use this DB subnet group when creating the database in the next task.
 
