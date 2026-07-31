@@ -103,7 +103,7 @@ Complete!
 `aurora.cluster-cl0denl5rvrv.us-west-2.rds.amazonaws.com`
 
 >[!Note]
-> - An endpoint is represented as an Aurora specific URL that contains a host address and a port. The following types of endpoints are available from an Aurora DB cluster.
+> An endpoint is represented as an Aurora specific URL that contains a host address and a port. The following types of endpoints are available from an Aurora DB cluster.
 >   - **Cluster endpoint**
 >     - A cluster endpoint for an Aurora DB cluster connects to the current primary DB instance for that DB cluster. This endpoint is the only one that can perform write operations such as DDL statements. Because of this, the cluster endpoint is the one that you connect to when you first set up a cluster or when your cluster contains only a single DB instance.
 >    - **Reader endpoint**
