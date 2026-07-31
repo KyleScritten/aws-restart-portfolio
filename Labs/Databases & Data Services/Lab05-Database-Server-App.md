@@ -29,7 +29,7 @@ In this task, I create a security group to allow my web server to access my RDS 
 5. I scroll to the bottom of the screen and click **Create security group**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/create-security-group.png" alt="Create a Security Group for the RDS DB Instance” width="1000">
 </p>
 
 I will use this security group when launching the Amazon RDS database.
@@ -53,7 +53,7 @@ In this task, I create a DB subnet group that is used to tell RDS which subnets 
 6. I click **Create**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/db-subnet-group.png" alt="Created a DB Subnet Group” width="1000">
 </p>
 
 This adds Private Subnet 1 (10.0.1.0/24) and Private Subnet 2 (10.0.3.0/24). I will use this DB subnet group when creating the database in the next task.
