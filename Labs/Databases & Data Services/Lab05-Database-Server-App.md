@@ -140,6 +140,7 @@ I now configure the application to connect to my database.
 </p>
 
 5. I test the web application by adding, editing, and removing contacts.
+
 *Adding a contact to the Databases:* 
 <p align="center">
   <img src="images/adding-to-database.png" alt="Adding a contact to the Databases” width="1000">
