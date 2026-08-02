@@ -17,6 +17,10 @@ I create a new table in DynamoDB with this configuration:
 
 ![DynamoDB Music Table](./images/lab09-dynamoDB-music.png)
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 ## Task 2: Add data
 A table is a collection of data on a particular topic. Each table contains multiple items. An item is a group of attributes that is uniquely 
 identifiable among all of the other items. Items in DynamoDB are similar in many ways to rows in other database systems. In DynamoDB, 
@@ -39,6 +43,10 @@ First item:
 
 ![DynamoDB Music Table - Create item](./images/lab09-dynamoDB-music-create-item.png)
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 Second item:
 * Artist: `John Lennon` (partition key)
 * Song: `Imagine` (sort key)
@@ -55,6 +63,10 @@ Third item:
 
 ![DynamoDB Music Table with Items](./images/lab09-dynamoDB-music-with-items.png)
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 The possibility to add items with different attributes demonstrates the flexibility of a NoSQL database.
 
 There are also faster ways to load data into DynamoDB, such as using AWS Command Line Interface, programmatically loading data, 
@@ -64,6 +76,10 @@ or using one of the free tools available on the internet.
 For item `Psy`, I change the Year from 2011 to 2012.
 
 ![DynamoDB Music Table - Create item](./images/lab09-dynamoDB-music-edit-item.png)
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
 
 ## Task 4: Query the table
 There are two ways to query a DynamoDB table: *query* and *scan*.
@@ -75,6 +91,10 @@ A query operation finds items based on the primary key and optionally the sort k
 
 ![DynamoDB Music Table - Query](./images/lab09-dynamoDB-music-query.png)
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 Scan for an item involves looking through every item in a table, so it is less efficient and can take significant time for larger tables.
 
     * Attribute name: `Year`
@@ -84,12 +104,24 @@ Only the song released in 1971 is displayed.
 
 ![DynamoDB Music Table - Scan](./images/lab09-dynamoDB-music-scan.png)
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 ## Task 5: Delete the table
 Delete a table, also delete all the data in the table.
 
 ![DynamoDB Music Table - Delete](./images/lab09-dynamoDB-music-delete.png)
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
+
 ![DynamoDB Music Table - Deleting](./images/lab09-dynamoDB-music-deleting.png)
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+</p>
 
 ## Conclusion
 
