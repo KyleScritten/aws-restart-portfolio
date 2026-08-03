@@ -113,7 +113,7 @@ In this task, I delete the `Music` table, which also deletes all the data in the
   <img src="images/dynamoDB-music-delete.png" alt="DynamoDB Music Table - Delete” width="1000">
 </p>
 
-The table is deleted.
+*The table is deleted.*
 
 <p align="center">
   <img src="images/dynamoDB-music-deleting.png" alt="DynamoDB Music Table - Deleting” width="1000">
