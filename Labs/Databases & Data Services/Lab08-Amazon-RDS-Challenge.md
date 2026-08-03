@@ -61,12 +61,12 @@ Output screen:
 4. I install a MySQL client, and use it to connect to the database with the commands:
 ```bash
 sudo yum install mariadb -y
-mysql -h db-cluster-challenge.cluster-cwdogf47er3t.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
+mysql -h db-cluster-challenge.cluster-cmqzzjf3ejjc.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
 ```
 
 Terminal screen:
 ```bash
-[ec2-user@ip-10-0-2-199 ~]$ mysql -h db-cluster-challenge.cluster-cwdogf47er3t.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='labchallenge123&'
+[ec2-user@ip-10-0-2-199 ~]$ mysql -h db-cluster-challenge.cluster-cmqzzjf3ejjc.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MySQL connection id is 41
 Server version: 5.7.12 MySQL Community Server (GPL)
