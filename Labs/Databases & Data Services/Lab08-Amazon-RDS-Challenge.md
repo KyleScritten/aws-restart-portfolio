@@ -83,7 +83,7 @@ The Aurora(MySQL compatible) database write endpoint is `db-cluster-challenge.cl
 </p>
 
 ## Part 4: Interacting with the database
-1. I click the 'Details' tab in the lab environment, followed by the `Show` button:
+1. I click the `Details` tab in the lab environment, followed by the `Show` button:
     * I download the PEM file from lab details
     * Copy LinuxServer address: `35.91.200.114`
   
