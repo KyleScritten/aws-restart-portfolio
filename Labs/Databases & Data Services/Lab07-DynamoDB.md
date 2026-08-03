@@ -23,7 +23,9 @@ I create a new table in DynamoDB with this configuration:
 
 >[!Note]
 > A table is a collection of data on a particular topic. Each table contains multiple items. An item is a group of attributes that is uniquely identifiable among all of the other items. Items in DynamoDB are similar in many ways to rows in other database systems. In DynamoDB, there is no limit to the number of items you can store in a table.
+>
 > Each item consists of one or more attributes. An attribute is a fundamental data element, something that does not need to be broken down any further. For example, an item in a Music table contains attributes such as song and artist. Attributes in DynamoDB are similar columns in other database systems, but each item (row) can have different attributes (columns).
+>
 > When writing an item to a DynamoDB table, only the partition key and sort key (if used) are required. Other than these fields, the table does not require a schema. This means that it is possible to add attributes to one item that may be different than the attributes for other items.
 
 I add 3 items into to the Music table using the button `Create item` on the Music table page. The items have the following attributes:
@@ -52,10 +54,8 @@ I add 3 items into to the Music table using the button `Create item` on the Musi
 * Year: `2011` (attribute)
 * LengthSeconds: `219` (new number attribute)
 
-![DynamoDB Music Table with Items](./images/lab09-dynamoDB-music-with-items.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-with-items.png" alt="DynamoDB Music Table with Items” width="1000">
 </p>
 
 The possibility to add items with different attributes demonstrates the flexibility of a NoSQL database.
@@ -73,10 +73,8 @@ I now notice that there is an error in my data. In this task, I modify an existi
 
 The item is now updated.
 
-![DynamoDB Music Table - Create item](./images/lab09-dynamoDB-music-edit-item.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-edit-item.png" alt="Modify an existing item in the Table” width="1000">
 </p>
 
 ## Task 4: Query the table
