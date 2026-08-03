@@ -14,8 +14,8 @@ In this part, I create a security group to allow my web server to access my RDS 
    * **Description:** `Permit access from Web Security Group`
    * **VPC:** Select **Lab VPC** from the dropdown
 4. Since the security group currently has no rules, I add a rule to permit inbound database requests from the Web Security Group. In the **Inbound rules** section, I click **Add rule** and configure:
-   * **Type:** MySQL/Aurora (3306)
-   * **Source type:** Custom
+   * **Type:** `MySQL/Aurora (3306)`
+   * **Source type:** `Custom`
    * **Source:** Type `sg` in the search field and select **Web Security Group**
 
    This configures the Database security group to permit inbound traffic on port 3306 from any EC2 instance associated with the Web Security Group.
@@ -26,16 +26,14 @@ In this part, I create a DB subnet group that is used to tell RDS which subnets 
 
 1. In the AWS Management Console, in the search bar, I type `RDS` and select **Aurora and RDS**.
 2. In the left navigation pane, I click **Subnet groups**.
-   * Note: If the navigation pane is not visible, I click the menu icon in the top-left corner.
 3. I click **Create DB Subnet Group** and configure:
    * **Name:** `DB Subnet Group`
    * **Description:** `DB Subnet Group`
-   * **VPC:** Lab VPC
+   * **VPC:** `Lab VPC`
 4. In the **Add subnets** section, for **Availability Zones**, I choose the first and second Availability Zones from the dropdown.
 5. For **Subnets**, I select the following subnets:
-   * 10.0.1.0/24 (Private Subnet 1)
-   * 10.0.3.0/24 (Private Subnet 2)
-6. I click **Create**.
+   * `10.0.1.0/24` (Private Subnet 1)
+   * `10.0.3.0/24` (Private Subnet 2)
 
 This adds Private Subnet 1 (10.0.1.0/24) and Private Subnet 2 (10.0.3.0/24). I will use this DB subnet group when creating the database in the next task.
 
@@ -60,10 +58,10 @@ In this part, I configure and launch a Multi-AZ Amazon RDS for MySQL database in
    * Select **db.t3.medium**.
 10. Under **Connectivity**, I configure:
     * **Compute resource:** Don't connect to an EC2 compute resource
-    * **Virtual Private Cloud (VPC):** Lab VPC
+    * **Virtual Private Cloud (VPC):** `Lab VPC`
     * **DB subnet group:** `DB Subnet Group`
-    * **Public access:** No
-    * **VPC security group (firewall):** Choose existing
+    * **Public access:** `No`
+    * **VPC security group (firewall):** `Choose existing`
     * **Existing VPC security groups:** Use X to remove default, then select **DB Security Group**
 11. Under **Monitoring**, I uncheck **Enable Enhanced monitoring**, and under **Performance Insights**, I uncheck **Enable Performance Insights**.
 12. I expand the **Additional configuration** section and configure:
@@ -74,7 +72,7 @@ In this part, I configure and launch a Multi-AZ Amazon RDS for MySQL database in
 > If prompted with the **Suggested add-ons for lab-db** window, I choose **Close**.
 
 14. I wait until the **Status** changes to **Modifying** or **Available**.
-15. I click on **lab-db** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
+15. I click on **lab** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
 
 The Aurora(MySQL compatible) database write endpoint is `db-cluster-challenge.cluster-cpct6rdtzlyu.us-west-2.rds.amazonaws.com`.
 
