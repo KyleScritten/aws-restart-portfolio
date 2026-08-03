@@ -5,7 +5,7 @@ This lab is designed to reinforce the concept of leveraging an AWS-managed datab
 ***Amazon Relational Database Service*** (Amazon RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It provides cost-efficient and resizable capacity while managing time-consuming database administration tasks, which allows me to focus on my applications and business. Amazon RDS provides six familiar database engines to choose from: Amazon Aurora, Oracle, Microsoft SQL Server, PostgreSQL, MySQL, and MariaDB.
 
 ## Part 1: Create a Security Group for the RDS DB Instance
-In this task, I create a security group to allow my web server to access my RDS DB instance. This security group will be used when I launch the database instance.
+In this part, I create a security group to allow my web server to access my RDS DB instance. This security group will be used when I launch the database instance.
 
 1. In the AWS Management Console, in the search bar, I type `VPC` and select **VPC**.
 2. In the left navigation pane, I click **Security groups**.
@@ -87,19 +87,25 @@ The Aurora(MySQL compatible) database write endpoint is `db-cluster-challenge.cl
   <img src="images/db-aurora-config.png" alt="DB Aurora (MySQL compatible)” width="1000">
 </p>
 
-2. I click the Details followed by Show:
+## Part 4: Interacting with the database
+1. I click the 'Details' tab in the lab environment, followed by the `Show` button:
     * Download PEM from lab details
-    * LinuxServer address: `34.222.103.240`
+    * LinuxServer address: `35.91.200.114`
   
-3. I connect (SSH) to the LinuxServer using a terminal:
+2. I connect (SSH) to the LinuxServer using a terminal:
 ```bash
 kylescritten@Kyles-MacBook-Air ~ % cd downloads
-kylescritten@Kyles-MacBook-Air downloads % chmod 700 labsuser.pem 
-ssh -i labsuser.pem ec2-user@34.222.103.240
+kylescritten@Kyles-MacBook-Air downloads % chmod 400 labsuser.pem
+kylescritten@Kyles-MacBook-Air downloads % ssh -i labsuser.pem ec2-user@35.91.200.114
 ```
 
 Output screen:
 ```bash
+The authenticity of host '35.91.200.114 (35.91.200.114)' can't be established.
+ED25519 key fingerprint is: SHA256:P+uCe78/TDNcizOKQHd2+beqDozxYcF8fIayKbF1jVo
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '35.91.200.114' (ED25519) to the list of known hosts.
 ** WARNING: connection is not using a post-quantum key exchange algorithm.
 ** This session may be vulnerable to "store now, decrypt later" attacks.
 ** The server may need to be upgraded. See https://openssh.com/pq.html
@@ -114,21 +120,21 @@ Output screen:
          _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
        _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[ec2-user@ip-10-0-2-205 ~]$ 
+[ec2-user@ip-10-0-2-187 ~]$
 ```
 
-4. I install a MySQL client, and use it to connect to the database with the commands:
+3. I install a MySQL client, and use it to connect to the database with the commands:
 ```bash
 sudo yum install mariadb -y
-mysql -h db-cluster-challenge.cluster-cmqzzjf3ejjc.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
+mysql -h db-cluster-challenge.cluster-cpct6rdtzlyu.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
 ```
 
 Terminal screen:
 ```bash
-[ec2-user@ip-10-0-2-199 ~]$ mysql -h db-cluster-challenge.cluster-cmqzzjf3ejjc.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
+[ec2-user@ip-10-0-2-187 ~]$ mysql -h db-cluster-challenge.cluster-cpct6rdtzlyu.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MySQL connection id is 41
-Server version: 5.7.12 MySQL Community Server (GPL)
+Your MySQL connection id is 77
+Server version: 8.0.42 6252a59a
 
 Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
@@ -137,7 +143,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 MySQL [(none)]> 
 ```
 
-Then I set the `lab` as default:
+4. I list all of the databases and then set the `lab` as default by running the following commands:
 ```sql
 MySQL [(none)]> SHOW DATABASES;
 +--------------------+
@@ -156,7 +162,7 @@ Database changed
 MySQL [lab]> 
 ```
 
-5. I create a table `RESTART` using the code:
+5. I create a table `RESTART` with the following columns — Student ID (Number), Student Name, Restart City, and Graduation Date (Date Time):
 ```sql
 CREATE TABLE `restart` (
 `Student_ID` INT(10) ZEROFILL,
@@ -176,62 +182,62 @@ MySQL [lab]> CREATE TABLE `restart` (
     -> `Graduation_Date` DATE,
     -> PRIMARY KEY (`Student_ID`)
     -> );
-Query OK, 0 rows affected (0.07 sec)
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
 ```
 
 6. I insert 10 sample rows into this table with the code:
 ```sql
 INSERT INTO `restart` (`Student_ID`, `Student_Name`, `Restart_City`, `Graduation_Date`) VALUES
-(101, 'Alice Johnson', 'New York', '2024-05-15'),
-(102, 'Bob Smith', 'Los Angeles', '2023-12-20'),
-(103, 'Charlie Brown', 'Chicago', '2025-06-10'),
-(104, 'Diana Prince', 'Houston', '2024-11-30'),
-(105, 'Ethan Hunt', 'Phoenix', '2023-08-25'),
-(106, 'Fiona Gallagher', 'Philadelphia', '2025-04-05'),
-(107, 'George Martin', 'San Antonio', '2024-09-17'),
-(108, 'Hannah Lee', 'San Diego', '2023-10-22'),
-(109, 'Ian Wright', 'Dallas', '2025-02-14'),
-(110, 'Julia Roberts', 'San Jose', '2024-07-09');
+(101, 'Marcus Reid', 'Seattle', '2024-06-12'),
+(102, 'Priya Nair', 'Denver', '2023-11-08'),
+(103, 'Liam O''Connor', 'Austin', '2025-03-21'),
+(104, 'Sofia Torres', 'Miami', '2024-10-04'),
+(105, 'Noah Bennett', 'Portland', '2023-09-16'),
+(106, 'Ava Mitchell', 'Boston', '2025-05-27'),
+(107, 'Elijah Park', 'Atlanta', '2024-08-19'),
+(108, 'Grace Kim', 'Nashville', '2023-12-11'),
+(109, 'Oscar Delgado', 'Detroit', '2025-01-30'),
+(110, 'Mia Foster', 'Minneapolis', '2024-04-23');
 ```
 
 Terminal screen:
 ```sql
 MySQL [lab]> INSERT INTO `restart` (`Student_ID`, `Student_Name`, `Restart_City`, `Graduation_Date`) VALUES
-    -> (101, 'Alice Johnson', 'New York', '2024-05-15'),
-    -> (102, 'Bob Smith', 'Los Angeles', '2023-12-20'),
-    -> (103, 'Charlie Brown', 'Chicago', '2025-06-10'),
-    -> (104, 'Diana Prince', 'Houston', '2024-11-30'),
-    -> (105, 'Ethan Hunt', 'Phoenix', '2023-08-25'),
-    -> (106, 'Fiona Gallagher', 'Philadelphia', '2025-04-05'),
-    -> (107, 'George Martin', 'San Antonio', '2024-09-17'),
-    -> (108, 'Hannah Lee', 'San Diego', '2023-10-22'),
-    -> (109, 'Ian Wright', 'Dallas', '2025-02-14'),
-    -> (110, 'Julia Roberts', 'San Jose', '2024-07-09');
-Query OK, 10 rows affected (0.01 sec)
+    -> (101, 'Marcus Reid', 'Seattle', '2024-06-12'),
+    -> (102, 'Priya Nair', 'Denver', '2023-11-08'),
+    -> (103, 'Liam O''Connor', 'Austin', '2025-03-21'),
+    -> (104, 'Sofia Torres', 'Miami', '2024-10-04'),
+    -> (105, 'Noah Bennett', 'Portland', '2023-09-16'),
+    -> (106, 'Ava Mitchell', 'Boston', '2025-05-27'),
+    -> (107, 'Elijah Park', 'Atlanta', '2024-08-19'),
+    -> (108, 'Grace Kim', 'Nashville', '2023-12-11'),
+    -> (109, 'Oscar Delgado', 'Detroit', '2025-01-30'),
+    -> (110, 'Mia Foster', 'Minneapolis', '2024-04-23');
+Query OK, 10 rows affected (0.00 sec)
 Records: 10  Duplicates: 0  Warnings: 0
 ```
 
 7. To select all rows from this table I use the sql command `SELECT * FROM restart;`:
 ```sql
 MySQL [lab]> SELECT * FROM restart;
-+------------+-----------------+--------------+-----------------+
-| Student_ID | Student_Name    | Restart_City | Graduation_Date |
-+------------+-----------------+--------------+-----------------+
-| 0000000101 | Alice Johnson   | New York     | 2024-05-15      |
-| 0000000102 | Bob Smith       | Los Angeles  | 2023-12-20      |
-| 0000000103 | Charlie Brown   | Chicago      | 2025-06-10      |
-| 0000000104 | Diana Prince    | Houston      | 2024-11-30      |
-| 0000000105 | Ethan Hunt      | Phoenix      | 2023-08-25      |
-| 0000000106 | Fiona Gallagher | Philadelphia | 2025-04-05      |
-| 0000000107 | George Martin   | San Antonio  | 2024-09-17      |
-| 0000000108 | Hannah Lee      | San Diego    | 2023-10-22      |
-| 0000000109 | Ian Wright      | Dallas       | 2025-02-14      |
-| 0000000110 | Julia Roberts   | San Jose     | 2024-07-09      |
-+------------+-----------------+--------------+-----------------+
-10 rows in set (0.01 sec)
++------------+---------------+--------------+-----------------+
+| Student_ID | Student_Name  | Restart_City | Graduation_Date |
++------------+---------------+--------------+-----------------+
+| 0000000101 | Marcus Reid   | Seattle      | 2024-06-12      |
+| 0000000102 | Priya Nair    | Denver       | 2023-11-08      |
+| 0000000103 | Liam O'Connor | Austin       | 2025-03-21      |
+| 0000000104 | Sofia Torres  | Miami        | 2024-10-04      |
+| 0000000105 | Noah Bennett  | Portland     | 2023-09-16      |
+| 0000000106 | Ava Mitchell  | Boston       | 2025-05-27      |
+| 0000000107 | Elijah Park   | Atlanta      | 2024-08-19      |
+| 0000000108 | Grace Kim     | Nashville    | 2023-12-11      |
+| 0000000109 | Oscar Delgado | Detroit      | 2025-01-30      |
+| 0000000110 | Mia Foster    | Minneapolis  | 2024-04-23      |
++------------+---------------+--------------+-----------------+
+10 rows in set (0.00 sec)
 ```
 
-8. I create a table `CLOUD_PRACTITIONER`:
+8. I create a table `CLOUD_PRACTITIONER` with the following columns: Student ID (Number) and Certification Date (Date Time).
 ```sql
 CREATE TABLE cloud_practitioner (
     `Student_ID` INT(10) ZEROFILL,
@@ -247,7 +253,7 @@ MySQL [lab]> CREATE TABLE cloud_practitioner (
     ->     `Certification_Date` DATE NOT NULL,
     ->     PRIMARY KEY (`Student_ID`)
     -> );
-Query OK, 0 rows affected (0.03 sec)
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
 ```
 
 9. I insert 5 sample rows into this table:
@@ -263,11 +269,11 @@ INSERT INTO cloud_practitioner (`Student_ID`, `Certification_Date`) VALUES
 Terminal screen:
 ```sql
 MySQL [lab]> INSERT INTO cloud_practitioner (`Student_ID`, `Certification_Date`) VALUES
-    -> (101, '2026-01-15 10:30:00'),
-    -> (102, '2026-02-20 14:45:00'),
-    -> (111, '2026-03-10 09:15:00'),
-    -> (112, '2026-03-25 16:00:00'),
-    -> (113, '2026-03-30 11:20:00');
+    -> (104, '2026-04-05 08:50:00'),
+    -> (106, '2026-04-18 13:25:00'),
+    -> (107, '2026-05-02 10:10:00'),
+    -> (109, '2026-05-19 15:40:00'),
+    -> (110, '2026-06-01 12:05:00');
 Query OK, 5 rows affected, 5 warnings (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 5
 ```
@@ -278,42 +284,39 @@ MySQL [lab]> SELECT * FROM cloud_practitioner;
 +------------+--------------------+
 | Student_ID | Certification_Date |
 +------------+--------------------+
-| 0000000101 | 2026-01-15         |
-| 0000000102 | 2026-02-20         |
-| 0000000111 | 2026-03-10         |
-| 0000000112 | 2026-03-25         |
-| 0000000113 | 2026-03-30         |
+| 0000000104 | 2026-04-05         |
+| 0000000106 | 2026-04-18         |
+| 0000000107 | 2026-05-02         |
+| 0000000109 | 2026-05-19         |
+| 0000000110 | 2026-06-01         |
 +------------+--------------------+
 5 rows in set (0.00 sec)
 ```
 
-11. I perform an inner join between the 2 tables created above and display student ID, Student Name, Certification Date:
+11. I perform an inner join between the 2 tables created above and display `student_ID`, `Student_Name`, `Certification_Date`:
 ```sql
-SELECT 
-    rs.Student_ID AS `Student ID`,
-    rs.Student_Name AS `Student Name`,
-    cp.Certification_Date AS `Certification Date`
-FROM restart rs
+SELECT r.Student_ID, r.Student_Name, cp.Certification_Date
+FROM restart r
 INNER JOIN cloud_practitioner cp
-ON rs.Student_ID = cp.Student_ID;
+ON r.Student_ID = cp.Student_ID;
 ```    
 
 Terminal screen:
 ```sql
-MySQL [lab]> SELECT 
-    ->     rs.Student_ID AS `Student ID`,
-    ->     rs.Student_Name AS `Student Name`,
-    ->     cp.Certification_Date AS `Certification Date`
-    -> FROM restart rs
+MySQL [lab]> SELECT r.Student_ID, r.Student_Name, cp.Certification_Date
+    -> FROM restart r
     -> INNER JOIN cloud_practitioner cp
-    -> ON rs.Student_ID = cp.Student_ID;
+    -> ON r.Student_ID = cp.Student_ID;
 +------------+---------------+--------------------+
-| Student ID | Student Name  | Certification Date |
+| Student_ID | Student_Name  | Certification_Date |
 +------------+---------------+--------------------+
-| 0000000101 | Alice Johnson | 2026-01-15         |
-| 0000000102 | Bob Smith     | 2026-02-20         |
+| 0000000104 | Sofia Torres  | 2026-04-05         |
+| 0000000106 | Ava Mitchell  | 2026-04-18         |
+| 0000000107 | Elijah Park   | 2026-05-02         |
+| 0000000109 | Oscar Delgado | 2026-05-19         |
+| 0000000110 | Mia Foster    | 2026-06-01         |
 +------------+---------------+--------------------+
-2 rows in set (0.00 sec)
+5 rows in set (0.00 sec)
 ```
 
 ## Conclusion
