@@ -102,18 +102,21 @@ There are two ways to query a DynamoDB table: *query* and *scan*.
 </p>
 
 ## Task 5: Delete the table
-Delete a table, also delete all the data in the table.
+In this task, I delete the `Music` table, which also deletes all the data in the table.
 
-![DynamoDB Music Table - Delete](./images/lab09-dynamoDB-music-delete.png)
+1. In the DynamoDB dashboard, under **Tables**, I choose **Update settings**.
+2. I choose the **Music** table if it is not already selected.
+3. I choose **Actions**, then choose **Delete table**.
+4. On the confirmation panel, I enter `delete` and choose **Delete table**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-delete.png" alt="DynamoDB Music Table - Delete” width="1000">
 </p>
 
-![DynamoDB Music Table - Deleting](./images/lab09-dynamoDB-music-deleting.png)
+The table is deleted.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-deleting.png" alt="DynamoDB Music Table - Deleting” width="1000">
 </p>
 
 ## Conclusion
