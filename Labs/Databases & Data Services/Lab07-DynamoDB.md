@@ -68,7 +68,14 @@ There are also faster ways to load data into DynamoDB, such as using AWS Command
 or using one of the free tools available on the internet.
 
 ## Task 3: Modify an existing item
-For item `Psy`, I change the Year from 2011 to 2012.
+I now notice that there is an error in my data. In this task, I modify an existing item.
+
+1. In the DynamoDB dashboard, under **Tables**, I choose **Explore Items**.
+2. I choose the **Music** button, then choose `Psy`.
+3. I change the **Year** from `2011` to `2012`.
+4. I choose **Save changes**.
+
+The item is now updated.
 
 ![DynamoDB Music Table - Create item](./images/lab09-dynamoDB-music-edit-item.png)
 
@@ -79,7 +86,7 @@ For item `Psy`, I change the Year from 2011 to 2012.
 ## Task 4: Query the table
 There are two ways to query a DynamoDB table: *query* and *scan*.
 
-A query operation finds items based on the primary key and optionally the sort key. It is fully indexed, so it runs very fast.
+1. A query operation finds items based on the primary key and optionally the sort key. It is fully indexed, so it runs very fast.
 
     * Artist (Partition key): `Psy`
     * Song (Sort key): `Gangnam Style`
@@ -90,12 +97,13 @@ A query operation finds items based on the primary key and optionally the sort k
   <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
 </p>
 
-Scan for an item involves looking through every item in a table, so it is less efficient and can take significant time for larger tables.
+2. Scan for an item involves looking through every item in a table, so it is less efficient and can take significant time for larger tables.
 
     * Attribute name: `Year`
     * Type: `Number`
     * Value`: `1971`
-Only the song released in 1971 is displayed.
+
+*Only the song released in 1971 is displayed:*
 
 ![DynamoDB Music Table - Scan](./images/lab09-dynamoDB-music-scan.png)
 
