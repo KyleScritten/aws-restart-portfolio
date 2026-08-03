@@ -51,7 +51,7 @@ In this part, I configure and launch a Multi-AZ Amazon RDS for MySQL database in
    * **DB instance identifier:** `db-cluster-challenge`
    * **Master username:** `admin`
 7. Under **Credential Settings**, for **Credentials management**, I select **Self managed**, then configure:
-   * I clear the **Auto generate a password** checkbox if selected.
+   * I clear the **Auto generate a password** checkbox
    * **Master password:** `lab-password123`
    * **Confirm master password:** `lab-password123`
 8. For **Additional credential settings**, I ensure **Password authentication** is selected.
@@ -61,27 +61,22 @@ In this part, I configure and launch a Multi-AZ Amazon RDS for MySQL database in
 10. Under **Connectivity**, I configure:
     * **Compute resource:** Don't connect to an EC2 compute resource
     * **Virtual Private Cloud (VPC):** Lab VPC
-    * **DB subnet group:** DB Subnet Group
+    * **DB subnet group:** `DB Subnet Group`
     * **Public access:** No
     * **VPC security group (firewall):** Choose existing
     * **Existing VPC security groups:** Use X to remove default, then select **DB Security Group**
 11. Under **Monitoring**, I uncheck **Enable Enhanced monitoring**, and under **Performance Insights**, I uncheck **Enable Performance Insights**.
 12. I expand the **Additional configuration** section and configure:
     * **Initial database name:** `lab`
-    * Under **Backup**, I uncheck **Enable automated backups**.
-
-    This turns off backups, which is not normally recommended, but makes the database deploy faster for this lab.
 13. I scroll to the bottom of the screen and click **Create database**. My database now launches.
-14. I click **lab** (the link itself), and wait approximately 4 minutes for the database to become available, since the deployment process is deploying a database in two different Availability Zones.
 
 >[!Note]
 > If prompted with the **Suggested add-ons for lab-db** window, I choose **Close**.
 
-16. I wait until the **Status** changes to **Modifying** or **Available**.
-17. I click on **lab-db** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
+14. I wait until the **Status** changes to **Modifying** or **Available**.
+15. I click on **lab-db** to view its details, scroll down to the **Connectivity & security** tab, and copy the **Endpoint** field.
 
 The Aurora(MySQL compatible) database write endpoint is `db-cluster-challenge.cluster-cpct6rdtzlyu.us-west-2.rds.amazonaws.com`.
-
 
 <p align="center">
   <img src="images/db-aurora-config.png" alt="DB Aurora (MySQL compatible)” width="1000">
@@ -89,10 +84,10 @@ The Aurora(MySQL compatible) database write endpoint is `db-cluster-challenge.cl
 
 ## Part 4: Interacting with the database
 1. I click the 'Details' tab in the lab environment, followed by the `Show` button:
-    * Download PEM from lab details
-    * LinuxServer address: `35.91.200.114`
+    * I download the PEM file from lab details
+    * Copy LinuxServer address: `35.91.200.114`
   
-2. I connect (SSH) to the LinuxServer using a terminal:
+2. I connect (SSH) to the LinuxServer using my local terminal:
 ```bash
 kylescritten@Kyles-MacBook-Air ~ % cd downloads
 kylescritten@Kyles-MacBook-Air downloads % chmod 400 labsuser.pem
@@ -200,23 +195,6 @@ INSERT INTO `restart` (`Student_ID`, `Student_Name`, `Restart_City`, `Graduation
 (110, 'Mia Foster', 'Minneapolis', '2024-04-23');
 ```
 
-Terminal screen:
-```sql
-MySQL [lab]> INSERT INTO `restart` (`Student_ID`, `Student_Name`, `Restart_City`, `Graduation_Date`) VALUES
-    -> (101, 'Marcus Reid', 'Seattle', '2024-06-12'),
-    -> (102, 'Priya Nair', 'Denver', '2023-11-08'),
-    -> (103, 'Liam O''Connor', 'Austin', '2025-03-21'),
-    -> (104, 'Sofia Torres', 'Miami', '2024-10-04'),
-    -> (105, 'Noah Bennett', 'Portland', '2023-09-16'),
-    -> (106, 'Ava Mitchell', 'Boston', '2025-05-27'),
-    -> (107, 'Elijah Park', 'Atlanta', '2024-08-19'),
-    -> (108, 'Grace Kim', 'Nashville', '2023-12-11'),
-    -> (109, 'Oscar Delgado', 'Detroit', '2025-01-30'),
-    -> (110, 'Mia Foster', 'Minneapolis', '2024-04-23');
-Query OK, 10 rows affected (0.00 sec)
-Records: 10  Duplicates: 0  Warnings: 0
-```
-
 7. To select all rows from this table I use the sql command `SELECT * FROM restart;`:
 ```sql
 MySQL [lab]> SELECT * FROM restart;
@@ -239,15 +217,6 @@ MySQL [lab]> SELECT * FROM restart;
 
 8. I create a table `CLOUD_PRACTITIONER` with the following columns: Student ID (Number) and Certification Date (Date Time).
 ```sql
-CREATE TABLE cloud_practitioner (
-    `Student_ID` INT(10) ZEROFILL,
-    `Certification_Date` DATE NOT NULL,
-    PRIMARY KEY (`Student_ID`)
-);
-```
-
-Terminal screen:
-```sql
 MySQL [lab]> CREATE TABLE cloud_practitioner (
     ->     `Student_ID` INT(10) ZEROFILL,
     ->     `Certification_Date` DATE NOT NULL,
@@ -257,16 +226,6 @@ Query OK, 0 rows affected, 2 warnings (0.03 sec)
 ```
 
 9. I insert 5 sample rows into this table:
-```sql
-INSERT INTO cloud_practitioner (`Student_ID`, `Certification_Date`) VALUES
-(101, '2026-01-15 10:30:00'),
-(102, '2026-02-20 14:45:00'),
-(111, '2026-03-10 09:15:00'),
-(112, '2026-03-25 16:00:00'),
-(113, '2026-03-30 11:20:00');
-```
-
-Terminal screen:
 ```sql
 MySQL [lab]> INSERT INTO cloud_practitioner (`Student_ID`, `Certification_Date`) VALUES
     -> (104, '2026-04-05 08:50:00'),
