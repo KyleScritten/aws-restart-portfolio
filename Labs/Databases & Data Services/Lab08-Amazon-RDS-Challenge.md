@@ -159,17 +159,6 @@ MySQL [lab]>
 
 5. I create a table `RESTART` with the following columns — Student ID (Number), Student Name, Restart City, and Graduation Date (Date Time):
 ```sql
-CREATE TABLE `restart` (
-`Student_ID` INT(10) ZEROFILL,
-`Student_Name` CHAR(52) NOT NULL DEFAULT '',
-`Restart_City` CHAR(52) NOT NULL DEFAULT '',
-`Graduation_Date` DATE,
-PRIMARY KEY (`Student_ID`)
-);
-```
-
-Terminal screen:
-```sql
 MySQL [lab]> CREATE TABLE `restart` (
     -> `Student_ID` INT(10) ZEROFILL,
     -> `Student_Name` CHAR(52) NOT NULL DEFAULT '',
@@ -253,14 +242,6 @@ MySQL [lab]> SELECT * FROM cloud_practitioner;
 ```
 
 11. I perform an inner join between the 2 tables created above and display `student_ID`, `Student_Name`, `Certification_Date`:
-```sql
-SELECT r.Student_ID, r.Student_Name, cp.Certification_Date
-FROM restart r
-INNER JOIN cloud_practitioner cp
-ON r.Student_ID = cp.Student_ID;
-```    
-
-Terminal screen:
 ```sql
 MySQL [lab]> SELECT r.Student_ID, r.Student_Name, cp.Certification_Date
     -> FROM restart r
