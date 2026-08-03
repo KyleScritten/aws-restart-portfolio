@@ -9,11 +9,11 @@ This lab is designed to reinforce the concept of leveraging an AWS-managed datab
 1. I launch an Amazon RDS DB instance using Amazon Aurora Provisioned DB engine with the following configuration:
     * DatabaseEngine: `Aurora (MySQL compatible)`
     * Template: Choose `Dev/Test`
-    * DB instance size: `Burstable classes` type `db.t3.small`
+    * DB instance size: `Burstable classes` type `db.t3.small` (Provisioned)
     * DB instance identifier: `db-cluster-challenge`
     * Master username: `admin`
-    * Password: `labchallenge123&` (self-manage)
-    * Storage: `Aurora Standard`
+    * Password: `lab-challenge123` (self-manage)
+    * Cluster storage configuration: `Aurora Standard`
     * Availability and durability: `Don't create an Aurora Replica`
     * Amazon VPC: `Lab VPC`
     * DB subnet group: `lab subnet`
@@ -34,17 +34,16 @@ This lab is designed to reinforce the concept of leveraging an AWS-managed datab
   
 3. I connect (SSH) to the LinuxServer using a terminal:
 ```bash
-chmod 700 labsuser.pem 
+kylescritten@Kyles-MacBook-Air ~ % cd downloads
+kylescritten@Kyles-MacBook-Air downloads % chmod 700 labsuser.pem 
 ssh -i labsuser.pem ec2-user@34.222.103.240
 ```
 
 Output screen:
 ```bash
-The authenticity of host '54.149.121.62 (54.149.121.62)' can't be established.
-ED25519 key fingerprint is SHA256:DthcSwIZJPIV9kRvb21VC+8Rh6PZfvfmdC6LDvPMdxw.
-This key is not known by any other names.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '54.149.121.62' (ED25519) to the list of known hosts.
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
    ,     #_
    ~\_  ####_        Amazon Linux 2
   ~~  \_#####\
@@ -53,16 +52,16 @@ Warning: Permanently added '54.149.121.62' (ED25519) to the list of known hosts.
    ~~       V~' '->
     ~~~         /    A newer version of Amazon Linux is available!
       ~~._.   _/
-         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
        _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[ec2-user@ip-10-0-2-199 ~]$ 
+[ec2-user@ip-10-0-2-205 ~]$ 
 ```
 
 4. I install a MySQL client, and use it to connect to the database with the commands:
 ```bash
 sudo yum install mariadb -y
-mysql -h db-cluster-challenge.cluster-cwdogf47er3t.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='labchallenge123&'
+mysql -h db-cluster-challenge.cluster-cwdogf47er3t.us-west-2.rds.amazonaws.com -P 3306 -u admin --password='lab-challenge123'
 ```
 
 Terminal screen:
