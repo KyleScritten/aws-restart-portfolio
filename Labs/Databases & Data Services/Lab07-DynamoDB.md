@@ -15,10 +15,8 @@ I create a new table in DynamoDB with this configuration:
 * Partition key: `Artist` (String)
 * Sort key - optional: `Song` (String)
 
-![DynamoDB Music Table](./images/lab09-dynamoDB-music.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music.png" alt="Create a new DynamoDB table” width="1000">
 </p>
 
 ## Task 2: Add data
@@ -36,10 +34,8 @@ I add 3 items into to the Music table using the button `Create item` on the Musi
 * Album: `The Dark Side of the Moon` (new string attribute)
 * Year: `1973` (new number attribute)
 
-![DynamoDB Music Table - Create item](./images/lab09-dynamoDB-music-create-item.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-create-item.png" alt="Add Data to DynamoDB Table” width="1000">
 </p>
 
 *Second item:*
