@@ -22,20 +22,15 @@ I create a new table in DynamoDB with this configuration:
 </p>
 
 ## Task 2: Add data
-A table is a collection of data on a particular topic. Each table contains multiple items. An item is a group of attributes that is uniquely 
-identifiable among all of the other items. Items in DynamoDB are similar in many ways to rows in other database systems. In DynamoDB, 
-there is no limit to the number of items you can store in a table.
 
-Each item consists of one or more attributes. An attribute is a fundamental data element, something that does not need to be broken down any further. 
-For example, an item in a Music table contains attributes such as song and artist. Attributes in DynamoDB are similar columns in other database systems, 
-but each item (row) can have different attributes (columns).
+>[!Note]
+> A table is a collection of data on a particular topic. Each table contains multiple items. An item is a group of attributes that is uniquely identifiable among all of the other items. Items in DynamoDB are similar in many ways to rows in other database systems. In DynamoDB, there is no limit to the number of items you can store in a table.
+> Each item consists of one or more attributes. An attribute is a fundamental data element, something that does not need to be broken down any further. For example, an item in a Music table contains attributes such as song and artist. Attributes in DynamoDB are similar columns in other database systems, but each item (row) can have different attributes (columns).
+> When writing an item to a DynamoDB table, only the partition key and sort key (if used) are required. Other than these fields, the table does not require a schema. This means that it is possible to add attributes to one item that may be different than the attributes for other items.
 
-When writing an item to a DynamoDB table, only the partition key and sort key (if used) are required. Other than these fields, the table does not require a schema. This means that it is possible to add attributes to one item that may be different than the attributes for other items.
+I add 3 items into to the Music table using the button `Create item` on the Music table page. The items have the following attributes:
 
-I add 3 items into to the Music table using the button `Create item` on the Music table page.
-The first itema has atributes:
-
-First item:
+*First item:*
 * Artist: `Pink Floyd` (partition key)
 * Song: `Money` (sort key)
 * Album: `The Dark Side of the Moon` (new string attribute)
@@ -47,14 +42,14 @@ First item:
   <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
 </p>
 
-Second item:
+*Second item:*
 * Artist: `John Lennon` (partition key)
 * Song: `Imagine` (sort key)
 * Album: `Imagine` (attribute)
 * Year: `1971` (attribute)
 * Genre: `Soft rock` (new string attribute)
 
-Third item:
+*Third item:*
 * Artist: `Psy` (partition key)
 * Song: `Gangnam Style` (sort key)
 * Album: `Psy 6 (Six Rules), Part 1` (attribute)
