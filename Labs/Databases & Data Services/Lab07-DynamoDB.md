@@ -85,10 +85,8 @@ There are two ways to query a DynamoDB table: *query* and *scan*.
     * Artist (Partition key): `Psy`
     * Song (Sort key): `Gangnam Style`
 
-![DynamoDB Music Table - Query](./images/lab09-dynamoDB-music-query.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-query.png" alt="Query the table” width="1000">
 </p>
 
 2. Scan for an item involves looking through every item in a table, so it is less efficient and can take significant time for larger tables.
@@ -99,10 +97,8 @@ There are two ways to query a DynamoDB table: *query* and *scan*.
 
 *Only the song released in 1971 is displayed:*
 
-![DynamoDB Music Table - Scan](./images/lab09-dynamoDB-music-scan.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="1000">
+  <img src="images/dynamoDB-music-scan.png" alt="Scan the table” width="1000">
 </p>
 
 ## Task 5: Delete the table
