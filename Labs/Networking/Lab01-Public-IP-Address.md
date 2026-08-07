@@ -6,7 +6,7 @@ In this lab, I will investigate the customer's environment and apply troubleshoo
 
 My role is a cloud support engineer at Amazon Web Services (AWS). During my shift, a customer from a Fortune 500 company requests assistance regarding a networking issue within their AWS infrastructure. The following is the email and an attachment regarding their architecture:
 
-Ticket from the customer
+**Ticket from the customer**
 
 > Hello, Cloud Support!
 >
