@@ -43,14 +43,14 @@ In the scenario, Paulo, who is the customer requesting assistance, has switched 
    * The **IPv4 CIDR block** box prefills with a CIDR notation and block. I delete this information and enter my own values.
 
 >[!Summary]
-> Configured the **VPC with a Single Public Subnet** with the following parameters:
-> * IPv4 CIDR block: `192.168.0.0/18`
-> * IPv6 CIDR block: set to default
-> * VPC name: `First VPC`
-> * Public subnet's IPv4 CIDR: `192.168.1.0/26`
-> * Availability Zone: **No Preference**
-> * Subnet name: `Public subnet`
-> * Remaining options: left at their default settings
+>Configured the **VPC with a Single Public Subnet** with the following parameters:
+>* IPv4 CIDR block: `192.168.0.0/18`
+>* IPv6 CIDR block: set to default
+>* VPC name: `First VPC`
+>* Public subnet's IPv4 CIDR: `192.168.1.0/26`
+>* Availability Zone: **No Preference**
+>* Subnet name: `Public subnet`
+>* Remaining options: left at their default settings
 
 <p align="center">
   <img src="images/create-vpc-1.png" alt="Create VPC Screenshot part 1” width="900">
