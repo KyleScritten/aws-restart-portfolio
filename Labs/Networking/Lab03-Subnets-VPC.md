@@ -61,6 +61,7 @@ In the scenario, Paulo, who is the customer requesting assistance, has switched 
 >* Remaining options: left at their default settings
 
 ## Task 2: Send the response to the customer
+In this task, I drafted and sent an email response to the customer, summarising my findings and outlining solutions to resolve their issue.
 
 > Subject: Assistance with Your VPC Setup
 >
