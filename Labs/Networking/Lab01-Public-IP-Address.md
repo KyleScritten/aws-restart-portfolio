@@ -21,6 +21,8 @@ My role is a cloud support engineer at Amazon Web Services (AWS). During my shif
 > Jess
 > Cloud Admin
 
+**Architecture diagram**
+
 <p align="center">
   <img src="images/customer-vpc-architecture.png" alt="Public and Private IP addresses Customer Architecture” width="900">
 </p>
