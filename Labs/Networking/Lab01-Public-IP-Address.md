@@ -22,7 +22,7 @@ Ticket from the customer
 > Cloud Admin
 
 <p align="center">
-  <img src="images/customer-vpc-architecture.png" alt="Public and Private IP addresses Customer Architecture” width="1000">
+  <img src="images/customer-vpc-architecture.png" alt="Public and Private IP addresses Customer Architecture” width="900">
 </p>
 
 *Figure: The customer's architecture, which consists of a VPC, internet gateway, public subnet with instance A, and a public subnet with instance B.*
