@@ -51,12 +51,12 @@ I currently have one VPC with the same CIDR of `10.0.0.0/16` with two instances 
 3. I gain an understanding of the customer's environment by selecting the check box next to **instance A**, and then at the bottom of the page, choose the **Networking** tab, and note the **Public and Private IPv4 addresses**. I then deselect the instance and select instance B, repeating the same process.
 
 **Instance A:**
-- Private IPv4 address: `10.0.10.30`
+- Private IPv4 address: `10.0.10.169`
 - Public IPv4 address: 'None
 
 **Instance B:**
-- Private IPv4 address: `10.0.10.63`
-- Public IPv4 address: `35.87.129.222`
+- Private IPv4 address: `10.0.10.176`
+- Public IPv4 address: `34.214.190.78` 
 
 ## Task 2: Use SSH to connect to an Amazon Linux EC2 instance
 
