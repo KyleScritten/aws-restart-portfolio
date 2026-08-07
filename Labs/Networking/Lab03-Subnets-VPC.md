@@ -43,6 +43,7 @@ In the scenario, Paulo, who is the customer requesting assistance, has switched 
    * The **IPv4 CIDR block** box prefills with a CIDR notation and block. I delete this information and enter my own values.
 
 >[!Summary]
+>
 >Configured the **VPC with a Single Public Subnet** with the following parameters:
 >* IPv4 CIDR block: `192.168.0.0/18`
 >* IPv6 CIDR block: set to default
