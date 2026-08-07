@@ -76,6 +76,7 @@ In this task, I drafted and sent an email response to the customer, summarising 
 > Best regards,
 >
 > Cloud Support Engineer
+> 
 > AWS Support Team
 
 ## Conclusion
