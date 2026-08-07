@@ -42,8 +42,7 @@ In the scenario, Paulo, who is the customer requesting assistance, has switched 
 5. For **VPC with a Single Public Subnet**, I configure the following information:
    * The **IPv4 CIDR block** box prefills with a CIDR notation and block. I delete this information and enter my own values.
 
->[!Summary]
->
+>[!Note]
 >Configured the **VPC with a Single Public Subnet** with the following parameters:
 >* IPv4 CIDR block: `192.168.0.0/18`
 >* IPv6 CIDR block: set to default
