@@ -60,7 +60,43 @@ I currently have one VPC with the same CIDR of `10.0.0.0/16` with two instances 
 
 ## Task 2: Use SSH to connect to an Amazon Linux EC2 instance
 
+In this task, I connect to an Amazon Linux EC2 instance. I use an SSH utility to perform all of these operations. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment.
 
+I downloaded the file labsuser.pem from the lab environment and use the Public IPv4 address from **Instance B**, which for my lab is `34.214.190.78`. From my terminal, I changed the permissions on the key to be read-only using my Public IPv4 address allowing the first connection to this remote SSH server. 
+
+#### Connect to the EC2 Instance
+
+```bash
+kylescritten@MacBookAir downloads % cd ~/Downloads
+kylescritten@MacBookAir Downloads % chmod 400 labsuser.pem
+kylescritten@MacBookAir Downloads % ssh -i labsuser.pem ec2-user@34.214.190.78
+The authenticity of host '34.214.190.78 (34.214.190.78)' can't be established.
+ED25519 key fingerprint is: SHA256:07LZQBn2/96/k6S9bcyuJMjTv/UQoxdWKohITZLe4G0
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+```
+#### Terminal Output
+```text
+Warning: Permanently added '34.214.190.78' (ED25519) to the list of known hosts.
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-0-10-176 ~]$ 
+```
+
+>[!Caution]
+> **Instance A** does not have the Public IPv4 address and it is not possible to connect to the instance with the Private IPv4 address.
 
 ## Task 3: Send the Response to the customer
 In this task, I drafted and sent an email response to the customer, summarising my findings and outlining solutions to resolve their connectivity issue.
