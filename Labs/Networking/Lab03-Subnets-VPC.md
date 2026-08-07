@@ -51,6 +51,10 @@ Ultimately, I configure "VPC with a Single Public Subnet with the following para
    * Subnet name: `Public subnet`
    * Remaining options: left at their default settings
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+</p>
+
 ## Task 2: Send the response to the customer
 
 > Subject: Assistance with Your VPC Setup
