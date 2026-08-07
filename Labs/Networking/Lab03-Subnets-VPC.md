@@ -26,7 +26,30 @@ My role is a cloud support engineer at Amazon Web Services (AWS). During my shif
 ## Task 1: Investigate the customer's needs
 In the scenario, Paulo, who is the customer requesting assistance, has switched to using AWS and would like assistance launching his first VPC. He has some networking knowledge but is new to AWS. I know that he needs around 15,000 IP addresses in the private range within his VPC, and he would like a public subnet. He would like to allocate at least 50 IP addresses in the public subnet.
 
+1. I open the AWS Management Console opens in a new tab in the AWS console, I type and search for `VPC` in the search bar in the top-left corner, and select **VPC** from the list.
+2. I choose the **Launch VPC Wizard** button to launch my first VPC. This launches a step-by-step process to set up a VPC with its basic components.
+3. I configure the following options:
+   * For **IPv6 CIDR block**, I leave **No IPv6 CIDR Block** selected, since I will not be using IPv6 in this lab.
+   * For the **VPC name**, I enter `First VPC`.
+   * For **Public subnet's IPv4 CIDR**, I input the correct VPC CIDR I am using, keeping in mind that the public subnet's CIDR must be smaller than the VPC CIDR block, and must be able to include at least 50 IP addresses.
+   * For **Availability Zone**, I choose **No Preference**.
+   * For **Subnet name**, I leave this option set to **Public subnet**.
+   * I leave the remaining options set to their default settings.
+   * At the lower-right, I choose **Create VPC**.
+4. I select a VPC configuration and configure the following options:
+   * I choose **VPC with a Single Public Subnet**.
+   * I choose **Select** to move to the next step.
+5. For **VPC with a Single Public Subnet**, I configure the following information:
+   * The **IPv4 CIDR block** box prefills with a CIDR notation and block. I delete this information and enter my own values.
 
+Ultimately, I configure "VPC with a Single Public Subnet with the following parameters:
+   * IPv4 CIDR block: `192.168.0.0/18`
+   * IPv6 CIDR block: set to default
+   * VPC name: `First VPC`
+   * Public subnet's IPv4 CIDR: `192.168.1.0/26`
+   * Availability Zone: **No Preference**
+   * Subnet name: `Public subnet`
+   * Remaining options: left at their default settings
 
 
 
