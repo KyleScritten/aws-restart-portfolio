@@ -8,16 +8,16 @@ My role is a cloud support engineer at Amazon Web Services (AWS). During my shif
 
 Ticket from the customer
 
->Hello, Cloud Support!
+> Hello, Cloud Support!
 >
->We currently have one virtual private cloud (VPC) with a CIDR range of 10.0.0.0/16. In this VPC, we have two Amazon Elastic Compute Cloud
->(Amazon EC2) instances: instance A and instance B. Even though both are in the same subnet and have the same configurations with AWS resources,
->instance A cannot reach the internet, and instance B can reach the internet. I think it has something to do with the EC2 instances, but I'm not sure.
->I also had a question about using a public range of IP address such as 12.0.0.0/16 for a VPC that I would like to launch. Would that cause any issues?
->Attached is our architecture for reference.
+> We currently have one virtual private cloud (VPC) with a CIDR range of 10.0.0.0/16. In this VPC, we have two Amazon Elastic Compute Cloud (Amazon EC2) instances: instance A and instance B. Even though both are in the same subnet and have the same configurations with AWS resources, instance A cannot reach the internet, and instance B can reach the internet. I think it has something to do with the EC2 instances, but I'm not sure.
 >
->Thanks!
+> I also had a question about using a public range of IP addresses, such as 12.0.0.0/16, for a VPC that I would like to launch. Would that cause any issues?
 >
->Jess
+> Attached is our architecture for reference.
 >
->Cloud Admin
+> Thanks!
+>
+> Jess
+>
+> Cloud Admin
