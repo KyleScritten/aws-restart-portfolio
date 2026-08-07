@@ -35,11 +35,11 @@ I think that Bob assigned a dynamic IP address to his EC2 instance because it co
    - Security Group: `Linux Instance SG` (existing SG)
    - Key pair: `vockey | RSA` (existing)
 2. The Private and Public IPv4 addresses for the *test instance* are:
-   - Private IPv4 address: `10.0.10.88`
-   - Public IPv4 address: `35.88.141.104`
+   - Private IPv4 address: `10.0.10.166`
+   - Public IPv4 address: `34.217.113.130`
 3. Once the instance is in *running* status, I stop the instance and then restart it again. Now the Private and Public IPv4 addresses for the *test instance* are:
-   - Private IPv4 address: `10.0.10.88`
-   - Public IPv4 address: `54.70.82.105`
+   - Private IPv4 address: `10.0.10.166`
+   - Public IPv4 address: `35.164.160.53`
 
 I have recreated the customer's issue: the **PublicIP address** changes when the *test instance* stops and restarts.
 
@@ -49,10 +49,10 @@ Bob needs a permanent Public IP address that doesn't change when he stops and re
 1. Under **Network and Security**, I select **Elastic IPs** and click the **Allocate Elastic IP address** button. I create an Elastic IP with this configuration:
    - Network border group: `us-west-2`
    - Associate to instance: `test instance`
-   - Associated Private IP: `10.0.10.88`
+   - Associated Private IP: `10.0.10.166`
 
-   The Elastic IP is `35.80.219.53`.
-2. I go back to the *test instance* and confirm that the Public IP address is `35.80.219.53`. I check that it does not change when the instance is stopped and started again.
+   The Elastic IP is `100.22.207.57`.
+2. I go back to the *test instance* and confirm that the Public IP address is `100.22.207.57`. I check that it does not change when the instance is stopped and started again.
 
 <p align="center">
   <img src="images/static-public-IPv4.png" alt="Static Public IPv4 Addresses" width="900">
