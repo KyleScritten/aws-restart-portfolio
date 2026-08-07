@@ -41,7 +41,7 @@ I think that Bob assigned a dynamic IP address to his EC2 instance because it co
    - Private IPv4 address: `10.0.10.88`
    - Public IPv4 address: `54.70.82.105`
 
-I have recreated the customer's issue: the Public IP address changes when the *test instance* stops and restarts.
+I have recreated the customer's issue: the **PublicIP address** changes when the *test instance* stops and restarts.
 
 ## Task 2: Fix issue with Elastic IP (EIP) address
 Bob needs a permanent Public IP address that doesn't change when he stops and restarts his instance. AWS does have a solution that allocates a persistent public IP address to an EC2 instance, called an Elastic IP (EIP).
