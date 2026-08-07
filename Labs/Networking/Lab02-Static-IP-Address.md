@@ -41,6 +41,10 @@ I think that Bob assigned a dynamic IP address to his EC2 instance because it co
    - Private IPv4 address: `10.0.10.166`
    - Public IPv4 address: `35.164.160.53`
 
+<p align="center">
+  <img src="images/static-public-IPv4.png" alt="Static Public IPv4 Addresses" width="900">
+</p>
+
 I have recreated the customer's issue: the **PublicIP address** changes when the *test instance* stops and restarts.
 
 ## Task 2: Fix issue with Elastic IP (EIP) address
@@ -53,10 +57,6 @@ Bob needs a permanent Public IP address that doesn't change when he stops and re
 
    The Elastic IP is `100.22.207.57`.
 2. I go back to the *test instance* and confirm that the Public IP address is `100.22.207.57`. I check that it does not change when the instance is stopped and started again.
-
-<p align="center">
-  <img src="images/static-public-IPv4.png" alt="Static Public IPv4 Addresses" width="900">
-</p>
 
 ## Task 3: Send the Response to the customer
 In this task, I drafted and sent an email response to the customer, summarising my findings and outlining solutions to resolve their connectivity issue.
