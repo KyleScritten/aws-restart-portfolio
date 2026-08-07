@@ -51,9 +51,37 @@ Ultimately, I configure "VPC with a Single Public Subnet with the following para
    * Subnet name: `Public subnet`
    * Remaining options: left at their default settings
 
+## Task 2: Send the response to the customer
 
-
-
+> Subject: Assistance with Your VPC Setup
+>
+> Hi Paulo,
+>
+> Thank you for reaching out! I'd be happy to help you set up your VPC. Let's address each of your points.
+>
+> **Private IPv4 Range:**
+> The private IPv4 ranges you can use are:
+> - 10.0.0.0 – 10.255.255.255
+> - 172.16.0.0 – 172.31.255.255
+> - 192.168.0.0 – 192.168.255.255
+>
+> So yes, the `192.x.x.x` range you mentioned can be used as a private range.
+>
+> **VPC and Subnet Sizing:**
+> To meet your requirements:
+> - **VPC IPv4 CIDR block:** `192.168.0.0/18` → provides 16,384 IP addresses, which comfortably covers your need for ~15,000 private IPs.
+> - **Public subnet:** `192.168.1.0/26` → provides 64 IP addresses (enough for your minimum requirement of 50 IPs).
+>
+> **Architecture:**
+> With this setup, you'll have one Availability Zone (AZ) containing a single public subnet within your VPC. This is a common starting configuration for startups, and it leaves plenty of headroom in your CIDR block to add private subnets or additional resources later as your infrastructure grows.
+>
+> If you'd like, I can provide step-by-step instructions on how to create this VPC and subnet in the AWS Management Console or via the AWS CLI.
+>
+> Let me know how you'd like to proceed!
+>
+> Best regards,
+> Cloud Support Engineer
+> AWS Support Team
 
 
 ## Conclusion
