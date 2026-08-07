@@ -28,7 +28,23 @@ Ticket from the customer
 *Figure: The customer's architecture, which consists of a VPC, internet gateway, public subnet with instance A, and a public subnet with instance B.*
 
 ## Task 1: Investigate the customer's environment
+## Task 1: Investigate the customer's environment
 
+In the scenario, Jess, who is the customer requesting assistance, has two EC2 instances in one VPC. Instance A cannot reach the internet, and instance B can, even though they are configured the same within the VPC. Currently, the customer's AWS architecture seems sound because one of their instances works. Jess suspects that the instance configuration may be the issue.
+
+She also has a question about using a public range of IP addresses for the new VPC and has asked if I could provide further insight on her question.
+
+I currently have one VPC with the same CIDR of 10.0.0.0/16 with two instances — instance A and instance B — with the same configurations as the customer. When troubleshooting networking and AWS, I can apply a troubleshooting method where I start from the top and work my way down, or start from the bottom and work my way up. I start troubleshooting from the bottom and work my way to the top in layers, using an example such as the OSI model. At the very bottom of this architecture is the EC2 instance. Although cloud architecture does not directly translate to the OSI model, the following is an example of how the OSI model and cloud relate:
+
+| | OSI Model | AWS infrastructure |
+|---|---|---|
+| Layer 7 | Application (how the end user sees it) | Application |
+| Layer 6 | Presentation (translator between layers) | Web Servers, application servers |
+| Layer 5 | Session (session establishment, security) | EC2 instances |
+| Layer 4 | Transport (TCP, flow control) | Security group, NACL |
+| Layer 3 | Network (Packets which contain IP addresses) | Route Tables, IGW, Subnets |
+| Layer 2 | Data Link (Frames which contain physical MAC addresses) | Route Tables, IGW, Subnets |
+| Layer 1 | Physical (cables, physical transmission bits and volts) | Regions, Availability Zones |
 
 
 
