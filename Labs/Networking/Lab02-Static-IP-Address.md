@@ -88,4 +88,4 @@ After completing this lab, I have successfully:
 
 ## Additional resources
 - [Amazon EC2 instance IP addressing](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html)
-- [How Amazon VPC works](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html#add-cidr-block-restrictions)
+- [Elastic IP addresses](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
