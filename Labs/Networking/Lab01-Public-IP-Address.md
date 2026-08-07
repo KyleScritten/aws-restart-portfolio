@@ -28,6 +28,15 @@ Ticket from the customer
 *Figure: The customer's architecture, which consists of a VPC, internet gateway, public subnet with instance A, and a public subnet with instance B.*
 
 ## Task 1: Investigate the customer's environment
+
+
+
+
+## Task 2: Use SSH to connect to an Amazon Linux EC2 instance
+
+
+
+## Task 3: Send the Response to the customer
 In this task, I drafted and sent an email response to the customer, summarising my findings and outlining solutions to resolve their connectivity issue.
 
 > Hi Jess,
@@ -51,12 +60,6 @@ In this task, I drafted and sent an email response to the customer, summarising 
 >
 > Cloud Support Engineer
 > AWS Support Team
-
-
-
-## Task 2: Use SSH to connect to an Amazon Linux EC2 instance
-
-## Task 3: Send the Response to the customer
 
 ## Conclusion
 In this lab, I have successfully:
