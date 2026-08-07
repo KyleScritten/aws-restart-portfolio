@@ -105,7 +105,7 @@ In this task, I drafted and sent an email response to the customer, summarising 
 >
 > Thanks for reaching out and for providing the architecture details — this made it much easier to investigate the issue.
 >
-> After reviewing your setup, I found that the difference in internet connectivity between instance A and instance B is due to their IP addressing. Instance B has a public IPv4 address assigned, which allows it to communicate with the internet through the Internet Gateway attached to your VPC. Instance A, however, only has a private IPv4 address. Since private IP addresses are not routable over the internet, instance A cannot establish outbound internet connectivity.
+> After reviewing your setup, I found that the difference in internet connectivity between instance A and instance B is due to their IP addressing. Instance B has a public IPv4 address assigned (`34.214.190.78`), which allows it to communicate with the internet through the Internet Gateway attached to your VPC. Instance A, however, only has a private IPv4 address (`10.0.10.169`) and no public IPv4 address. Since private IP addresses are not routable over the internet, instance A cannot establish outbound internet connectivity.
 >
 > To resolve this issue, you have a couple of options:
 >
