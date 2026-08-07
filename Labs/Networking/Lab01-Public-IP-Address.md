@@ -19,5 +19,55 @@ Ticket from the customer
 > Thanks!
 >
 > Jess
->
 > Cloud Admin
+
+<p align="center">
+  <img src="images/customer-vpc-architecture.png" alt="Public and Private IP addresses Customer Architecture” width="1000">
+</p>
+
+*Figure: The customer's architecture, which consists of a VPC, internet gateway, public subnet with instance A, and a public subnet with instance B.*
+
+## Task 1: Investigate the customer's environment
+In this task, I drafted and sent an email response to the customer, summarising my findings and outlining solutions to resolve their connectivity issue.
+
+> Hi Jess,
+>
+> Thanks for reaching out and for providing the architecture details — this made it much easier to investigate the issue.
+>
+> After reviewing your setup, I found that the difference in internet connectivity between instance A and instance B is due to their IP addressing. Instance B has a public IPv4 address assigned, which allows it to communicate with the internet through the Internet Gateway attached to your VPC. Instance A, however, only has a private IPv4 address. Since private IP addresses are not routable over the internet, instance A cannot establish outbound internet connectivity.
+>
+> To resolve this issue, you have a couple of options:
+>
+> * Assign a public IPv4 address to instance A (either by enabling auto-assign public IP or associating an Elastic IP).
+> * Alternatively, if you prefer to keep instance A private, you can configure a NAT Gateway or NAT instance in a public subnet. This would allow instance A to initiate outbound internet traffic securely without exposing it directly to inbound internet access.
+>
+> Regarding your question about using a public IP range such as 12.0.0.0/16 for a new VPC, I would not recommend this approach. While AWS technically allows you to define almost any CIDR block, using a publicly routable IP range that you do not own can lead to unexpected routing conflicts. For example, responses to outbound traffic may be misrouted or intercepted by the legitimate owners of that public IP space on the internet, resulting in connectivity issues that are difficult to troubleshoot.
+>
+> As a best practice, it is strongly recommended to use private IP address ranges defined by RFC 1918 (such as 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16) when designing VPC networks. These ranges are specifically reserved for internal use and avoid conflicts with public internet routing.
+>
+> Please let me know if you'd like help implementing any of these solutions or reviewing your architecture further.
+>
+> Best regards,
+>
+> Cloud Support Engineer
+> AWS Support Team
+
+
+
+## Task 2: Use SSH to connect to an Amazon Linux EC2 instance
+
+## Task 3: Send the Response to the customer
+
+## Conclusion
+In this lab, I have successfully:
+
+* Summarized and investigated the customer scenario
+* Analyzed the difference between a private and public IP address
+* Developed a solution to the customer's issue in this lab
+* Summarized and described my findings (group activity)
+
+## Additional resources
+- [Amazon EC2 instance IP addressing](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html)
+- [How Amazon VPC works](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html#add-cidr-block-restrictions)
+- [RCF1918](https://datatracker.ietf.org/doc/html/rfc1918)
+
