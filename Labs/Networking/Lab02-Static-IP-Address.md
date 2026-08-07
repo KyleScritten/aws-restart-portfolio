@@ -7,6 +7,13 @@ My role is a cloud support engineer at Amazon Web Services (AWS). During my shif
 
 **Ticket from the customer**
 
+> Hello Cloud Support!
+>
+> We are having issues with one of our EC2 instances. The IP changes every time we start and stop this instance called Public Instance. This causes everything to break since it needs a static IP address. We are not sure why the IP changes on this instance to a random IP every time. Can you please investigate? Attached is our architecture. Please let me know if you have any questions.
+>
+> Thanks!
+> Bob, Cloud Admin
+
 **Architecture diagram**
 
 <p align="center">
