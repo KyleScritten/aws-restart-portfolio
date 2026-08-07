@@ -15,7 +15,7 @@ My role is a cloud support engineer at Amazon Web Services (AWS). During my shif
 > Paulo Santos
 > Startup Owner
 
-**Architecture diagram**
+**Customer diagram**
 
 <p align="center">
   <img src="images/vpc-subnet-architecture.png" alt="VPC Subnets and IP addresses Customer Architecture” width="900">
@@ -23,7 +23,8 @@ My role is a cloud support engineer at Amazon Web Services (AWS). During my shif
 
 *Figure: In the customer's VPC architecture, the customer needs approximately 15,000 IP addresses for their Seattle office headquarters and 50 IP addresses for their operations department, which will be in the public subnet.*
 
-
+## Task 1: Investigate the customer's needs
+In the scenario, Paulo, who is the customer requesting assistance, has switched to using AWS and would like assistance launching his first VPC. He has some networking knowledge but is new to AWS. I know that he needs around 15,000 IP addresses in the private range within his VPC, and he would like a public subnet. He would like to allocate at least 50 IP addresses in the public subnet.
 
 
 
