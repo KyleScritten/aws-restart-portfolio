@@ -70,8 +70,14 @@ sudo systemctl status httpd.service
 
 **Terminal output:**
 ```bash
-[paste terminal output here]
+[ec2-user@ip-10-0-10-24 ~]$ sudo systemctl status httpd.service
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+     Docs: man:httpd.service(8)
+[ec2-user@ip-10-0-10-24 ~]$ 
 ```
+
 >[!Note]
 > The status shows that the httpd service is inactive because it has not been started yet. This output indicates that the httpd service is loaded (already installed) but is currently inactive.
 
@@ -87,12 +93,60 @@ sudo systemctl status httpd.service
 
 **Terminal output:**
 ```bash
-[paste terminal output here]
+[ec2-user@ip-10-0-10-24 ~]$ sudo systemctl status httpd.service
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; vendor preset: disabled)
+   Active: active (running) since Sun 2026-08-09 21:29:27 UTC; 12s ago
+     Docs: man:httpd.service(8)
+ Main PID: 2553 (httpd)
+   Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+   CGroup: /system.slice/httpd.service
+           ├─2553 /usr/sbin/httpd -DFOREGROUND
+           ├─2554 /usr/sbin/httpd -DFOREGROUND
+           ├─2555 /usr/sbin/httpd -DFOREGROUND
+           ├─2556 /usr/sbin/httpd -DFOREGROUND
+           ├─2557 /usr/sbin/httpd -DFOREGROUND
+           └─2558 /usr/sbin/httpd -DFOREGROUND
+
+Aug 09 21:29:27 ip-10-0-10-24.us-west-2.compute.internal systemd[1]: Starting The Apache HTTP Server...
+Aug 09 21:29:27 ip-10-0-10-24.us-west-2.compute.internal systemd[1]: Started The Apache HTTP Server.
+[ec2-user@ip-10-0-10-24 ~]$ 
 ```
 
-The Apache HTTP Server is now in the **Active** status.
+The Apache HTTP Server is now in the **Active (running)** status.
 
 The httpd service is now running, but it does not load on the public IP of the instance `http://54.188.245.182`.
+
+## Task 3: Investigate the customer's VPC configuration
+In the scenario, Ana, the customer requesting assistance, cannot reach her Apache server even though it is active. I have an exact replica of the customer's VPC and its resources. I keep the error I received when trying to load Apache in the web browser in mind while troubleshooting this issue.
+
+1. I open the AWS Management Console in a new browser tab, choose the **Services** dropdown menu, and under **Networking & Content Delivery**, choose **VPC**.
+2. I check each service within the VPC to confirm that each resource is configured correctly. I consider the following:
+   * **Subnets** - Are the route tables associated with the correct subnets?
+   * **Route Tables** - Do the route tables have the correct routes?
+   * **Internet Gateway** - Is there an Internet Gateway, and is it attached?
+   * **Security Groups and network ACLs** - Are the correct rules configured?
+   * Can I ping websites such as `www.amazon.com`? If so, I can reach the internet (the Internet Gateway and route table should be working).
+   * Apache is a server that commonly uses HTTP/S ports.
+     
+3. I then run the command to ping `amazon.com`:
+```bash
+ping amazon.com
+```
+
+**Terminal output:**
+```bash
+[paste terminal output here]
+```
+4. I find that instead, the security group lacks an inbound rule allowing HTTP traffic (port 80) from the internet (`0.0.0.0/0`). I add this rule to the `Linux instance SG` security group.
+
+5. Once I have gone through each option in the previous step — I confirm that the Apache HTTP server is working by testing the URL `http://54.188.245.182` in a browser for my instance.
+
+If Apache is successfully installed, the following is the expected output:
+
+<p align="center">
+  <img src="images/Apache-HTTP-server.png" alt="The test page of the Apache HTTP server when Apache is successfully installed." width="900">
+</p>
 
 ## Conclusion
 After completing this lab, I am able to:
