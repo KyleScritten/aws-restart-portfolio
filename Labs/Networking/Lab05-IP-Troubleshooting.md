@@ -56,21 +56,20 @@ This command is primarily used to verify whether a host is reachable and to trou
 
 The `ping` command accepts an IP address or URL along with optional parameters. The `-c` option specifies the number of echo requests to send.
 
-Example usage:
-
+*Example usage:*
 ```bash
-[ec2-user@ip-10-0-10-132 ~]$ ping 8.8.8.8 -c 5
+[ec2-user@ip-10-0-10-33 ~]$ ping 8.8.8.8 -c 5
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
-64 bytes from 8.8.8.8: icmp_seq=1 ttl=117 time=5.38 ms
-64 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=5.39 ms
-64 bytes from 8.8.8.8: icmp_seq=3 ttl=117 time=5.39 ms
-64 bytes from 8.8.8.8: icmp_seq=4 ttl=117 time=5.39 ms
-64 bytes from 8.8.8.8: icmp_seq=5 ttl=117 time=5.40 ms
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=6.75 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=117 time=6.98 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=113 time=6.76 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=117 time=6.75 ms
+64 bytes from 8.8.8.8: icmp_seq=5 ttl=113 time=6.76 ms
 
 --- 8.8.8.8 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 4006ms
-rtt min/avg/max/mdev = 5.380/5.393/5.403/0.080 ms
-[ec2-user@ip-10-0-10-132 ~]$
+rtt min/avg/max/mdev = 6.755/6.806/6.989/0.117 ms
+[ec2-user@ip-10-0-10-33 ~]$ 
 ```
 
 In this example, five ICMP echo requests are sent to `8.8.8.8`, a public DNS server operated by Google, to test connectivity and measure response times.
@@ -85,20 +84,53 @@ Packet loss may appear at individual hops and is often associated with issues in
 
 A failed hop is typically shown as three asterisks (`***`), indicating that no response was received within the timeout period. By comparing the hostnames and IP addresses before and after such failures, it is possible to locate potential points of failure or filtering.
 
-Example usage:
-
+*Example usage:*
 ```bash
-[ec2-user@ip-10-0-10-132 ~]$ traceroute 8.8.8.8
+[ec2-user@ip-10-0-10-33 ~]$ traceroute 8.8.8.8
 traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
- 1  242.16.83.239 (242.16.83.239)  5.362 ms 242.4.194.199 (242.4.194.199)  5.364 ms 242.16.82.107 (242.16.82.107)  15.591 ms
- 2  99.82.10.8 (99.82.10.8)  6.624 ms  5.980 ms *
- 3  * 99.83.117.223 (99.83.117.223)  5.586 ms 99.82.10.7 (99.82.10.7)  5.486 ms
- 4  * 142.251.61.157 (142.251.61.157)  6.708 ms 108.170.255.127 (108.170.255.127)  6.539 ms
- 5  dns.google (8.8.8.8)  5.304 ms  5.402 ms  5.387 ms
-[ec2-user@ip-10-0-10-132 ~]$
+ 1  ec2-44-233-117-81.us-west-2.compute.amazonaws.com (44.233.117.81)  7.262 ms ec2-44-233-117-85.us-west-2.compute.amazonaws.com (44.233.117.85)  4.167 ms ec2-44-233-117-105.us-west-2.compute.amazonaws.com (44.233.117.105)  7.413 ms
+ 2  240.0.68.6 (240.0.68.6)  0.265 ms 240.0.68.5 (240.0.68.5)  0.285 ms 240.0.68.4 (240.0.68.4)  0.232 ms
+ 3  242.1.47.97 (242.1.47.97)  0.339 ms 242.1.47.229 (242.1.47.229)  3.098 ms 242.1.46.229 (242.1.46.229)  3.098 ms
+ 4  240.4.12.36 (240.4.12.36)  8.031 ms 240.4.12.10 (240.4.12.10)  9.011 ms 240.4.12.38 (240.4.12.38)  8.078 ms
+ 5  242.11.43.3 (242.11.43.3)  8.721 ms 242.11.42.3 (242.11.42.3)  8.714 ms 242.11.42.135 (242.11.42.135)  8.899 ms
+ 6  240.1.228.34 (240.1.228.34)  7.559 ms 240.1.228.2 (240.1.228.2)  8.405 ms  7.833 ms
+ 7  99.83.116.81 (99.83.116.81)  7.509 ms * 99.82.10.7 (99.82.10.7)  6.882 ms
+ 8  * * *
+ 9  dns.google (8.8.8.8)  6.740 ms  6.809 ms  6.848 ms
+[ec2-user@ip-10-0-10-33 ~]$ 
 ```
 
 This command reveals the route taken to reach the destination and provides insight into network performance and potential issues along the path.
+
+### Layer 4 (transport): The netstat and telnet commands
+
+#### 3. netstat
+
+The `netstat` command is used to display network connections, listening ports, and associated processes on a system. It is a useful tool for troubleshooting network issues and verifying whether specific ports are open or in use.
+
+For example, during a routine security scan, a compromised port may be detected on a subnet. To investigate further, `netstat` can be run on a local host within that subnet to determine whether the port is actively listening when it should not be.
+
+The command provides insight into active TCP connections and listening services, helping identify unexpected or unauthorized network activity. It is particularly valuable when diagnosing issues starting from the host machine and working outward through the network.
+
+Common options include:
+
+* `netstat -tp`: Displays established TCP connections along with the associated processes
+* `netstat -tlp`: Shows services that are currently listening for incoming connections
+* `netstat -ntlp`: Displays listening services without resolving port names (shows numeric ports only)
+
+*Example usage:*
+```bash
+[ec2-user@ip-10-0-10-33 ~]$ netstat -tp
+(No info could be read for "-p": geteuid()=1000 but you should be root.)
+Active Internet connections (w/o servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0    296 ip-10-0-10-33.us-we:ssh 152-110-72-98.ftt:52954 ESTABLISHED -                   
+[ec2-user@ip-10-0-10-33 ~]$ 
+```
+
+This command outputs currently established TCP connections, allowing verification of which remote hosts are connected and which processes are involved.
+
+Overall, `netstat` provides a snapshot of Layer 4 (transport layer) connectivity. By revealing active connections and listening ports, it helps narrow down potential network or security issues efficiently.
 
 
 
