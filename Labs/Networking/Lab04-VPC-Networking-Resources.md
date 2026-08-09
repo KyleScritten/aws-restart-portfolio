@@ -17,3 +17,29 @@ In this lab, I will investigate the customer's environment and analyze the custo
 </p>
 
 ## Task 1: Investigate the customer's needs
+In the scenario, Brock, the customer requesting assistance, has requested help creating resources for his VPC to be routable to the internet. I keep the VPC CIDR at `192.168.0.0/18` and the public subnet CIDR at `192.168.1.0/26`.
+
+
+
+
+
+
+
+
+## Conclusion
+By completing this lab, I have successfully:
+
+* Summarized the customer scenario
+* Created a VPC, Internet Gateway, Route Table, Security Group, Network ACL, and EC2 instance to establish a routable network within the VPC
+* Familiarized myself with the console
+* Developed a solution to the customer's issue found within this lab
+
+The lab is complete now that I have successfully used the `ping` command outside the VPC.
+
+## Additional Resources
+- [What is Amazon VPC?](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
+- [IP Addressing in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html)
+- [Route tables for your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
+- [Internet Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)
+- [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-rules)
+- [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#VPCSecurityGroups)
