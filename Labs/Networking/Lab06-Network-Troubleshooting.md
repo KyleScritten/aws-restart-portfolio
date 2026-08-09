@@ -113,7 +113,8 @@ Aug 09 21:29:27 ip-10-0-10-24.us-west-2.compute.internal systemd[1]: Started The
 [ec2-user@ip-10-0-10-24 ~]$ 
 ```
 
-The Apache HTTP Server is now in the **Active (running)** status.
+>[!Note]
+> The Apache HTTP Server is now in the **Active (running)** status.
 
 The httpd service is now running, but it does not load on the public IP of the instance `http://54.188.245.182`.
 
@@ -131,12 +132,22 @@ In the scenario, Ana, the customer requesting assistance, cannot reach her Apach
      
 3. I then run the command to ping `amazon.com`:
 ```bash
-ping amazon.com
+ping -c 4 www.amazon.com
 ```
 
 **Terminal output:**
 ```bash
-[paste terminal output here]
+[ec2-user@ip-10-0-10-24 ~]$ ping -c 4 www.amazon.com
+PING cf.47cf2c8c9-frontier.amazon.com (3.163.26.68) 56(84) bytes of data.
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=1 ttl=249 time=5.30 ms
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=2 ttl=249 time=5.33 ms
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=3 ttl=249 time=5.31 ms
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=4 ttl=249 time=5.32 ms
+
+--- cf.47cf2c8c9-frontier.amazon.com ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 5.301/5.318/5.332/0.052 ms
+[ec2-user@ip-10-0-10-24 ~]$ 
 ```
 4. I find that instead, the security group lacks an inbound rule allowing HTTP traffic (port 80) from the internet (`0.0.0.0/0`). I add this rule to the `Linux instance SG` security group.
 
@@ -145,7 +156,7 @@ ping amazon.com
 If Apache is successfully installed, the following is the expected output:
 
 <p align="center">
-  <img src="images/Apache-HTTP-server.png" alt="The test page of the Apache HTTP server when Apache is successfully installed." width="900">
+  <img src="images/apache-http-server.png" alt="The test page of the Apache HTTP server when Apache is successfully installed." width="900">
 </p>
 
 ## Conclusion
