@@ -87,6 +87,11 @@ they control traffic. The following rules apply: NACLs must be associated to a s
    - Outbound rule:
      - `All traffic` from `0.0.0.0/0` (custom)
 
+For **Inbound rules** you are allowing SSH, HTTP, and HTTPS types of traffic, each of which has its own protocols and port range. The source from which this traffic reaches your instance can be originating from anywhere. For **Outbound rules**, you are allowing all traffic from outside your instance.
+
+>[!Note]
+> A security group is a virtual firewall at the instance level that controls inbound and outbound traffic. Just like a NACL, security groups control traffic; however, security groups cannot deny traffic. Security groups are stateful; you must allow traffic through the security group as it blocks everything by default, and it must be associated to an instance.
+
 I now have a functional VPC. In the next task, I launch an EC2 instance to ensure that everything works.
 
 ## Task 2: Launch EC2 instance and SSH into instance
