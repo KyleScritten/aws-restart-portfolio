@@ -113,62 +113,67 @@ In this task, I launch an EC2 instance within my public subnet and test connecti
 4. I choose **Launch instance**.
 5. To display the launched instance, I choose **View all instances**. The EC2 instance named **Bastion Server** is initially in a **Pending** state, then the instance state changes to **Running** to indicate that the instance has finished booting.
 
-I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP 52.42.122.142. From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
+<p align="center">
+  <img src="images/ec2-instance-ip.png" alt="Use SSH to connect to an Amazon Linux EC2 instance” width="900">
+</p>
+
+I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address from the instance I have just created, which is Public IPv4 address `34.221.67.91`. From my terminal, I changed the permissions on the key to be read-only using my Public IPv4 address allowing the first connection to this remote SSH server. 
 
 #### Connect to the Bastion Server via SSH
-
 ```bash
-kylescritten@Kyles-MacBook-Air ~ % cd ~/Downloads
-kylescritten@Kyles-MacBook-Air Downloads % chmod 400 labsuser.pem
-kylescritten@Kyles-MacBook-Air Downloads % ssh -i labsuser.pem ec2-user@52.42.122.142
-The authenticity of host '52.42.122.142 (52.42.122.142)' can't be established.
-ED25519 key fingerprint is: SHA256:iR8ngHw5JuO15w804j32BygrHWl2D3DPLbZ7yhCAoc8
+kylescritten@MacBookAir ~ % cd ~/Downloads
+kylescritten@MacBookAir Downloads % chmod 400 labsuser.pem
+kylescritten@MacBookAir Downloads % ssh -i labsuser.pem ec2-user@34.221.67.91
+The authenticity of host '34.221.67.91 (34.221.67.91)' can't be established.
+ED25519 key fingerprint is: SHA256:tmB/6P+kfIeqsOL86dMWoMf786xuo3I8cREFFXezT/c
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 ```
 #### Terminal Output
 ```text
-Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
+Warning: Permanently added '34.221.67.91' (ED25519) to the list of known hosts.
 ** WARNING: connection is not using a post-quantum key exchange algorithm.
 ** This session may be vulnerable to "store now, decrypt later" attacks.
 ** The server may need to be upgraded. See https://openssh.com/pq.html
    ,     #_
-   ~\_  ####_        Amazon Linux 2
+   ~\_  ####_        Amazon Linux 2023
   ~~  \_#####\
-  ~~     \###|       AL2 End of Life is 2026-06-30.
-  ~~       \#/ ___
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
    ~~       V~' '->
-    ~~~         /    A newer version of Amazon Linux is available!
+    ~~~         /
       ~~._.   _/
-         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
-       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
-
-[ec2-user@ip-10-0-10-165 ~]$ 
+         _/ _/
+       _/m/'
+[ec2-user@ip-192-168-1-4 ~]$ 
 ```
 
 
 ## Task 3: Use ping to test internet connectivity
-I test the connectivity with a ping to the google website:
+I test the connectivity with a `ping` to the Google website.
 
-```bash
-[ec2-user@ip-192-168-1-4 ~]$ ping google.com
-PING google.com (142.251.46.78) 56(84) bytes of data.
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=1 ttl=117 time=5.63 ms
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=2 ttl=117 time=5.68 ms
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=3 ttl=117 time=5.69 ms
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=4 ttl=117 time=5.65 ms
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=5 ttl=117 time=5.65 ms
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=6 ttl=117 time=5.69 ms
-64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=7 ttl=117 time=5.66 ms
-^C
---- google.com ping statistics ---
-7 packets transmitted, 7 received, 0% packet loss, time 6008ms
-rtt min/avg/max/mdev = 5.629/5.664/5.694/0.022 ms
-[ec2-user@ip-192-168-1-4 ~]$
+I run the following command:
+```
+ping google.com
 ```
 
-The message on the terminal screen is saying I have replies from google.com and 0% packet loss.
+#### Terminal Output
+```bash
+[ec2-user@ip-192-168-1-4 ~]$ ping google.com
+PING google.com (142.250.73.142) 56(84) bytes of data.
+64 bytes from pnseaa-ao-in-f14.1e100.net (142.250.73.142): icmp_seq=1 ttl=117 time=6.69 ms
+64 bytes from pnseaa-ao-in-f14.1e100.net (142.250.73.142): icmp_seq=2 ttl=117 time=6.70 ms
+64 bytes from pnseaa-ao-in-f14.1e100.net (142.250.73.142): icmp_seq=3 ttl=117 time=6.72 ms
+64 bytes from pnseaa-ao-in-f14.1e100.net (142.250.73.142): icmp_seq=4 ttl=117 time=6.72 ms
+64 bytes from pnseaa-ao-in-f14.1e100.net (142.250.73.142): icmp_seq=5 ttl=117 time=6.72 ms
+^C
+--- google.com ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4005ms
+rtt min/avg/max/mdev = 6.693/6.709/6.720/0.010 ms
+[ec2-user@ip-192-168-1-4 ~]$ 
+```
 
+The terminal output confirms that all 5 packets sent to `google.com` (`142.250.73.142`) were successfully received, with 0% packet loss and an average round-trip time of 6.71 ms.
 
 ## Conclusion
 By completing this lab, I have successfully:
