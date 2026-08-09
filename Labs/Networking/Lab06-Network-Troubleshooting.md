@@ -151,6 +151,10 @@ rtt min/avg/max/mdev = 5.301/5.318/5.332/0.052 ms
 ```
 4. I find that instead, the security group lacks an inbound rule allowing HTTP traffic (port 80) from the internet (`0.0.0.0/0`). I add this rule to the `Linux instance SG` security group.
 
+<p align="center">
+  <img src="images/edit-inbound-rules.png" alt="Inbound rules control the incoming traffic that's allowed to reach the instance.” width="900">
+</p>
+
 5. Once I have gone through each option in the previous step — I confirm that the Apache HTTP server is working by testing the URL `http://54.188.245.182` in a browser for my instance.
 
 If Apache is successfully installed, the following is the expected output:
