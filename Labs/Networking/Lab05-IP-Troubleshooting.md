@@ -41,7 +41,7 @@ Warning: Permanently added '44.248.10.201' (ED25519) to the list of known hosts.
 Some layers have commands related to them to help with troubleshooting. The following is an example of how the troubleshooting commands flow with the Open Systems Interconnection (OSI) model:
 
 <p align="center">
-  <img src="images/OSI-troubleshooting.png" alt="How Troubleshooting Commands have Similarities to the OSI Model” width="900">
+  <img src="images/OSI-troubleshooting.png" alt="How Troubleshooting Commands have Similarities to the OSI Model” width="800">
 </p>
 
 *Figure: This is an example of how troubleshooting commands have similarities to the OSI model.*
