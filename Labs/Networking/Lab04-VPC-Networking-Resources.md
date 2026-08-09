@@ -97,7 +97,7 @@ I now have a functional VPC. In the next task, I launch an EC2 instance to ensur
 ## Task 2: Launch EC2 instance and SSH into instance
 In this task, I launch an EC2 instance within my public subnet and test connectivity by running the `ping` command. This validates that my infrastructure — including security groups and network ACLs — is correctly configured and not blocking any traffic between the instance and the internet, and confirms that I have a route to the Internet Gateway via the route table, and that the Internet Gateway is attached.
 
-1. On the AWS Management Console, in the search bar, I enter and choose `EC2` to go to the EC2 Management Console, then choose **Instances** in the left navigation pane.
+1. I choose `EC2` to go to the EC2 Management Console on the AWS Management Console, then choose **Instances** in the left navigation pane.
 2. I choose **Launch instances** and configure the following options:
    * In the **Name and tags** section, I leave the Name blank.
    * In the **Application and OS Images (Amazon Machine Image)** section, I configure the following options:
@@ -111,7 +111,7 @@ In this task, I launch an EC2 instance within my public subnet and test connecti
    * **Auto-assign public IP:** Choose **Enable**.
    * **Firewall (security groups):** Choose **Select existing security group**, then choose **public security group**.
 4. I choose **Launch instance**.
-5. To display the launched instance, I choose **View all instances**. The EC2 instance named **Bastion Server** is initially in a **Pending** state, then the instance state changes to **Running** to indicate that the instance has finished booting.
+5. To display the launched instance, I choose **View all instances**. The EC2 instance is initially in a **Pending** state, then the instance state changes to **Running** to indicate that the instance has finished booting.
 
 <p align="center">
   <img src="images/ec2-instance-ip.png" alt="Use SSH to connect to an Amazon Linux EC2 instance” width="900">
@@ -148,7 +148,6 @@ Warning: Permanently added '34.221.67.91' (ED25519) to the list of known hosts.
 [ec2-user@ip-192-168-1-4 ~]$ 
 ```
 
-
 ## Task 3: Use ping to test internet connectivity
 I test the connectivity with a `ping` to the Google website.
 
@@ -173,7 +172,7 @@ rtt min/avg/max/mdev = 6.693/6.709/6.720/0.010 ms
 [ec2-user@ip-192-168-1-4 ~]$ 
 ```
 
-The terminal output confirms that all 5 packets sent to `google.com` (`142.250.73.142`) were successfully received, with 0% packet loss and an average round-trip time of 6.71 ms.
+The terminal output confirms that all 5 packets sent to Google.com (`142.250.73.142`) were successfully received, with 0% packet loss and an average round-trip time of `6.71 ms`.
 
 ## Conclusion
 By completing this lab, I have successfully:
