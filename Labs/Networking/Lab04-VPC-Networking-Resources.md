@@ -26,6 +26,12 @@ In the scenario, Brock, the customer requesting assistance, has requested help c
 
 
 
+## Task 2: Launch EC2 instance and SSH into instance
+
+
+
+## Task 3: Use ping to test internet connectivity
+
 
 
 ## Conclusion
