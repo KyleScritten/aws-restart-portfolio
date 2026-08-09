@@ -25,11 +25,17 @@ In the scenario, Brock, the customer requesting assistance, has requested help c
 1. I create the VPC:
    - Name tag: `Test VPC`
    - IPv4 CIDR block: `192.168.0.0/18`
+
+>[!Note]
+> VPC is like a data center, but located in the cloud. It's logically isolated from other virtual networks. Now you will build a VPC.
      
 2. I create the subnet:
    - VPC ID: `Test VPC`
    - Subnet name: `Public subnet`
    - IPv4 subnet CIDR block: `192.168.1.0/28` (16 IPs)
+
+>[!Note]
+> A subnet is a range of IP addresses within your VPC. In your VPC, you can create a public and a private subnet. You can separate subnets according to specific architectural needs. For example, if you have servers that shouldn't be directly accessed by the internet, you would put them in the private subnet. For test servers or instances that require internet connectivity can be placed in the public subnet.
      
 3. I create the route table:
    - Name: `Public route table`
