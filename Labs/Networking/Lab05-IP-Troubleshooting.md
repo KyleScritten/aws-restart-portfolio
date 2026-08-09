@@ -132,7 +132,96 @@ This command outputs currently established TCP connections, allowing verificatio
 
 Overall, `netstat` provides a snapshot of Layer 4 (transport layer) connectivity. By revealing active connections and listening ports, it helps narrow down potential network or security issues efficiently.
 
+#### 4. telnet
 
+The `telnet` command is used to test connectivity to a specific host and port, helping verify whether a service is reachable over a TCP connection. It is often used in troubleshooting to determine if network access is being blocked by firewalls, security groups, or access control rules.
+
+For example, a customer may have a secure web server with firewall rules configured to block port 80. To confirm whether the port is actually inaccessible, the `telnet` command can be used to attempt a connection to that port. If the connection is refused, it indicates that the port is properly blocked.
+
+Before using `telnet`, it may need to be installed:
+
+```bash
+sudo yum install telnet -y
+```
+
+The command accepts a hostname or IP address followed by a port number.
+
+*Example usage:*
+```bash
+[ec2-user@ip-10-0-10-132 ~]$ telnet www.google.com 80
+Trying 142.251.156.119...
+Connected to www.google.com.
+Escape character is '^]'.
+```
+
+This command attempts to establish a TCP connection to port 80 on the specified server. If successful, it confirms that the port is open and reachable. When connecting to a web server on port 80, it is also possible to manually send an HTTP request through the session.
+
+The `telnet` command operates primarily at the transport layer (Layer 4) to test TCP connectivity, but it can also be used at the application layer (Layer 7) for simple protocol interactions.
+
+* If the connection succeeds, the port is open and accessible
+* If the connection fails with **“connection refused”**, the port is reachable but blocked by a firewall or service configuration
+* If the connection fails with **“connection timed out”**, it may indicate a lack of network connectivity or routing issues
+
+Overall, `telnet` is a simple and effective tool for verifying port accessibility and identifying where connectivity problems may exist.
+
+### Layer 7 (application): The curl command
+
+#### 5. curl
+
+The `curl` command is used to transfer data between a local machine and a remote server. It supports multiple protocols, most commonly HTTP and HTTPS, and is widely used to test web services and troubleshoot connectivity.
+
+For example, a customer running an Apache web server may want to verify that their website is functioning correctly by checking for a successful HTTP response (such as **200 OK**). The `curl` command can be used to send a request and inspect the server’s response.
+
+*Example usage:*
+```bash
+[ec2-user@ip-10-0-10-33 ~]$ curl -vLo /dev/null https://aws.com
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 3.169.173.19:443...
+* Connected to aws.com (3.169.173.19) port 443
+...
+> GET / HTTP/2
+> Host: aws.amazon.com
+> User-Agent: curl/8.3.0
+> Accept: */*
+> 
+{ [5 bytes data]
+< HTTP/2 200 
+< content-type: text/html;charset=utf-8
+< date: Sun, 09 Aug 2026 04:19:42 GMT
+< set-cookie: aws-priv=eyJ2IjoxLCJldSI6MCwic3QiOjB9; Version=1; Comment="Anonymous cookie for privacy regulations"; Domain=.aws.amazon.com; Max-Age=31536000; Expires=Mon, 09 Aug 2027 04:19:42 GMT; Path=/; Secure
+< set-cookie: aws_lang=en; Domain=.amazon.com; Path=/
+< x-content-type-options: nosniff
+< server: Server
+< x-frame-options: SAMEORIGIN
+< x-xss-protection: 1; mode=block
+< strict-transport-security: max-age=47304000; includeSubDomains
+< x-amz-id-1: 1029EBD8BD9F48B58229
+< last-modified: Fri, 07 Aug 2026 17:56:18 GMT
+< vary: accept-encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 4894bef31db1c311602a51393339af0a.cloudfront.net (CloudFront)
+< x-amz-cf-pop: HIO52-P2
+< x-amz-cf-id: u1Nqf0GJ7MRPH092SXD5phlGSAGETIAI4P2tIE50ekr1McaPAHUVyQ==
+< 
+{ [7499 bytes data]
+100  462k    0  462k    0     0  1795k      0 --:--:-- --:--:-- --:--:-- 1795k
+* Connection #2 to host aws.amazon.com left intact
+[ec2-user@ip-10-0-10-33 ~]$ 
+```
+
+This command sends a request to a web server and provides detailed output about the connection and response, while discarding the actual page content.
+
+Common options include:
+* `-I`: Sends a HEAD request and returns only the response headers
+* `-i`: Includes response headers with the output (GET request)
+* `-k`: Ignores SSL certificate errors
+* `-v`: Enables verbose output, showing detailed request and response information
+* `-o /dev/null`: Discards the response body (such as HTML and CSS content)
+
+After execution, the output displays details about the connection and the HTTP response. A **200 OK** status indicates that the server is operating correctly and responding successfully to requests.
+
+The `curl` command is a powerful tool for testing communication between a local system and a server. By examining responses and status codes, it helps identify issues related to connectivity, server configuration, or application behavior.
 
 ## Conclusion
 After completing this lab, I am able to:
