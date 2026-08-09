@@ -172,7 +172,7 @@ rtt min/avg/max/mdev = 6.693/6.709/6.720/0.010 ms
 [ec2-user@ip-192-168-1-4 ~]$ 
 ```
 
-The terminal output confirms that all 5 packets sent to Google.com (`142.250.73.142`) were successfully received, with 0% packet loss and an average round-trip time of `6.71 ms`.
+The terminal output confirms that all 5 packets sent to ***Google.com*** (`142.250.73.142`) were successfully received, with 0% packet loss and an average round-trip time of `6.71 ms`.
 
 ## Conclusion
 By completing this lab, I have successfully:
