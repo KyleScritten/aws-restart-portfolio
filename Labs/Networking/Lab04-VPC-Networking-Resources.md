@@ -40,14 +40,20 @@ In the scenario, Brock, the customer requesting assistance, has requested help c
 3. I create the route table:
    - Name: `Public route table`
    - VPC: `Test VPC`
+  
+>[!Note]
+> A route table contains the rules or routes that determine where network traffic within your subnet and VPC will go. It controls the network traffic like a router, and, just like a router, it stores IP addresses within the VPC. You associate a route table to each subnet and put the routes that you need your subnet to be able to reach. 
      
-4. I create the Internet Gateway and attach it:
+4. I create the Internet Gateway and attach it to the VPC:
    - Name: `IGW test VPC`
    - Attach to VPC: `Test VPC`
+  
+>[!Note]
+> An Internet Gateway (IGW) is what allows the VPC to have internet connectivity and allows communication between resources in your VPC and the internet. The IGW is used as a target in the route table to route internet-routable traffic and to perform network address translation (NAT) for EC2 instances.
      
 5. I add a route to the *Public route table* and associate the subnet to the route table:
    - Destination: `0.0.0.0/0`
-   - Target: `IGW test VPC` (Internet Gateway)
+   - Target: `igw-0b909d43620de4617 (IGW test VPC)` (Internet Gateway)
    - Associate to `Public subnet`
      
 6. I create a Network ACL:
@@ -59,6 +65,16 @@ In the scenario, Brock, the customer requesting assistance, has requested help c
    - Add new Outbound rule:
      - Rule number: `100`
      - Type: `All traffic`
+    
+>[!Note]
+> An Network ACL (NACL) is a layer of security that acts like a firewall at the subnet level. The rules to set up a NACL are similar to security groups in the way that 
+they control traffic. The following rules apply: NACLs must be associated to a subnet, NACLs are stateless, and they have the following parts:
+>* Rule number: The lowest number rule gets evaluated first. As soon as a rule matches traffic, its applied; for example: 10 or 100. Rule 10 would get evaluated first.
+>* Type of traffic; for example: HTTP or SSH
+>* Protocol: You can specify all or certain types here
+>* Port range: All or specific ones
+>* Destination: Only applies to outbound rules
+>* Allow or Deny specified traffic.
        
 7. I create a Security Group:
    - Security group name: `public security group`
