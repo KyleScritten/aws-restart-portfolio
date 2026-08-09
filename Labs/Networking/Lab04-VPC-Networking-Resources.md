@@ -101,15 +101,15 @@ In this task, I launch an EC2 instance within my public subnet and test connecti
 2. I choose **Launch instances** and configure the following options:
    * In the **Name and tags** section, I leave the Name blank.
    * In the **Application and OS Images (Amazon Machine Image)** section, I configure the following options:
-     * Quick Start: Choose **Amazon Linux**.
-     * Amazon Machine Image (AMI): Choose **Amazon Linux 2023 AMI**.
-   * In the **Instance type** section, I choose **t3.micro**.
-   * In the **Key pair (login)** section, I choose **vockey**.
+     * Quick Start: `Amazon Linux`.
+     * Amazon Machine Image (AMI): `Amazon Linux 2023 AMI`.
+   * In the **Instance type** section, I choose `t3.micro`.
+   * In the **Key pair (login)** section, I choose `vockey`.
 3. In the **Network settings** section, I choose **Edit** and configure the following options:
-   * **VPC - required:** Choose **Test VPC**.
-   * **Subnet:** Choose **Public Subnet**.
-   * **Auto-assign public IP:** Choose **Enable**.
-   * **Firewall (security groups):** Choose **Select existing security group**, then choose **public security group**.
+   * **VPC - required:** `Test VPC`.
+   * **Subnet:** `Public Subnet`.
+   * **Auto-assign public IP:** `Enable`.
+   * **Firewall (security groups):** Choose `Select existing security group`, then choose `public security group`.
 4. I choose **Launch instance**.
 5. To display the launched instance, I choose **View all instances**. The EC2 instance is initially in a **Pending** state, then the instance state changes to **Running** to indicate that the instance has finished booting.
 
