@@ -72,8 +72,8 @@ sudo systemctl status httpd.service
 ```bash
 [paste terminal output here]
 ```
-
-The status shows that the httpd service is inactive because it has not been started yet. This output indicates that the httpd service is loaded (already installed) but is currently inactive.
+>[!Note]
+> The status shows that the httpd service is inactive because it has not been started yet. This output indicates that the httpd service is loaded (already installed) but is currently inactive.
 
 2. To start the httpd service, I enter the following command:
 ```bash
