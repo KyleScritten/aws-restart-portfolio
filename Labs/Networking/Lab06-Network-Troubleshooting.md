@@ -159,6 +159,8 @@ If Apache is successfully installed, the following is the expected output:
   <img src="images/apache-http-server.png" alt="The test page of the Apache HTTP server when Apache is successfully installed." width="900">
 </p>
 
+*The test page of the Apache HTTP server when Apache is successfully installed*
+
 ## Conclusion
 After completing this lab, I am able to:
 
