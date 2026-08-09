@@ -68,11 +68,28 @@ In the scenario, Brock, the customer requesting assistance, has requested help c
 I now have a functional VPC. In the next task, I launch an EC2 instance to ensure that everything works.
 
 ## Task 2: Launch EC2 instance and SSH into instance
-In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
+In this task, I launch an EC2 instance within my public subnet and test connectivity by running the `ping` command. This validates that my infrastructure — including security groups and network ACLs — is correctly configured and not blocking any traffic between the instance and the internet, and confirms that I have a route to the Internet Gateway via the route table, and that the Internet Gateway is attached.
+
+1. On the AWS Management Console, in the search bar, I enter and choose `EC2` to go to the EC2 Management Console.
+2. In the left navigation pane, I choose **Instances**.
+3. I choose **Launch instances** and configure the following options:
+   * In the **Name and tags** section, I leave the Name blank.
+   * In the **Application and OS Images (Amazon Machine Image)** section, I configure the following options:
+     * Quick Start: Choose **Amazon Linux**.
+     * Amazon Machine Image (AMI): Choose **Amazon Linux 2023 AMI**.
+   * In the **Instance type** section, I choose **t3.micro**.
+   * In the **Key pair (login)** section, I choose **vockey**.
+4. In the **Network settings** section, I choose **Edit** and configure the following options:
+   * **VPC - required:** Choose **Test VPC**.
+   * **Subnet:** Choose **Public Subnet**.
+   * **Auto-assign public IP:** Choose **Enable**.
+   * **Firewall (security groups):** Choose **Select existing security group**, then choose **public security group**.
+5. I choose **Launch instance**.
+6. To display the launched instance, I choose **View all instances**. The EC2 instance named **Bastion Server** is initially in a **Pending** state, then the instance state changes to **Running** to indicate that the instance has finished booting.
 
 I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP 52.42.122.142. From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
 
-#### Connect to the EC2 Instance
+#### Connect to the Bastion Server via SSH
 
 ```bash
 kylescritten@Kyles-MacBook-Air ~ % cd ~/Downloads
@@ -105,7 +122,26 @@ Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
 
 
 ## Task 3: Use ping to test internet connectivity
+I test the connectivity with a ping to the google website:
 
+```bash
+[ec2-user@ip-192-168-1-4 ~]$ ping google.com
+PING google.com (142.251.46.78) 56(84) bytes of data.
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=1 ttl=117 time=5.63 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=2 ttl=117 time=5.68 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=3 ttl=117 time=5.69 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=4 ttl=117 time=5.65 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=5 ttl=117 time=5.65 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=6 ttl=117 time=5.69 ms
+64 bytes from pnseab-ad-in-f14.1e100.net (142.251.46.78): icmp_seq=7 ttl=117 time=5.66 ms
+^C
+--- google.com ping statistics ---
+7 packets transmitted, 7 received, 0% packet loss, time 6008ms
+rtt min/avg/max/mdev = 5.629/5.664/5.694/0.022 ms
+[ec2-user@ip-192-168-1-4 ~]$
+```
+
+The message on the terminal screen is saying I have replies from google.com and 0% packet loss.
 
 
 ## Conclusion
