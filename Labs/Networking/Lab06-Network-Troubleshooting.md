@@ -60,7 +60,39 @@ Warning: Permanently added '54.188.245.182' (ED25519) to the list of known hosts
 [ec2-user@ip-10-0-10-24 ~]$  
 ```
 
+## Task 2: Install httpd
+In the scenario, Ana, the customer requesting assistance, cannot reach her Apache server or get it to successfully load on a webpage from her virtual private cloud (VPC).
 
+1. To check the status of the httpd service, I enter the following `systemctl` command in the terminal window and press Enter:
+```bash
+sudo systemctl status httpd.service
+```
+
+**Terminal output:**
+```bash
+[paste terminal output here]
+```
+
+The status shows that the httpd service is inactive because it has not been started yet. This output indicates that the httpd service is loaded (already installed) but is currently inactive.
+
+2. To start the httpd service, I enter the following command:
+```bash
+sudo systemctl start httpd.service
+```
+
+3. To check the status of the httpd service again, I enter the following `systemctl` command:
+```bash
+sudo systemctl status httpd.service
+```
+
+**Terminal output:**
+```bash
+[paste terminal output here]
+```
+
+The Apache HTTP Server is now in the **Active** status.
+
+The httpd service is now running, but it does not load on the public IP of the instance `http://54.188.245.182`.
 
 ## Conclusion
 After completing this lab, I am able to:
