@@ -112,7 +112,7 @@ chkconfig httpd on
 service httpd start
 ```
 
-After it passes the status checks, I copy the Public IPv4 DNS `PLACEHOLDER` and open it in a browser to verify that the web server is running successfully.
+After it passes the status checks, I copy the Public IPv4 DNS `184.32.246.154` and open it in a browser to verify that the web server is running successfully.
 
 <p align="center">
   <img src="images/web-server-instance.png" alt="Web Server Instance” width="900">
