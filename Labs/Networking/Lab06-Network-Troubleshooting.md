@@ -160,7 +160,7 @@ rtt min/avg/max/mdev = 5.301/5.318/5.332/0.052 ms
 If Apache is successfully installed, the following is the expected output:
 
 <p align="center">
-  <img src="images/apache-http-server.png" alt="The test page of the Apache HTTP server when Apache is successfully installed." width="900">
+  <img src="images/apache-http-server.png" alt="The test page of the Apache HTTP server when Apache is successfully installed." width="1000">
 </p>
 
 *The test page of the Apache HTTP server when Apache is successfully installed*
