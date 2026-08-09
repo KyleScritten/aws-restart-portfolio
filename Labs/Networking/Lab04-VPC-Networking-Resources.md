@@ -13,7 +13,7 @@ In this lab, I will investigate the customer's environment and analyze the custo
 > Brock, startup owner
 
 <p align="center">
-  <img src="images/customer-vpc-architecture.png" alt="VPC Networking Resources Architecture” width="900">
+  <img src="images/network-vpc-architecture.png" alt="VPC Networking Resources Architecture” width="900">
 </p>
 
 ## Task 1: Investigate the customer's needs
