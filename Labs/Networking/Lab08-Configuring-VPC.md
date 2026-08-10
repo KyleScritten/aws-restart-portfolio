@@ -236,12 +236,30 @@ I should now be logged in to the bastion server, which is located in the public 
 
 3. I return to the terminal window and run the following command:
 ```bash
-ssh PRIVATE-IP
+ssh 10.0.2.70
 ```
 
 **Terminal output:**
 ```bash
-[placeholder for output]
+[ec2-user@ip-10-0-2-70 ~]$ ssh 10.0.2.70
+The authenticity of host '10.0.2.70 (10.0.2.70)' can't be established.
+ED25519 key fingerprint is SHA256:qWy3yyOTSGnLbJu14rwOxfvGvTIM03YGtMdTW4EfZmE.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.0.2.70' (ED25519) to the list of known hosts.
+ec2-user@10.0.2.70's password: lab-password
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Mon Aug 10 23:55:54 2026 from 10.0.0.174
+[ec2-user@ip-10-0-2-70 ~]$
 ```
 
 *I am now connected to the private instance. I accomplished this by first connecting to the bastion server (in the public subnet), then connecting to the private instance (in the private subnet).*
@@ -257,7 +275,15 @@ ping -c 3 amazon.com
 
 **Terminal output:**
 ```bash
-[placeholder for output]
+[ec2-user@ip-10-0-2-70 ~]$ ping -c 3 amazon.com
+PING cf.47cf2c8c9-frontier.amazon.com (3.163.26.68) 56(84) bytes of data.
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=1 ttl=248 time=6.46 ms
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=2 ttl=248 time=7.49 ms
+64 bytes from server-3-163-26-68.hio52.r.cloudfront.net (3.163.26.68): icmp_seq=3 ttl=248 time=5.48 ms
+
+--- cf.47cf2c8c9-frontier.amazon.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2023ms
+rtt min/avg/max/mdev = 5.476/6.476/7.494/0.823 ms
 ```
 
 This output indicates that the private instance successfully communicated with `amazon.com` on the internet. The private instance is in the private subnet, and the only way this is possible in the current scenario is by going through the NAT gateway.
