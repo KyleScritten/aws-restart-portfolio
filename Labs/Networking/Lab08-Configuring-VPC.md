@@ -176,6 +176,92 @@ In this task, I launch a NAT gateway in the public subnet and configure the priv
 
 *Resources in the private subnet that wish to communicate with the internet now have their network traffic directed to the NAT gateway, which forwards the request to the internet. Responses flow through the NAT gateway back to the private subnet.*
 
+# Optional challenge: Testing the private subnet
+In this optional challenge, I launch an EC2 instance in the private subnet and confirm that it can communicate with the internet.
+
+### Launching an instance in the private subnet
+In this optional task, I launch an EC2 instance in the private subnet.
+
+1. I follow the instructions I used to launch the bastion server, and configure the following options:
+   * In the **Name and tags** section, I enter `Private Instance`.
+   * In the **Application and OS Images (Amazon Machine Image)** section, I configure the following options:
+     * **Quick Start:** Choose **Amazon Linux**
+     * **Amazon Machine Image (AMI):** Choose **Amazon Linux 2023 AMI**
+   * In the **Instance type** section, I choose **t3.micro**.
+   * In the **Key pair (login)** section, I choose **Proceed without a key pair (Not recommended)**.
+   * In the **Network settings** section, I choose **Edit** and configure the following options:
+     * **VPC - required:** Choose **Lab VPC**
+     * **Subnet:** Choose **Private Subnet** (not the public subnet)
+     * **Firewall (security groups):** Choose **Create security group**
+       * **Security group name - required:** Enter `Private Instance SG`
+       * **Description - required:** Enter `Allow SSH from Bastion`
+     * **Inbound security group rules:**
+       * **Type:** Choose **SSH**
+       * **Source type:** Choose **Custom**
+       * **Source:** Choose `10.0.0.0/16`
+      
+2. I expand the **Advanced Details** section, and for **User data - optional**, I paste the following script:
+```bash
+#!/bin/bash
+# Turn on password authentication for lab challenge
+echo 'lab-password' | passwd ec2-user --stdin
+sed -i 's|[#]*PasswordAuthentication no|PasswordAuthentication yes|g' /etc/ssh/sshd_config
+systemctl restart sshd.service
+```
+*This script permits login using a password. It is included to help make the lab steps shorter, but is not recommended for normal instance deployments.*
+
+3. I choose **Launch instance**.
+
+<p align="center">
+  <img src="images/ec2-private-instance.png" alt="Launching an instance in the private subnet" width="900">
+</p>
+
+### Logging in to the bastion server
+The instance I just launched is in the private subnet, so it is not possible to log in to it directly. Instead, I first log in to the bastion server in the public subnet, then log in to the private instance from the bastion server.
+
+1. On the AWS Management Console, in the search bar, I enter and choose `EC2` to open the EC2 Management Console.
+2. In the navigation pane, I choose **Instances**.
+3. From the list of instances, I select the **Bastion Server** instance.
+4. I choose **Connect**.
+5. On the **EC2 Instance Connect** tab, I choose **Connect**.
+
+### Logging in to the private instance
+I should now be logged in to the bastion server, which is located in the public subnet. I now connect to the private instance, which is placed in the private subnet.
+
+1. In the Amazon EC2 console, I choose **Instances** and select **Private Instance**.
+2. I copy the **Private IPv4 address**.
+
+> [!NOTE]
+> This IP address is a private IP address starting with `10.0.2.x` or `10.0.3.x`. This address is not reachable directly from the internet, which is why I first logged in to the bastion server. I now log in to the private instance.
+
+3. I return to the terminal window and run the following command:
+```bash
+ssh PRIVATE-IP
+```
+
+**Terminal output:**
+```bash
+[placeholder for output]
+```
+
+I am now connected to the private instance. I accomplished this by first connecting to the bastion server (in the public subnet), then connecting to the private instance (in the private subnet).
+
+### Testing the NAT gateway
+The final part of this challenge is to confirm that the private instance can access the internet. I do this by running the `ping` command.
+
+1. I run the following command:
+
+```bash
+ping -c 3 amazon.com
+```
+
+**Terminal output:**
+```bash
+[placeholder for output]
+```
+
+This output indicates that the private instance successfully communicated with `amazon.com` on the internet. The private instance is in the private subnet, and the only way this is possible in the current scenario is by going through the NAT gateway.
+
 ## Conclusion
 By the end of this lab, I am able to:
 
