@@ -121,6 +121,8 @@ After it passes the status checks, I copy the Public IPv4 DNS `ec2-54-202-180-31
   <img src="images/web-server-instance.png" alt="Web Server Instance” width="900">
 </p>
 
+*Figure: The success page when the web server is launched.*
+
 ## Conclusion
 After completing this lab, I am able to:
 
