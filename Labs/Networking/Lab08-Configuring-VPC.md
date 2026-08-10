@@ -32,9 +32,41 @@ In this task, I create a new VPC.
 
 *EC2 instances launched into the VPC now automatically receive a public IPv4 Domain Name System (DNS) hostname.*
 
+<p align="center">
+  <img src="images/creating-vpc.png" alt="Creating a VPC” width="900">
+</p>
 
+## Task 2: Creating subnets
+In this task, I create a public subnet and a private subnet.
 
+1. In the left navigation pane, for **Virtual private cloud**, I choose **Subnets**.
+2. I choose **Create subnet** and configure the following options:
+   * **VPC ID:** Choose **Lab VPC**
+   * **Subnet name:** Enter `Public Subnet`
+   * **Availability Zone:** Choose the first Availability Zone in the list (not **No preference**)
+   * **IPv4 CIDR block:** Enter `10.0.0.0/24`
+3. I choose **Create subnet**.
+4. I now configure the public subnet to automatically assign a public IP address for all EC2 instances launched within it. I select **Public Subnet**, choose **Actions**, then choose **Edit subnet settings**.
+5. In the **Auto-assign IP settings** section, I select **Enable auto-assign public IPv4 address**, then choose **Save**.
 
+> [!NOTE]
+> Even though this subnet has been named Public Subnet, it is not yet public. A public subnet must have an Internet Gateway, which I attach in a later task in the lab.
+
+6. To create the private subnet, which is used for resources that remain isolated from the internet, I repeat the steps from the previous task and choose the following options:
+   * **VPC ID:** Choose **Lab VPC**
+   * **Subnet name:** Enter `Private Subnet`
+   * **Availability Zone:** Choose the first Availability Zone in the list (not **No preference**)
+   * **IPv4 CIDR block:** Enter `10.0.2.0/23`
+7. I choose **Create subnet**.
+
+> [!NOTE]
+> The CIDR block `10.0.2.0/23` includes all IP addresses that start with `10.0.2.x` and `10.0.3.x`. This range is twice as large as the public subnet, since most resources should be kept in private subnets unless they specifically need to be accessible from the internet.
+
+*My VPC now has two subnets. However, the VPC is totally isolated and cannot communicate with resources outside the VPC.*
+
+<p align="center">
+  <img src="images/creating-subnets.png" alt="Created a public subnet and a private subnet." width="900">
+</p>
 
 
 
