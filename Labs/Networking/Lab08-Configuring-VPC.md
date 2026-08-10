@@ -30,11 +30,11 @@ In this task, I create a new VPC.
 5. I choose **Actions**, then choose **Edit VPC settings**.
 6. In the **DNS settings** section, I select **Enable DNS hostnames**, then choose **Save**.
 
-*EC2 instances launched into the VPC now automatically receive a public IPv4 Domain Name System (DNS) hostname.*
-
 <p align="center">
   <img src="images/creating-vpc.png" alt="Creating a VPC” width="900">
 </p>
+
+*EC2 instances launched into the VPC now automatically receive a public IPv4 Domain Name System (DNS) hostname.*
 
 ## Task 2: Creating subnets
 In this task, I create a public subnet and a private subnet.
@@ -62,15 +62,61 @@ In this task, I create a public subnet and a private subnet.
 > [!NOTE]
 > The CIDR block `10.0.2.0/23` includes all IP addresses that start with `10.0.2.x` and `10.0.3.x`. This range is twice as large as the public subnet, since most resources should be kept in private subnets unless they specifically need to be accessible from the internet.
 
-*My VPC now has two subnets. However, the VPC is totally isolated and cannot communicate with resources outside the VPC.*
-
 <p align="center">
   <img src="images/creating-subnets.png" alt="Created a public subnet and a private subnet." width="900">
 </p>
 
+*My VPC now has two subnets. However, the VPC is totally isolated and cannot communicate with resources outside the VPC.*
 
+## Task 3: Creating an internet gateway
+In this task, I create an Internet Gateway for my VPC. I need an Internet Gateway to establish outside connectivity to EC2 instances in my VPC.
 
+1. In the left navigation pane, for **Virtual private cloud**, I choose **Internet gateways**.
+2. I choose **Create internet gateway**, and for **Name tag**, I enter `Lab IGW`.
+3. I choose **Create internet gateway**.
+4. I choose **Actions**, then choose **Attach to a VPC**.
 
+<p align="center">
+  <img src="images/create-internet-gateway.png" alt="Created an internet gateway” width="900">
+</p>
+
+*My public subnet now has a connection to the internet. However, to route traffic to the internet, I must also configure the public subnet's route table so that it uses the Internet Gateway.*
+
+## Task 4: Configuring route tables
+In this task, I do the following:
+
+* Create a public route table for internet-bound traffic.
+* Add a route to the route table to direct internet-bound traffic to the Internet Gateway.
+* Associate the public subnet with the new route table.
+
+1. In the left navigation pane, for **Virtual private cloud**, I choose **Route tables**. Several route tables are listed.
+2. I select the route table that includes **Lab VPC** in the **VPC** column.
+3. In the **Name** column, I choose the edit icon, enter `Private Route Table` for **Edit Name**, then choose **Save**.
+4. I choose the **Routes** tab.
+
+> [!NOTE]
+> There is currently only one route. It shows that all traffic destined for `10.0.0.0/16` (the range of the Lab VPC) is routed locally. This allows all subnets within a VPC to communicate with each other.
+
+5. I now create a new public route table to send public traffic to the Internet Gateway. I choose **Create route table** and configure the following options:
+   * **Name - optional:** Enter `Public Route Table`
+   * **VPC:** Choose **Lab VPC**
+6. I choose **Create route table**.
+7. After the route table is created, in the **Routes** tab, I choose **Edit routes**.
+
+> [!NOTE]
+> I now add a route to direct internet-bound traffic (`0.0.0.0/0`) to the Internet Gateway.
+
+8. I choose **Add route** and configure the following options:
+   * **Destination:** Enter `0.0.0.0/0`
+   * **Target:** Choose **Internet Gateway**, then choose **Lab IGW** from the list
+9. I choose **Save changes**.
+10. The final step is to associate this new route table with the public subnet. I choose the **Subnet associations** tab, choose **Edit subnet associations**, select **Public Subnet**, and choose **Save associations**.
+
+<p align="center">
+  <img src="images/config-route-table.png" alt="Configuring route tables” width="900">
+</p>
+
+*The public subnet is now public because it has a route table entry that sends traffic to the internet through the Internet Gateway.*
 
 
 
