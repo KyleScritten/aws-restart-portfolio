@@ -154,6 +154,28 @@ In this task, I launch an EC2 instance bastion server in the public subnet I cre
 
 *The EC2 instance named **Bastion Server** is initially in a **Pending** state. The instance state then changes to **Running** to indicate that the instance has finished booting. The bastion server is launched in the public subnet.*
 
+## Task 6: Creating a NAT gateway
+In this task, I launch a NAT gateway in the public subnet and configure the private route table to facilitate communication between resources in the private subnet and the internet.
+
+1. On the AWS Management Console, in the search bar, I enter `NAT gateways`, choose the **Features** list, and choose **NAT gateways**.
+2. I choose **Create NAT gateway** and configure the following options:
+   * **Name:** Enter `Lab NAT gateway`
+   * **Subnet:** From the dropdown list, choose **Public Subnet**
+3. I choose **Allocate Elastic IP**.
+4. I choose **Create a NAT gateway**.
+5. I now configure the private subnet to send internet-bound traffic to the NAT gateway. In the left navigation pane, I choose **Route tables**, then select **Private Route Table**.
+6. I choose the **Routes** tab. The route table currently shows only a single entry, which routes traffic locally within the VPC. I add an additional route to send internet-bound traffic through the NAT gateway.
+7. I choose **Edit routes**, then choose **Add route** and configure the following options:
+   * **Destination:** Enter `0.0.0.0/0`
+   * **Target:** Choose **NAT Gateway**, then choose `nat-` from the list
+8. I choose **Save changes**.
+
+<p align="center">
+  <img src="images/nat-gateway.png" alt="Creating a NAT gateway" width="900">
+</p>
+
+*Resources in the private subnet that wish to communicate with the internet now have their network traffic directed to the NAT gateway, which forwards the request to the internet. Responses flow through the NAT gateway back to the private subnet.*
+
 ## Conclusion
 By the end of this lab, I am able to:
 
