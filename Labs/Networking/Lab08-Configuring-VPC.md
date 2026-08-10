@@ -118,7 +118,41 @@ In this task, I do the following:
 
 *The public subnet is now public because it has a route table entry that sends traffic to the internet through the Internet Gateway.*
 
+## Task 5: Launching a bastion server in the public subnet
+In this task, I launch an EC2 instance bastion server in the public subnet I created earlier.
 
+> [!NOTE]
+> A bastion server (also known as a jump box) is an EC2 instance in a public subnet that is securely configured to provide access to resources in a private subnet. Systems operators can connect to the bastion server and then jump into resources in the private subnet.
+
+1. On the AWS Management Console, in the search bar, I enter and choose `EC2` to go to the EC2 Management Console, then choose **Instances**.
+2. I choose **Launch instances** and configure the following options:
+   * In the **Name and tags** section, I enter `Bastion Server`.
+   * In the **Application and OS Images (Amazon Machine Image)** section, I configure the following options:
+     * **Quick Start:** Choose **Amazon Linux**
+     * **Amazon Machine Image (AMI):** Choose **Amazon Linux 2023 AMI**
+   * In the **Instance type** section, I choose **t3.micro**.
+   * In the **Key pair (login)** section, I choose **Proceed without a key pair (Not recommended)**.
+
+> [!NOTE]
+> I use EC2 Instance Connect to access the shell running on the EC2 instance, so a key pair is not needed in this lab.
+
+3. In the **Network settings** section, I choose **Edit** and configure the following options:
+   * **VPC - required:** Choose **Lab VPC**
+   * **Subnet:** Choose **Public Subnet**
+   * **Auto-assign public IP:** Choose **Enable**
+   * **Firewall (security groups):** Choose **Create security group**
+     * **Security group name - required:** Enter `Bastion Security Group`
+     * **Description - required:** Enter `Allow SSH`
+   * **Inbound security group rules:**
+     * **Type:** Choose **SSH**
+     * **Source type:** Choose **Anywhere**
+4. I choose **Launch instance**.
+
+<p align="center">
+  <img src="images/ec2-bastion-instance.png" alt="Launching a bastion server in the public subnet" width="900">
+</p>
+
+*The EC2 instance named **Bastion Server** is initially in a **Pending** state. The instance state then changes to **Running** to indicate that the instance has finished booting. The bastion server is launched in the public subnet.*
 
 ## Conclusion
 By the end of this lab, I am able to:
