@@ -199,7 +199,7 @@ In this optional task, I launch an EC2 instance in the private subnet.
        * **Type:** Choose **SSH**
        * **Source type:** Choose **Custom**
        * **Source:** Choose `10.0.0.0/16`
-      
+
 2. I expand the **Advanced Details** section, and for **User data - optional**, I paste the following script:
 ```bash
 #!/bin/bash
