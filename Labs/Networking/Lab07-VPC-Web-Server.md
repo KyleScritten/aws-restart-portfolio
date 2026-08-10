@@ -115,7 +115,7 @@ systemctl enable httpd
 systemctl start httpd
 ```
 
-After it passes the status checks, I copy the Public IPv4 DNS `184.32.246.154` and open it in a browser to verify that the web server is running successfully.
+After it passes the status checks, I copy the Public IPv4 DNS `ec2-54-202-180-31.us-west-2.compute.amazonaws.com` and open it in a browser to verify that the web server is running successfully.
 
 <p align="center">
   <img src="images/web-server-instance.png" alt="Web Server Instance” width="900">
