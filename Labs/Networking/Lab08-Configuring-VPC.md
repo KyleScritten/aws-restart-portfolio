@@ -244,7 +244,7 @@ ssh PRIVATE-IP
 [placeholder for output]
 ```
 
-I am now connected to the private instance. I accomplished this by first connecting to the bastion server (in the public subnet), then connecting to the private instance (in the private subnet).
+*I am now connected to the private instance. I accomplished this by first connecting to the bastion server (in the public subnet), then connecting to the private instance (in the private subnet).*
 
 ### Testing the NAT gateway
 The final part of this challenge is to confirm that the private instance can access the internet. I do this by running the `ping` command.
