@@ -265,7 +265,7 @@ Last login: Mon Aug 10 23:55:54 2026 from 10.0.0.174
 *I am now connected to the private instance. I accomplished this by first connecting to the bastion server (in the public subnet), then connecting to the private instance (in the private subnet).*
 
 ### Testing the NAT gateway
-The final part of this challenge is to confirm that the private instance can access the internet. I do this by running the `ping` command. I run the following command:
+The final part of this challenge is to confirm that the private instance can access the internet. I do this by running the `ping` command:
 ```bash
 ping -c 3 amazon.com
 ```
