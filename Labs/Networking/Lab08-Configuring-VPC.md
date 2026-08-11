@@ -26,7 +26,7 @@ In this task, I create a new VPC.
    * **IPv6 CIDR block:** Choose **No IPv6 CIDR block**
    * **Tenancy:** Choose **Default**
    * **Tags:** Leave the suggested tags as is
-4. I choose **Create VPC**. At the top of the page, a message displays: "You successfully created vpc-Oaa4cf7a2856f4b97 / Lab VPC"
+4. I choose **Create VPC**. At the top of the page, a message displays: `"You successfully created vpc-Oaa4cf7a2856f4b97 / Lab VPC"`
 5. I choose **Actions**, then choose **Edit VPC settings**.
 6. In the **DNS settings** section, I select **Enable DNS hostnames**, then choose **Save**.
 
