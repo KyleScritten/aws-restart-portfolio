@@ -171,7 +171,7 @@ In this task, I launch a NAT gateway in the public subnet and configure the priv
 8. I choose **Save changes**.
 
 <p align="center">
-  <img src="images/nat-gateway.png" alt="Creating a NAT gateway" width="900">
+  <img src="images/nat-gateway.png" alt="Creating a NAT gateway" width="1000">
 </p>
 
 *Resources in the private subnet that wish to communicate with the internet now have their network traffic directed to the NAT gateway, which forwards the request to the internet. Responses flow through the NAT gateway back to the private subnet.*
