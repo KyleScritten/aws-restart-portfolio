@@ -63,7 +63,7 @@ In this task, I create a public subnet and a private subnet.
 > The CIDR block `10.0.2.0/23` includes all IP addresses that start with `10.0.2.x` and `10.0.3.x`. This range is twice as large as the public subnet, since most resources should be kept in private subnets unless they specifically need to be accessible from the internet.
 
 <p align="center">
-  <img src="images/creating-subnets.png" alt="Created a public subnet and a private subnet." width="900">
+  <img src="images/creating-subnets.png" alt="Created a public subnet and a private subnet." width="1000">
 </p>
 
 *My VPC now has two subnets. However, the VPC is totally isolated and cannot communicate with resources outside the VPC.*
