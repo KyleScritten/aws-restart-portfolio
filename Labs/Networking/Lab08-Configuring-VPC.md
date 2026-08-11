@@ -149,7 +149,7 @@ In this task, I launch an EC2 instance bastion server in the public subnet I cre
 4. I choose **Launch instance**.
 
 <p align="center">
-  <img src="images/ec2-bastion-instance.png" alt="Launching a bastion server in the public subnet" width="900">
+  <img src="images/ec2-bastion-instance.png" alt="Launching a bastion server in the public subnet" width="1000">
 </p>
 
 *The EC2 instance named **Bastion Server** is initially in a **Pending** state. The instance state then changes to **Running** to indicate that the instance has finished booting. The bastion server is launched in the public subnet.*
