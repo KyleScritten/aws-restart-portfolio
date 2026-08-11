@@ -229,7 +229,7 @@ The instance I just launched is in the private subnet, so it is not possible to 
 I should now be logged in to the bastion server, which is located in the public subnet. I now connect to the private instance, which is placed in the private subnet.
 
 1. In the Amazon EC2 console, I choose **Instances** and select **Private Instance**.
-2. I copy the **Private IPv4 address**.
+2. I copy the **Private IPv4 address** `10.0.2.70`.
 
 > [!NOTE]
 > This IP address is a private IP address starting with `10.0.2.x` or `10.0.3.x`. This address is not reachable directly from the internet, which is why I first logged in to the bastion server. I now log in to the private instance.
