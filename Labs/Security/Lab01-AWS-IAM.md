@@ -9,6 +9,7 @@ In many business environments, access involves a single login to a computer or a
 
 >[!Note]
 > **IAM**
+>
 >IAM can be used for the following:
 >
 >Manage IAM users and their access: You can create users and assign them individual security credentials (access keys, passwords, and multi-factor authentication devices). You can manage permissions to control which operations a user can perform.
@@ -33,13 +34,25 @@ In this task, I strengthen the password requirements by creating a custom passwo
 These changes take effect at the AWS account level and apply to every user associated with the account.
 
 
+## Task 2: Explore users and user groups
 
 
 
+## Business scenario
+For the remainder of this lab, I work with these users and user groups to activate permissions supporting the following business scenario.
 
+My company is growing its use of AWS and is using many EC2 instances and a great deal of Amazon S3 storage. I want to give access to new staff members depending upon their job function:
 
+| User | In Group | Permissions |
+|---|---|---|
+| user-1 | S3-Support | Read-only access to Amazon S3 |
+| user-2 | EC2-Support | Read-only access to Amazon EC2 |
+| user-3 | EC2-Admin | View, start, and stop EC2 instances |
 
+## Task 3: Add users to user groups
+I have recently hired `user-1` into a role where they provide support for Amazon S3. I add them to the `S3-Support` group so that they inherit the necessary permissions via the attached `AmazonS3ReadOnlyAccess` policy.
 
+In this task, I add all the associated users to their user groups.
 
 
 
