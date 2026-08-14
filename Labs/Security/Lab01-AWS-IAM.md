@@ -24,8 +24,7 @@ In this task, I strengthen the password requirements by creating a custom passwo
 1. In the AWS Management Console, I search for and select **IAM**.
 2. In the left navigation pane, I choose **Account settings**.
 
-> [!NOTE]
-> Here I can see the default password policy currently in effect. The company I am working for has much stricter requirements, so I need to update this policy.
+Here I can see the default password policy currently in effect. The company I am working for has much stricter requirements, so I need to update this policy.
 
 3. I choose **Change password policy**.
 4. Under **Select your account password policy requirements**, I configure the following options:
