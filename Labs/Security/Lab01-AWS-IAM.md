@@ -37,6 +37,7 @@ These changes take effect at the AWS account level and apply to every user assoc
 
 
 ## Task 2: Explore users and user groups
+In this task, I view pre-created users along with the pre-created user groups. I learn about the policies attached to the user groups and what the differences are between the user groups and their permissions.
 
 
 
@@ -58,7 +59,8 @@ In this task, I add all the associated users to their user groups.
 
 
 
-
+## Task 4: Sign in and test user permissions
+In this task, I test the permissions of each IAM user. I sign in as all three users. I verify that `user-1` is able to view S3 buckets but unable to view EC2 instances. I then sign in as `user-2` and verify that they are able to view EC2 instances but unable to perform the stop instance action; `user-2` is also unable to view S3 buckets. After signing in as `user-3`, I verify that I am able to view EC2 instances and perform the stop instance action.
 
 
 
