@@ -34,8 +34,11 @@ Here I can see the default password policy currently in effect. The company I am
    * For **Prevent password reuse**, I leave the default option of **5 passwords**.
 5. I choose **Save changes**.
 
-These changes take effect at the AWS account level and apply to every user associated with the account.
+<p align="center">
+  <img src="images/password-policy.png" alt="Password Policy Configuration” width="900">
+</p>
 
+These changes take effect at the AWS account level and apply to every user associated with the account.
 
 ## Task 2: Explore users and user groups
 In this task, I view pre-created users along with the pre-created user groups. I learn about the policies attached to the user groups and what the differences are between the user groups and their permissions.
