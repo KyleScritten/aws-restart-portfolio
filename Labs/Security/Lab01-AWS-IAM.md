@@ -65,8 +65,8 @@ In this task, I view pre-created users along with the pre-created user groups. I
 
 8. I choose **User groups**, then choose the **S3-Support** group, and choose the **Permissions** tab. The `S3-Support` group has the `AmazonS3ReadOnlyAccess` policy attached.
 9. Next to the `AmazonS3ReadOnlyAccess` policy, I select the plus sign to show the policy. This policy has permissions to get and list resources in Amazon S3.
-10. I choose **User groups**, then choose the **EC2-Admin** group, and choose the **Permissions** tab. This group is slightly different from the other two — instead of a managed policy, it has a **Customer inline policy**, which is a policy assigned to only one user or group. Inline policies are typically used to apply permissions for one-off situations.
-11. Next to the `EC2-Admin-Policy` policy, I select the plus sign to show the policy. This policy grants permission to view (Describe) information about Amazon EC2, as well as the ability to start and stop instances.
+10. I choose **User groups**, then choose the **EC2-Admin** group, and choose the **Permissions** tab. This group is slightly different from the other two — instead of a managed policy, it has a **Customer inline policy**, which is a policy assigned to only one user or group. 
+11. Next to the `EC2-Admin-Policy` policy, I select the plus sign to show the policy. This policy grants permission to view (`Describe`) information about Amazon EC2, as well as the ability to start and stop instances.
 
 ## Business scenario
 For the remainder of this lab, I work with these users and user groups to activate permissions supporting the following business scenario.
