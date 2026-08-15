@@ -52,7 +52,7 @@ In this task, I view pre-created users along with the pre-created user groups. I
 
 4. I choose the **Security credentials** tab and see that `user-1` is assigned a **Console password**.
 5. I choose **User groups**. The following user groups have already been created for me: `EC2-Admin`, `EC2-Support`, `S3-Support`.
-6. I choose the **EC2-Support** group, then choose the **Permissions** tab. This group has a managed policy associated with it called `AmazonEC2ReadOnlyAccess`. Managed policies are pre-built policies (built either by AWS or by administrators) that can be attached to IAM users and user groups. When the policy is updated, the changes are immediately applied to all users and user groups attached to it.
+6. I choose the **EC2-Support** group, then choose the **Permissions** tab. This group has a managed policy associated with it called `AmazonEC2ReadOnlyAccess`. 
 7. Next to the `AmazonEC2ReadOnlyAccess` policy, I select the plus sign to show the policy.
 
 > [!NOTE]
