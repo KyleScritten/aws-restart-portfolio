@@ -43,7 +43,30 @@ These changes take effect at the AWS account level and apply to every user assoc
 ## Task 2: Explore users and user groups
 In this task, I view pre-created users along with the pre-created user groups. I learn about the policies attached to the user groups and what the differences are between the user groups and their permissions.
 
+1. In the left navigation pane, I choose **Users**. The following IAM users have been created for me: `user-1`, `user-2`, `user-3`.
+2. I choose `user-1` and notice that they do not have any permissions.
+3. I choose the **Groups** tab and see that `user-1` is also not a member of any user groups.
 
+> [!NOTE]
+> A user group consists of several users who need access to the same data. Privileges can be distributed to the entire group of users rather than to each individual. This is much more efficient when applying permissions and provides greater overall control of access to resources than applying permissions to individuals.
+
+4. I choose the **Security credentials** tab and see that `user-1` is assigned a console password.
+5. I choose **User groups**. The following user groups have already been created for me: `EC2-Admin`, `EC2-Support`, `S3-Support`.
+6. I choose the **EC2-Support** group, then choose the **Permissions** tab. This group has a managed policy associated with it called `AmazonEC2ReadOnlyAccess`. Managed policies are pre-built policies (built either by AWS or by administrators) that can be attached to IAM users and user groups. When the policy is updated, the changes are immediately applied to all users and user groups attached to it.
+7. Next to the `AmazonEC2ReadOnlyAccess` policy, I select the plus sign to show the policy.
+
+> [!NOTE]
+> A policy defines what actions are allowed or denied for specific AWS resources. This policy grants permission to list and describe information about Amazon Elastic Compute Cloud (EC2), Elastic Load Balancing (ELB), Amazon CloudWatch, and Amazon EC2 Auto Scaling. The ability to view resources without modifying them is ideal for assigning to a support role.
+   >
+   > The following is the basic structure of the statements in an IAM policy:
+   > * *Effect* indicates whether to *Allow* or *Deny* the permissions.
+   > * *Action* specifies the API calls that can be made against an AWS service.
+   > * *Resource* defines the scope of entities covered by the policy rule.
+
+8. I choose **User groups**, then choose the **S3-Support** group, and choose the **Permissions** tab. The `S3-Support` group has the `AmazonS3ReadOnlyAccess` policy attached.
+9. Next to the `AmazonS3ReadOnlyAccess` policy, I select the plus sign to show the policy. This policy has permissions to get and list resources in Amazon S3.
+10. I choose **User groups**, then choose the **EC2-Admin** group, and choose the **Permissions** tab. This group is slightly different from the other two — instead of a managed policy, it has a **Customer inline policy**, which is a policy assigned to only one user or group. Inline policies are typically used to apply permissions for one-off situations.
+11. Next to the `EC2-Admin-Policy` policy, I select the plus sign to show the policy. This policy grants permission to view (Describe) information about Amazon EC2, as well as the ability to start and stop instances.
 
 ## Business scenario
 For the remainder of this lab, I work with these users and user groups to activate permissions supporting the following business scenario.
