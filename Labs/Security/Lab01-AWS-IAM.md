@@ -101,16 +101,16 @@ I have hired `user-2` into a role where they provide support for Amazon EC2.
 
 5. Using the previous steps in this task, I add `user-2` to the **EC2-Support** group.
 
-`user-2` is now part of the `EC2-Support` group.
+In the **Users** tab, I see that `user-2` is now part of the `EC2-Support` group.
 
 ### Add user-3 to the EC2-Admin group
 I have hired `user-3` as my Amazon EC2 administrator to manage my EC2 instances.
 
 6. Using the previous steps in this task, I add `user-3` to the **EC2-Admin** group.
 
-`user-3` is now part of the `EC2-Admin` group.
+In the **Users** tab, I see that `user-3` is now part of the `EC2-Admin` group.
 
-7. In the left navigation pane, I choose **User groups**. Each group now shows a `1` in the **Users** column for the number of users in each group.
+*Each group now shows a `1` in the **Users** column for the number of users in each group.*
 
 ## Task 4: Sign in and test user permissions
 In this task, I test the permissions of each IAM user. I sign in as all three users. I verify that `user-1` is able to view S3 buckets but unable to view EC2 instances. I then sign in as `user-2` and verify that they are able to view EC2 instances but unable to perform the stop instance action; `user-2` is also unable to view S3 buckets. After signing in as `user-3`, I verify that I am able to view EC2 instances and perform the stop instance action.
