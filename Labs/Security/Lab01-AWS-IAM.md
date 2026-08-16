@@ -168,7 +168,8 @@ I now sign in as `user-2`, who has been hired as my Amazon EC2 support person.
 6. At the **Stop Instances** window, I choose **Cancel**.
 7. Next, I check whether `user-2` can access Amazon S3. From the **Services** menu, I choose **S3**.
 
-I receive a "You don't have permissions to list buckets" message because `user-2` does not have permission to use Amazon S3.
+>[!Caution]
+> I receive a **"You don't have permissions to list buckets"** message because `user-2` does not have permission to use Amazon S3.
 
 ### Testing user-3 (EC2-Admin)
 I now sign in as `user-3`, who has been hired as my Amazon EC2 administrator.
