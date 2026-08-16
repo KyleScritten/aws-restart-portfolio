@@ -34,7 +34,7 @@ Three rows are displayed, one for each vulnerability within the Lambda function.
 One key finding is **CVE-2023-32681 - requests**, which identifies a vulnerability in the Python `requests` package. By opening the finding details, I access the External reference to the National Vulnerability Database (NVD), which contains the recommended remediation.
 
 <p align="center">
-  <img src="images/vulnerability-details.png" alt="Detailed view of a specific finding (CVE-2023-32681)" width="900">
+  <img src="images/vulnerability-details.png" alt="Detailed view of a specific finding (CVE-2023-32681)" width="1000">
 </p>
 
 The issue is that the `requests` package is vulnerable and outdated, and the recommendation is to upgrade the package.
@@ -55,7 +55,7 @@ In this task, I analyze the findings reported by Amazon Inspector and interpret 
 5. I choose the **Deploy** button to deploy the function.
 
 <p align="center">
-  <img src="images/lambda-dependencies.png" alt="Remediating my Lambda function's Package Vulnerabilities" width="900">
+  <img src="images/lambda-dependencies.png" alt="Remediating my Lambda function's Package Vulnerabilities" width="1000">
 </p>
 
 *A banner displays the message "Successfully updated the function **get-request**." This latest deployment of my Lambda function triggers Amazon Inspector to initiate a new scan of the function.*
@@ -78,7 +78,7 @@ Below the closed findings list showing resolved vulnerability.
 I observe that the most recently scanned Lambda function has an updated timestamp.
 
 <p align="center">
-  <img src="images/NVD-vulnerability-updated.png" alt="Resource coverage page" width="900">
+  <img src="images/NVD-vulnerability-updated.png" alt="Resource coverage page" width="1000">
 </p>
 
 ## Conclusion
