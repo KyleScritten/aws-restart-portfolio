@@ -2,7 +2,7 @@
 In many business environments, access involves a single login to a computer or a network of computer systems that provides the user with access to all resources on the network. This access includes rights to personal and shared folders on a network server, company intranets, printers, and other network resources and devices, and unauthorized users can quickly exploit these same resources if the access control and associated authentication procedures are not set up properly. In this lab, I will explore users, user groups, and policies in the AWS Identity and Access Management (IAM) service.
 
 <p align="center">
-  <img src="images/IAM-current-environment.png" alt="Diagram of the current environment” width="900">
+  <img src="images/IAM-current-environment.png" alt="Diagram of the current environment” width="800">
 </p>
 
 *Here is diagram of the current environment with the listed IAM users and IAM groups.*
