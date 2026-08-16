@@ -186,7 +186,7 @@ I now sign in as `user-3`, who has been hired as my Amazon EC2 administrator.
 
 As an EC2 administrator, I now have permissions to stop the EC2 instance.
 
-> [!CAUTION]
+> [!NOTE]
 > If I cannot see an EC2 instance, my Region may be incorrect. In the upper-right of the screen, I choose the Region menu and select the Region I noted at the start of the lab.
 
 4. From the **Instance state** dropdown list, I choose **Stop instance**.
