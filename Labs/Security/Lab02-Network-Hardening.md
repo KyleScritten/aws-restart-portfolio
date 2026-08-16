@@ -69,11 +69,17 @@ In this task, I analyze the findings reported by Amazon Inspector and interpret 
 5. Under **Resource coverage**, I choose **Lambda functions**.
 6. If needed, I expand the width of the **Last scanned** column to display the full timestamp.
 
+Below the closed findings list showing resolved vulnerability.
+
+<p align="center">
+  <img src="images/closed-vulnerability.png" alt="Closed findings list showing resolved vulnerability” width="900">
+</p>
+
+I observe that the most recently scanned Lambda function has an updated timestamp.
+
 <p align="center">
   <img src="images/NVD-vulnerability-updated.png" alt="Resource coverage page" width="900">
 </p>
-
-*I observe that the most recently scanned Lambda function has an updated timestamp.*
 
 ## Conclusion
 After completing this lab, I am able to:
