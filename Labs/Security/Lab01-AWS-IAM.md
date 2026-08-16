@@ -136,7 +136,7 @@ I now sign in as `user-1`, who has been hired as my Amazon S3 storage support st
 5. I choose the name of one of my buckets and browse the contents. Because my user is part of the `S3-Support` group in IAM, they have permission to view a list of S3 buckets and their contents.
 
 <p align="center">
-  <img src="images/test-s3-support.png" alt="Testing user-1 S3-Support" width="900">
+  <img src="images/test-s3-support.png" alt="Testing user-1 S3-Support" width="1000">
 </p>
 
 6. Now, test whether they have access to Amazon EC2. From the **Services** menu, I choose **EC2**, then in the left navigation pane, I choose **Instances**.
@@ -154,7 +154,7 @@ I now sign in as `user-2`, who has been hired as my Amazon EC2 support person.
 3. From the **Services** menu, I choose **EC2**, then choose **Instances**.
 
 <p align="center">
-  <img src="images/test-ec2-support.png" alt="Testing user-2 EC2-Support" width="900">
+  <img src="images/test-ec2-support.png" alt="Testing user-2 EC2-Support" width="1000">
 </p>
 
 *I am now able to see an EC2 instance because I have read-only permissions. However, I am not able to make any changes to Amazon EC2 resources.*
@@ -180,10 +180,6 @@ I now sign in as `user-3`, who has been hired as my Amazon EC2 administrator.
 2. I choose **Sign in**.
 3. From the **Services** menu, I choose **EC2**, then choose **Instances**.
 
-<p align="center">
-  <img src="images/test-ec2-admin" alt="Testing user-3 EC2-Admin" width="900">
-</p>
-
 As an EC2 administrator, I now have permissions to stop the EC2 instance.
 
 > [!NOTE]
@@ -192,8 +188,8 @@ As an EC2 administrator, I now have permissions to stop the EC2 instance.
 4. From the **Instance state** dropdown list, I choose **Stop instance**.
 5. In the **Stop instance?** window, I choose **Stop**.
 
-<p align="center">
-  <img src="images/user3-ec2-stop.png" alt="Stop the EC2 instance as user-3" width="900">
+p align="center">
+  <img src="images/test-ec2-admin" alt="Testing user-3 EC2-Admin" width="1000">
 </p>
 
 *The instance enters the **Stopping** state and shuts down.*
