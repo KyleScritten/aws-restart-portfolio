@@ -119,7 +119,7 @@ I have hired `user-3` as my Amazon EC2 administrator to manage my EC2 instances.
 ## Task 4: Sign in and test user permissions
 In this task, I test the permissions of each IAM user. I sign in as all three users. I verify that `user-1` is able to view S3 buckets but unable to view EC2 instances. I then sign in as `user-2` and verify that they are able to view EC2 instances but unable to perform the stop instance action; `user-2` is also unable to view S3 buckets. After signing in as `user-3`, I verify that I am able to view EC2 instances and perform the stop instance action.
 
-1. From the IAM Dashboard, I note the **AWS Account** section includes a Sign-in URL for IAM users in this account, which I can use to sign in to the AWS account I am currently using: `https://136933261767.signin.aws.amazon.com/console`
+1. From the IAM Dashboard, I note the **AWS Account** section includes a **Sign-in URL for IAM users in this account**, which I can use to sign in to the AWS account I am currently using: `https://136933261767.signin.aws.amazon.com/console`
 2. I open a private window using the following instructions for my web browser (Google Chrome):
    * I choose the ellipsis at the upper-right of the screen.
    * I choose **New Incognito window**.
@@ -139,7 +139,7 @@ I now sign in as `user-1`, who has been hired as my Amazon S3 storage support st
   <img src="images/test-s3-support.png" alt="Testing user-1 S3-Support" width="900">
 </p>
 
-6. From the **Services** menu, I choose **EC2**, then in the left navigation pane, I choose **Instances**.
+6. Now, test whether they have access to Amazon EC2. From the **Services** menu, I choose **EC2**, then in the left navigation pane, I choose **Instances**.
 
 >[!Caution]
 >I cannot see any instances. Instead, I see a message that says "You are not authorized to perform this operation." This message appears because my user has not been assigned any permissions to use Amazon EC2.*
