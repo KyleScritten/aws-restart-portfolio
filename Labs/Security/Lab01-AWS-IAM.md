@@ -127,7 +127,7 @@ In this task, I test the permissions of each IAM user. I sign in as all three us
 ### Testing user-1 (S3-Support)
 I now sign in as `user-1`, who has been hired as my Amazon S3 storage support staff.
 
-1. I paste the Sign-in URL for IAM users in this account into my private browser window.
+1. I paste the **Sign-in URL for IAM users in this account** into my private browser window.
 2. I sign in using the following credentials:
    * **IAM user name:** `user-1`
    * **Password:** `Lab-Password1`
