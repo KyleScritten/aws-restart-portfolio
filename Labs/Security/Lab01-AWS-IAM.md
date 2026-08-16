@@ -85,7 +85,7 @@ I have recently hired `user-1` into a role where they provide support for Amazon
 In this task, I add all the associated users to their user groups.
 
 ### Add user-1 to the S3-Support group
-1. In the left navigation pane, I choose **User groups**.
+1. I choose **User groups**.
 2. I choose the **S3-Support** group, then choose the **Users** tab.
 3. In the **Users** tab, I choose **Add users**.
 4. In the **Add users to S3-Support** window, I select the check box for `user-1` and choose **Add Users**.
