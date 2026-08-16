@@ -141,7 +141,8 @@ I now sign in as `user-1`, who has been hired as my Amazon S3 storage support st
 
 6. From the **Services** menu, I choose **EC2**, then in the left navigation pane, I choose **Instances**.
 
-*I cannot see any instances. Instead, I see a message that says "You are not authorized to perform this operation." This message appears because my user has not been assigned any permissions to use Amazon EC2.*
+>[!Caution]
+>I cannot see any instances. Instead, I see a message that says "You are not authorized to perform this operation." This message appears because my user has not been assigned any permissions to use Amazon EC2.*
 
 ### Testing user-2 (EC2-Support)
 I now sign in as `user-2`, who has been hired as my Amazon EC2 support person.
@@ -161,7 +162,8 @@ I now sign in as `user-2`, who has been hired as my Amazon EC2 support person.
 4. From the **Instance state** dropdown list, I choose **Stop instance**.
 5. In the **Stop instance?** window, I choose **Stop**.
 
-I receive an error that says "Failed to stop the instance. You are not authorized to perform this operation." This demonstrates that the policy gives me permission to only view information and does not give me permission to make changes.
+>[!Caution]
+>I receive an error that says "Failed to stop the instance. You are not authorized to perform this operation." This demonstrates that the policy gives me permission to only view information and does not give me permission to make changes.
 
 6. At the **Stop Instances** window, I choose **Cancel**.
 7. Next, I check whether `user-2` can access Amazon S3. From the **Services** menu, I choose **S3**.
@@ -177,7 +179,7 @@ I now sign in as `user-3`, who has been hired as my Amazon EC2 administrator.
 2. I choose **Sign in**.
 3. From the **Services** menu, I choose **EC2**, then choose **Instances**.
 
-p align="center">
+<p align="center">
   <img src="images/test-ec2-admin" alt="Testing user-3 EC2-Admin" width="900">
 </p>
 
