@@ -91,7 +91,7 @@ In this task, I add all the associated users to their user groups.
 4. In the **Add users to S3-Support** window, I select the check box for `user-1` and choose **Add Users**.
 
 <p align="center">
-  <img src="images/add-user-s3-support.png" alt="Add user-1 to the S3-Support group” width="900">
+  <img src="images/user-groups-added-users.png" alt="Added users to user groups” width="900">
 </p>
 
 In the **Users** tab, I see that `user-1` has been added to the group.
