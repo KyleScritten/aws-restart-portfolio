@@ -23,7 +23,7 @@ The dashboard now shows my account number and activation status for AWS Lambda, 
 In this task, while I wait for the scan to finish, I explore the detected vulnerabilities under the **Findings** section. Amazon Inspector reports multiple findings related to Lambda functions, each with details such as severity, affected resource, and vulnerability description.
 
 <p align="center">
-  <img src="images/review-lambda.png" alt="Lambda Vulnerability Findings" width="900">
+  <img src="images/review-lambda.png" alt="Lambda Vulnerability Findings" width="1000">
 </p>
 
 Three rows are displayed, one for each vulnerability within the Lambda function. I see the following key details:
