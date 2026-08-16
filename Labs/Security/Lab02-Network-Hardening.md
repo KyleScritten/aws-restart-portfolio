@@ -9,12 +9,31 @@ The developers at AnyCompany are in the initial phases of building an applicatio
 **Amazon Inspector** meets the requirement of being able to scan AWS Lambda functions by quickly responding to new deployments. It also automatically scans additional resources, such as EC2 instances and Amazon ECRs, within AnyCompany's AWS account.
 
 ## Task 1: Activate the Amazon Inspector
-
-I began by navigating to the AWS Management Console, searching for and choosing **Inspector**, then choosing **Activate Inspector** to activate the service for my account and continuously scan my Lambda functions.
+I began by navigating to the AWS Management Console, searching for and choosing `Inspector`, then choosing **Activate Inspector** to activate the service for my account and continuously scan my Lambda functions.
 
 After activation, the dashboard indicated that scanning was in progress. I monitored the **Environment coverage** section, refreshing the page periodically until **Lambda functions** coverage reached 100%, confirming that all functions were being scanned.
 
-The dashboard now shows my account number and activation status for AWS Lambda, with Lambda coverage at 100%. By default, scanning is activated for Amazon EC2, Amazon ECR, and AWS Lambda standard scanning.
+The dashboard now shows my account number and activation status for AWS Lambda, with **Lambda coverage at 100%**. By default, scanning is activated for Amazon EC2, Amazon ECR, and AWS Lambda standard scanning.
+
+## Task 2: Reviewing the inspected resources
+In this task, while I wait for the scan to finish, I explore the detected vulnerabilities under the **Findings** section. Amazon Inspector reports multiple findings related to Lambda functions, each with details such as severity, affected resource, and vulnerability description.
+
+<p align="center">
+  <img src="images/review-lambda.png" alt="Lambda Vulnerability Findings" width="900">
+</p>
+
+Three rows are displayed, one for each vulnerability within the Lambda function. I see the following key details:
+- Severity: `Medium`
+- Impacted resource shows the affected Lambda function, here: `get-request`
+- Title shows the reason for the finding, here: `CVE-20XX-XXXXX - requests`
+
+One key finding is **CVE-2023-32681 - requests**, which identifies a vulnerability in the Python `requests` package. By opening the finding details, I access the External reference to the National Vulnerability Database (NVD), which contains the recommended remediation.
+
+<p align="center">
+  <img src="images/vulnerability-details.png" alt="Detailed view of a specific finding (CVE-2023-32681)" width="900">
+</p>
+
+The issue is that the `requests` package is vulnerable and outdated, and the recommendation is to upgrade the package.
 
 ## Conclusion
 After completing this lab, I am able to:
