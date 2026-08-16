@@ -188,7 +188,7 @@ As an EC2 administrator, I now have permissions to stop the EC2 instance.
 4. From the **Instance state** dropdown list, I choose **Stop instance**.
 5. In the **Stop instance?** window, I choose **Stop**.
 
-p align="center">
+<p align="center">
   <img src="images/test-ec2-admin" alt="Testing user-3 EC2-Admin" width="1000">
 </p>
 
