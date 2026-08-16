@@ -119,10 +119,81 @@ I have hired `user-3` as my Amazon EC2 administrator to manage my EC2 instances.
 ## Task 4: Sign in and test user permissions
 In this task, I test the permissions of each IAM user. I sign in as all three users. I verify that `user-1` is able to view S3 buckets but unable to view EC2 instances. I then sign in as `user-2` and verify that they are able to view EC2 instances but unable to perform the stop instance action; `user-2` is also unable to view S3 buckets. After signing in as `user-3`, I verify that I am able to view EC2 instances and perform the stop instance action.
 
+1. From the IAM Dashboard, I note the **AWS Account** section includes a Sign-in URL for IAM users in this account, which I can use to sign in to the AWS account I am currently using: `https://136933261767.signin.aws.amazon.com/console`
+2. I open a private window using the following instructions for my web browser (Google Chrome):
+   * I choose the ellipsis at the upper-right of the screen.
+   * I choose **New Incognito window**.
 
+### Testing user-1 (S3-Support)
+I now sign in as `user-1`, who has been hired as my Amazon S3 storage support staff.
 
+1. I paste the Sign-in URL for IAM users in this account into my private window and press Enter.
+2. I sign in using the following credentials:
+   * **IAM user name:** `user-1`
+   * **Password:** `Lab-Password1`
+3. I choose **Sign in**.
+4. From the **Services** menu, I choose **S3**.
+5. I choose the name of one of my buckets and browse the contents. Because my user is part of the `S3-Support` group in IAM, they have permission to view a list of S3 buckets and their contents.
 
+<p align="center">
+  <img src="images/test-s3-support.png" alt="Testing user-1 S3-Support" width="900">
+</p>
 
+6. From the **Services** menu, I choose **EC2**, then in the left navigation pane, I choose **Instances**.
+
+*I cannot see any instances. Instead, I see a message that says "You are not authorized to perform this operation." This message appears because my user has not been assigned any permissions to use Amazon EC2.*
+
+### Testing user-2 (EC2-Support)
+I now sign in as `user-2`, who has been hired as my Amazon EC2 support person.
+
+1. I sign in using the following credentials:
+   * **IAM user name:** `user-2`
+   * **Password:** `Lab-Password2`
+2. I choose **Sign in**.
+3. From the **Services** menu, I choose **EC2**, then choose **Instances**.
+
+<p align="center">
+  <img src="images/test-ec2-support.png" alt="Testing user-2 EC2-Support" width="900">
+</p>
+
+*I am now able to see an EC2 instance because I have read-only permissions. However, I am not able to make any changes to Amazon EC2 resources.*
+
+4. From the **Instance state** dropdown list, I choose **Stop instance**.
+5. In the **Stop instance?** window, I choose **Stop**.
+
+I receive an error that says "Failed to stop the instance. You are not authorized to perform this operation." This demonstrates that the policy gives me permission to only view information and does not give me permission to make changes.
+
+6. At the **Stop Instances** window, I choose **Cancel**.
+7. Next, I check whether `user-2` can access Amazon S3. From the **Services** menu, I choose **S3**.
+
+I receive a "You don't have permissions to list buckets" message because `user-2` does not have permission to use Amazon S3.
+
+### Testing user-3 (EC2-Admin)
+I now sign in as `user-3`, who has been hired as my Amazon EC2 administrator.
+
+1. I sign in using the following credentials:
+   * **IAM user name:** `user-3`
+   * **Password:** `Lab-Password3`
+2. I choose **Sign in**.
+3. From the **Services** menu, I choose **EC2**, then choose **Instances**.
+
+p align="center">
+  <img src="images/test-ec2-admin" alt="Testing user-3 EC2-Admin" width="900">
+</p>
+
+As an EC2 administrator, I now have permissions to stop the EC2 instance.
+
+> [!CAUTION]
+> If I cannot see an EC2 instance, my Region may be incorrect. In the upper-right of the screen, I choose the Region menu and select the Region I noted at the start of the lab.
+
+4. From the **Instance state** dropdown list, I choose **Stop instance**.
+5. In the **Stop instance?** window, I choose **Stop**.
+
+<p align="center">
+  <img src="images/user3-ec2-stop.png" alt="Stop the EC2 instance as user-3" width="900">
+</p>
+
+*The instance enters the **Stopping** state and shuts down.*
 
 ## Conclusion
 By completing this lab, I have successfully:
