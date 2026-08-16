@@ -91,24 +91,28 @@ In this task, I add all the associated users to their user groups.
 4. In the **Add users to S3-Support** window, I select the check box for `user-1` and choose **Add Users**.
 
 <p align="center">
-  <img src="images/user-groups-added-users.png" alt="Added users to user groups” width="900">
+  <img src="images/add-user-s3-support.png" alt="Add user-1 to the S3-Support group” width="900">
 </p>
 
-In the **Users** tab, I see that `user-1` has been added to the group.
+*In the **Users** tab, I see that `user-1` has been added to the group.*
 
 ### Add user-2 to the EC2-Support group
 I have hired `user-2` into a role where they provide support for Amazon EC2.
 
 5. Using the previous steps in this task, I add `user-2` to the **EC2-Support** group.
 
-In the **Users** tab, I see that `user-2` is now part of the `EC2-Support` group.
+`user-2` is now part of the `EC2-Support` group.
 
 ### Add user-3 to the EC2-Admin group
 I have hired `user-3` as my Amazon EC2 administrator to manage my EC2 instances.
 
 6. Using the previous steps in this task, I add `user-3` to the **EC2-Admin** group.
 
-In the **Users** tab, I see that `user-3` is now part of the `EC2-Admin` group.
+`user-3` is now part of the `EC2-Admin` group.
+
+<p align="center">
+  <img src="images/user-groups-added-users.png" alt="Added users to user groups” width="900">
+</p>
 
 *Each group now shows a `1` in the **Users** column for the number of users in each group.*
 
