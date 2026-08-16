@@ -189,7 +189,7 @@ As an EC2 administrator, I now have permissions to stop the EC2 instance.
 5. In the **Stop instance?** window, I choose **Stop**.
 
 <p align="center">
-  <img src="images/test-ec2-admin" alt="Testing user-3 EC2-Admin" width="1000">
+  <img src="images/test-ec2-admin.png" alt="Testing user-3 EC2-Admin" width="1000">
 </p>
 
 *The instance enters the **Stopping** state and shuts down.*
