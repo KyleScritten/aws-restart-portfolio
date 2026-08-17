@@ -103,9 +103,21 @@ In this task, I tag my Windows instances. Later in the lab, I create a patch gro
      * **Tag key:** `Patch Group`
      * **Tag value:** `WindowsProd`
    * I choose **Add**, then choose **Patch now**.
-8. A new page displays. When it becomes available, I choose the link to the **Execution ID**. A page in the State Manager part of Systems Manager opens.
-9. I choose the **Output** link for one of the managed instances that shows a status of **InProgress**. A page in the Run Command part of Systems Manager opens.
-10. I expand the **Output** panel to observe the details.
+8. A new page displays. When it becomes available, I choose the link to the **Execution ID**.
+
+<p align="center">
+  <img src="images/state-manager-page.png" alt="A page in the State Manager part of Systems Manager” width="900">
+</p>
+
+*A page in the State Manager part of Systems Manager opens.*
+  
+9. I choose the **Output** link for one of the managed instances that shows a status of **InProgress**.
+
+<p align="center">
+  <img src="images/run-command-page.png" alt="A page in the Run Command part of Systems Manager” width="900">
+</p>
+
+*A page in the Run Command part of Systems Manager opens.*
 
 ## Conclusion
 After completing this lab, I am able to:
