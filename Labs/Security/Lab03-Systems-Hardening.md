@@ -1,7 +1,6 @@
 # Systems Hardening with Patch Manager via AWS Systems Manager
 
 ## Lab overview
-
 In organizations with hundreds and often thousands of workstations, it can be logistically challenging to keep all the operating system (OS) and application software up to date. In most cases, OS updates on workstations can be automatically applied via the network. However, administrators must have a clear security policy and baseline plan to ensure that all workstations are running a certain minimum version of software.
 
 In this lab, I use Patch Manager, a capability of AWS Systems Manager, to create a patch baseline. I then use the patch baseline I created to scan the Amazon Elastic Compute Cloud (Amazon EC2) instances for Windows that were pre-created for this lab. I also use the default patch baseline to patch EC2 Linux instances.
@@ -43,7 +42,6 @@ A new page displays. In the **AWS-PatchNowAssociation** panel, a **Status** fiel
 *A Scan/Install operation summary panel also displays the status of the affected EC2 instances visually. I monitor this page until the patch operation on all three instances completes.*
 
 ## Task 2: Create a custom patch baseline for Windows instances
-
 In this task, I create a custom patch baseline for the Windows instances. Although Windows has default patch baselines available, for this use case, I set up a baseline for Windows security updates.
 
 1. In the Systems Manager console, under **Node Tools**, I choose **Patch Manager**.
