@@ -124,7 +124,7 @@ In this task, I tag my Windows instances. Later in the lab, I create a patch gro
 2. I choose the **Dashboard** tab. Under **Compliance summary**, I now see **Compliant: 6**
 
 <p align="center">
-  <img src="images/patch-manager-page.png" alt="Patch Manager Page" width="900">
+  <img src="images/patch-manager-page.png" alt="Patch Manager Page" width="1000">
 </p>
 
 *`Complaint: 6` verifies that all Windows and Linux instances are compliant.*
@@ -146,7 +146,7 @@ In this task, I tag my Windows instances. Later in the lab, I create a patch gro
 5. In the Node ID page that opens, I choose the **Patch** tab.
 
 <p align="center">
-  <img src="images/compliance-tab.png" alt="Compliance reporting tab" width="900">
+  <img src="images/compliance-tab.png" alt="Compliance reporting tab" width="1000">
 </p>
 
 *Here I observe what patches were applied to this instance, as well as the **Installed Time**.*
