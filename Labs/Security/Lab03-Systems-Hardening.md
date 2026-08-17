@@ -76,6 +76,37 @@ Next, I modify a patch group for the Windows patch baseline I just created, to a
   <img src="images/modify-patch-groups.png" alt="Create a custom patch baseline for Windows instances” width="900">
 </p>
 
+## Task 3: Patching the Windows instances
+In this task, I patch the Windows instances using the **Patch now** feature based on the tag associated with them.
+
+> [!NOTE]
+> After configuration, Patch Manager uses the Run Command to call the `RunPatchBaseline` document to evaluate which patches should be installed on target instances according to each instance's operating system type, either directly or during the defined schedule (maintenance window).
+
+### Task 3.1: Tagging Windows instances
+In this task, I tag my Windows instances. Later in the lab, I create a patch group and associate it with these tags.
+
+1. In the AWS Management Console, I enter `EC2` and select it.
+2. I choose **Instances**, select the check box next to the **Windows-1** instance, then choose the **Tags** tab.
+3. I choose the **Manage tags** button, choose **Add new tag**, and configure the following options:
+   * **Key:** `Patch Group`
+   * **Value:** `WindowsProd`
+4. I choose **Save**.
+5. I repeat the previous steps to tag the **Windows-2** and **Windows-3** instances with the same tag.
+
+### Task 3.2: Patching Windows instances
+6. I return to the Systems Manager console.
+7. To patch the Windows instances, I choose **Patch Manager**, choose **Start with an overview** (proceeding to the next step if this option does not appear), then choose **Patch now**, and configure the following options:
+   * **Patching operation:** Scan and install
+   * **Reboot option:** Reboot if needed
+   * **Instances to patch:** Patch only the target instances I specify
+   * **Target selection:** Specify instance tags
+     * **Tag key:** `Patch Group`
+     * **Tag value:** `WindowsProd`
+   * I choose **Add**, then choose **Patch now**.
+8. A new page displays. When it becomes available, I choose the link to the **Execution ID**. A page in the State Manager part of Systems Manager opens.
+9. I choose the **Output** link for one of the managed instances that shows a status of **InProgress**. A page in the Run Command part of Systems Manager opens.
+10. I expand the **Output** panel to observe the details.
+
 ## Conclusion
 After completing this lab, I am able to:
 
