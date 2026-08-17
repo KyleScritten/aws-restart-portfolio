@@ -15,7 +15,7 @@ In this task, I patch Linux EC2 instances using default baselines available for 
 2. In the Systems Manager console page, under **Node Management**, I choose **Fleet Manager**.
 
 <p align="center">
-  <img src="images/config-ec2-instances.png" alt="Pre-configured EC2 instances" width="900">
+  <img src="images/config-ec2-instances.png" alt="Pre-configured EC2 instances" width="1000">
 </p>
 
 *Here are the pre-configured EC2 instances — three Linux instances and three Windows instances. These EC2 instances have a specific IAM role associated with them that allows me to manage them using Systems Manager.*
@@ -36,7 +36,7 @@ In this task, I patch Linux EC2 instances using default baselines available for 
 A new page displays. In the **AWS-PatchNowAssociation** panel, a **Status** field shows that three instances will be affected, along with the progress made.
 
 <p align="center">
-  <img src="images/ops-summary-panel.png" alt="Patch Linux instances using default baselines" width="900">
+  <img src="images/ops-summary-panel.png" alt="Patch Linux instances using default baselines" width="1000">
 </p>
 
 *A Scan/Install operation summary panel also displays the status of the affected EC2 instances visually. I monitor this page until the patch operation on all three instances completes.*
