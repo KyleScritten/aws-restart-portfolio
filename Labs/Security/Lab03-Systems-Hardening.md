@@ -95,7 +95,7 @@ In this task, I tag my Windows instances. Later in the lab, I create a patch gro
 
 ### Task 3.2: Patching Windows instances
 6. I return to the Systems Manager console.
-7. To patch the Windows instances, I choose **Patch Manager**, choose **Start with an overview** (proceeding to the next step if this option does not appear), then choose **Patch now**, and configure the following options:
+7. To patch the Windows instances, I choose **Patch Manager**, choose **Patch now**, and configure the following options:
    * **Patching operation:** Scan and install
    * **Reboot option:** Reboot if needed
    * **Instances to patch:** Patch only the target instances I specify
