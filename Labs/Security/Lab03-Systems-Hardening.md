@@ -119,6 +119,38 @@ In this task, I tag my Windows instances. Later in the lab, I create a patch gro
 
 *A page in the Run Command part of Systems Manager opens.*
 
+## Task 4: Verifying compliance
+1. Under **Node Management**, I choose **Patch Manager**.
+2. I choose the **Dashboard** tab. Under **Compliance summary**, I now see **Compliant: 6**
+
+<p align="center">
+  <img src="images/patch-manager-page.png" alt="Patch Manager Page" width="900">
+</p>
+
+*`Complaint: 6` verifies that all Windows and Linux instances are compliant.*
+
+3. I choose the **Compliance reporting** tab.
+
+> [!NOTE]
+>  This tab provides an overview of all running instances with SSM. I should be able to verify that the compliance status of all Linux and Windows instances is Compliant.
+
+* All six instances (three Linux and three Windows) show as compliant.
+* I scroll to the right in the **Node patching details** panel to find, for each instance:
+     * Critical noncompliant count
+     * Security noncompliant count
+     * Other noncompliant count
+     * Last operation date
+     * Baseline ID
+     
+4. I choose the **Node ID** for one of the Windows nodes.
+5. In the Node ID page that opens, I choose the **Patch** tab.
+
+<p align="center">
+  <img src="images/compliance-tab.png" alt="Compliance reporting tab" width="900">
+</p>
+
+*Here I observe what patches were applied to this instance, as well as the **Installed Time**.*
+
 ## Conclusion
 After completing this lab, I am able to:
 
