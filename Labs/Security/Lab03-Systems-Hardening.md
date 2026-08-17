@@ -43,37 +43,36 @@ A new page displays. In the **AWS-PatchNowAssociation** panel, a **Status** fiel
 *A Scan/Install operation summary panel also displays the status of the affected EC2 instances visually. I monitor this page until the patch operation on all three instances completes.*
 
 ## Task 2: Create a custom patch baseline for Windows instances
+
 In this task, I create a custom patch baseline for the Windows instances. Although Windows has default patch baselines available, for this use case, I set up a baseline for Windows security updates.
 
 1. In the Systems Manager console, under **Node Tools**, I choose **Patch Manager**.
-2. I choose **Start with an overview**.
-3. I choose the **Patch baselines** tab.
-4. I choose the **Create patch baseline** button.
-5. For **Patch baseline details**, I configure the following options:
+2. I choose **Start with an overview**, choose the **Patch baselines** tab, then choose the **Create patch baseline** button.
+3. For **Patch baseline details**, I configure the following options:
    * **Name:** `WindowsServerSecurityUpdates`
    * **Description - optional:** `Windows security baseline patch`
    * **Operating system:** Windows
    * I leave the **Default patch baseline** check box unselected.
-6. In the **Approval rules for operating systems** section, I configure the following options:
+4. In the **Approval rules for operating systems** section, I configure the following options:
    * **Products:** From the dropdown list, I choose **WindowsServer2019**, and deselect **All** so that it no longer appears under Products.
    * **Severity:** This option indicates the severity value of the patches that the rule applies to. To ensure that all service packs are included by the rule, I choose **Critical** from the dropdown list.
    * **Classification:** From the dropdown list, I choose **SecurityUpdates**.
    * **Auto-approval:** I enter `3` days.
    * **Compliance reporting - optional:** From the dropdown list, I choose **Critical**.
-7. I choose **Add rule** to add a second rule to this patch baseline, and configure the following options:
+5. I choose **Add rule** to add a second rule to this patch baseline, and configure the following options:
    * **Products:** From the dropdown list, I choose **WindowsServer2019**, and deselect **All** so that it no longer appears under Products.
    * **Severity:** From the dropdown list, I choose **Important**.
    * **Classification:** From the dropdown list, I choose **SecurityUpdates**.
    * **Auto-approval:** I enter `3` days.
    * **Compliance reporting - optional:** From the dropdown list, I choose **High**.
-8. I choose **Create patch baseline**.
+6. I choose **Create patch baseline**.
 
 Next, I modify a patch group for the Windows patch baseline I just created, to associate it with a patch group.
 
-9. In the **Patch baselines** section, I select the button for the **WindowsServerSecurityUpdates** patch baseline I just created.
-10. I choose the **Actions** dropdown list, then choose **Modify patch groups**.
-11. In the **Modify patch groups** section, under **Patch groups**, I enter `WindowsProd`.
-12. I choose the **Add** button, then choose **Close**.
+7. In the **Patch baselines** section, I select the button for the **WindowsServerSecurityUpdates** patch baseline I just created.
+8. I choose the **Actions** dropdown list, then choose **Modify patch groups**.
+9. In the **Modify patch groups** section, under **Patch groups**, I enter `WindowsProd`.
+10. I choose the **Add** button, then choose **Close**.
 
 ## Conclusion
 After completing this lab, I am able to:
