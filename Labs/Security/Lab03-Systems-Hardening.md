@@ -72,6 +72,10 @@ Next, I modify a patch group for the Windows patch baseline I just created, to a
 9. In the **Modify patch groups** section, under **Patch groups**, I enter `WindowsProd`.
 10. I choose the **Add** button, then choose **Close**.
 
+<p align="center">
+  <img src="images/modify-patch-groups.png" alt="Create a custom patch baseline for Windows instances” width="900">
+</p>
+
 ## Conclusion
 After completing this lab, I am able to:
 
