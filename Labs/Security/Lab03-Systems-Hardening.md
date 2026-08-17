@@ -54,17 +54,17 @@ In this task, I create a custom patch baseline for the Windows instances. Althou
    * **Operating system:** Windows
    * I leave the **Default patch baseline** check box unselected.
 4. In the **Approval rules for operating systems** section, I configure the following options:
-   * **Products:** From the dropdown list, I choose **WindowsServer2019**, and deselect **All** so that it no longer appears under Products.
-   * **Severity:** This option indicates the severity value of the patches that the rule applies to. To ensure that all service packs are included by the rule, I choose **Critical** from the dropdown list.
-   * **Classification:** From the dropdown list, I choose **SecurityUpdates**.
-   * **Auto-approval:** I enter `3` days.
-   * **Compliance reporting - optional:** From the dropdown list, I choose **Critical**.
+   * **Products:** I choose **WindowsServer2019**, and deselect **All** so that it no longer appears under Products.
+   * **Severity:** This option indicates the severity value of the patches that the rule applies to. To ensure that all service packs are included by the rule, I choose **Critical**.
+   * **Classification:** I choose **SecurityUpdates**.
+   * **Auto-approval:** `3` days.
+   * **Compliance reporting - optional:** I choose **Critical**.
 5. I choose **Add rule** to add a second rule to this patch baseline, and configure the following options:
-   * **Products:** From the dropdown list, I choose **WindowsServer2019**, and deselect **All** so that it no longer appears under Products.
-   * **Severity:** From the dropdown list, I choose **Important**.
-   * **Classification:** From the dropdown list, I choose **SecurityUpdates**.
-   * **Auto-approval:** I enter `3` days.
-   * **Compliance reporting - optional:** From the dropdown list, I choose **High**.
+   * **Products:** I choose **WindowsServer2019**, and deselect **All** so that it no longer appears under Products.
+   * **Severity:** I choose **Important**.
+   * **Classification:** I choose **SecurityUpdates**.
+   * **Auto-approval:** `3` days.
+   * **Compliance reporting - optional:** I choose **High**.
 6. I choose **Create patch baseline**.
 
 Next, I modify a patch group for the Windows patch baseline I just created, to associate it with a patch group.
