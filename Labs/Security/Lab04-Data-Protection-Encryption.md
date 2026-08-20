@@ -165,7 +165,10 @@ cat secret1.txt
 
 **Terminal Output:**
 ```bash
-PLACEHOLDER
+sh-4.2$ touch secret1.txt secret2.txt secret3.txt
+sh-4.2$ echo 'TOP SECRET 1!!!' > secret1.txt
+sh-4.2$ cat secret1.txt
+TOP SECRET 1!!!
 ```
 
 3. To create a directory to output the encrypted file, I run the following command:
@@ -228,24 +231,14 @@ sh-4.2$
 > * The value of the `--output` parameter, `~/output/.`, tells the command to write the output file to the output directory.
 
 7. To determine whether the command succeeded, I run the following command:
-```
-echo $?
-```
-*If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.*
-
-**Terminal Output:**
-```bash
+```BASH
 sh-4.2$ echo $?
 0
 ```
+If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.
 
 8. To view the newly encrypted file location, I run the following command:
 ```
-ls output
-```
-
-**Terminal Output:**
-```bash
 sh-4.2$ ls output
 secret1.txt.encrypted
 ```
@@ -266,7 +259,7 @@ x��Z��,>χ��[�E}��xM��M�Bnaws-crypto-public-keyDAtg5CvDA
                ���H^���w��;�͹�D�'��w:DE3��@v�ɦ_�7s��g���N:&��١�UZK�TH��:�#���;Pb߮���AG.l�WW>���c-"�`�)kzE�_������.x�z|X����+9��w���`v?�\t�Gg0e1�w*�E��^����%�yǜ����9.��d\�P�Q��{�ۨ���T=�07~M�H��b�;����7++�շ���2ȍ�k4����#|o�S�~��W�sh-4.2$
 ```
 
-The encryption and decryption process takes data in **plaintext**, which is readable and understandable, and manipulates its form to create **ciphertext**, which is what I am now seeing.
+The encryption and decryption process takes data in ***plaintext***, which is readable and understandable, and manipulates its form to create ***ciphertext***, which is what I am now seeing.
 
 <p align="center">
   <img src="images/encryption-diagram.png" alt="Diagram shows how encryption works” width="900">
@@ -317,6 +310,8 @@ sh-4.2$ cat secret1.txt.encrypted.decrypted
 TOP SECRET 1!!!
 sh-4.2$
 ```
+
+After successful decryption, you can now see the original *plaintext* contents of the `secret1.txt`.
 
 <p align="center">
   <img src="images/decryption-diagram.png" alt="Diagram shows how decryption works” width="900">
