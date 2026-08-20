@@ -152,20 +152,14 @@ sh-4.2$
 ## Task 3: Encrypt and decrypt data
 In this task, I learn how to encrypt plaintext data into ciphertext by running the `--encrypt` command. I then successfully decrypt the ciphertext back into the original, readable plaintext data.
 
-## Task 3: Encrypt and decrypt data
-
-In this task, I learn how to encrypt plaintext data into ciphertext by running the `--encrypt` command. I then successfully decrypt the ciphertext back into the original, readable plaintext data.
-
 1. To create the text files, I run the following commands:
-
-```bash
+```
 touch secret1.txt secret2.txt secret3.txt
 echo 'TOP SECRET 1!!!' > secret1.txt
 ```
 
 2. To view the contents of the `secret1.txt` file, I run the following command:
-
-```bash
+```
 cat secret1.txt
 ```
 
@@ -175,35 +169,31 @@ PLACEHOLDER
 ```
 
 3. To create a directory to output the encrypted file, I run the following command:
-
-```bash
+```
 mkdir output
 ```
 
 4. I run the following command in the File Server terminal:
-
-```bash
+```
 keyArn=(arn:aws:kms:us-west-2:705225511426:key/d844d02d-733d-4dfd-8c2f-f29e78a1f163)
 ```
 
-   This command saves the ARN of an AWS KMS key in the `$keyArn` variable. When encrypting using an AWS KMS key, I can identify it by using a key ID, key ARN, alias name, or alias ARN.
+This command saves the ARN of an AWS KMS key in the `$keyArn` variable. When encrypting using an AWS KMS key, I can identify it by using a key ID, key ARN, alias name, or alias ARN.
 
-   > [!CAUTION]
-   > While attempting to run the encryption command, I encountered a `ModuleNotFoundError` related to `importlib.metadata`. This issue occurred because the EC2 instance in the lab environment uses Python 3.7, which does not natively support the `importlib.metadata` module required by newer versions of the AWS Encryption CLI.
-   >
-   > Although the `importlib-metadata` package was already installed, the CLI version in use expected a newer Python environment (Python 3.8 or later).
+> [!CAUTION]
+> While attempting to run the encryption command, I encountered a `ModuleNotFoundError` related to `importlib.metadata`. This issue occurred because the EC2 instance in the lab environment uses Python 3.7, which does not natively support the `importlib.metadata` module required by newer versions of the AWS Encryption CLI.
+>
+> Although the `importlib-metadata` package was already installed, the CLI version in use expected a newer Python environment (Python 3.8 or later).
 
 5. To resolve this compatibility issue, I uninstall the current version of the AWS Encryption CLI and install an older version that supports Python 3.7:
-
 ```bash
 pip3 uninstall aws-encryption-sdk-cli -y
 pip3 install "aws-encryption-sdk-cli<4.0"
 ```
 
-   After downgrading the CLI, the encryption command executes successfully, allowing me to proceed with encrypting and decrypting the files as required.
+After downgrading the CLI, the encryption command executes successfully, allowing me to proceed with encrypting and decrypting the files as required.
 
 6. To encrypt the `secret1.txt` file, I run the following command:
-
 ```bash
 aws-encryption-cli --encrypt \
                      --input secret1.txt \
@@ -228,22 +218,20 @@ sh-4.2$ aws-encryption-cli --encrypt \
 sh-4.2$
 ```
 
-   > [!NOTE]
-   > The following describes what this command does:
-   > * The first line encrypts the file contents. The command uses the `--encrypt` parameter to specify the operation, and the `--input` parameter to indicate the file to encrypt.
-   > * The `--wrapping-keys` parameter, and its required `key` attribute, tell the command to use the AWS KMS key represented by the key ARN.
-   > * The `--metadata-output` parameter specifies a text file for the metadata about the encryption operation.
-   > * As a best practice, the command uses the `--encryption-context` parameter to specify an encryption context.
-   > * The `--commitment-policy` parameter specifies that the key commitment security feature should be used to encrypt and decrypt.
-   > * The value of the `--output` parameter, `~/output/.`, tells the command to write the output file to the output directory.
+> [!NOTE]
+> The following describes what this command does:
+> * The first line encrypts the file contents. The command uses the `--encrypt` parameter to specify the operation, and the `--input` parameter to indicate the file to encrypt.
+> * The `--wrapping-keys` parameter, and its required `key` attribute, tell the command to use the AWS KMS key represented by the key ARN.
+> * The `--metadata-output` parameter specifies a text file for the metadata about the encryption operation.
+> * As a best practice, the command uses the `--encryption-context` parameter to specify an encryption context.
+> * The `--commitment-policy` parameter specifies that the key commitment security feature should be used to encrypt and decrypt.
+> * The value of the `--output` parameter, `~/output/.`, tells the command to write the output file to the output directory.
 
 7. To determine whether the command succeeded, I run the following command:
-
-```bash
+```
 echo $?
 ```
-
-   If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.
+If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.
 
 **Terminal Output:**
 ```bash
@@ -252,8 +240,7 @@ sh-4.2$ echo $?
 ```
 
 8. To view the newly encrypted file location, I run the following command:
-
-```bash
+```
 ls output
 ```
 
@@ -264,8 +251,7 @@ secret1.txt.encrypted
 ```
 
 9. To view the contents of the newly encrypted file, I run the following commands:
-
-```bash
+```
 cd output
 cat secret1.txt.encrypted
 ```
@@ -288,8 +274,7 @@ The encryption and decryption process takes data in **plaintext**, which is read
 *This diagram shows how encryption works with symmetric keys and algorithms. A symmetric key and algorithm are used to convert a plaintext message into ciphertext.*
 
 10. To decrypt the `secret1.txt.encrypted` file, I run the following command:
-
-```bash
+```
 aws-encryption-cli --decrypt \
                      --input secret1.txt.encrypted \
                      --wrapping-keys key=$keyArn \
@@ -318,8 +303,7 @@ sh-4.2$
 ```
 
 11. To view the new file location and the contents of the decrypted file, I run the following commands:
-
-```bash
+```
 ls
 cat secret1.txt.encrypted.decrypted
 ```
