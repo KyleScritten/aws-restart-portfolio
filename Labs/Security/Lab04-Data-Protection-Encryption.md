@@ -33,7 +33,85 @@ arn:aws:kms:us-west-2:705225511426:key/d844d02d-733d-4dfd-8c2f-f29e78a1f163
 ## Task 2: Configure the File Server instance
 In this task, I configure the AWS credentials file, which provides the ability to use the AWS KMS key I created earlier. I then install the AWS Encryption CLI, so that I can run encryption commands.
 
+1. In the AWS Management Console, I choose **EC2**.
+2. In the **Instances** list, I select the check box next to the **File Server** instance, then choose **Connect**.
+3. I choose the **Session Manager** tab, then choose **Connect**.
+4. To change to the home directory and create the AWS credentials file, I run the following commands:
 
+```bash
+cd ~
+aws configure
+```
+
+**Terminal Output:**
+```bash
+
+```
+
+5. When prompted, I configure the following:
+   * **AWS Access Key ID:** Enter `1`, then press Enter.
+   * **AWS Secret Access Key:** Enter `1`, then press Enter.
+   * **Default region name:** Copy and paste the Region provided from the Vocareum AWS Details page.
+     * Tip: I may need to press **Ctrl+Shift+V** to paste into Session Manager.
+   * **Default output format:** Press Enter.
+
+   The AWS configuration file is created, and I update it in a later step. The entries of `1` are temporary placeholders.
+
+**Terminal Output:**
+```bash
+
+```
+
+   
+6. I navigate to the Vocareum console page and choose the **AWS Details** button.
+7. Next to **AWS CLI**, I choose **Show**.
+8. I copy and paste the code block, which starts with `[default]`, into a text editor.
+9. I return to the browser tab where I am logged in to the File Server.
+10. To open the AWS credentials file, I run the following command:
+
+```bash
+vi ~/.aws/credentials
+```
+
+**Terminal Output:**
+```bash
+
+```
+
+11. In the `~/.aws/credentials` file, I type `dd` multiple times to delete the contents of the file.
+12. I paste in the code block I copied from Vocareum.
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+</p>
+
+*The AWS credentials file now includes the following: `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`. The credentials used are from the AWS Details section.*
+
+13. To save and close the file, I press **Escape**, type `:wq`, and press Enter.
+14. To view the updated contents of the file, I run the following command:
+
+```bash
+cat ~/.aws/credentials
+```
+
+**Terminal Output:**
+```bash
+
+```
+
+Now I install the AWS Encryption CLI and export my path, so that I can run the commands to encrypt and decrypt data.
+
+15. To install the AWS Encryption CLI and set my path, I run the following commands:
+
+```bash
+pip3 install aws-encryption-sdk-cli
+export PATH=$PATH:/home/ssm-user/.local/bin
+```
+
+**Terminal Output:**
+```bash
+
+```
 
 ## Task 3: Encrypt and decrypt data
 In this task, I learn how to encrypt plaintext data into ciphertext by running the `--encrypt` command. I then successfully decrypt the ciphertext back into the original, readable plaintext data.
