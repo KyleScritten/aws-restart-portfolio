@@ -49,17 +49,6 @@ aws configure
    * **Default region name:** Copy and paste the Region provided from the Vocareum AWS Details page.
    * **Default output format:** Press Enter.
 
-**Terminal Output:**
-```bash
-sh-4.2$ cd ~
-sh-4.2$ aws configure
-AWS Access Key ID [None]: 1
-AWS Secret Access Key [None]: 1
-Default region name [None]: us-west-2
-Default output format [None]:
-sh-4.2$
-```
-
 *The AWS configuration file is created, however the entries of `1` are temporary placeholders that will be updated.*
 
 6. I use the details provided from the Vocareum Lab console page.
@@ -70,20 +59,7 @@ vi ~/.aws/credentials
 ```
 
 8. In the `~/.aws/credentials` file, I type `dd` multiple times to delete the contents of the file.
-9. I paste in the code block I copied from the Vocareum Lab. The AWS credentials file now looks similar to the following:
-
-**Terminal Output:**
-```bash
-[default]
-aws_access_key_id=ASIA2IMVXKIBEJ6POEN2
-aws_secret_access_key=8SjzAP1IFHZmsOBduD+SCZ2ik+c0+cfK53GN+eda
-aws_session_token=IQoJb3JpZ2luX2VjEMz//////////wEaCXVzLXdlc3QtMiJHMEUCIQChB5apExSyXrql2MYBdcx/kryBmAjBZ3QtPPXttredKQIgViKhUzULP6Xken1ZCl5ruOhq4wRX5Ms0DVtNqAeX/l0qsAIIlf//////////ARACGgw3MDUyMjU1MTE0MjYiDFulungS7nS7kmoUHyqEAiNHbTv0eBu9ZcL0rMIPgHqQy35Nwy8bxmywp4rbRmZQi/AOQinzWh5MJJF2cCKUTkU+vtTh3N95vE6k/zGutrqGd7J1kUmD2uVy9tx2Yai6FgGGD5mDf4zhxd2IAcZOH5z8345n77s27YHcUcJ+fezCy1SImOi1ETYsecOwsWGtFER/IBTieWgLuM8/AF6siV3np8q/6F1taWISEuKjYdFkqNkXouqId3iJ9Z8BJk0SqHQ0DE5gHD0YUWr608HExg2XyBSlXJoDpsfNhzGMt8PshRroROPWBAsTfhjCoJ/N4wv/v2WZuX9zcpQgwrQGrEwvzgB8g3LOcA3kX94t5oYOcGCAMNmpndQGOp0BSaL+0hBTYdOspsvU1DrJ3f0hyZwlPBhcl4xac8w5emjwSTjUAC71Q3cF365u/9vFnKApjeQqYUFRbSVrd3P9s1KpbOscL8rdBhOCeS6Muw0Sn89MO7EgdrXhoSivX/Fip6WhggF8OaAkmXDP4m0vl8bIqL+Mtjtvh/3ZR7GHXQiMHGjE9BgXBe9rU32+U0Md2YAA6Ml+WRl5uxevEQ==
-~
-~
-~
-~
-~
-```
+9. I paste in the code block I copied from the Vocareum Lab into the `vi` editor.
 
 *The AWS credentials file now includes the following: `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`. The credentials used are from the AWS Details section.*
 
@@ -94,19 +70,9 @@ aws_session_token=IQoJb3JpZ2luX2VjEMz//////////wEaCXVzLXdlc3QtMiJHMEUCIQChB5apEx
 cat ~/.aws/credentials
 ```
 
-**Terminal Output:**
-```bash
-sh-4.2$ cat ~/.aws/credentials
-[default]
-aws_access_key_id=ASIA2IMVXKIBEJ6POEN2
-aws_secret_access_key=8SjzAP1IFHZmsOBduD+SCZ2ik+c0+cfK53GN+eda
-aws_session_token=IQoJb3JpZ2luX2VjEMz//////////wEaCXVzLXdlc3QtMiJHMEUCIQChB5apExSyXrql2MYBdcx/kryBmAjBZ3QtPPXttredKQIgViKhUzULP6Xken1ZCl5ruOhq4wRX5Ms0DVtNqAeX/l0qsAIIlf//////////ARACGgw3MDUyMjU1MTE0MjYiDFulungS7nS7kmoUHyqEAiNHbTv0eBu9ZcL0rMIPgHqQy35Nwy8bxmywp4rbRmZQi/AOQinzWh5MJJF2cCKUTkU+vtTh3N95vE6k/zGutrqGd7J1kUmD2uVy9tx2Yai6FgGGD5mDf4zhxd2IAcZOH5z8345n77s27YHcUcJ+fezCy1SImOi1ETYsecOwsWGtFER/IBTieWgLuM8/AF6siV3np8q/6F1taWISEuKjYdFkqNkXouqId3iJ9Z8BJk0SqHQ0DE5gHD0YUWr608HExg2XyBSlXJoDpsfNhzGMt8PshRroROPWBAsTfhjCoJ/N4wv/v2WZuX9zcpQgwrQGrEwvzgB8g3LOcA3kX94t5oYOcGCAMNmpndQGOp0BSaL+0hBTYdOspsvU1DrJ3f0hyZwlPBhcl4xac8w5emjwSTjUAC71Q3cF365u/9vFnKApjeQqYUFRbSVrd3P9s1KpbOscL8rdBhOCeS6Muw0Sn89MO7EgdrXhoSivX/Fip6WhggF8OaAkmXDP4m0vl8bIqL+Mtjtvh/3ZR7GHXQiMHGjE9BgXBe9rU32+U0Md2YAA6Ml+WRl5uxevEQ==
-sh-4.2$
-```
-
 Now I install the AWS Encryption CLI and export my path, so that I can run the commands to encrypt and decrypt data.
 
-15. To install the AWS Encryption CLI and set my path, I run the following commands:
+12. To install the AWS Encryption CLI and set my path, I run the following commands:
 
 ```bash
 pip3 install aws-encryption-sdk-cli
@@ -115,6 +81,14 @@ export PATH=$PATH:/home/ssm-user/.local/bin
 
 **Terminal Output:**
 ```bash
+sh-4.2$ cd ~
+sh-4.2$ aws configure
+AWS Access Key ID [None]: 1
+AWS Secret Access Key [None]: 1
+Default region name [None]: us-west-2
+Default output format [None]:
+sh-4.2$ vi ~/.aws/credentials
+...
 
 sh-4.2$ pip3 install aws-encryption-sdk-cli
 Defaulting to user installation because normal site-packages is not writeable
