@@ -231,25 +231,19 @@ sh-4.2$
 > * The value of the `--output` parameter, `~/output/.`, tells the command to write the output file to the output directory.
 
 7. To determine whether the command succeeded, I run the following command:
-```BASH
+```bash
 sh-4.2$ echo $?
 0
 ```
 If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.
 
 8. To view the newly encrypted file location, I run the following command:
-```
+```bash
 sh-4.2$ ls output
 secret1.txt.encrypted
 ```
 
 9. To view the contents of the newly encrypted file, I run the following commands:
-```
-cd output
-cat secret1.txt.encrypted
-```
-
-**Terminal Output:**
 ```bash
 sh-4.2$ cd output
 sh-4.2$ cat secret1.txt.encrypted
