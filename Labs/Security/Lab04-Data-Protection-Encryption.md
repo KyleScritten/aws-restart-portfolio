@@ -25,7 +25,10 @@ In this task, I create an AWS KMS key that I later use to encrypt and decrypt da
 5. I choose **Next**.
 6. On the **Define key administrative permissions** page, in the **Key administrators** section, I search for and select the check box for `voclabs`, then choose **Next**.
 7. On the **Define key usage permissions** page, in the **This account** section, I search for and select the check box for `voclabs`, then choose **Next**. I review the settings, then choose **Finish**.
-8. I choose the link for **MyKMSKey**, which I just created, and copy the ARN (Amazon Resource Name) value: `PLACEHOLDER_FOR_ARN`
+8. I choose the link for **MyKMSKey**, which I just created, and copy the **ARN (Amazon Resource Name)** value: 
+```
+arn:aws:kms:us-west-2:705225511426:key/d844d02d-733d-4dfd-8c2f-f29e78a1f163
+```
 
 ## Task 2: Configure the File Server instance
 In this task, I configure the AWS credentials file, which provides the ability to use the AWS KMS key I created earlier. I then install the AWS Encryption CLI, so that I can run encryption commands.
