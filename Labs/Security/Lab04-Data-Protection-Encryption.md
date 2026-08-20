@@ -291,12 +291,6 @@ sh-4.2$
 ```
 
 11. To view the new file location and the contents of the decrypted file, I run the following commands:
-```
-ls
-cat secret1.txt.encrypted.decrypted
-```
-
-**Terminal Output:**
 ```bash
 sh-4.2$ ls
 secret1.txt.encrypted  secret1.txt.encrypted.decrypted
