@@ -9,7 +9,23 @@ In this lab, I connect to a file server hosted on an Amazon Elastic Compute Clou
 ## Task 1: Create an AWS KMS key
 In this task, I create an AWS KMS key that I later use to encrypt and decrypt data.
 
+> [!NOTE]
+> With AWS KMS, I can create and manage cryptographic keys and control their use across a wide range of AWS services and in my applications. AWS KMS is a secure and resilient service that uses hardware security modules (HSMs) that have been validated under the Federal Information Processing Standard (FIPS) Publication 140-2, or are in the process of being validated, to protect my keys.
 
+1. In the AWS Management Console, I choose **Key Management Service**.
+2. I choose **Create a key**.
+3. For **Key type**, I choose **Symmetric**, then choose **Next**.
+
+> [!NOTE]
+> *Symmetric* encryption uses the same key to encrypt and decrypt data, which makes it fast and efficient to use. *Asymmetric* encryption uses a public key to encrypt data and a private key to decrypt information.
+
+4. On the **Add labels** page, I configure the following:
+   * **Alias:** `MyKMSKey`
+   * **Description:** `Key used to encrypt and decrypt data files.`
+5. I choose **Next**.
+6. On the **Define key administrative permissions** page, in the **Key administrators** section, I search for and select the check box for `voclabs`, then choose **Next**.
+7. On the **Define key usage permissions** page, in the **This account** section, I search for and select the check box for `voclabs`, then choose **Next**. I review the settings, then choose **Finish**.
+8. I choose the link for **MyKMSKey**, which I just created, and copy the ARN (Amazon Resource Name) value: `PLACEHOLDER_FOR_ARN`
 
 ## Task 2: Configure the File Server instance
 In this task, I configure the AWS credentials file, which provides the ability to use the AWS KMS key I created earlier. I then install the AWS Encryption CLI, so that I can run encryption commands.
