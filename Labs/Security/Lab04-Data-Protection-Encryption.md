@@ -52,22 +52,12 @@ aws configure
    * **AWS Access Key ID:** Enter `1`, then press Enter.
    * **AWS Secret Access Key:** Enter `1`, then press Enter.
    * **Default region name:** Copy and paste the Region provided from the Vocareum AWS Details page.
-     * Tip: I may need to press **Ctrl+Shift+V** to paste into Session Manager.
    * **Default output format:** Press Enter.
 
-   The AWS configuration file is created, and I update it in a later step. The entries of `1` are temporary placeholders.
+*The AWS configuration file is created, however the entries of `1` are temporary placeholders that will be updated.*
 
-**Terminal Output:**
-```bash
-
-```
-
-   
-6. I navigate to the Vocareum console page and choose the **AWS Details** button.
-7. Next to **AWS CLI**, I choose **Show**.
-8. I copy and paste the code block, which starts with `[default]`, into a text editor.
-9. I return to the browser tab where I am logged in to the File Server.
-10. To open the AWS credentials file, I run the following command:
+6. I use the details provided from the Vocareum Lab console page.
+7. To open the AWS credentials file, I run the following command:
 
 ```bash
 vi ~/.aws/credentials
@@ -78,17 +68,18 @@ vi ~/.aws/credentials
 
 ```
 
-11. In the `~/.aws/credentials` file, I type `dd` multiple times to delete the contents of the file.
-12. I paste in the code block I copied from Vocareum.
+8. In the `~/.aws/credentials` file, I type `dd` multiple times to delete the contents of the file.
+9. I paste in the code block I copied from the Vocareum Lab. The AWS credentials file now looks similar to the following:
 
-<p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
-</p>
+**Terminal Output:**
+```bash
+
+```
 
 *The AWS credentials file now includes the following: `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`. The credentials used are from the AWS Details section.*
 
-13. To save and close the file, I press **Escape**, type `:wq`, and press Enter.
-14. To view the updated contents of the file, I run the following command:
+10. To save and close the file, I press **Escape**, type `:wq`, and press Enter.
+11. To view the updated contents of the file, I run the following command:
 
 ```bash
 cat ~/.aws/credentials
