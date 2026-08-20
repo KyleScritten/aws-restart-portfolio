@@ -43,29 +43,30 @@ cd ~
 aws configure
 ```
 
-**Terminal Output:**
-```bash
-
-```
-
 5. When prompted, I configure the following:
    * **AWS Access Key ID:** Enter `1`, then press Enter.
    * **AWS Secret Access Key:** Enter `1`, then press Enter.
    * **Default region name:** Copy and paste the Region provided from the Vocareum AWS Details page.
    * **Default output format:** Press Enter.
 
+**Terminal Output:**
+```bash
+sh-4.2$ cd ~
+sh-4.2$ aws configure
+AWS Access Key ID [None]: 1
+AWS Secret Access Key [None]: 1
+Default region name [None]: us-west-2
+Default output format [None]:
+sh-4.2$
+```
+
 *The AWS configuration file is created, however the entries of `1` are temporary placeholders that will be updated.*
 
 6. I use the details provided from the Vocareum Lab console page.
-7. To open the AWS credentials file, I run the following command:
+7. To open the AWS credentials file in the `vi` editor, I run the following command:
 
 ```bash
 vi ~/.aws/credentials
-```
-
-**Terminal Output:**
-```bash
-
 ```
 
 8. In the `~/.aws/credentials` file, I type `dd` multiple times to delete the contents of the file.
@@ -73,7 +74,15 @@ vi ~/.aws/credentials
 
 **Terminal Output:**
 ```bash
-
+[default]
+aws_access_key_id=ASIA2IMVXKIBEJ6POEN2
+aws_secret_access_key=8SjzAP1IFHZmsOBduD+SCZ2ik+c0+cfK53GN+eda
+aws_session_token=IQoJb3JpZ2luX2VjEMz//////////wEaCXVzLXdlc3QtMiJHMEUCIQChB5apExSyXrql2MYBdcx/kryBmAjBZ3QtPPXttredKQIgViKhUzULP6Xken1ZCl5ruOhq4wRX5Ms0DVtNqAeX/l0qsAIIlf//////////ARACGgw3MDUyMjU1MTE0MjYiDFulungS7nS7kmoUHyqEAiNHbTv0eBu9ZcL0rMIPgHqQy35Nwy8bxmywp4rbRmZQi/AOQinzWh5MJJF2cCKUTkU+vtTh3N95vE6k/zGutrqGd7J1kUmD2uVy9tx2Yai6FgGGD5mDf4zhxd2IAcZOH5z8345n77s27YHcUcJ+fezCy1SImOi1ETYsecOwsWGtFER/IBTieWgLuM8/AF6siV3np8q/6F1taWISEuKjYdFkqNkXouqId3iJ9Z8BJk0SqHQ0DE5gHD0YUWr608HExg2XyBSlXJoDpsfNhzGMt8PshRroROPWBAsTfhjCoJ/N4wv/v2WZuX9zcpQgwrQGrEwvzgB8g3LOcA3kX94t5oYOcGCAMNmpndQGOp0BSaL+0hBTYdOspsvU1DrJ3f0hyZwlPBhcl4xac8w5emjwSTjUAC71Q3cF365u/9vFnKApjeQqYUFRbSVrd3P9s1KpbOscL8rdBhOCeS6Muw0Sn89MO7EgdrXhoSivX/Fip6WhggF8OaAkmXDP4m0vl8bIqL+Mtjtvh/3ZR7GHXQiMHGjE9BgXBe9rU32+U0Md2YAA6Ml+WRl5uxevEQ==
+~
+~
+~
+~
+~
 ```
 
 *The AWS credentials file now includes the following: `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`. The credentials used are from the AWS Details section.*
@@ -87,7 +96,12 @@ cat ~/.aws/credentials
 
 **Terminal Output:**
 ```bash
-
+sh-4.2$ cat ~/.aws/credentials
+[default]
+aws_access_key_id=ASIA2IMVXKIBEJ6POEN2
+aws_secret_access_key=8SjzAP1IFHZmsOBduD+SCZ2ik+c0+cfK53GN+eda
+aws_session_token=IQoJb3JpZ2luX2VjEMz//////////wEaCXVzLXdlc3QtMiJHMEUCIQChB5apExSyXrql2MYBdcx/kryBmAjBZ3QtPPXttredKQIgViKhUzULP6Xken1ZCl5ruOhq4wRX5Ms0DVtNqAeX/l0qsAIIlf//////////ARACGgw3MDUyMjU1MTE0MjYiDFulungS7nS7kmoUHyqEAiNHbTv0eBu9ZcL0rMIPgHqQy35Nwy8bxmywp4rbRmZQi/AOQinzWh5MJJF2cCKUTkU+vtTh3N95vE6k/zGutrqGd7J1kUmD2uVy9tx2Yai6FgGGD5mDf4zhxd2IAcZOH5z8345n77s27YHcUcJ+fezCy1SImOi1ETYsecOwsWGtFER/IBTieWgLuM8/AF6siV3np8q/6F1taWISEuKjYdFkqNkXouqId3iJ9Z8BJk0SqHQ0DE5gHD0YUWr608HExg2XyBSlXJoDpsfNhzGMt8PshRroROPWBAsTfhjCoJ/N4wv/v2WZuX9zcpQgwrQGrEwvzgB8g3LOcA3kX94t5oYOcGCAMNmpndQGOp0BSaL+0hBTYdOspsvU1DrJ3f0hyZwlPBhcl4xac8w5emjwSTjUAC71Q3cF365u/9vFnKApjeQqYUFRbSVrd3P9s1KpbOscL8rdBhOCeS6Muw0Sn89MO7EgdrXhoSivX/Fip6WhggF8OaAkmXDP4m0vl8bIqL+Mtjtvh/3ZR7GHXQiMHGjE9BgXBe9rU32+U0Md2YAA6Ml+WRl5uxevEQ==
+sh-4.2$
 ```
 
 Now I install the AWS Encryption CLI and export my path, so that I can run the commands to encrypt and decrypt data.
@@ -102,6 +116,63 @@ export PATH=$PATH:/home/ssm-user/.local/bin
 **Terminal Output:**
 ```bash
 
+sh-4.2$ pip3 install aws-encryption-sdk-cli
+Defaulting to user installation because normal site-packages is not writeable
+Collecting aws-encryption-sdk-cli
+  Downloading aws_encryption_sdk_cli-4.3.0-py2.py3-none-any.whl (44 kB)
+     |████████████████████████████████| 44 kB 3.0 MB/s
+Collecting aws-encryption-sdk~=3.1
+  Downloading aws_encryption_sdk-3.3.1-py2.py3-none-any.whl (90 kB)
+     |████████████████████████████████| 90 kB 9.6 MB/s
+Collecting attrs>=17.1.0
+  Downloading attrs-24.2.0-py3-none-any.whl (63 kB)
+     |████████████████████████████████| 63 kB 3.3 MB/s
+Requirement already satisfied: setuptools in /usr/lib/python3.7/site-packages (from aws-encryption-sdk-cli) (49.1.3)
+Collecting base64io>=1.0.1
+  Downloading base64io-1.0.3-py2.py3-none-any.whl (17 kB)
+Collecting wrapt>=1.10.11
+  Downloading wrapt-1.16.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (77 kB)
+     |████████████████████████████████| 77 kB 11.1 MB/s
+Collecting cryptography>=3.4.6
+  Downloading cryptography-45.0.7-cp37-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.4 MB)
+     |████████████████████████████████| 4.4 MB 56.5 MB/s
+Collecting boto3>=1.10.0
+  Downloading boto3-1.33.13-py3-none-any.whl (139 kB)
+     |████████████████████████████████| 139 kB 75.9 MB/s
+Collecting importlib-metadata; python_version < "3.8"
+  Downloading importlib_metadata-6.7.0-py3-none-any.whl (22 kB)
+Collecting cffi>=1.14; platform_python_implementation != "PyPy"
+  Downloading cffi-1.15.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (427 kB)
+     |████████████████████████████████| 427 kB 75.7 MB/s
+Collecting s3transfer<0.9.0,>=0.8.2
+  Downloading s3transfer-0.8.2-py3-none-any.whl (82 kB)
+     |████████████████████████████████| 82 kB 398 kB/s
+Collecting jmespath<2.0.0,>=0.7.1
+  Downloading jmespath-1.0.1-py3-none-any.whl (20 kB)
+Collecting botocore<1.34.0,>=1.33.13
+  Downloading botocore-1.33.13-py3-none-any.whl (11.8 MB)
+     |████████████████████████████████| 11.8 MB 50.6 MB/s
+Collecting zipp>=0.5
+  Downloading zipp-3.15.0-py3-none-any.whl (6.8 kB)
+Collecting typing-extensions>=3.6.4; python_version < "3.8"
+  Downloading typing_extensions-4.7.1-py3-none-any.whl (33 kB)
+Collecting pycparser
+  Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+     |████████████████████████████████| 118 kB 78.2 MB/s
+Collecting python-dateutil<3.0.0,>=2.1
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+     |████████████████████████████████| 229 kB 76.8 MB/s
+Collecting urllib3<1.27,>=1.25.4; python_version < "3.10"
+  Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+     |████████████████████████████████| 144 kB 81.9 MB/s
+Collecting six>=1.5
+  Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: wrapt, pycparser, cffi, cryptography, six, python-dateutil, jmespath, urllib3, botocore, s3transfer, boto3, zipp, typing-extensions, importlib-metadata, attrs, aws-encryption-sdk, base64io, aws-encryption-sdk-cli
+  WARNING: The script aws-encryption-cli is installed in '/home/ssm-user/.local/bin' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed attrs-24.2.0 aws-encryption-sdk-3.3.1 aws-encryption-sdk-cli-4.3.0 base64io-1.0.3 boto3-1.33.13 botocore-1.33.13 cffi-1.15.1 cryptography-45.0.7 importlib-metadata-6.7.0 jmespath-1.0.1 pycparser-2.21 python-dateutil-2.9.0.post0 s3transfer-0.8.2 six-1.17.0 typing-extensions-4.7.1 urllib3-1.26.20 wrapt-1.16.0 zipp-3.15.0
+sh-4.2$ export PATH=$PATH:/home/ssm-user/.local/bin
+sh-4.2$
 ```
 
 ## Task 3: Encrypt and decrypt data
