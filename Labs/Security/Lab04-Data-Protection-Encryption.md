@@ -258,6 +258,7 @@ cat secret1.txt.encrypted
 
 **Terminal Output:**
 ```bash
+sh-4.2$ cd output
 sh-4.2$ cat secret1.txt.encrypted
 x��Z��,>χ��[�E}��xM��M�Bnaws-crypto-public-keyDAtg5CvDAULMkiKrwkVu3I2kbpsQ0OlEEUDUWABCZsZ53Bflr5TXdPLH66+uRgWrXsA==purposetestaws-kmsKarn:aws:kms:us-west-2:705225511426:key/d844d02d-733d-4dfd-8c2f-f29e78a1f163�x��?v+����V4�
 0o0m0h�#`�He.0����l�'nn�~0|     *�H��
