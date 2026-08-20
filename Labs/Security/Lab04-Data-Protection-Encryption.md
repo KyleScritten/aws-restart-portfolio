@@ -61,7 +61,8 @@ vi ~/.aws/credentials
 8. In the `~/.aws/credentials` file, I type `dd` multiple times to delete the contents of the file.
 9. I paste in the code block I copied from the Vocareum Lab into the `vi` editor.
 
-*The AWS credentials file now includes the following: `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`. The credentials used are from the AWS Details section.*
+>[!Note]
+> The AWS credentials file now includes the following: `aws_access_key_id`, `aws_secret_access_key`, and `aws_session_token`. The credentials used are from the AWS Details section.
 
 10. To save and close the file, I press **Escape**, type `:wq`, and press Enter.
 11. To view the updated contents of the file, I run the following command:
