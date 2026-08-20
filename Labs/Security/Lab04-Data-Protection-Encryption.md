@@ -231,7 +231,7 @@ sh-4.2$
 ```
 echo $?
 ```
-If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.
+*If the command succeeded, the value of `$?` is `0`. If the command failed, the value is nonzero.*
 
 **Terminal Output:**
 ```bash
