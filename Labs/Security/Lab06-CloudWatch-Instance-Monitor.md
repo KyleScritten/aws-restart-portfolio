@@ -33,7 +33,7 @@ In the **Details** section, the **Status** shows **Pending confirmation**. I rec
 7. I go back to the AWS Management Console and choose **Subscriptions**.
 
 <p align="center">
-  <img src="images/cw-sns-topic.png" alt="SNS Topic with Subscription" width="900">
+  <img src="images/cw-sns-topic.png" alt="SNS Topic with Subscription" width="1000">
 </p>
 
 *The status now shows **Confirmed**.*
@@ -53,7 +53,7 @@ CloudWatch usually takes 5-10 minutes after the creation of an EC2 instance to s
 4. I select the check box with **CPUUtilization** as the Metric name for the **Stress Test** EC2 instance.
 
 <p align="center">
-  <img src="images/cloudwatch-ec2-metric.png" alt="CloudWatch Instance CPU Utilization Metric" width="900">
+  <img src="images/cloudwatch-ec2-metric.png" alt="CloudWatch Instance CPU Utilization Metric" width="1000">
 </p>
 
 *This displays the graph for the CPU utilization metric, which is approximately 0% because nothing has been done yet.*
@@ -95,7 +95,7 @@ I now create a metric alarm. A metric alarm watches a single CloudWatch metric o
 13. I choose **Next**, review the **Preview and create** page, then choose **Create alarm**.
 
 <p align="center">
-  <img src="images/cw-alarm-created.png" alt="CloudWatch Alarm Creation" width="900">
+  <img src="images/cw-alarm-created.png" alt="CloudWatch Alarm Creation" width="1000">
 </p>
 
 *The figure shows the CloudWatch alarm for the Stress Test EC2 instance CPUUtilization page.*
@@ -154,14 +154,14 @@ stress: dbug: [3560] --> hogcpu worker 1 [3570] forked
 4. In the new terminal, I run the `top` command:
 
 <p align="center">
-  <img src="images/top-command-monitoring.png" alt="Top Command Monitoring" width="900">
+  <img src="images/top-command-monitoring.png" alt="Top Command Monitoring" width="1000">
 </p>
 
 5. I navigate back to the AWS console, where I have the CloudWatch Alarms page open and choose `LabCPUUtilizationAlarm`.
 6. I monitor the graph, selecting the refresh button every 1 minute, until the alarm status shows **In alarm**.
 
 <p align="center">
-  <img src="images/cloudwatch-alarm-triggered.png" alt="CloudWatch Alarm Triggered" width="900">
+  <img src="images/cloudwatch-alarm-triggered.png" alt="CloudWatch Alarm Triggered" width="1000">
 </p>
 
 *On the graph, I can see where CPUUtilization has increased above the 60 percent threshold.*
@@ -169,7 +169,7 @@ stress: dbug: [3560] --> hogcpu worker 1 [3570] forked
 7. I navigate to the email inbox for the address I used to configure the Amazon SNS subscription, and see a new email notification from AWS Notifications.
 
 <p align="center">
-  <img src="images/sns-email-notification.png" alt="SNS Email Notification" width="900">
+  <img src="images/sns-email-notification.png" alt="SNS Email Notification" width="1000">
 </p>
 
 *The CloudWatch alarm successfully detects the CPU spike and triggers an SNS email notification.*
@@ -189,7 +189,7 @@ In this task, I create a CloudWatch dashboard using the same CPUUtilization metr
 7. I choose **Create widget**, then choose **Save dashboard**.
 
 <p align="center">
-  <img src="images/cloudwatch-dashboard.png" alt="CloudWatch Dashboard" width="900">
+  <img src="images/cloudwatch-dashboard.png" alt="CloudWatch Dashboard" width="1000">
 </p>
 
 *I now have a quick access shortcut to view the CPUUtilization metric for the Stress Test instance.*
