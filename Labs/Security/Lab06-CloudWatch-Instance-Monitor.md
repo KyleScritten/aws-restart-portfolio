@@ -45,7 +45,7 @@ In this task, I view some Amazon EC2 metrics within CloudWatch, then create a Cl
 > CloudWatch is a monitoring and observability service built for DevOps engineers, developers, site reliability engineers (SREs), IT managers, and product owners. CloudWatch provides data and actionable insights to monitor applications, respond to system-wide performance changes, and optimize resource utilization. CloudWatch collects monitoring and operational data in the form of logs, metrics, and events, giving a unified view of operational health and visibility into AWS resources, applications, and services running on AWS and on premises.
 
 1. In the AWS Management Console, I enter `CloudWatch` in the search bar and choose it.
-2. I choose the **Metrics** dropdown list, then choose **All metrics**.
+2. I choose the **Metrics** dropdown list, then choose **Classic metrics**.
 
 CloudWatch usually takes 5-10 minutes after the creation of an EC2 instance to start fetching metric details.
 
@@ -53,7 +53,7 @@ CloudWatch usually takes 5-10 minutes after the creation of an EC2 instance to s
 4. I select the check box with **CPUUtilization** as the Metric name for the **Stress Test** EC2 instance.
 
 <p align="center">
-  <img src="images/cloudwatch-metrics.png" alt="CloudWatch Metrics" width="900">
+  <img src="images/cloudwatch-ec2-metric.png" alt="CloudWatch Instance CPU Utilization Metric" width="900">
 </p>
 
 *This displays the graph for the CPU utilization metric, which is approximately 0% because nothing has been done yet.*
@@ -71,11 +71,11 @@ I now create a metric alarm. A metric alarm watches a single CloudWatch metric o
    * **Metric name:** `CPUUtilization`
    * **InstanceId:** Leave the default option selected
    * **Statistic:** `Average`
-   * **Period:** Choose **1 minute**
+   * **Period:** Choose `1 minute`
 
    **Conditions**
-   * **Threshold type:** Choose **Static**
-   * **Whenever CPUUtilization is...:** Choose **Greater > threshold**
+   * **Threshold type:** Choose `Static`
+   * **Whenever CPUUtilization is...:** Choose `Greater > threshold`
    * **than... Define the threshold value:** Enter `60`
 
 10. I choose **Next**.
