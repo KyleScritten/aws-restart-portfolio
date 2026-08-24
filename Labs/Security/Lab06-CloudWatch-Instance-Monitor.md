@@ -82,9 +82,9 @@ I now create a metric alarm. A metric alarm watches a single CloudWatch metric o
 11. On the **Configure actions** page, I configure the following options:
 
     **Notification**
-    * **Alarm state trigger:** Choose **In alarm**
-    * **Select an SNS topic:** Choose **Select an existing SNS topic**
-    * **Send a notification to...:** Choose the text box, then choose **MyCwAlarm**
+    * **Alarm state trigger:** Choose `In alarm`
+    * **Select an SNS topic:** Choose `Select an existing SNS topic`
+    * **Send a notification to...:** Choose the text box, then choose `MyCwAlarm`
 
 12. I choose **Next**, then configure the following options:
 
@@ -105,7 +105,7 @@ In this task, I run a command to load the EC2 instance to 100 percent for 400 se
 
 1. I navigate to the Vocareum Lab console page and copy the `EC2InstanceURL` link. I paste this link into a new browser tab, connecting me to the Stress Test EC2 instance.
 ``` 
-PLACEHOLDER_URL
+https://us-west-2.console.aws.amazon.com/systems-manager/session-manager/i-03103dadf8a2c03d4?region=us-west-2
 ```
 2. To manually increase the CPU load of the EC2 instance, I run the following command:
 ```bash
@@ -114,7 +114,38 @@ sudo stress --cpu 10 -v --timeout 400s
 
 **Terminal output:**
 ```bash
-PLACEHOLDER
+sh-4.2$ sudo stress --cpu 10 -v --timeout 400s
+stress: info: [3560] dispatching hogs: 10 cpu, 0 io, 0 vm, 0 hdd
+stress: dbug: [3560] using backoff sleep of 30000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 10 [3561] forked
+stress: dbug: [3560] using backoff sleep of 27000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 9 [3562] forked
+stress: dbug: [3560] using backoff sleep of 24000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 8 [3563] forked
+stress: dbug: [3560] using backoff sleep of 21000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 7 [3564] forked
+stress: dbug: [3560] using backoff sleep of 18000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 6 [3565] forked
+stress: dbug: [3560] using backoff sleep of 15000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 5 [3566] forked
+stress: dbug: [3560] using backoff sleep of 12000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 4 [3567] forked
+stress: dbug: [3560] using backoff sleep of 9000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 3 [3568] forked
+stress: dbug: [3560] using backoff sleep of 6000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 2 [3569] forked
+stress: dbug: [3560] using backoff sleep of 3000us
+stress: dbug: [3560] setting timeout to 400s
+stress: dbug: [3560] --> hogcpu worker 1 [3570] forked
 ```
 
 *This command runs for 400 seconds, loads the CPU to 100 percent, and then decreases the CPU to 0 percent after the allotted time.*
