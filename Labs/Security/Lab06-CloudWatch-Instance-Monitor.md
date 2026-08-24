@@ -153,10 +153,9 @@ stress: dbug: [3560] --> hogcpu worker 1 [3570] forked
 3. I copy and paste the URL next to `EC2InstanceURL` into another new browser tab to open a second terminal for the Stress Test instance.
 4. In the new terminal, I run the `top` command:
 
-**Terminal output:**
-```bash
-PLACEHOLDER
-```
+<p align="center">
+  <img src="images/top-command-monitoring.png" alt="Top Command Monitoring" width="900">
+</p>
 
 5. I navigate back to the AWS console, where I have the CloudWatch Alarms page open and choose `LabCPUUtilizationAlarm`.
 6. I monitor the graph, selecting the refresh button every 1 minute, until the alarm status shows **In alarm**.
@@ -184,8 +183,8 @@ In this task, I create a CloudWatch dashboard using the same CPUUtilization metr
 1. I go to the CloudWatch section in the AWS console and choose **Dashboards**.
 2. I choose **Create dashboard**.
 3. For **Dashboard name**, I enter `LabEC2Dashboard`, then choose **Create dashboard**.
-4. I choose **Line**, then choose **Metrics**.
-5. I choose **EC2**, then choose **Per-Instance Metrics**.
+4. I choose **Line**, then choose `Metrics`.
+5. I choose **EC2**, then choose `Per-Instance Metrics`.
 6. I select the check box with **Stress Test** for the Instance name and **CPUUtilization** for the Metric name.
 7. I choose **Create widget**, then choose **Save dashboard**.
 
