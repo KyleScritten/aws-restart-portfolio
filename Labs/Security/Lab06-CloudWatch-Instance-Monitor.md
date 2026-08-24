@@ -27,7 +27,7 @@ In this task, I create an SNS topic and then create a subscription for the topic
    * **Protocol:** `Email`
    * **Endpoint:** `My Email Address`
 
-In the **Details** section, the **Status** shows **Pending confirmation**. I receive an "AWS Notification - Subscription Confirmation" email message at the address I provided in the previous step.
+In the **Details** section, the **Status** shows **Pending confirmation**. I receive an *"AWS Notification - Subscription Confirmation"* email message at the address I provided in the previous step.
 
 6. I open the email I received with the Amazon SNS subscription notification and choose **Confirm subscription**.
 7. I go back to the AWS Management Console and choose **Subscriptions**.
@@ -104,6 +104,9 @@ I now create a metric alarm. A metric alarm watches a single CloudWatch metric o
 In this task, I run a command to load the EC2 instance to 100 percent for 400 seconds. This increase in CPU utilization activates the alarm into the **In alarm** state, and I confirm the spike in CPU utilization by viewing the CloudWatch graph. I also receive an email notification alerting me of the In alarm state.
 
 1. I navigate to the Vocareum Lab console page and copy the `EC2InstanceURL` link. I paste this link into a new browser tab, connecting me to the Stress Test EC2 instance.
+``` 
+PLACEHOLDER_URL
+```
 2. To manually increase the CPU load of the EC2 instance, I run the following command:
 ```bash
 sudo stress --cpu 10 -v --timeout 400s
@@ -124,9 +127,8 @@ PLACEHOLDER
 PLACEHOLDER
 ```
 
-5. I navigate back to the AWS console, where I have the CloudWatch Alarms page open.
-6. I choose `LabCPUUtilizationAlarm`.
-7. I monitor the graph, selecting the refresh button every 1 minute, until the alarm status shows **In alarm**.
+5. I navigate back to the AWS console, where I have the CloudWatch Alarms page open and choose `LabCPUUtilizationAlarm`.
+6. I monitor the graph, selecting the refresh button every 1 minute, until the alarm status shows **In alarm**.
 
 <p align="center">
   <img src="images/cloudwatch-alarm-triggered.png" alt="CloudWatch Alarm Triggered" width="900">
@@ -134,7 +136,7 @@ PLACEHOLDER
 
 *On the graph, I can see where CPUUtilization has increased above the 60 percent threshold.*
 
-8. I navigate to the email inbox for the address I used to configure the Amazon SNS subscription, and see a new email notification from AWS Notifications.
+7. I navigate to the email inbox for the address I used to configure the Amazon SNS subscription, and see a new email notification from AWS Notifications.
 
 <p align="center">
   <img src="images/sns-email-notification.png" alt="SNS Email Notification" width="900">
