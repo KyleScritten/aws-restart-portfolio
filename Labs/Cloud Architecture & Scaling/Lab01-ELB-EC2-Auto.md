@@ -217,8 +217,20 @@ The `AlarmHigh` chart indicates an increasing CPU percentage. Once it crosses th
 
 *More than two instances named **Lab Instance** are now running. Auto Scaling created the new instances in response to the alarm.*
 
-## Conclusion
+## Task 7: Terminating the Web Server 1 instance
+In this task, I terminate the **Web Server 1** instance. This instance was used to create the AMI that my Auto Scaling group used, but it is no longer needed.
 
+1. I choose **Web Server 1**, ensuring it is the only instance selected.
+2. From the **Instance state** dropdown menu, I choose **Terminate instance**.
+3. I choose **Terminate**.
+
+<p align="center">
+  <img src="images/terminate-instance.png" alt="Terminate Instance" width="900">
+</p>
+
+*This step ensures that only instances managed by the Auto Scaling group remain active in the architecture.*
+
+## Conclusion
 After completing this lab, I am able to:
 
 * Create an AMI from an EC2 instance
