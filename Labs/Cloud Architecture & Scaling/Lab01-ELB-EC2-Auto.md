@@ -25,7 +25,7 @@ In this task, I create an AMI from the existing **Web Server 1**. This saves the
 
 1. On the AWS Management Console, in the search bar, I enter and choose `EC2` to open the Amazon EC2 Management Console.
 2. In the left navigation pane, I locate the **Instances** section and choose **Instances**. The **Web Server 1** instance is listed. I now create an AMI based on this instance.
-3. I choose the **Web Server 1** instance, which appears in a **Running** state.
+3. I choose the `Web Server 1` instance, which appears in a ***Running*** state.
 4. From the **Actions** dropdown list, I choose **Image and templates > Create image**, and configure the following options:
    * **Image name:** `Web Server AMI`
    * **Image description - optional:** `Lab AMI for Web Server`
