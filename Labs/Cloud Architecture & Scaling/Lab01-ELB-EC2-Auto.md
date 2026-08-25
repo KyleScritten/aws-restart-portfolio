@@ -46,7 +46,7 @@ In this task, I create a load balancer that can balance traffic across multiple 
 4. In the **Basic configuration** section, I configure the following option:
    * **Load balancer name:** `LabELB`
 5. In the **Network mapping** section, I configure the following options:
-   * **VPC:** Choose **Lab VPC**
+   * **VPC:** Choose `Lab VPC`
    * **Mappings:** Choose both Availability Zones listed
    * For the first Availability Zone, choose **Public Subnet 1**
    * For the second Availability Zone, choose **Public Subnet 2**
@@ -75,7 +75,7 @@ In this task, I create a load balancer that can balance traffic across multiple 
 15. I copy the DNS name of the load balancer, for later use in the lab:
 
 ```
-PLACEHOLDER_DNS_NAME
+LabELB-111746152.us-west-2.elb.amazonaws.com
 ```
 
 ## Task 3: Creating a launch template
@@ -94,7 +94,7 @@ In this task, I create a launch template for my Auto Scaling group. A launch tem
 > [!NOTE]
 > Amazon EC2 uses public key cryptography to encrypt and decrypt login information. To log in to an instance, I must create a key pair, specify the name of the key pair when launching the instance, and provide the private key when connecting to the instance.
 
-7. In the **Network settings** section, I choose the **Security groups** dropdown list and choose **Web Security Group**.
+7. In the **Network settings** section, I choose the **Security groups** dropdown list and choose `Web Security Group`.
 8. I choose **Create launch template**.
 
 I receive a message similar to the following: "**Successfully created lab-app-launch-template.**"
@@ -113,22 +113,22 @@ In this task, I use my launch template to create an Auto Scaling group.
 1. I choose **lab-app-launch-template**, then from the **Actions** dropdown list, choose **Create Auto Scaling group**.
 2. On the **Choose launch template or configuration** page, in the **Name** section, for **Auto Scaling group name**, I enter `Lab Auto Scaling Group`.
 3. On the **Choose instance launch options** page, in the **Network** section, I configure the following options:
-   * **VPC:** Choose **Lab VPC**
-   * **Availability Zones and subnets:** Choose **Private Subnet 1 (10.0.1.0/24)** and **Private Subnet 2 (10.0.3.0/24)**
+   * **VPC:** Choose `Lab VPC`
+   * **Availability Zones and subnets:** Choose `Private Subnet 1 (10.0.1.0/24)` and `Private Subnet 2 (10.0.3.0/24)`
 4. I choose **Next**.
-5. On the **Configure advanced options – optional** page, I configure the following options:
-   * In the **Load balancing – optional** section, I choose **Attach to an existing load balancer**.
+5. On the **Integrate with other services options – optional** page, I configure the following options:
+   * In the **Load balancing** section, I choose `Attach to an existing load balancer`.
    * In the **Attach to an existing load balancer** section, I configure the following options:
      * Choose **Choose from your load balancer target groups**
-     * From the **Existing load balancer target groups** dropdown list, choose **lab-target-group | HTTP**
-   * In the **Health checks – optional** section, for **Health check type**, I choose **ELB**.
-6. I choose **Next**, and on the **Configure group size and scaling policies – optional** page, I configure the following options:
-   * In the **Group size – optional** section, I enter the following values:
+     * From the **Existing load balancer target groups** dropdown list, choose `lab-target-group | HTTP`
+   * In the **Health checks** section, for **Additional health check type - optional**, I choose `Turn on Elastic Load Balancing health checks`.
+6. I choose **Next**, and on the **Configure group size and scaling – optional** page, I configure the following options:
+   * In the **Group size** and **Scaling** sections, I enter the following values:
      * **Desired capacity:** `2`
-     * **Minimum capacity:** `2`
-     * **Maximum capacity:** `4`
-   * In the **Scaling policies – optional** section, I configure the following options:
-     * Choose **Target tracking scaling policy**
+     * **Minimum desired capacity:** `2`
+     * **Maximum desired capacity:** `4`
+   * In the **Automatic scaling policies – optional** section, I configure the following options:
+     * Choose `Target tracking scaling policy`
      * **Metric type:** Choose **Average CPU utilization**
      * I change the **Target value** to `50`
 
