@@ -220,8 +220,8 @@ The `AlarmHigh` chart indicates an increasing CPU percentage. Once it crosses th
 ## Task 7: Terminating the Web Server 1 instance
 In this task, I terminate the **Web Server 1** instance. This instance was used to create the AMI that my Auto Scaling group used, but it is no longer needed.
 
-1. I choose **Web Server 1**, ensuring it is the only instance selected.
-2. From the **Instance state** dropdown menu, I choose **Terminate instance**.
+1. I choose `**Web Server 1**`, ensuring it is the only instance selected.
+2. From the **Instance state** dropdown menu, I choose `Terminate instance`.
 3. I choose **Terminate**.
 
 <p align="center">
