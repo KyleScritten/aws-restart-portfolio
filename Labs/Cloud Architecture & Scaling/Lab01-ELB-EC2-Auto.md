@@ -238,3 +238,7 @@ After completing this lab, I am able to:
 * Create a launch template and an Auto Scaling group
 * Configure an Auto Scaling group to scale new instances within private subnets
 * Use CloudWatch alarms to monitor the performance of my infrastructure
+
+## Additional resources
+* [Amazon EC2 Auto Scaling Getting Started](https://aws.amazon.com/ec2/autoscaling/getting-started/)
+* [Getting Started with Elastic Load Balancing](https://aws.amazon.com/elasticloadbalancing/getting-started)
