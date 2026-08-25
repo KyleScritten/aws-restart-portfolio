@@ -178,6 +178,45 @@ I can now access the instances launched in the Auto Scaling group using the load
 
 *The Load Test application appears in my browser, which means that the load balancer received the request, sent it to one of the EC2 instances, and then passed back the result.*
 
+## Task 6: Testing auto scaling
+I created an Auto Scaling group with a minimum of two instances and a maximum of four instances. Currently, two instances are running because the minimum size is two and the group is not currently under any load. I now increase the load to cause Auto Scaling to add additional instances.
+
+1. I return to the AWS Management Console, but keep the Load Test application tab open.
+2. On the AWS CloudWatch Dashboard, in the **Alarms** section, I choose **All alarms**.
+
+<p align="center">
+  <img src="images/alarmHigh-status.png" alt="CloudWatch AlarmHigh Status" width="900">
+</p>
+
+*Two alarms are displayed. The Auto Scaling group automatically created these two alarms, which keep the average CPU load close to 50 percent while staying within the limitation of having 2–4 instances.*
+
+3. I choose the alarm that has `AlarmHigh` in its name. This alarm has a **State** of **OK**.
+
+> [!CAUTION]
+> If the alarm is not showing OK for the State, I wait a minute, then refresh until the State changes.
+>
+> The OK state indicates that the alarm has not been triggered. It is the alarm for CPU Utilization > 50, which adds instances when the average CPU utilization is high. The chart shows very low levels of CPU at the moment.
+
+4. I now tell the application to perform calculations that raise the CPU level by returning to the browser tab with the Load Test application.
+5. Next to the AWS logo, I choose **Load Test**.
+
+> [!NOTE]
+> This causes the application to generate high loads. The browser page automatically refreshes so that all instances in the Auto Scaling group generate loads. **I do not close this tab.**
+
+6. I return to the browser tab with the CloudWatch Management Console.
+7. In less than 5 minutes, the `AlarmLow` alarm status changes to **OK**, and the `AlarmHigh` alarm status changes to **In alarm**.
+
+The `AlarmHigh` chart indicates an increasing CPU percentage. Once it crosses the 50 percent line for more than 3 minutes, it triggers Auto Scaling to add additional instances.
+
+8. I wait until the `AlarmHigh` alarm enters the **In alarm** state, then view the additional instance(s) that were launched.
+9. In the EC2 Management Console, I locate the **Instances** section and choose **Instances**.
+
+<p align="center">
+  <img src="images/auto-scaling-trigger.png" alt="Auto Scaling Trigger" width="900">
+</p>
+
+*More than two instances named **Lab Instance** are now running. Auto Scaling created the new instances in response to the alarm.*
+
 ## Conclusion
 
 After completing this lab, I am able to:
