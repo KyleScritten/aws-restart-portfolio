@@ -32,7 +32,7 @@ In this task, I create an AMI from the existing **Web Server 1**. This saves the
 5. I choose **Create image**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/AMI-creation.png" alt="Creating an AMI for auto scaling" width="900">
 </p>
 
 *The confirmation screen displays the AMI ID `PLACHOLDER_AMI_ID` for my new AMI. I use this AMI when launching the Auto Scaling group later in the lab.*
