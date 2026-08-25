@@ -32,7 +32,7 @@ In this task, I create an AMI from the existing **Web Server 1**. This saves the
 5. I choose **Create image**.
 
 <p align="center">
-  <img src="images/AMI-creation.png" alt="Creating an AMI for auto scaling" width="900">
+  <img src="images/AMI-creation.png" alt="Creating an AMI for auto scaling" width="1000">
 </p>
 
 *The confirmation screen displays the AMI ID `PLACHOLDER_AMI_ID` for my new AMI. I use this AMI when launching the Auto Scaling group later in the lab.*
@@ -66,7 +66,7 @@ In this task, I create a load balancer that can balance traffic across multiple 
 13. At the bottom of the page, I choose **Create load balancer**.
 
 <p align="center">
-  <img src="images/ELB-creation.png" alt="Creating a load balancer" width="900">
+  <img src="images/ELB-creation.png" alt="Creating a load balancer" width="1000">
 </p>
 
 *I receive a message similar to the following: "**Successfully created load balancer: LabELB**"*
@@ -102,7 +102,7 @@ I receive a message similar to the following: "**Successfully created lab-app-la
 9. I choose **View launch templates**.
 
 <p align="center">
-  <img src="images/01-launch-template.png" alt="Launch Template Creation Success" width="900">
+  <img src="images/01-launch-template.png" alt="Launch Template Creation Success" width="1000">
 </p>
 
 *I have successfully created a launch template, for the Auto Scaling group, named `lab-app-launch-template`.*
@@ -142,7 +142,7 @@ In this task, I use my launch template to create an Auto Scaling group.
 9. I choose **Create Auto Scaling group**. These options launch EC2 instances in private subnets across both Availability Zones.
 
 <p align="center">
-  <img src="images/auto-scaling-group.png" alt="Auto Scaling Group Overview" width="900">
+  <img src="images/auto-scaling-group.png" alt="Auto Scaling Group Overview" width="1000">
 </p>
 
 *My Auto Scaling group initially shows an **Instances** count of zero, but new instances will be launched to reach the desired count of two instances.*
@@ -163,7 +163,7 @@ In this task, I verify that load balancing is working correctly.
 4. I wait until the **Health status** of both instances changes to **healthy**, refreshing to check for updates.
 
 <p align="center">
-  <img src="images/healthy-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="900">
+  <img src="images/healthy-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="1000">
 </p>
 
 *A **healthy** status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.*
@@ -173,7 +173,7 @@ I can now access the instances launched in the Auto Scaling group using the load
 5. I open a new web browser tab, paste the DNS name I copied earlier, and press Enter.
 
 <p align="center">
-  <img src="images/load-test.png" alt="Verifying that load balancing is working" width="900">
+  <img src="images/load-test.png" alt="Verifying that load balancing is working" width="1000">
 </p>
 
 *The Load Test application appears in my browser, which means that the load balancer received the request, sent it to one of the EC2 instances, and then passed back the result.*
@@ -185,7 +185,7 @@ I created an Auto Scaling group with a minimum of two instances and a maximum of
 2. On the AWS CloudWatch Dashboard, in the **Alarms** section, I choose **All alarms**.
 
 <p align="center">
-  <img src="images/alarmHigh-status.png" alt="CloudWatch AlarmHigh Status" width="900">
+  <img src="images/alarmHigh-status.png" alt="CloudWatch AlarmHigh Status" width="1000">
 </p>
 
 *Two alarms are displayed. The Auto Scaling group automatically created these two alarms, which keep the average CPU load close to 50 percent while staying within the limitation of having 2–4 instances.*
@@ -212,7 +212,7 @@ The `AlarmHigh` chart indicates an increasing CPU percentage. Once it crosses th
 9. In the EC2 Management Console, I locate the **Instances** section and choose **Instances**.
 
 <p align="center">
-  <img src="images/auto-scaling-trigger.png" alt="Auto Scaling Trigger" width="900">
+  <img src="images/auto-scaling-trigger.png" alt="Auto Scaling Trigger" width="1000">
 </p>
 
 *More than two instances named **Lab Instance** are now running. Auto Scaling created the new instances in response to the alarm.*
@@ -225,7 +225,7 @@ In this task, I terminate the **Web Server 1** instance. This instance was used 
 3. I choose **Terminate**.
 
 <p align="center">
-  <img src="images/terminate-instance.png" alt="Terminate Instance" width="900">
+  <img src="images/terminate-instance.png" alt="Terminate Instance" width="1000">
 </p>
 
 *This step ensures that only instances managed by the Auto Scaling group remain active in the architecture.*
