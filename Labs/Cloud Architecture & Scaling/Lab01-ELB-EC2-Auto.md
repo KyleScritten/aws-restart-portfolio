@@ -151,7 +151,33 @@ In this task, I use my launch template to create an Auto Scaling group.
 > [!NOTE]
 > If I experience an error related to the `t3.micro` instance type not being available, I rerun this task by choosing the `t2.micro` instance type instead.
 
+## Task 5: Verifying that load balancing is working
+In this task, I verify that load balancing is working correctly.
 
+1. In the left navigation pane, I locate the **Instances** section and choose **Instances**.
+
+> [!NOTE]
+> I see two new instances named **Lab Instance**. These instances were launched by Auto Scaling. If the instances or names are not displayed, I wait 30 seconds, then choose refresh.
+
+2. First, I confirm that the new instances have passed their health check. In the **Load Balancing** section, I choose **Target Groups**.
+3. I choose **lab-target-group**. In the **Registered targets** section, two **Lab Instance** targets are listed for this target group.
+4. I wait until the **Health status** of both instances changes to **healthy**, refreshing to check for updates.
+
+<p align="center">
+  <img src="images/healthy-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="900">
+</p>
+
+*A **healthy** status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.*
+
+I can now access the instances launched in the Auto Scaling group using the load balancer.
+
+5. I open a new web browser tab, paste the DNS name I copied earlier, and press Enter.
+
+<p align="center">
+  <img src="images/load-test.png" alt="Verifying that load balancing is working" width="900">
+</p>
+
+*The Load Test application appears in my browser, which means that the load balancer received the request, sent it to one of the EC2 instances, and then passed back the result.*
 
 ## Conclusion
 
