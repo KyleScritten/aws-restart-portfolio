@@ -79,7 +79,6 @@ PLACEHOLDER_DNS_NAME
 ```
 
 ## Task 3: Creating a launch template
-
 In this task, I create a launch template for my Auto Scaling group. A launch template is a template that an Auto Scaling group uses to launch EC2 instances. When creating a launch template, I specify information for the instances, such as the AMI, instance type, key pair, security group, and disks.
 
 1. In the EC2 Management Console, I locate the **Instances** section and choose **Launch Templates**.
@@ -98,7 +97,7 @@ In this task, I create a launch template for my Auto Scaling group. A launch tem
 7. In the **Network settings** section, I choose the **Security groups** dropdown list and choose **Web Security Group**.
 8. I choose **Create launch template**.
 
-I receive a message similar to the following: "Successfully created lab-app-launch-template."
+I receive a message similar to the following: "**Successfully created lab-app-launch-template.**"
 
 9. I choose **View launch templates**.
 
