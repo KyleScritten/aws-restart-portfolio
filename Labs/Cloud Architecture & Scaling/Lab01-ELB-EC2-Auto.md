@@ -54,8 +54,8 @@ In this task, I create a load balancer that can balance traffic across multiple 
 7. From the **Security groups** dropdown list, I choose `Web Security Group`.
 8. In the **Listeners and routing** section, I choose the **Create target group** link.
 
-   > [!NOTE]
-   > This link opens a new browser tab with the Create target group configuration options.
+> [!NOTE]
+> This link opens a new browser tab with the Create target group configuration options.
 
 9. On the new **Target groups** browser tab, in the **Basic configuration** section, I configure the following and choose **Next**:
    * **Choose a target type:** `Instances`
