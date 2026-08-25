@@ -69,7 +69,7 @@ In this task, I create a load balancer that can balance traffic across multiple 
   <img src="images/ELB-creation.png" alt="Creating a load balancer" width="900">
 </p>
 
-I receive a message similar to the following: "Successfully created load balancer: LabELB"
+*I receive a message similar to the following: "**Successfully created load balancer: LabELB**"*
 
 14. To view the **LabELB** load balancer I created, I choose **View load balancer**.
 15. I copy the DNS name of the load balancer, for later use in the lab:
@@ -77,6 +77,81 @@ I receive a message similar to the following: "Successfully created load balance
 ```
 PLACEHOLDER_DNS_NAME
 ```
+
+## Task 3: Creating a launch template
+
+In this task, I create a launch template for my Auto Scaling group. A launch template is a template that an Auto Scaling group uses to launch EC2 instances. When creating a launch template, I specify information for the instances, such as the AMI, instance type, key pair, security group, and disks.
+
+1. In the EC2 Management Console, I locate the **Instances** section and choose **Launch Templates**.
+2. I choose **Create launch template**.
+3. On the **Create launch template** page, in the **Launch template name and description** section, I configure the following options:
+   * **Launch template name - required:** `lab-app-launch-template`
+   * **Template version description:** `A web server for the load test app`
+   * **Auto Scaling guidance:** Choose **Provide guidance to help me set up a template that I can use with EC2 Auto Scaling**
+4. In the **Application and OS Images (Amazon Machine Image) - required** section, I choose the **My AMIs** tab.
+5. In the **Instance type** section, I choose `t3.micro`.
+6. In the **Key pair (login)** section, I confirm that the **Key pair name** dropdown list is set to **Don't include in launch template**.
+
+> [!NOTE]
+> Amazon EC2 uses public key cryptography to encrypt and decrypt login information. To log in to an instance, I must create a key pair, specify the name of the key pair when launching the instance, and provide the private key when connecting to the instance.
+
+7. In the **Network settings** section, I choose the **Security groups** dropdown list and choose **Web Security Group**.
+8. I choose **Create launch template**.
+
+I receive a message similar to the following: "Successfully created lab-app-launch-template."
+
+9. I choose **View launch templates**.
+
+<p align="center">
+  <img src="images/01-launch-template.png" alt="Launch Template Creation Success" width="900">
+</p>
+
+*I have successfully created a launch template, for the Auto Scaling group, named `lab-app-launch-template`.*
+
+## Task 4: Creating an Auto Scaling group
+In this task, I use my launch template to create an Auto Scaling group.
+
+1. I choose **lab-app-launch-template**, then from the **Actions** dropdown list, choose **Create Auto Scaling group**.
+2. On the **Choose launch template or configuration** page, in the **Name** section, for **Auto Scaling group name**, I enter `Lab Auto Scaling Group`.
+3. On the **Choose instance launch options** page, in the **Network** section, I configure the following options:
+   * **VPC:** Choose **Lab VPC**
+   * **Availability Zones and subnets:** Choose **Private Subnet 1 (10.0.1.0/24)** and **Private Subnet 2 (10.0.3.0/24)**
+4. I choose **Next**.
+5. On the **Configure advanced options – optional** page, I configure the following options:
+   * In the **Load balancing – optional** section, I choose **Attach to an existing load balancer**.
+   * In the **Attach to an existing load balancer** section, I configure the following options:
+     * Choose **Choose from your load balancer target groups**
+     * From the **Existing load balancer target groups** dropdown list, choose **lab-target-group | HTTP**
+   * In the **Health checks – optional** section, for **Health check type**, I choose **ELB**.
+6. I choose **Next**, and on the **Configure group size and scaling policies – optional** page, I configure the following options:
+   * In the **Group size – optional** section, I enter the following values:
+     * **Desired capacity:** `2`
+     * **Minimum capacity:** `2`
+     * **Maximum capacity:** `4`
+   * In the **Scaling policies – optional** section, I configure the following options:
+     * Choose **Target tracking scaling policy**
+     * **Metric type:** Choose **Average CPU utilization**
+     * I change the **Target value** to `50`
+
+> [!NOTE]
+> This tells Auto Scaling to maintain an average CPU utilization across all instances of 50 percent. Auto Scaling automatically adds or removes capacity as required to keep the metric at or close to the specified target value, adjusting to fluctuations in the metric due to a fluctuating load pattern.
+
+7. On the **Add notifications – optional** page, I choose **Next**.
+8. On the **Add tags – optional** page, I choose **Add tag** and configure the following options, then choose **Next**:
+   * **Key:** `Name`
+   * **Value - optional:** `Lab Instance`
+9. I choose **Create Auto Scaling group**. These options launch EC2 instances in private subnets across both Availability Zones.
+
+<p align="center">
+  <img src="images/auto-scaling-group.png" alt="Auto Scaling Group Overview" width="900">
+</p>
+
+*My Auto Scaling group initially shows an **Instances** count of zero, but new instances will be launched to reach the desired count of two instances.*
+
+> [!NOTE]
+> If I experience an error related to the `t3.micro` instance type not being available, I rerun this task by choosing the `t2.micro` instance type instead.
+
+
 
 ## Conclusion
 
