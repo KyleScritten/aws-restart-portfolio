@@ -293,7 +293,11 @@ In this task, I verify that both the Auto Scaling configuration and the load bal
 ## Task 4: Testing auto scaling configuration
 
 1. I open a new web browser tab, paste the `DNS name` of the load balancer I copied earlier into the address bar, and press `Enter`.
-2. On the web page, I choose **Start Stress**. This calls the application **stress** in the background, causing the CPU utilization on the instance that serviced this request to spike to 100 percent.
+2. On the web page, I choose **Start Stress**. 
+
+>[!Note]
+> This calls the application **stress** in the background, causing the CPU utilization on the instance that serviced this request to spike to 100 percent.
+
 3. On the EC2 Management Console, in the **Auto Scaling** section, I choose **Auto Scaling Groups**.
 4. I select **Web App Auto Scaling Group**.
 5. I choose the **Activity** tab.
