@@ -15,7 +15,19 @@ In this lab, I use the AWS Command Line Interface (AWS CLI) to create an Amazon 
   <img src="images/02-final-architecture.png" alt="Final lab architecture” width="600">
 </p>
 
-## Task 1
+## Task 1: Creating a new AMI for Amazon EC2 Auto Scaling
+In this task, I launch a new EC2 instance and then create a new AMI based on that running instance. I use the AWS CLI on the Command Host EC2 instance to perform all of these operations.
+
+### Task 1.1: Connecting to the Command Host instance
+In this task, I use EC2 Instance Connect to connect to the Command Host EC2 instance that was created when the lab was provisioned. I use this instance to run AWS CLI commands.
+
+I navigate to the EC2 Management Console by entering `EC2` in the search bar of the AWS Management Console, then choose **Instances** in the navigation pane. From the list of instances, I select the **Command Host** instance, choose **Connect**, and on the **EC2 Instance Connect** tab, choose **Connect**.
+
+**Terminal output:**
+```bash
+PLACEHOLDER
+```
+
 
 ## Task 2: Creating an auto scaling environment
 In this section, I create a load balancer that pools a group of EC2 instances under a single Domain Name System (DNS) address. I use Auto Scaling to create a dynamically scalable pool of EC2 instances based on the image I created in the previous task. Finally, I create a set of alarms that scale out or scale in the number of instances in my load balancer group whenever the CPU performance of any machine within the group exceeds or falls below a set of specified thresholds.
