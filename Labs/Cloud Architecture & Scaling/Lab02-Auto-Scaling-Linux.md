@@ -108,10 +108,12 @@ aws ec2 run-instances --key-name KEYNAME --instance-type t3.micro --image-id AMI
 
 **Terminal output:**
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-0-1-187 ~]$ aws ec2 run-instances --key-name vockey --instance-type t3.micro --image-id ami-07d99f9a9d64e297d --user-data file:///home/ec2-user/UserData.txt --security-group-ids sg-04847ccd83a12b4e4 --subnet-id subnet-038c6488cc740773f --associate-public-ip-address --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=WebServer}]' --output text --query 'Instances[*].InstanceId'
+i-0ba722db5a584e6ca
+[ec2-user@ip-10-0-1-187 ~]$ 
 ```
 
-The output of this command provides an **InstanceId:** `INSTANCEID_PLACEHOLDER`. Subsequent steps in this lab refer to this value as `NEW-INSTANCE-ID`.
+The output of this command provides an **InstanceId:** `i-0ba722db5a584e6ca`. Subsequent steps in this lab refer to this value as `NEW-INSTANCE-ID`.
 
 5. To use the `aws ec2 wait instance-running` command to monitor this instance's status, I replace `NEW-INSTANCE-ID` in the following command with the InstanceID value I copied in the previous step, then run the modified command:
 ```bash
@@ -127,16 +129,16 @@ aws ec2 describe-instances --instance-id NEW-INSTANCE-ID --query 'Reservations[0
 
 7. I copy the output of this command without the quotation marks. The value of this output is referred to as `PUBLIC-DNS-ADDRESS`:
 ```bash
-DNS_PLACEHOLDER
+ec2-35-85-49-62.us-west-2.compute.amazonaws.com
 ```
 
 8. In the following command, I replace `PUBLIC-DNS-ADDRESS` with the value I copied in the previous step, then run the modified command:
 ```bash
-http://PUBLIC-DNS-ADDRESS/index.php
+http://ec2-35-85-49-62.us-west-2.compute.amazonaws.com/index.php
 ```
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/02-ec2-instance-web-app.png" alt="Load EC2 web server" width="900">
 </p>
 
 *I access the web application through the browser using the URL `PLACEHOLDER_URL` to confirm that the web server is functioning correctly.*
