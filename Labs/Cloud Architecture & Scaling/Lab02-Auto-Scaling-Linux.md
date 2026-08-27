@@ -138,7 +138,7 @@ http://PUBLIC-DNS-ADDRESS/index.php
 ```
 
 <p align="center">
-  <img src="images/02-ec2-instance-web-app.png" alt="Load EC2 web server" width="900">
+  <img src="images/02-ec2-instance-web-app.png" alt="Load EC2 web server" width="1000">
 </p>
 
 *I access the web application through the browser using the URL `ec2-35-85-49-62.us-west-2.compute.amazonaws.com` to confirm that the web server is functioning correctly.*
@@ -285,7 +285,7 @@ In this task, I verify that both the Auto Scaling configuration and the load bal
 3. On the **Targets** tab, I verify that two instances are being created, refreshing this list until the **Health status** of these instances changes to ***healthy***.
 
 <p align="center">
-  <img src="images/healthy-EC2-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="900">
+  <img src="images/healthy-EC2-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="1000">
 </p>
 
 *A **healthy** status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.*
