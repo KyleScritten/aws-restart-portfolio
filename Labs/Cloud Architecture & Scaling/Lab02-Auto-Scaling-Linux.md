@@ -23,11 +23,100 @@ In this task, I use EC2 Instance Connect to connect to the Command Host EC2 inst
 
 I navigate to the EC2 Management Console by entering `EC2` in the search bar of the AWS Management Console, then choose **Instances** in the navigation pane. From the list of instances, I select the **Command Host** instance, choose **Connect**, and on the **EC2 Instance Connect** tab, choose **Connect**.
 
+
+### Task 1.2: Configuring the AWS CLI
+The AWS CLI is preconfigured on the Command Host instance.
+
+1. To confirm that the Region in which the Command Host instance is running matches the lab's Region (`us-west-2`), I run the following command:
+```bash
+curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+```
+
+2. To update the AWS CLI software with the correct credentials, I run the following command:
+```bash
+aws configure
+```
+
+3. At the prompts, I enter the following information:
+   * **AWS Access Key ID:** Press Enter
+   * **AWS Secret Access Key:** Press Enter
+   * **Default region name:** Enter the Region name from the previous step (for example, `us-west-2`). If the Region is already displayed, press Enter.
+   * **Default output format:** Enter `json`
+4. To access the scripts, I run the following command to navigate to their directory:
+```bash
+cd /home/ec2-user/
+```
+
 **Terminal output:**
 ```bash
 PLACEHOLDER
 ```
 
+### Task 1.3: Creating a new EC2 Instance
+In this task, I use the AWS CLI to create a new instance that hosts a web server.
+
+1. To inspect the `UserData.txt` script that was installed as part of the Command Host creation, I run the `more UserData.txt` command:
+
+**Terminal output:**
+```bash
+PLACEHOLDER
+```
+
+> [!NOTE]
+> This script performs a number of initialization tasks, including updating all installed software on the box and installing a small PHP web application that I can use to simulate a high CPU load on the instance.
+
+2. From the Vocareum Lab Environment, I save the lab details, including the `KEYNAME`, `AMIID`, `HTTPACCESS`, and `SUBNETID` credential values.
+3. In the following script, I replace the corresponding text with the values from the Vocareum Lab Environment:
+```bash
+aws ec2 run-instances --key-name KEYNAME --instance-type t3.micro --image-id AMIID --user-data file:///home/ec2-user/UserData.txt --security-group-ids HTTPACCESS --subnet-id SUBNETID --associate-public-ip-address --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=WebServer}]' --output text --query 'Instances[*].InstanceId'
+```
+
+4. I enter my modified script into the terminal window and run it.
+
+**Terminal output:**
+```bash
+PLACEHOLDER
+```
+
+The output of this command provides an **InstanceId:** `INSTANCEID_PLACEHOLDER`. Subsequent steps in this lab refer to this value as `NEW-INSTANCE-ID`.
+
+5. To use the `aws ec2 wait instance-running` command to monitor this instance's status, I replace `NEW-INSTANCE-ID` in the following command with the InstanceID value I copied in the previous step, then run the modified command:
+```bash
+aws ec2 wait instance-running --instance-ids NEW-INSTANCE-ID
+```
+
+My instance starts a new web server. To test that the web server was installed properly, I must obtain the public DNS name.
+
+6. To obtain the **Public DNS Name**, I replace `NEW-INSTANCE-ID` in the following command with the value I copied previously, then run the modified command:
+```bash
+aws ec2 describe-instances --instance-id NEW-INSTANCE-ID --query 'Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicDnsName'
+```
+
+7. I copy the output of this command without the quotation marks. The value of this output is referred to as `PUBLIC-DNS-ADDRESS`:
+```bash
+DNS_PLACEHOLDER
+```
+
+8. In the following command, I replace `PUBLIC-DNS-ADDRESS` with the value I copied in the previous step, then run the modified command:
+```bash
+http://PUBLIC-DNS-ADDRESS/index.php
+```
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+</p>
+
+*I access the web application through the browser using the URL `PLACEHOLDER_URL` to confirm that the web server is functioning correctly.*
+
+### Task 1.4: Creating a Custom AMI
+Next, I created a custom AMI from the running EC2 instance using the AWS CLI by running the `aws ec2 create-image` command. This AMI captured the configured web server environment and would later be used to launch identical instances in the Auto Scaling Group.
+
+```bash
+[PLACEHOLDER]$ aws ec2 create-image --name WebServerAMI --instance-id $NEW_INSTANCE_ID
+{
+    PLACEHOLDER
+}
+```
 
 ## Task 2: Creating an auto scaling environment
 In this section, I create a load balancer that pools a group of EC2 instances under a single Domain Name System (DNS) address. I use Auto Scaling to create a dynamically scalable pool of EC2 instances based on the image I created in the previous task. Finally, I create a set of alarms that scale out or scale in the number of instances in my load balancer group whenever the CPU performance of any machine within the group exceeds or falls below a set of specified thresholds.
