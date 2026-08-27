@@ -151,7 +151,7 @@ In this task, I verify that both the Auto Scaling configuration and the load bal
   <img src="images/healthy-EC2-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="900">
 </p>
 
-A healthy status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.
+*A healthy status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.*
 
 ## Task 4: Testing auto scaling configuration
 
