@@ -20,7 +20,7 @@ In this lab, I use the AWS Command Line Interface (AWS CLI) to create an Amazon 
 ## Task 2: Creating an auto scaling environment
 In this section, I create a load balancer that pools a group of EC2 instances under a single Domain Name System (DNS) address. I use Auto Scaling to create a dynamically scalable pool of EC2 instances based on the image I created in the previous task. Finally, I create a set of alarms that scale out or scale in the number of instances in my load balancer group whenever the CPU performance of any machine within the group exceeds or falls below a set of specified thresholds.
 
-### Task 2.1 Creating a load balancer
+### Task 2.1: Creating an Application Load Balancer
 In this task, I create a load balancer that can balance traffic across multiple EC2 instances and Availability Zones.
 
 1. I locate the **Load Balancing** section and choose **Load Balancers**.
@@ -35,6 +35,63 @@ In this task, I create a load balancer that can balance traffic across multiple 
    * For the second Availability Zone, choose **Public Subnet 2**
 6. In the **Security groups** section, I choose the `X` for the default security group to remove it.
 7. From the **Security groups** dropdown list, I choose `HTTPAccess`.
+8. In the **Listeners and routing** section, I choose the **Create target group** link.
+
+> [!NOTE]
+> This link opens a new browser tab with the Create target group configuration options.
+
+9. On the new **Specify group details** page, in the **Basic configuration** section, I configure the following and choose **Next**:
+   * **Choose a target type:** `Instances`
+   * **Target group name:** `webserver-app`
+10. In the **Health checks** section, for **Health check path**, I enter `/index.php` and choose **Next**.
+11. On the **Register targets** page, I choose **Create target group**. Once the target group is created successfully, I close the Target groups browser tab.
+12. I return to the **Load balancers** browser tab. In the **Listeners and routing** section, I choose **Refresh** to the right of the **Forward to** dropdown list for **Default action**.
+13. From the **Forward to** dropdown list, I choose `webserver-app`.
+14. At the bottom of the page, I choose **Create load balancer**.
+
+<p align="center">
+  <img src="images/app-load-balance-create.png" alt="Creating an Application Load Balancer" width="1000">
+</p>
+
+*I receive a message similar to the following: "**Successfully created load balancer: WebServerELB**"*
+
+15. To view the **WebServerELB** load balancer I created, I choose **View load balancer**.
+16. I copy the DNS name of the load balancer, for later use in the lab:
+
+```
+PLACEHOLDER_DNS
+```
+
+### Task 2.2: Creating a launch template
+In this task, I create a launch template for my Auto Scaling group. A launch template is a template that an Auto Scaling group uses to launch EC2 instances. When creating a launch template, I specify information for the instances, such as the AMI, instance type, key pair, security group, and disks.
+
+1. In the EC2 Management Console, I locate the **Instances** section and choose **Launch Templates**.
+2. I choose **Create launch template**.
+3. On the **Create launch template** page, in the **Launch template name and description** section, I configure the following options:
+   * **Launch template name - required:** `web-app-launch-template`
+   * **Template version description:** `A web server for the load test app`
+   * **Auto Scaling guidance:** Choose **Provide guidance to help me set up a template that I can use with EC2 Auto Scaling**
+4. In the **Application and OS Images (Amazon Machine Image) - required** section, I choose the **My AMIs** tab.
+5. In the **Instance type** section, I choose `t3.micro`.
+6. In the **Key pair (login)** section, I confirm that the **Key pair name** dropdown list is set to **Don't include in launch template**.
+
+> [!NOTE]
+> Amazon EC2 uses public key cryptography to encrypt and decrypt login information. To log in to an instance, I must create a key pair, specify the name of the key pair when launching the instance, and provide the private key when connecting to the instance.
+
+7. In the **Network settings** section, I choose the **Security groups** dropdown list and choose `HTTPAccess`.
+8. I choose **Create launch template**.
+
+I receive a message similar to the following: "**Successfully created web-app-launch-template.**"
+
+9. I choose **View launch templates**.
+
+<p align="center">
+  <img src="images/02-launch-template.png" alt="Launch Template Creation Success" width="1000">
+</p>
+
+*I have successfully created a launch template, for the Auto Scaling group, named `web-app-launch-template`.*
+
+
 
 ## Conclusion
 After completing this lab, I am able to:
