@@ -141,7 +141,7 @@ http://PUBLIC-DNS-ADDRESS/index.php
   <img src="images/02-ec2-instance-web-app.png" alt="Load EC2 web server" width="900">
 </p>
 
-*I access the web application through the browser using the URL `PLACEHOLDER_URL` to confirm that the web server is functioning correctly.*
+*I access the web application through the browser using the URL `http://ec2-35-85-49-62.us-west-2.compute.amazonaws.com/index.php` to confirm that the web server is functioning correctly.*
 
 ### Task 1.4: Creating a Custom AMI
 Next, I created a custom AMI from the running EC2 instance using the AWS CLI by running the `aws ec2 create-image` command. This AMI captured the configured web server environment and would later be used to launch identical instances in the Auto Scaling Group.
@@ -167,8 +167,8 @@ In this task, I create a load balancer that can balance traffic across multiple 
 5. In the **Network mapping** section, I configure the following options:
    * **VPC:** Choose `Lab VPC`
    * **Mappings:** Choose both Availability Zones listed
-   * For the first Availability Zone, choose **Public Subnet 1**
-   * For the second Availability Zone, choose **Public Subnet 2**
+   * For the first Availability Zone, choose `Public Subnet 1`
+   * For the second Availability Zone, choose `Public Subnet 2`
 6. In the **Security groups** section, I choose the `X` for the default security group to remove it.
 7. From the **Security groups** dropdown list, I choose `HTTPAccess`.
 8. In the **Listeners and routing** section, I choose the **Create target group** link.
@@ -176,11 +176,11 @@ In this task, I create a load balancer that can balance traffic across multiple 
 > [!NOTE]
 > This link opens a new browser tab with the Create target group configuration options.
 
-9. On the new **Specify group details** page, in the **Basic configuration** section, I configure the following and choose **Next**:
+9. On the new **Create target group** page, in the **Settings - *immutable*** section, I configure the following and choose **Next**:
    * **Choose a target type:** `Instances`
    * **Target group name:** `webserver-app`
 10. In the **Health checks** section, for **Health check path**, I enter `/index.php` and choose **Next**.
-11. On the **Register targets** page, I choose **Create target group**. Once the target group is created successfully, I close the Target groups browser tab.
+11. On the **Register targets** page, I choose **Next**. Once the target group is created successfully, I close the Target groups browser tab.
 12. I return to the **Load balancers** browser tab. In the **Listeners and routing** section, I choose **Refresh** to the right of the **Forward to** dropdown list for **Default action**.
 13. From the **Forward to** dropdown list, I choose `webserver-app`.
 14. At the bottom of the page, I choose **Create load balancer**.
@@ -195,7 +195,7 @@ In this task, I create a load balancer that can balance traffic across multiple 
 16. I copy the DNS name of the load balancer, for later use in the lab:
 
 ```
-PLACEHOLDER_DNS
+WebServerELB-1545391657.us-west-2.elb.amazonaws.com
 ```
 
 ### Task 2.2: Creating a launch template
@@ -206,7 +206,7 @@ In this task, I create a launch template for my Auto Scaling group. A launch tem
 3. On the **Create launch template** page, in the **Launch template name and description** section, I configure the following options:
    * **Launch template name - required:** `web-app-launch-template`
    * **Template version description:** `A web server for the load test app`
-   * **Auto Scaling guidance:** Choose **Provide guidance to help me set up a template that I can use with EC2 Auto Scaling**
+   * **Auto Scaling guidance:** Choose `Provide guidance to help me set up a template that I can use with EC2 Auto Scaling`
 4. In the **Application and OS Images (Amazon Machine Image) - required** section, I choose the **My AMIs** tab.
 5. In the **Instance type** section, I choose `t3.micro`.
 6. In the **Key pair (login)** section, I confirm that the **Key pair name** dropdown list is set to **Don't include in launch template**.
@@ -236,10 +236,10 @@ In this task, I use my launch template to create an Auto Scaling group.
    * **VPC:** Choose `Lab VPC`
    * **Availability Zones and subnets:** Choose `Private Subnet 1 (10.0.2.0/24)` and `Private Subnet 2 (10.0.4.0/24)`
 4. I choose **Next**.
-5. On the **Integrate with other services options – optional** page, I configure the following options:
+5. On the **Configure advanced options – *optional*** page, I configure the following options:
    * In the **Load balancing** section, I choose `Attach to an existing load balancer`.
    * In the **Attach to an existing load balancer** section, I configure the following options:
-     * Choose **Choose from your load balancer target groups**
+     * Choose `Choose from your load balancer target groups`
      * From the **Existing load balancer target groups** dropdown list, choose `webserver-app | HTTP`
    * In the **Health checks** section, for **Additional health check type - optional**, I choose `Turn on Elastic Load Balancing health checks`.
 6. I choose **Next**, and on the **Configure group size and scaling – optional** page, I configure the following options:
@@ -275,10 +275,11 @@ In this task, I verify that both the Auto Scaling configuration and the load bal
 
 1. I choose **Instances**. Two new instances named `WebApp` are being created as part of my Auto Scaling group.
 
-> [!NOTE]
-> While these instances are being created, the **Status check** for them is **Initializing**.
->
-> I observe the **Status check** field for the instances until the status shows **2/2 checks passed**.
+<p align="center">
+  <img src="images/auto-scaling-instances.png" alt="WebApp instances created by Auto Scaling Group” width="900">
+</p>
+
+*While these instances are being created, the **Status check** for them is **Initializing**. I observe the **Status check** field for the instances until the status shows **2/2 checks passed**.*
 
 2. Once the instances have completed *initialization*, in the **Load Balancing** section, I choose **Target Groups**, then select my target group, `webserver-app`.
 3. On the **Targets** tab, I verify that two instances are being created, refreshing this list until the **Health status** of these instances changes to ***healthy***.
@@ -287,7 +288,7 @@ In this task, I verify that both the Auto Scaling configuration and the load bal
   <img src="images/healthy-EC2-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="900">
 </p>
 
-*A healthy status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.*
+*A **healthy** status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.*
 
 ## Task 4: Testing auto scaling configuration
 
