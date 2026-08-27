@@ -42,14 +42,32 @@ aws configure
    * **AWS Secret Access Key:** Press Enter
    * **Default region name:** Enter the Region name from the previous step (for example, `us-west-2`). If the Region is already displayed, press Enter.
    * **Default output format:** Enter `json`
-4. To access the scripts, I run the following command to navigate to their directory:
-```bash
-cd /home/ec2-user/
-```
+4. To access the scripts, I run the `cd /home/ec2-user/` command to navigate to their directory
 
 **Terminal output:**
 ```bash
-PLACEHOLDER
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-0-1-187 ~]$ curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   475  100   475    0     0   471k      0 --:--:-- --:--:-- --:--:--  463k
+  "region" : "us-west-2",
+[ec2-user@ip-10-0-1-187 ~]$ aws configure
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+Default region name [us-west-2]: us-west-2
+Default output format [None]: json
+[ec2-user@ip-10-0-1-187 ~]$ 
 ```
 
 ### Task 1.3: Creating a new EC2 Instance
@@ -59,7 +77,22 @@ In this task, I use the AWS CLI to create a new instance that hosts a web server
 
 **Terminal output:**
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-0-1-187 ~]$ more UserData.txt
+#!/bin/bash
+yum update -y --security
+amazon-linux-extras install epel -y
+yum -y install httpd php stress
+systemctl enable httpd.service
+systemctl start httpd
+cd /var/www/html
+wget http://aws-tc-largeobjects.s3.amazonaws.com/CUR-TF-100-TULABS-1/10-lab-autoscaling-linux/s3/ec2-stress.zip
+unzip ec2-stress.zip
+
+echo 'UserData has been successfully executed. ' >> /home/ec2-user/result
+find -wholename /root/.*history -wholename /home/*/.*history -exec rm -f {} \;
+find / -name 'authorized_keys' -exec rm -f {} \;
+rm -rf /var/lib/cloud/data/scripts/*
+[ec2-user@ip-10-0-1-187 ~]$ 
 ```
 
 > [!NOTE]
