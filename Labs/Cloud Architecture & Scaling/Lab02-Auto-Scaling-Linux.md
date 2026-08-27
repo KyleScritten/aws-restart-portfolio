@@ -134,7 +134,7 @@ ec2-35-85-49-62.us-west-2.compute.amazonaws.com
 
 8. In the following command, I replace `PUBLIC-DNS-ADDRESS` with the value I copied in the previous step, then run the modified command:
 ```bash
-http://ec2-35-85-49-62.us-west-2.compute.amazonaws.com/index.php
+http://PUBLIC-DNS-ADDRESS/index.php
 ```
 
 <p align="center">
@@ -147,9 +147,9 @@ http://ec2-35-85-49-62.us-west-2.compute.amazonaws.com/index.php
 Next, I created a custom AMI from the running EC2 instance using the AWS CLI by running the `aws ec2 create-image` command. This AMI captured the configured web server environment and would later be used to launch identical instances in the Auto Scaling Group.
 
 ```bash
-[PLACEHOLDER]$ aws ec2 create-image --name WebServerAMI --instance-id $NEW_INSTANCE_ID
+[ec2-user@ip-10-0-1-187 ~]$ aws ec2 create-image --name WebServerAMI --instance-id i-0ba722db5a584e6ca
 {
-    PLACEHOLDER
+    "ImageId": "ami-0d3c084d1b74a0398"
 }
 ```
 
