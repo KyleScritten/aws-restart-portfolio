@@ -6,13 +6,13 @@ In this lab, I use the AWS Command Line Interface (AWS CLI) to create an Amazon 
 *Starting architecture:*
 
 <p align="center">
-  <img src="images/02-starting-architecture.png" alt="Starting lab architecture” width="400">
+  <img src="images/02-starting-architecture.png" alt="Starting lab architecture” width="800">
 </p>
 
 *Final architecture:*
 
 <p align="center">
-  <img src="images/02-final-architecture.png" alt="Final lab architecture” width="400">
+  <img src="images/02-final-architecture.png" alt="Final lab architecture” width="800">
 </p>
 
 ## Task 1: Creating a new AMI for Amazon EC2 Auto Scaling
