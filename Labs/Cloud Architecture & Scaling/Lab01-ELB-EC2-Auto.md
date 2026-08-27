@@ -147,7 +147,7 @@ In this task, I use my launch template to create an Auto Scaling group.
 
 *My Auto Scaling group initially shows an **Instances** count of zero, but new instances will be launched to reach the desired count of two instances.*
 
-> [!NOTE]
+> [!CAUTION]
 > If I experience an error related to the `t3.micro` instance type not being available, I rerun this task by choosing the `t2.micro` instance type instead.
 
 ## Task 5: Verifying that load balancing is working
