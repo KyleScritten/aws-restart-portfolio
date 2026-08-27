@@ -141,7 +141,7 @@ http://PUBLIC-DNS-ADDRESS/index.php
   <img src="images/02-ec2-instance-web-app.png" alt="Load EC2 web server" width="900">
 </p>
 
-*I access the web application through the browser using the URL `http://ec2-35-85-49-62.us-west-2.compute.amazonaws.com/index.php` to confirm that the web server is functioning correctly.*
+*I access the web application through the browser using the URL `ec2-35-85-49-62.us-west-2.compute.amazonaws.com` to confirm that the web server is functioning correctly.*
 
 ### Task 1.4: Creating a Custom AMI
 Next, I created a custom AMI from the running EC2 instance using the AWS CLI by running the `aws ec2 create-image` command. This AMI captured the configured web server environment and would later be used to launch identical instances in the Auto Scaling Group.
