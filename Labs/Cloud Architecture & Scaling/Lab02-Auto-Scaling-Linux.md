@@ -6,13 +6,13 @@ In this lab, I use the AWS Command Line Interface (AWS CLI) to create an Amazon 
 *Starting architecture:*
 
 <p align="center">
-  <img src="images/02-starting-architecture.png" alt="Starting lab architecture” width="700">
+  <img src="images/02-starting-architecture.png" alt="Starting lab architecture” width="600">
 </p>
 
 *Final architecture:*
 
 <p align="center">
-  <img src="images/02-final-architecture.png" alt="Final lab architecture” width="700">
+  <img src="images/02-final-architecture.png" alt="Final lab architecture” width="600">
 </p>
 
 ## Conclusion
