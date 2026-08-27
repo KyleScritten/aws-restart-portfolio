@@ -35,7 +35,7 @@ In this task, I create an AMI from the existing **Web Server 1**. This saves the
   <img src="images/AMI-creation.png" alt="Creating an AMI for auto scaling" width="1000">
 </p>
 
-*The confirmation screen displays the AMI ID `PLACHOLDER_AMI_ID` for my new AMI. I use this AMI when launching the Auto Scaling group later in the lab.*
+*The confirmation screen displays the AMI ID `ami-0b114c15cd10bf84c` for my new AMI. I use this AMI when launching the Auto Scaling group later in the lab.*
 
 ## Task 2: Creating a load balancer
 In this task, I create a load balancer that can balance traffic across multiple EC2 instances and Availability Zones.
