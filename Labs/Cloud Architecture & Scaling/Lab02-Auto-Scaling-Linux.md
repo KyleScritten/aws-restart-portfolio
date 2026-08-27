@@ -34,7 +34,7 @@ In this task, I create a load balancer that can balance traffic across multiple 
    * For the first Availability Zone, choose **Public Subnet 1**
    * For the second Availability Zone, choose **Public Subnet 2**
 6. In the **Security groups** section, I choose the `X` for the default security group to remove it.
-7. From the **Security groups** dropdown list, I choose `Web Security Group`.
+7. From the **Security groups** dropdown list, I choose `HTTPAccess`.
 
 ## Conclusion
 After completing this lab, I am able to:
