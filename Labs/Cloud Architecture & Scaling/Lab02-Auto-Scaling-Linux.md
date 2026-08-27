@@ -134,18 +134,38 @@ In this task, I use my launch template to create an Auto Scaling group.
 > [!CAUTION]
 > If I experience an error related to the `t3.micro` instance type not being available, I rerun this task by choosing the `t2.micro` instance type instead.
 
+## Task 3: Verifying the auto scaling configuration
+In this task, I verify that both the Auto Scaling configuration and the load balancer are working by accessing a pre-installed script on one of my servers that consumes CPU cycles, invoking the scale-out alarm.
 
+1. I choose **Instances**. Two new instances named `WebApp` are being created as part of my Auto Scaling group.
 
+> [!NOTE]
+> While these instances are being created, the **Status check** for them is **Initializing**.
+>
+> I observe the **Status check** field for the instances until the status shows **2/2 checks passed**.
 
+2. Once the instances have completed *initialization*, in the **Load Balancing** section, I choose **Target Groups**, then select my target group, `webserver-app`.
+3. On the **Targets** tab, I verify that two instances are being created, refreshing this list until the **Health status** of these instances changes to ***healthy***.
 
+<p align="center">
+  <img src="images/healthy-EC2-targets.png" alt="Auto Scaling group successfully launched two EC2 instances" width="900">
+</p>
 
+A healthy status indicates that an instance has passed the load balancer's health check, meaning the load balancer will send traffic to the instance.
 
+## Task 4: Testing auto scaling configuration
 
+1. I open a new web browser tab, paste the `DNS name` of the load balancer I copied earlier into the address bar, and press `Enter`.
+2. On the web page, I choose **Start Stress**. This calls the application **stress** in the background, causing the CPU utilization on the instance that serviced this request to spike to 100 percent.
+3. On the EC2 Management Console, in the **Auto Scaling** section, I choose **Auto Scaling Groups**.
+4. I select **Web App Auto Scaling Group**.
+5. I choose the **Activity** tab.
 
+<p align="center">
+  <img src="images/auto-scale-overview.png" alt="Web App Auto Scaling Group Overview” width="900">
+</p>
 
-
-
-
+*After a few minutes, I see my Auto Scaling group add a new instance. This occurs because Amazon CloudWatch detects that the average CPU utilization of my Auto Scaling group exceeded 50 percent, and my scale-up policy has been invoked in response.*
 
 ## Conclusion
 After completing this lab, I am able to:
