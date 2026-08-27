@@ -91,6 +91,60 @@ I receive a message similar to the following: "**Successfully created web-app-la
 
 *I have successfully created a launch template, for the Auto Scaling group, named `web-app-launch-template`.*
 
+### Task 2.3: Creating an Auto Scaling group
+In this task, I use my launch template to create an Auto Scaling group.
+
+1. I choose **web-app-launch-template**, then from the **Actions** dropdown list, choose **Create Auto Scaling group**.
+2. On the **Choose launch template or configuration** page, in the **Name** section, for **Auto Scaling group name**, I enter `Web App Auto Scaling Group`.
+3. On the **Choose instance launch options** page, in the **Network** section, I configure the following options:
+   * **VPC:** Choose `Lab VPC`
+   * **Availability Zones and subnets:** Choose `Private Subnet 1 (10.0.2.0/24)` and `Private Subnet 2 (10.0.4.0/24)`
+4. I choose **Next**.
+5. On the **Integrate with other services options – optional** page, I configure the following options:
+   * In the **Load balancing** section, I choose `Attach to an existing load balancer`.
+   * In the **Attach to an existing load balancer** section, I configure the following options:
+     * Choose **Choose from your load balancer target groups**
+     * From the **Existing load balancer target groups** dropdown list, choose `webserver-app | HTTP`
+   * In the **Health checks** section, for **Additional health check type - optional**, I choose `Turn on Elastic Load Balancing health checks`.
+6. I choose **Next**, and on the **Configure group size and scaling – optional** page, I configure the following options:
+   * In the **Group size** and **Scaling** sections, I enter the following values:
+     * **Desired capacity:** `2`
+     * **Minimum desired capacity:** `2`
+     * **Maximum desired capacity:** `4`
+   * In the **Automatic scaling policies – optional** section, I configure the following options:
+     * Choose `Target tracking scaling policy`
+     * **Metric type:** Choose **Average CPU utilization**
+     * I change the **Target value** to `50`
+
+> [!NOTE]
+> This change tells Auto Scaling to maintain an average CPU utilization across all instances of 50 percent. Auto Scaling automatically adds or removes capacity as required to keep the metric at or close to the specified target value. It adjusts to fluctuations in the metric due to a fluctuating load pattern.
+
+7. On the **Add notifications – optional** page, I choose **Next**.
+8. On the **Add tags – optional** page, I choose **Add tag** and configure the following options, then choose **Next**:
+   * **Key:** `Name`
+   * **Value - optional:** `WebApp`
+9. I choose **Create Auto Scaling group**. These options launch EC2 instances in private subnets across both Availability Zones.
+
+<p align="center">
+  <img src="images/webapp-auto-scaling-group.png" alt="Auto Scaling Group Overview" width="1000">
+</p>
+
+*My Auto Scaling group initially shows an **Instances** count of zero, but new instances will be launched to reach the desired count of two instances.*
+
+> [!CAUTION]
+> If I experience an error related to the `t3.micro` instance type not being available, I rerun this task by choosing the `t2.micro` instance type instead.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Conclusion
