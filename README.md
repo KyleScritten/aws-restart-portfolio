@@ -10,12 +10,7 @@ Over the course of the program, I'm building foundational skills across cloud co
 
 This repository serves as a record of my labs, notes, certifications and badges, and projects completed throughout the course.
 
-**Provider:** Praesignis | **Start Date:** 1 June 2026 | **Duration:** 24 weeks | **Status:** 🟢 In Progress
-
-**Provider:** [Praesignis](https://praesignis.com)
-**Start Date:** 1 June 2026
-**Duration:** 24 weeks
-**Status:** 🟢 In Progress
+**Provider:** [Praesignis](https://praesignis.com) | **Start Date:** 1 June 2026 | **Duration:** 24 weeks | **Status:** 🟢 In Progress
 
 These are my badges fom completing the AWS re/Start program and passing AWS Certified Cloud Practitioner exam from Amazon Web Services Training and Certification:
 
