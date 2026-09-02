@@ -99,8 +99,8 @@ I now configure failover routing based on the health check I just created.
 
 1. In the Route 53 console, in the left navigation pane, I choose **Hosted zones**.
 
-   > [!NOTE]
-   > The SOA, or start of authority record, identifies the base Domain Name System (DNS) information about the domain in the **Value/Route traffic to** column. It was also created when the domain was registered with Route 53.
+> [!NOTE]
+> The SOA, or start of authority record, identifies the base Domain Name System (DNS) information about the domain in the **Value/Route traffic to** column. It was also created when the domain was registered with Route 53.
 
 2. I choose **Create record** and configure the following options:
    * **Record name:** `www`
@@ -154,24 +154,25 @@ In this task, I verify that Route 53 correctly fails over to my secondary server
 
 3. On the **Services** menu, I choose **Route 53**, then choose **Health checks**.
 4. I select **Primary-Website-Health**, then choose the **Monitoring** tab, and see failed health checks within minutes of stopping the EC2 instance.
-5. I wait until the status of `Primary-Website-Health` is **Unhealthy**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/primary-website-unhealthy.png" alt="Primary-Website-Health Health Status Unhealthy" width="900">
 </p>
 
-6. I return to the browser tab where I have the `www.6313282_1777904138.vocareum.training/cafe` website open, and refresh the page.
+*I wait until the status of `Primary-Website-Health` is **Unhealthy**.*
+
+5. I return to the browser tab where I have the `PLACEHOLDER_URL` website open, and refresh the page.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/failover-result-az2.png" alt="Failover Result" width="900">
 </p>
 
 *I notice that the Region/Availability Zone value now displays a different Availability Zone (for example, `us-west-2b` instead of `us-west-2a`). I am now seeing the website served from my `CafeInstance2` instance.*
 
-7. I check my email and receive an email from AWS Notifications titled "ALARM: Primary-Website-Health-awsroute53-..." with details about what triggered the alarm.
+6. I check my email and receive an email from AWS Notifications titled "ALARM: Primary-Website-Health-awsroute53-..." with details about what triggered the alarm.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/failover-notification.png" alt="Failover Email Notification" width="900">
 </p>
 
 *I have now successfully confirmed that my application environment can fail over from its primary Availability Zone to its secondary Availability Zone if the server in the primary Availability Zone fails.*
