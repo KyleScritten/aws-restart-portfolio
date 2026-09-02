@@ -35,8 +35,8 @@
 #### Option 5:
 
 <p align="center">
-  <img src="https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS" width="200">
-  <img src="https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux" alt="Linux" width="200">
+  <img src="https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS" width="100">
+  <img src="https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux" alt="Linux" width="300">
   <img src="https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python" alt="Python" width="200">
 </p>
 
