@@ -7,13 +7,13 @@ The activity environment starts with two Amazon Elastic Compute Cloud (Amazon EC
 
 I configure my domain such that, if the website in the primary Availability Zone becomes unavailable, Amazon Route 53 automatically fails over application traffic to the instance in the secondary Availability Zone.
 
-When finished, my environment looks like the following architecture:
+*When finished, my environment looks like the following architecture:*
 
 <p align="center">
   <img src="images/03-final-architecture.png" alt="Amazon Route 53 Failover Routing Final Architecture" width="900">
 </p>
 
-Route 53 records store the IP address of the EC2 instance in each Availability Zone. User requests are normally sent to the IP address corresponding to Café Instance1 in Availability Zone 1. If Café Instance1 is unavailable, requests are routed to Café Instance2 in Availability Zone 2, based on the configuration in the Route 53 records. When Café Instance1 becomes unavailable, a Route 53 health check alarm is invoked, and an email alert is sent to the email address provided.
+*Route 53 records store the IP address of the EC2 instance in each Availability Zone. User requests are normally sent to the IP address corresponding to Café Instance1 in Availability Zone 1. If Café Instance1 is unavailable, requests are routed to Café Instance2 in Availability Zone 2, based on the configuration in the Route 53 records. When Café Instance1 becomes unavailable, a Route 53 health check alarm is invoked, and an email alert is sent to the email address provided.*
 
 
 
