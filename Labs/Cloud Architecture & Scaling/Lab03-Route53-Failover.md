@@ -89,6 +89,93 @@ The first step to configure failover is to create a health check for my primary 
 
 *This tab provides a view of the status of the `Primary-Website-Health` health check over time. It might take a few seconds before the chart becomes available.*
 
+## Task 3: Configuring Route 53 records
+
+In the following tasks, I create Route 53 records for the hosted zone.
+
+### Task 3.1: Creating an A record for the primary website
+
+I now configure failover routing based on the health check I just created.
+
+1. In the Route 53 console, in the left navigation pane, I choose **Hosted zones**.
+
+   > [!NOTE]
+   > The SOA, or start of authority record, identifies the base Domain Name System (DNS) information about the domain in the **Value/Route traffic to** column. It was also created when the domain was registered with Route 53.
+
+2. I choose **Create record** and configure the following options:
+   * **Record name:** `www`
+   * **Record type:** Choose `A - Routes traffic to an IPv4 address and some AWS resources`
+   * **Value:** In the text box, enter the IP address for `CafeInstance1IPAddress`
+   * **TTL (seconds):** Enter `15`
+   * **Routing policy:** Choose `Failover`
+   * **Failover record type:** Choose `Primary`
+   * **Health check ID:** Choose `Primary-Website-Health`
+   * **Record ID:** Enter `FailoverPrimary`
+
+### Task 3.2: Creating an A record for the secondary website
+
+I now create another record for the stand-by/secondary web server.
+
+3. I choose **Create record** and configure the following options:
+   * **Record name:** `www`
+   * **Record type:** Choose `A - Routes traffic to an IPv4 address and some AWS resources`
+   * **Value:** In the text box, enter the IP address for `CafeInstance2IPAddress`. I copy the IP address from the `CafeInstance2IPAddress` value captured earlier in the lab.
+   * **TTL (seconds):** Enter `15`
+   * **Routing policy:** Choose `Failover`
+   * **Failover record type:** Choose `Secondary`
+   * **Health check ID:** Leave this field empty
+   * **Record ID:** Enter `FailoverSecondary`
+
+<p align="center">
+  <img src="images/failover-records.png" alt="Primary and Secondary Record" width="900">
+</p>
+
+*I have now configured my web application to fail over to another Availability Zone. Two new A-type records are now listed on the **Hosted zones** page.*
+
+## Task 4: Verifying the DNS resolution
+In this task, I visit the DNS records in a browser to verify that Route 53 is pointing correctly to my primary website.
+
+The URL for my lab is `PLACEHOLDER_URL`.
+
+<p align="center">
+  <img src="images/verify-dns-resolution.png" alt="Verifying the DNS resolution" width="900">
+</p>
+
+*I confirm that the request was routed to the primary instance by checking the server information displayed on the webpage, which indicates the correct Availability Zone.*
+
+## Task 5: Verifying the failover functionality
+In this task, I verify that Route 53 correctly fails over to my secondary server if my primary server fails. For the purposes of this activity, I simulate a failure by manually stopping `CafeInstance1`.
+
+1. On the EC2 Management Console, I choose **Instances** and select `CafeInstance1`.
+2. From the **Instance state** menu, I choose **Stop instance**.
+
+> [!NOTE]
+> The primary website now stops functioning. The Route 53 health check I configured notices that the application is not responding, and the record entries I configured cause DNS traffic to fail over to the secondary EC2 instance.
+
+3. On the **Services** menu, I choose **Route 53**, then choose **Health checks**.
+4. I select **Primary-Website-Health**, then choose the **Monitoring** tab, and see failed health checks within minutes of stopping the EC2 instance.
+5. I wait until the status of `Primary-Website-Health` is **Unhealthy**.
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+</p>
+
+6. I return to the browser tab where I have the `www.6313282_1777904138.vocareum.training/cafe` website open, and refresh the page.
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+</p>
+
+*I notice that the Region/Availability Zone value now displays a different Availability Zone (for example, `us-west-2b` instead of `us-west-2a`). I am now seeing the website served from my `CafeInstance2` instance.*
+
+7. I check my email and receive an email from AWS Notifications titled "ALARM: Primary-Website-Health-awsroute53-..." with details about what triggered the alarm.
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+</p>
+
+*I have now successfully confirmed that my application environment can fail over from its primary Availability Zone to its secondary Availability Zone if the server in the primary Availability Zone fails.*
+
 ## Conclusion
 After completing this activity, I am able to:
 * Configure a Route 53 health check that sends emails when the health of an HTTP endpoint becomes unhealthy
