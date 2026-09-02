@@ -166,7 +166,7 @@ In this task, I verify that Route 53 correctly fails over to my secondary server
 
 *I notice that the Region/Availability Zone value now displays a different Availability Zone (for example, `us-west-2b` instead of `us-west-2a`). I am now seeing the website served from my `CafeInstance2` instance.*
 
-6. I check my email and receive an email from AWS Notifications titled "ALARM: Primary-Website-Health-awsroute53-..." with details about what triggered the alarm.
+6. I check my email and receive an email from AWS Notifications titled **"ALARM: Primary-Website-Health-awsroute53-..."** with details about what triggered the alarm.
 
 <p align="center">
   <img src="images/failover-notification.png" alt="Failover Email Notification" width="1000">
