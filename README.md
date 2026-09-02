@@ -17,3 +17,42 @@ These are my badges fom completing the AWS re/Start program and passing AWS Cert
 BADGE-PLACEHOLDERS
 
 ---
+
+## 📖 About This Journey
+
+Throughout the AWS re/Start Programme, I've been building both technical skills and hands-on cloud experience across a wide range of areas, including:
+
+- **Cloud Computing Fundamentals** — developing a strong foundation in core AWS services and cloud concepts
+- **Linux Administration** — practicing system administration, shell scripting, and automation
+- **Networking** — building and troubleshooting network architectures using VPC concepts
+- **Databases** — working with both relational and NoSQL databases
+- **Security** — applying best practices including IAM policies and encryption
+- **Programming** — writing Python scripts for automation and problem-solving
+- **Infrastructure Deployment** — deploying and managing infrastructure using AWS tools and services
+- **Documentation** — recording my learning and labs through structured Markdown files
+
+This repository reflects that growth — capturing not just what I've learned, but how I've applied it through real, hands-on cloud experience.
+
+---
+
+## Certifications & Badges
+
+PLACEHOLDER_TABLE
+
+---
+
+## Labs
+
+---
+
+## Projects
+
+---
+
+## Key Skills Developed
+
+---
+
+## Summary
+
+---
