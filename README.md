@@ -11,15 +11,19 @@ BANNER-PLACEHOLDERS
 #### Option 2:
 
 <div align="center">
+  
 ![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white) ![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux) ![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
+
 </div>
 
 #### Options 3:
 
 <div align="center">
+  
 ![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white)&nbsp;&nbsp;&nbsp;
 ![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux)&nbsp;&nbsp;&nbsp;
 ![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
+
 </div>
 
 ## 👋 Introduction
