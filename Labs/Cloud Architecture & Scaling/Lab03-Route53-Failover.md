@@ -10,7 +10,7 @@ I configure my domain such that, if the website in the primary Availability Zone
 *When finished, my environment looks like the following architecture:*
 
 <p align="center">
-  <img src="images/03-final-architecture.png" alt="Amazon Route 53 Failover Routing Final Architecture" width="900">
+  <img src="images/03-final-architecture.png" alt="Amazon Route 53 Failover Routing Final Architecture" width="1000">
 </p>
 
 *Route 53 records store the IP address of the EC2 instance in each Availability Zone. User requests are normally sent to the IP address corresponding to Café Instance1 in Availability Zone 1. If Café Instance1 is unavailable, requests are routed to Café Instance2 in Availability Zone 2, based on the configuration in the Route 53 records. When Café Instance1 becomes unavailable, a Route 53 health check alarm is invoked, and an email alert is sent to the email address provided.*
@@ -33,7 +33,7 @@ In this task, I analyze the resources that AWS CloudFormation has automatically 
 3. I open a new browser tab and navigate to the Primary Website URL: `http://44.225.129.199/cafe/`.
 
 <p align="center">
-  <img src="images/primary-web-url.png" alt="PrimaryWebSiteURL Homepage" width="900">
+  <img src="images/primary-web-url.png" alt="PrimaryWebSiteURL Homepage" width="1000">
 </p>
 
 *The café application webpage opens.*
@@ -41,7 +41,7 @@ In this task, I analyze the resources that AWS CloudFormation has automatically 
 4. I open the Secondary Website URL `http://32.185.145.132/cafe/` in another browser tab.
 
 <p align="center">
-  <img src="images/secondary-web-url.png" alt="SecondaryWebsiteURL Homepage" width="900">
+  <img src="images/secondary-web-url.png" alt="SecondaryWebsiteURL Homepage" width="1000">
 </p>
 
 *These configurations confirm that the café application is running on both instances.*
@@ -49,7 +49,7 @@ In this task, I analyze the resources that AWS CloudFormation has automatically 
 5. On the first website, I choose **Menu**, choose any item on the menu, then select **Submit Order**.
 
 <p align="center">
-  <img src="images/order-confirmation.png" alt="The Order Confirmation page from the PrimaryWebSiteURL" width="900">
+  <img src="images/order-confirmation.png" alt="The Order Confirmation page from the PrimaryWebSiteURL" width="1000">
 </p>
 
 *The **Order Confirmation** page reflects the time the order was placed in the time zone where the web server is running.*
@@ -84,7 +84,7 @@ The first step to configure failover is to create a health check for my primary 
 8. In the email, I choose the **Confirm subscription** link to finish setting up the email alerting I configured when creating the health check.
 
 <p align="center">
-  <img src="images/health-check-config-route53.png" alt="Configuring a Route 53 Health Check" width="900">
+  <img src="images/health-check-config-route53.png" alt="Configuring a Route 53 Health Check" width="1000">
 </p>
 
 *This tab provides a view of the status of the `Primary-Website-Health` health check over time. It might take a few seconds before the chart becomes available.*
@@ -124,7 +124,7 @@ I now create another record for the stand-by/secondary web server.
    * **Record ID:** Enter `FailoverSecondary`
 
 <p align="center">
-  <img src="images/failover-records.png" alt="Primary and Secondary Record" width="900">
+  <img src="images/failover-records.png" alt="Primary and Secondary Record" width="1000">
 </p>
 
 *I have now configured my web application to fail over to another Availability Zone. Two new A-type records are now listed on the **Hosted zones** page.*
@@ -135,7 +135,7 @@ In this task, I visit the DNS records in a browser to verify that Route 53 is po
 The URL for my lab is `www.4137084_1788382469.vocareum.training/cafe`.
 
 <p align="center">
-  <img src="images/verify-dns-resolution.png" alt="Verifying the DNS resolution" width="900">
+  <img src="images/verify-dns-resolution.png" alt="Verifying the DNS resolution" width="1000">
 </p>
 
 *I confirm that the request was routed to the **primary instance** by checking the server information displayed on the webpage, which indicates the correct Availability Zone.*
@@ -153,15 +153,15 @@ In this task, I verify that Route 53 correctly fails over to my secondary server
 4. I select **Primary-Website-Health**, then choose the **Monitoring** tab, and see failed health checks within minutes of stopping the EC2 instance.
 
 <p align="center">
-  <img src="images/primary-website-unhealthy.png" alt="Primary-Website-Health Health Status Unhealthy" width="900">
+  <img src="images/primary-website-unhealthy.png" alt="Primary-Website-Health Health Status Unhealthy" width="1000">
 </p>
 
 *I wait until the status of `Primary-Website-Health` is **Unhealthy**.*
 
-5. I return to the browser tab where I have the `PLACEHOLDER_URL` website open, and refresh the page.
+5. I return to the browser tab where I have the `www.4137084_1788382469.vocareum.training/cafe` website open, and refresh the page.
 
 <p align="center">
-  <img src="images/failover-result-az2.png" alt="Failover Result" width="900">
+  <img src="images/failover-result-az2.png" alt="Failover Result" width="1000">
 </p>
 
 *I notice that the Region/Availability Zone value now displays a different Availability Zone (for example, `us-west-2b` instead of `us-west-2a`). I am now seeing the website served from my `CafeInstance2` instance.*
@@ -169,7 +169,7 @@ In this task, I verify that Route 53 correctly fails over to my secondary server
 6. I check my email and receive an email from AWS Notifications titled "ALARM: Primary-Website-Health-awsroute53-..." with details about what triggered the alarm.
 
 <p align="center">
-  <img src="images/failover-notification.png" alt="Failover Email Notification" width="900">
+  <img src="images/failover-notification.png" alt="Failover Email Notification" width="1000">
 </p>
 
 *I have now successfully confirmed that my application environment can fail over from its primary Availability Zone to its secondary Availability Zone if the server in the primary Availability Zone fails.*
