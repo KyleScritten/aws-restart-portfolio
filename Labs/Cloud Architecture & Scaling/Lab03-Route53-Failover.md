@@ -79,19 +79,18 @@ The first step to configure failover is to create a health check for my primary 
 > [!NOTE]
 > Route 53 now checks the health of my site by periodically requesting the domain name I provided and verifying that it returns a successful response. The health check might take up to a minute to show a **Healthy** status.
 
-6. I select **Primary-Website-Health**, then choose the **Monitoring** tab.
+6. I select `Primary-Website-Health`, then choose the **Monitoring** tab.
 7. I check my email have an email from AWS Notifications.
 8. In the email, I choose the **Confirm subscription** link to finish setting up the email alerting I configured when creating the health check.
 
 <p align="center">
-  <img src="images/health-check-config.png" alt="Configuring a Route 53 Health Check" width="900">
+  <img src="images/health-check-config-route53.png" alt="Configuring a Route 53 Health Check" width="900">
 </p>
 
 *This tab provides a view of the status of the `Primary-Website-Health` health check over time. It might take a few seconds before the chart becomes available.*
 
 ## Conclusion
 After completing this activity, I am able to:
-
 * Configure a Route 53 health check that sends emails when the health of an HTTP endpoint becomes unhealthy
 * Configure failover routing in Route 53
 
