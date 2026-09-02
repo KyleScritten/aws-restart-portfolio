@@ -2,6 +2,26 @@
 
 BANNER-PLACEHOLDERS
 
+#### Option 1:
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux)
+![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
+
+#### Option 2:
+
+<div align="center">
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white) ![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux) ![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
+</div>
+
+#### Options 3:
+
+<div align="center">
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white)&nbsp;&nbsp;&nbsp;
+![Linux](https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux)&nbsp;&nbsp;&nbsp;
+![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
+</div>
+
 ## 👋 Introduction
 
 Hi, my name is Kyle! Welcome to my AWS re/Start Programme repository. This repo documents my journey through **AWS re/Start**, an AWS-backed, no-cost training program designed to prepare individuals for entry-level roles in cloud computing — regardless of prior technical background.
