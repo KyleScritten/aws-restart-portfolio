@@ -26,6 +26,14 @@ BANNER-PLACEHOLDERS
 
 </div>
 
+#### Option 4:
+
+<p align="center">
+  <img src="https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS">
+  <img src="https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux" alt="Linux">
+  <img src="https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python" alt="Python">
+</p>
+
 ## 👋 Introduction
 
 Hi, my name is Kyle! Welcome to my AWS re/Start Programme repository. This repo documents my journey through **AWS re/Start**, an AWS-backed, no-cost training program designed to prepare individuals for entry-level roles in cloud computing — regardless of prior technical background.
