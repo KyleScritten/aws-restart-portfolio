@@ -164,7 +164,7 @@ In the terminal window, I test the IAM configuration by running the `aws iam lis
 ## Activity 1 challenge
 I successfully install the AWS CLI on a Red Hat Linux instance and connect it to my AWS account. I use the AWS CLI to retrieve policy information by referencing AWS documentation.
 
-1. In the IAM AWS CLI Command Reference [documentation page](https://docs.aws.amazon.com/cli/latest/reference/iam/index.html), the following command lists IAM policies and filters customer managed policies:
+1. In the [IAM AWS CLI Command Reference documentation page](https://docs.aws.amazon.com/cli/latest/reference/iam/index.html), the following command lists IAM policies and filters customer managed policies:
 
 ```bash
 [ec2-user@ip-10-200-0-42 ~]$ aws iam list-policies --scope Local
