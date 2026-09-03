@@ -115,6 +115,8 @@ In this task, I observe the IAM configuration details for the EC2 instance in th
   <img src="images/awsstudent-security-credentials.png" alt="IAM User Security Credentials” width="900">
 </p>
 
+*Once the access key is created, you must save the secret access key locally at the time that the key is created.*
+
 ## Task 4: Configure the AWS CLI to connect to my AWS Account
 
 1. In the SSH session terminal window, I run the `aws configure` command for the AWS CLI.
