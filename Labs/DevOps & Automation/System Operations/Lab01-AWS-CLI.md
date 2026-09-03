@@ -52,7 +52,7 @@ Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
 
 ## Task 2: Install the AWS CLI on a Red Hat Linux instance
 
-**Terminal output:**
+#### Terminal output
 ```bash
 PLACEHOLDER
 ```
@@ -71,7 +71,7 @@ PLACEHOLDER
    * **Default region name:** Enter `us-west-2`
    * **Default output format:** Enter `json`
 
-**Terminal output:**
+#### Terminal output
 ```bash
 PLACEHOLDER
 ```
@@ -81,7 +81,7 @@ In this task, I observe the IAM configuration details for the EC2 instance using
 
 In the terminal window, I test the IAM configuration by running the `aws iam list-users` command:
 
-**Terminal output:**
+#### Terminal output
 ```bash
 PLACEHOLDER
 ```
