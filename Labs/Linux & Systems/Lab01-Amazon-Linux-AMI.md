@@ -1,7 +1,7 @@
 # Introduction to an Amazon Linux Amazon Machine Image (AMI)
 
 <p align="center">
-  <img src="images/ec2-user-lab-scenario.png" alt="Connect securely to an EC2 instance through Secure Shell Lab Scenario" width="600">
+  <img src="images/ec2-user-lab-scenario.png" alt="Connect securely to an EC2 instance through Secure Shell Lab Scenario" width="800">
 </p>
 
 ## Lab Objectives
