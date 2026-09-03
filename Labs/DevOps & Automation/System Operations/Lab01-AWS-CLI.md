@@ -107,7 +107,7 @@ In the terminal window, I test the IAM configuration by running the `aws iam lis
 PLACEHOLDER
 ```
 
-A successful test shows a JSON response that includes a list of IAM users in the account.
+*A successful test shows a JSON response that includes a list of IAM users in the account.*
 
 ## Activity 1 challenge
 I successfully install the AWS CLI on a Red Hat Linux instance and connect it to my AWS account. I use the AWS CLI to retrieve policy information by referencing AWS documentation.
