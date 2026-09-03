@@ -51,11 +51,32 @@ Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
 ```
 
 ## Task 2: Install the AWS CLI on a Red Hat Linux instance
+In this task, I follow these steps from the terminal window to install the AWS CLI on a Red Hat Linux instance.
+
+I write the downloaded file to the current directory by running the `curl` command with the `-o` option, then unzip the installer by running the `unzip` command with the `-u` option to skip any prompts to overwrite existing files. 
+
+I then run the install program using `sudo`, which grants write permissions to the directory and uses a file named `install` in the unzipped `aws` directory to install the AWS CLI. Finally, I confirm the installation by running the `aws --version` command.
+
+```bash
+# Write the downloaded file to the current directory, option -o rename the file
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+# Unzip the installer, option -u option to skip prompts asking you to overwrite any existing files
+unzip -u awscliv2.zip
+
+# Run the install program - The sudo command grants write permissions to the directory
+sudo ./aws/install
+
+# Confirm the installation
+aws --version
+```
 
 #### Terminal output
 ```bash
 PLACEHOLDER
 ```
+
+*To verify that the AWS CLI is now working, I run the `aws help` command. The help command displays the information for the AWS CLI.*
 
 ## Task 3: Observe IAM configuration details in the AWS Management Console
 
