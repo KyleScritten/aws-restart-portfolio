@@ -18,21 +18,21 @@ During this activity, I establish a Secure Shell (SSH) connection to the instanc
 ## Task 1: Connect to the Red Hat EC2 instance using SSH
 In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
 
-I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP `PLACEHOLDER_PUBLIC_IP`. From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
+I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP `34.221.15.194`. From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
 
 #### Connect to the EC2 Instance
 ```bash
-kylescritten@Kyles-MacBook-Air ~ % cd ~/Downloads
-kylescritten@Kyles-MacBook-Air Downloads % chmod 400 labsuser.pem
-kylescritten@Kyles-MacBook-Air Downloads % ssh -i labsuser.pem ec2-user@52.42.122.142
-The authenticity of host '52.42.122.142 (52.42.122.142)' can't be established.
-ED25519 key fingerprint is: SHA256:iR8ngHw5JuO15w804j32BygrHWl2D3DPLbZ7yhCAoc8
+kylescritten@MacBookAir ~ % cd ~/Downloads
+kylescritten@MacBookAir Downloads % chmod 400 labsuser.pem
+kylescritten@MacBookAir Downloads % ssh -i labsuser.pem ec2-user@34.221.15.194
+The authenticity of host '34.221.15.194 (34.221.15.194)' can't be established.
+ED25519 key fingerprint is: SHA256:NwytUe++pSWRP0dfUhKxdWHswWzfGkPBQBhReOP1yGk
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 ```
 #### Terminal Output
 ```text
-Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
+Warning: Permanently added '34.221.15.194' (ED25519) to the list of known hosts.
 ** WARNING: connection is not using a post-quantum key exchange algorithm.
 ** This session may be vulnerable to "store now, decrypt later" attacks.
 ** The server may need to be upgraded. See https://openssh.com/pq.html
@@ -44,10 +44,10 @@ Warning: Permanently added '52.42.122.142' (ED25519) to the list of known hosts.
    ~~       V~' '->
     ~~~         /    A newer version of Amazon Linux is available!
       ~~._.   _/
-         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
        _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[ec2-user@ip-10-0-10-165 ~]$ 
+[ec2-user@ip-10-200-0-42 ~]$ 
 ```
 
 ## Task 2: Install the AWS CLI on a Red Hat Linux instance
@@ -74,7 +74,22 @@ aws --version
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-200-0-42 ~]$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 69.9M  100 69.9M    0     0   264M      0 --:--:-- --:--:-- --:--:--  265M
+[ec2-user@ip-10-200-0-42 ~]$ unzip -u awscliv2.zip
+Archive:  awscliv2.zip
+   creating: aws/
+   creating: aws/dist/
+...
+  inflating: aws/dist/prompt_toolkit-3.0.51.dist-info/licenses/LICENSE  
+  inflating: aws/dist/prompt_toolkit-3.0.51.dist-info/licenses/AUTHORS.rst  
+[ec2-user@ip-10-200-0-42 ~]$ sudo ./aws/install
+You can now run: /usr/local/bin/aws --version
+[ec2-user@ip-10-200-0-42 ~]$ aws --version
+aws-cli/2.36.39 Python/3.14.6 Linux/4.14.355-284.742.amzn2.x86_64 exe/x86_64.amzn.2
+[ec2-user@ip-10-200-0-42 ~]$ 
 ```
 
 *To verify that the AWS CLI is now working, I run the `aws help` command. The help command displays the information for the AWS CLI.*
