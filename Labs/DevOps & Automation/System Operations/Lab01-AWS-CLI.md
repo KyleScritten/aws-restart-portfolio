@@ -10,7 +10,7 @@ During this activity, I establish a Secure Shell (SSH) connection to the instanc
 *When I finish the activity, it reflects the following diagram:*
 
 <p align="center">
-  <img src="images/aws-cli-architecture.png" alt="Install and Configure the AWS CLI" width="900">
+  <img src="images/aws-cli-architecture.png" alt="Install and Configure the AWS CLI" width="1000">
 </p>
 
 *In the preceding diagram, I access the AWS Cloud through an SSH connection. Within the AWS Cloud, a virtual private cloud (VPC) with a Red Hat EC2 instance is configured with the AWS CLI. IAM is configured, and I use the AWS CLI to interact with IAM.*
@@ -209,6 +209,8 @@ drwxr-xr-x 3 ec2-user ec2-user       78 Sep  3 18:14 aws
                         "cloudformation:Detect*",
 [ec2-user@ip-10-200-0-42 ~]$ 
 ```
+
+*`ls -ltr` lists all files in the current directory sorted by modification time (oldest first, newest last), with `-l` giving a detailed long-format listing (permissions, owner, size, date) and `-r` reversing the default sort order — here it shows an `aws` directory, the `awscliv2.zip` installer, and a `lab_policy.json` file you saved earlier. `head -n 10 lab_policy.json` then prints just the first 10 lines of that JSON file, letting you preview its contents without dumping the entire file to the terminal.*
 
 > [!NOTE]
 > I can use the AWS CLI to manage and control multiple AWS services through the command line. I can also accomplish these tasks using the AWS Management Console.
