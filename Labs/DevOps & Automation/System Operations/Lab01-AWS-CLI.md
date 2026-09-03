@@ -57,6 +57,7 @@ I write the downloaded file to the current directory by running the `curl` comma
 
 I then run the install program using `sudo`, which grants write permissions to the directory and uses a file named `install` in the unzipped `aws` directory to install the AWS CLI. Finally, I confirm the installation by running the `aws --version` command.
 
+#### CLI commands run
 ```bash
 # Write the downloaded file to the current directory, option -o rename the file
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
