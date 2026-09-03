@@ -100,11 +100,11 @@ In this task, I observe the IAM configuration details for the EC2 instance in th
 > [!NOTE]
 > The IAM page that appears contains messages indicating that I do not have permission to observe some IAM service details. I can safely ignore these messages.
 
-1. In the AWS IAM Console, I choose **Users**, then choose **awsstudent**.
+1. In the AWS IAM Console, I choose **Users**, then choose `awsstudent`.
 2. I am now in the **Permissions** tab. Next to `lab_policy`, I choose the arrow icon, then choose the **{} JSON** button. 
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/observe-lab-policy.png" alt="Observe IAM configuration details and User Lab Policy” width="900">
 </p>
 
 *This `lab_policy` document is formatted in JSON, and the IAM policy grants the `awsstudent` user access to specific AWS services in this account.*
@@ -112,7 +112,7 @@ In this task, I observe the IAM configuration details for the EC2 instance in th
 3. I choose the **Security credentials** tab. In the **Access keys** section, I locate the `awsstudent` user's access key ID.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/awsstudent-security-credentials.png" alt="IAM User Security Credentials” width="900">
 </p>
 
 ## Task 4: Configure the AWS CLI to connect to my AWS Account
@@ -126,7 +126,15 @@ In this task, I observe the IAM configuration details for the EC2 instance in th
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-200-0-42 ~]$ aws configure
+
+Tip: You can deliver temporary credentials to the AWS CLI using your AWS Console session by running the command 'aws login'.
+
+AWS Access Key ID [None]: AKIARNRMGMBMOAACX3TI
+AWS Secret Access Key [None]: peyP6AzViJDBpIreZnZbPrum65WMOma7GkusKRu7
+Default region name [None]: us-west-2
+Default output format [None]: json
+[ec2-user@ip-10-200-0-42 ~]$ 
 ```
 
 ## Task 5: Observe IAM configuration details using the AWS CLI
@@ -136,7 +144,19 @@ In the terminal window, I test the IAM configuration by running the `aws iam lis
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-200-0-42 ~]$ aws iam list-users
+{
+    "Users": [
+        {
+            "Path": "/",
+            "UserName": "awsstudent",
+            "UserId": "AIDARNRMGMBMAKPWOL5OM",
+            "Arn": "arn:aws:iam::097803198552:user/awsstudent",
+            "CreateDate": "2026-09-03T20:21:41+00:00"
+        }
+    ]
+}
+[ec2-user@ip-10-200-0-42 ~]$ 
 ```
 
 *A successful test shows a JSON response that includes a list of IAM users in the account.*
@@ -147,13 +167,47 @@ I successfully install the AWS CLI on a Red Hat Linux instance and connect it to
 1. In the IAM AWS CLI Command Reference [documentation page](https://docs.aws.amazon.com/cli/latest/reference/iam/index.html), the following command lists IAM policies and filters customer managed policies:
 
 ```bash
-aws iam list-policies --scope Local
+[ec2-user@ip-10-200-0-42 ~]$ aws iam list-policies --scope Local
+{
+    "Policies": [
+        {
+            "PolicyName": "lab_policy",
+            "PolicyId": "ANPARNRMGMBMDAXO5XJA3",
+            "Arn": "arn:aws:iam::097803198552:policy/lab_policy",
+            "Path": "/",
+            "DefaultVersionId": "v1",
+            "AttachmentCount": 1,
+            "PermissionsBoundaryUsageCount": 0,
+            "IsAttachable": true,
+            "CreateDate": "2026-09-03T20:22:19+00:00",
+            "UpdateDate": "2026-09-03T20:22:19+00:00"
+        }
+    ]
+}
+[ec2-user@ip-10-200-0-42 ~]$ 
 ```
 
 2. Next, I use the version number ARN information and `DefaultVersionId` found inside the `lab_policy` document to retrieve the JSON IAM policy, using the `>` command to save the file:
 
 ```bash
-aws iam get-policy-version --policy-arn arn:aws:iam::038946776283:policy/lab_policy --version-id v1 > lab_policy.json
+[ec2-user@ip-10-200-0-42 ~]$ aws iam get-policy-version --policy-arn arn:aws:iam::097803198552:policy/lab_policy --version-id v1 > lab_policy.json
+[ec2-user@ip-10-200-0-42 ~]$ ls -ltr
+total 71684
+drwxr-xr-x 3 ec2-user ec2-user       78 Sep  3 18:14 aws
+-rw-rw-r-- 1 ec2-user ec2-user 73395047 Sep  3 20:28 awscliv2.zip
+-rw-rw-r-- 1 ec2-user ec2-user     5035 Sep  3 20:45 lab_policy.json
+[ec2-user@ip-10-200-0-42 ~]$ head -n 10 lab_policy.json
+{
+    "PolicyVersion": {
+        "Document": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": [
+                        "cloudformation:List*",
+                        "cloudformation:Describe*",
+                        "cloudformation:Detect*",
+[ec2-user@ip-10-200-0-42 ~]$ 
 ```
 
 > [!NOTE]
