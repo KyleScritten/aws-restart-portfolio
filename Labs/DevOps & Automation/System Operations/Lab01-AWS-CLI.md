@@ -79,7 +79,7 @@ PLACEHOLDER
 ## Task 5: Observe IAM configuration details using the AWS CLI
 In this task, I observe the IAM configuration details for the EC2 instance using the AWS CLI.
 
-1. In the terminal window, I test the IAM configuration by running the `aws iam list-users` command:
+In the terminal window, I test the IAM configuration by running the `aws iam list-users` command:
 
 **Terminal output:**
 ```bash
