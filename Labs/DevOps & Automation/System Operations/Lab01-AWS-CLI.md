@@ -80,9 +80,25 @@ PLACEHOLDER
 *To verify that the AWS CLI is now working, I run the `aws help` command. The help command displays the information for the AWS CLI.*
 
 ## Task 3: Observe IAM configuration details in the AWS Management Console
+In this task, I observe the IAM configuration details for the EC2 instance in the AWS Management Console.
 
+> [!NOTE]
+> The IAM page that appears contains messages indicating that I do not have permission to observe some IAM service details. I can safely ignore these messages.
 
+1. In the AWS IAM Console, I choose **Users**, then choose **awsstudent**.
+2. I am now in the **Permissions** tab. Next to `lab_policy`, I choose the arrow icon, then choose the **{} JSON** button. 
 
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+</p>
+
+*This `lab_policy` document is formatted in JSON, and the IAM policy grants the `awsstudent` user access to specific AWS services in this account.*
+
+3. I choose the **Security credentials** tab. In the **Access keys** section, I locate the `awsstudent` user's access key ID.
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+</p>
 
 ## Task 4: Configure the AWS CLI to connect to my AWS Account
 
