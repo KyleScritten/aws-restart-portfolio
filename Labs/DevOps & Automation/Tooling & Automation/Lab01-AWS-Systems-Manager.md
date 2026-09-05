@@ -9,8 +9,20 @@ In this task, I will use Fleet Manager to gather inventory from an EC2 instance.
 > [!NOTE]
 > I can use Fleet Manager, a capability of Systems Manager, to collect operating system information, application information, and metadata from EC2 instances, on-premises servers, or virtual machines in a hybrid environment. I can also use Fleet Manager to query metadata to quickly understand which instances are running the software and configurations my software policy requires, and which instances need updating.
 
+1. In the Systems Manager Console, under **Node Management**, I choose **Fleet Manager**.
+2. I choose the **Account management** dropdown list, then choose `Set up inventory`.
+3. To create an association that collects information about software and settings for my managed instance, I configure the following options:
+   * In the **Provide inventory details** section, for **Name**, I enter `Inventory-Association`.
+   * In the **Targets** section, I configure the following options:
+     * For **Specify targets by**, I choose `Manually selecting instances`.
+     * I select the row for `Managed Instance`.
+   * I leave the other options at their default settings.
+4. I choose **Setup Inventory**. A banner with the message "Setup inventory request succeeded" appears on the Fleet Manager page. Inventory, a capability of Systems Manager, now regularly inventories the instance for the selected properties.
+5. I choose the **Node ID** link, which directs me to the Node overview.
+6. I choose the **Inventory** tab.
+
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/instance-inventory-list.png" alt="Managed Instance Inventory List” width="900">
 </p>
 
 *This tab lists all of the applications on the instance. I take a moment to review the installed applications and other options in the **Inventory type** dropdown list.*
@@ -55,6 +67,30 @@ In this task, I access the EC2 instance through Session Manager. This demonstrat
 </p>
 
 *In the preceding diagram, Systems Manager uses Session Manager to access the EC2 instance without having to connect to the instance using SSH. Session Manager is one of the secure ways to access the instance.*
+
+Under **Node Management**, I choose **Session Manager**, then choose **Start session**. I select **Managed Instance** and choose **Start session** again, which opens a new session tab in my browser. 
+
+I click anywhere in the session window to activate the cursor, and I am now ready to run commands directly in the session window.
+
+#### CLI commands run
+```bash
+# The output lists the application files that were installed on the instance
+ls /var/www/html
+
+# Get region
+AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+export AWS_DEFAULT_REGION=${AZ::-1}
+
+# List information about EC2 instances
+aws ec2 describe-instances
+```
+
+#### Terminal output
+```bash
+PLACEHOLDER_OUTPUT
+```
+
+*The output lists the EC2 instance details for the **Managed Instance** in JSON format.*
 
 >[!Note]
 > You can restrict access to Session Manager through AWS Identity and Access Management (IAM) policies, and AWS CloudTrail logs Session Manager usage. These options provide better security and auditing than traditional SSH access.
