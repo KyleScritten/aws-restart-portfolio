@@ -37,7 +37,7 @@ In this task, I install a custom web application (**Widget Manufacturing Dashboa
 *In the preceding diagram, Systems Manager installs an application on an EC2 instance within a virtual private cloud (VPC) using Run Command. Run Command runs the "install script" and installs the following: Apache web server, PHP, AWS SDK, and the web application. Once everything is installed, it also starts the web server.*
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/widget-dashboard.png" alt="Widget Manufacturing Dashboard” width="900">
 </p>
 
 *The **Widget Manufacturing Dashboard** I installed appears. I have successfully used Run Command through Systems Manager to install a custom application onto my instance without needing to remotely access the instance using SSH.*
@@ -48,8 +48,19 @@ In this task, I use Parameter Store to store a parameter that I use to activate 
 > [!NOTE]
 > Parameter Store, a capability of Systems Manager, provides secure, hierarchical storage for configuration data management and secrets management. I can store data such as passwords, database strings, and license codes as parameter values, either as plain text or encrypted data, and can then reference values using the unique name I specified when creating the parameter.
 
+1. I keep the Widget Manufacturing Dashboard browser tab open and return to the AWS Systems Manager tab.
+2. Under **Application Management**, I choose **Parameter Store**.
+3. I choose **Create parameter** and configure the following options:
+   * **Name:** `/dashboard/show-beta-features`
+   * **Description:** `Display beta features`
+   * **Tier:** `<Leave the default option>`
+   * **Type:** `<Leave the default option>`
+   * **Value:** `True`
+4. I choose **Create parameter**. A banner with the message **"Create parameter request succeeded"** appears at the top of the page.
+5. I return to the web browser tab displaying the application and refresh the web page.
+
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/parameter-creation.png" alt="Use Parameter Store to manage application settings” width="900">
 </p>
 
 *I notice that three charts are displayed. The application is now checking Parameter Store to determine whether the additional chart (which is still in beta) should be displayed. It is common to configure applications to display "dark features" that are installed but not yet activated.*
