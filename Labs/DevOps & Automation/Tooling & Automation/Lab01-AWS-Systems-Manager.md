@@ -36,6 +36,42 @@ In this task, I install a custom web application (**Widget Manufacturing Dashboa
 
 *In the preceding diagram, Systems Manager installs an application on an EC2 instance within a virtual private cloud (VPC) using Run Command. Run Command runs the "install script" and installs the following: Apache web server, PHP, AWS SDK, and the web application. Once everything is installed, it also starts the web server.*
 
+1. Under **Node Management**, I choose **Run Command**.
+2. I choose the **Run command** button, and a list appears of pre-configured documents for running common commands.
+3. I choose the search icon in the box, and a dropdown box appears. I choose the following options:
+   * `Owner`
+   * `Owned by me`
+
+> [!CAUTION]
+> I do not enter "Owner" or "Owned by me" directly into the search box — entering this text does not return results.
+
+4. A document appears. The following information appears for this document:
+   * **Description:** Install Dashboard App
+   * **Document version:** 1 (Default)
+
+I leave the **Document version** option set to this default.
+  
+5. For **Target selection**, I select **Choose instances manually**.
+6. In the **Instances** section, I select **Managed Instance**.
+
+> [!NOTE]
+> The Managed Instance has the Systems Manager agent installed. The agent has registered the instance to the service, which allows it to be selected for Run Command.
+
+7. In the **Output options** section, I clear **Enable an S3 bucket**.
+8. I expand the **AWS command line interface command** section and choose **Run**.
+
+> [!NOTE]
+> This section displays the command line interface (CLI) command that initiates Run Command. I can copy this command and use it in the future within a script rather than having to use the AWS Management Console.
+
+A banner with the Command ID `COMMAND_ID` indicates that it was successfully sent on the Command ID page.
+
+10. After 1–2 minutes, the **Overall status** changes to ***Success***.
+
+I now validate the custom application that was installed.
+
+10. In the Vocareum console, I copy the `ServerIP` value (the public IP address).
+11. I open a new web browser tab, paste the IP address `IP_ADDRESS`, and press Enter.
+
 <p align="center">
   <img src="images/widget-dashboard.png" alt="Widget Manufacturing Dashboard” width="900">
 </p>
