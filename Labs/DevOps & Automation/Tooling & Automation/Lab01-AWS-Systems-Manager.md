@@ -133,9 +133,7 @@ In this task, I access the EC2 instance through Session Manager. This demonstrat
 
 Under **Node Tools**, I choose **Session Manager**, then choose **Start session**. I select `Managed Instance` and choose **Start session** again, which opens a new session tab in my browser. 
 
-I click anywhere in the session window to activate the cursor, and I am now ready to run commands directly in the session window.
-
-#### CLI commands run
+#### CLI commands I run
 ```bash
 # The output lists the application files that were installed on the instance
 ls /var/www/html
@@ -147,6 +145,8 @@ export AWS_DEFAULT_REGION=${AZ::-1}
 # List information about EC2 instances
 aws ec2 describe-instances
 ```
+
+I click anywhere in the session window to activate the cursor, and I am now ready to run commands directly in the session window.
 
 <p align="center">
   <img src="images/session-manager-commands.png" alt="Session Manager Terminal Commands” width="900">
