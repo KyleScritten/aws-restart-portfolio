@@ -9,15 +9,15 @@ In this task, I will use Fleet Manager to gather inventory from an EC2 instance.
 > [!NOTE]
 > I can use Fleet Manager, a capability of Systems Manager, to collect operating system information, application information, and metadata from EC2 instances, on-premises servers, or virtual machines in a hybrid environment. I can also use Fleet Manager to query metadata to quickly understand which instances are running the software and configurations my software policy requires, and which instances need updating.
 
-1. In the Systems Manager Console, under **Node Management**, I choose **Fleet Manager**.
+1. In the Systems Manager Console, under **Node Tools**, I choose **Fleet Manager**.
 2. I choose the **Account management** dropdown list, then choose `Set up inventory`.
 3. To create an association that collects information about software and settings for my managed instance, I configure the following options:
    * In the **Provide inventory details** section, for **Name**, I enter `Inventory-Association`.
    * In the **Targets** section, I configure the following options:
-     * For **Specify targets by**, I choose `Manually selecting instances`.
+     * I choose `Manually selecting instances`.
      * I select the row for `Managed Instance`.
    * I leave the other options at their default settings.
-4. I choose **Setup Inventory**. A banner with the message "Setup inventory request succeeded" appears on the Fleet Manager page. Inventory, a capability of Systems Manager, now regularly inventories the instance for the selected properties.
+4. I choose **Setup Inventory**. Inventory, a capability of Systems Manager, now regularly inventories the instance for the selected properties.
 5. I choose the **Node ID** link, which directs me to the Node overview.
 6. I choose the **Inventory** tab.
 
@@ -51,26 +51,42 @@ In this task, I install a custom web application (**Widget Manufacturing Dashboa
 
 I leave the **Document version** option set to this default.
   
-5. For **Target selection**, I select **Choose instances manually**.
-6. In the **Instances** section, I select **Managed Instance**.
+5. For **Target selection**, I select `Choose instances manually`.
+6. In the **Instances** section, I select `Managed Instance`.
 
 > [!NOTE]
 > The Managed Instance has the Systems Manager agent installed. The agent has registered the instance to the service, which allows it to be selected for Run Command.
 
 7. In the **Output options** section, I clear **Enable an S3 bucket**.
-8. I expand the **AWS command line interface command** section and choose **Run**.
+8. I expand the **AWS command line interface command** section. After review this and I then choose **Run**.
 
-> [!NOTE]
-> This section displays the command line interface (CLI) command that initiates Run Command. I can copy this command and use it in the future within a script rather than having to use the AWS Management Console.
+#### AWS command line interface command
+```bash
+aws ssm send-command \
+  --document-name "c214215a5412420l16603547t1w688146162243-InstallDashboardApp-5rOe5xZda1zK" \
+  --document-version "1" \
+  --targets '[{"Key":"InstanceIds","Values":["i-00474f6fc1030a607"]}]' \
+  --parameters '{}' \
+  --timeout-seconds 600 \
+  --max-concurrency "50" \
+  --max-errors "0" \
+  --region us-west-2
+```
 
-A banner with the Command ID `COMMAND_ID` indicates that it was successfully sent on the Command ID page.
+*This section displays the command line interface (CLI) command that initiates Run Command. I can copy this command and use it in the future within a script rather than having to use the AWS Management Console.*
 
-10. After 1–2 minutes, the **Overall status** changes to ***Success***.
+<p align="center">
+  <img src="images/run-command-doc.png" alt="Run Command Document” width="900">
+</p>
+
+*A banner with the Command ID `6ea1de4d-7370-4a00-b412-8e449b223115` indicates that it was successfully sent on the Command ID page.*
+
+9. After 1–2 minutes, the **Overall status** changes to ✅***Success***.
 
 I now validate the custom application that was installed.
 
 10. In the Vocareum console, I copy the `ServerIP` value (the public IP address).
-11. I open a new web browser tab, paste the IP address `IP_ADDRESS`, and press Enter.
+11. I open a new web browser tab and paste the ServerIP address `44.255.194.187`.
 
 <p align="center">
   <img src="images/widget-dashboard.png" alt="Widget Manufacturing Dashboard” width="900">
@@ -85,7 +101,7 @@ In this task, I use Parameter Store to store a parameter that I use to activate 
 > Parameter Store, a capability of Systems Manager, provides secure, hierarchical storage for configuration data management and secrets management. I can store data such as passwords, database strings, and license codes as parameter values, either as plain text or encrypted data, and can then reference values using the unique name I specified when creating the parameter.
 
 1. I keep the Widget Manufacturing Dashboard browser tab open and return to the AWS Systems Manager tab.
-2. Under **Application Management**, I choose **Parameter Store**.
+2. Under **Application Tools**, I choose **Parameter Store**.
 3. I choose **Create parameter** and configure the following options:
    * **Name:** `/dashboard/show-beta-features`
    * **Description:** `Display beta features`
@@ -115,7 +131,7 @@ In this task, I access the EC2 instance through Session Manager. This demonstrat
 
 *In the preceding diagram, Systems Manager uses Session Manager to access the EC2 instance without having to connect to the instance using SSH. Session Manager is one of the secure ways to access the instance.*
 
-Under **Node Management**, I choose **Session Manager**, then choose **Start session**. I select **Managed Instance** and choose **Start session** again, which opens a new session tab in my browser. 
+Under **Node Tools**, I choose **Session Manager**, then choose **Start session**. I select `Managed Instance` and choose **Start session** again, which opens a new session tab in my browser. 
 
 I click anywhere in the session window to activate the cursor, and I am now ready to run commands directly in the session window.
 
@@ -132,9 +148,176 @@ export AWS_DEFAULT_REGION=${AZ::-1}
 aws ec2 describe-instances
 ```
 
+<p align="center">
+  <img src="images/session-manager-commands.png" alt="Session Manager Terminal Commands” width="900">
+</p>
+
 #### Terminal output
 ```bash
-PLACEHOLDER_OUTPUT
+sh-4.2$ ls /var/www/html
+Aws           GuzzleHttp  LICENSE.md  Psr        aws-autoloader.php  get-parameters.php  info.php     style.css
+CHANGELOG.md  JmesPath    NOTICE.md   README.md  css                 index.php           make_zip.sh
+sh-4.2$ # Get region
+sh-4.2$ AZ=`curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone`
+sh-4.2$ export AWS_DEFAULT_REGION=${AZ::-1}
+sh-4.2$ 
+sh-4.2$ # List information about EC2 instances
+sh-4.2$ aws ec2 describe-instances
+{
+    "Reservations": [
+        {
+            "Instances": [
+                {
+                    "Monitoring": {
+                        "State": "disabled"
+                    }, 
+                    "PublicDnsName": "ec2-44-255-194-187.us-west-2.compute.amazonaws.com", 
+                    "State": {
+                        "Code": 16, 
+                        "Name": "running"
+                    }, 
+                    "EbsOptimized": false, 
+                    "LaunchTime": "2026-09-06T00:21:39.000Z", 
+                    "PublicIpAddress": "44.255.194.187", 
+                    "PrivateIpAddress": "10.0.0.246", 
+                    "ProductCodes": [], 
+                    "VpcId": "vpc-0d55ea42bbeb79491", 
+                    "CpuOptions": {
+                        "CoreCount": 1, 
+                        "ThreadsPerCore": 2
+                    }, 
+                    "StateTransitionReason": "", 
+                    "InstanceId": "i-00474f6fc1030a607", 
+                    "EnaSupport": true, 
+                    "ImageId": "ami-0d1bc08881a62440e", 
+                    "PrivateDnsName": "ip-10-0-0-246.us-west-2.compute.internal", 
+                    "KeyName": "vockey", 
+                    "SecurityGroups": [
+                        {
+                            "GroupName": "AppSecurityGroup", 
+                            "GroupId": "sg-0c561cf7033cb11b9"
+                        }
+                    ], 
+                    "ClientToken": "7a82b003-5077-d27f-765d-f2c4edc78bb3", 
+                    "SubnetId": "subnet-070d24b363fd67d8f", 
+                    "InstanceType": "t3.micro", 
+                    "CapacityReservationSpecification": {
+                        "CapacityReservationPreference": "open"
+                    }, 
+                    "NetworkInterfaces": [
+                        {
+                            "Status": "in-use", 
+                            "MacAddress": "02:ff:e1:8b:bf:8d", 
+                            "SourceDestCheck": true, 
+                            "VpcId": "vpc-0d55ea42bbeb79491", 
+                            "Description": "", 
+                            "NetworkInterfaceId": "eni-041e1c1f229f1f81c", 
+                            "PrivateIpAddresses": [
+                                {
+                                    "PrivateDnsName": "ip-10-0-0-246.us-west-2.compute.internal", 
+                                    "PrivateIpAddress": "10.0.0.246", 
+                                    "Primary": true, 
+                                    "Association": {
+                                        "PublicIp": "44.255.194.187", 
+                                        "PublicDnsName": "ec2-44-255-194-187.us-west-2.compute.amazonaws.com", 
+                                        "IpOwnerId": "amazon"
+                                    }
+                                }
+                            ], 
+                            "PrivateDnsName": "ip-10-0-0-246.us-west-2.compute.internal", 
+                            "InterfaceType": "interface", 
+                            "Attachment": {
+                                "Status": "attached", 
+                                "DeviceIndex": 0, 
+                                "DeleteOnTermination": true, 
+                                "AttachmentId": "eni-attach-09bb7e49e4e198039", 
+                                "AttachTime": "2026-09-06T00:21:39.000Z"
+                            }, 
+                            "Groups": [
+                                {
+                                    "GroupName": "AppSecurityGroup", 
+                                    "GroupId": "sg-0c561cf7033cb11b9"
+                                }
+                            ], 
+                            "Ipv6Addresses": [], 
+                            "OwnerId": "688146162243", 
+                            "PrivateIpAddress": "10.0.0.246", 
+                            "SubnetId": "subnet-070d24b363fd67d8f", 
+                            "Association": {
+                                "PublicIp": "44.255.194.187", 
+                                "PublicDnsName": "ec2-44-255-194-187.us-west-2.compute.amazonaws.com", 
+                                "IpOwnerId": "amazon"
+                            }
+                        }
+                    ], 
+                    "SourceDestCheck": true, 
+                    "Placement": {
+                        "Tenancy": "default", 
+                        "GroupName": "", 
+                        "AvailabilityZone": "us-west-2a"
+                    }, 
+                    "Hypervisor": "xen", 
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/xvda", 
+                            "Ebs": {
+                                "Status": "attached", 
+                                "DeleteOnTermination": true, 
+                                "VolumeId": "vol-0c980f1a2315d5de0", 
+                                "AttachTime": "2026-09-06T00:21:40.000Z"
+                            }
+                        }
+                    ], 
+                    "Architecture": "x86_64", 
+                    "RootDeviceType": "ebs", 
+                    "IamInstanceProfile": {
+                        "Id": "AIPA2AOFVEJB5HW4L6NNO", 
+                        "Arn": "arn:aws:iam::688146162243:instance-profile/App-Role"
+                    }, 
+                    "RootDeviceName": "/dev/xvda", 
+                    "VirtualizationType": "hvm", 
+                    "Tags": [
+                        {
+                            "Value": "Managed Instance", 
+                            "Key": "Name"
+                        }, 
+                        {
+                            "Value": "c214215a5412420l16603547t1w688146162243", 
+                            "Key": "aws:cloudformation:stack-name"
+                        }, 
+                        {
+                            "Value": "arn:aws:cloudformation:us-west-2:688146162243:stack/c214215a5412420l16603547t1w688146162243/8f3493b0-a988-11f1-a0b1-0aae629db321", 
+                            "Key": "aws:cloudformation:stack-id"
+                        }, 
+                        {
+                            "Value": "SSMInstance", 
+                            "Key": "aws:cloudformation:logical-id"
+                        }, 
+                        {
+                            "Value": "c214215a5412420l16603547t1w688146162243", 
+                            "Key": "cloudlab"
+                        }
+                    ], 
+                    "HibernationOptions": {
+                        "Configured": false
+                    }, 
+                    "MetadataOptions": {
+                        "State": "applied", 
+                        "HttpEndpoint": "enabled", 
+                        "HttpTokens": "optional", 
+                        "HttpPutResponseHopLimit": 1
+                    }, 
+                    "AmiLaunchIndex": 0
+                }
+            ], 
+            "ReservationId": "r-0b9af8697d6412cb3", 
+            "RequesterId": "658754138699", 
+            "Groups": [], 
+            "OwnerId": "688146162243"
+        }
+    ]
+}
+sh-4.2$ 
 ```
 
 *The output lists the EC2 instance details for the **Managed Instance** in JSON format.*
