@@ -108,7 +108,7 @@ In this task, I use Parameter Store to store a parameter that I use to activate 
    * **Tier:** `<Leave the default option>`
    * **Type:** `<Leave the default option>`
    * **Value:** `True`
-4. I choose **Create parameter**. A banner with the message **"Create parameter request succeeded"** appears at the top of the page.
+4. I choose **Create parameter**. A banner with the message ✅**"Create parameter request succeeded"** appears at the top of the page.
 5. I return to the web browser tab displaying the application and refresh the web page.
 
 <p align="center">
