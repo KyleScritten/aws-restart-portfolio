@@ -329,6 +329,54 @@ for myCarProperties in myInventoryList:
 > 1. Located the `environment` folder for a file called `collections.py`.
 > 2. Renamed `collections.py` to something else, namely `my_collections.py`, the code now runs successfully.
 
+## Labs 07 : Working with Conditionals
+A section of code that compares two pieces of information is called a conditional statement. I can use conditionals to create different paths through the program. Using comparative operators, I write a program that makes decisions.
+
+After completing this lab, I am able to:
+* Use the `if` statement
+* Use the `else` statement
+* Use the `elif` statement
+
+Python file name: `conditionals.py`
+
+#### Python code
+```python
+# Exercise 1: Working with the if-else statement
+userReply = input("Do you need to ship a package? (Enter yes or no) ")
+if userReply == "yes":
+    print("We can help you ship that package!")
+else:
+    print("Please come back when you need to ship a package. Thank you.")
+
+# Exercise 2: Working with the elif statement
+userReply = input("Would you like to buy stamps, buy an envelope, or make a copy? (Enter stamps, envelope, or copy) ")
+if userReply == "stamps":
+    print("We have many stamp designs to choose from.")
+elif userReply == "envelope":
+    print("We have many envelope sizes to choose from.")
+elif userReply == "copy":
+    copies = input("How many copies would you like? (Enter a number) ")
+    print("Here are {} copies.".format(copies))
+else:
+    print("Thank you, please come again.")
+```
+
+<p align="center">
+  <img src="images/py-07-practice.png" alt="Working with Conditionals” width="900">
+</p>
+
+*I have written a Python script that uses `if`, `elif`, and `else` statements.*
+
+
+
+
+
+
+
+
+
+
+
 
 
 
