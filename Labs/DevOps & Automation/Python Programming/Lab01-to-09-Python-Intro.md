@@ -57,7 +57,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 [ec2-user@ip-10-0-1-72 environment]$ 
 ```
 
-#### Python file
+#### Python code
 ```python
 print("Python has three numeric types: int, float, and complex")
 
