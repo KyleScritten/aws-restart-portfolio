@@ -140,4 +140,23 @@ print("{}, you like a {} {}!".format(name,color,animal))
 
 *I have used Python to concatenate strings, take input from the user, and output a formatted string.*
 
+## Labs 04 : Working with Lists, Tuples, and Dictionaries
+In Python, string and numeric data types are often used in groups called collections. Three such collections that Python supports are the list, the tuple, and the dictionary.
 
+After completing this lab, I am able to:
+* Use the `list` data type
+* Use the `tuple` data type
+* Use the `dictionary` data type
+
+Python file name: `collections.py`
+
+#### Python code
+```python
+PLACEHOLDER_CODE
+```
+
+<p align="center">
+  <img src="images/py-04-practice.png" alt="Working with Lists, Tuples, and Dictionaries” width="900">
+</p>
+
+*I have worked with the `list`, `tuple`, and `dictionary` data types in Python.*
