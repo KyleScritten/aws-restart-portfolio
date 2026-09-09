@@ -435,7 +435,7 @@ After completing this lab, I am able to:
 
 You can find all python scripts here: [Python Scripts](./python-scripts)
 
-You can find all .csv files here: [Files](./files)
+You can find all files here: [Files](./files)
 
 
 
