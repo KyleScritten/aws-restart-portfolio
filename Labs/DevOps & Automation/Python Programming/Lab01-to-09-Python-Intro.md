@@ -13,8 +13,6 @@ To open the VS Code IDE, I copy the `LabIDEURL` value from the panel to the left
 </p>
 
 ## Labs 01 : Creating a Hello, World Program
-
-### Lab overview
 Welcome to Introduction to Programming. For the labs, I use the Python programming language. In this lab, I write my first Python program.
 
 Python file name: `hello-world.py`
@@ -28,8 +26,6 @@ print("Hello, World")
 </p>
 
 ## Labs 02 : Working with Numeric Data Types
-
-### Lab overview
 Python makes it easier to do math. In fact, Python is a popular language among data scientists, who must analyze large amounts of data. In this lab, I explore the basic data types used to store numeric values.
 
 After completing this lab, I am able to:
@@ -70,6 +66,9 @@ PLACEHOLDER_CODE
 <p align="center">
   <img src="images/py-02-practice.png" alt="Working with Numeric Data Types” width="900">
 </p>
+
+
+
 
 ## Labs 03 : NAME
 
