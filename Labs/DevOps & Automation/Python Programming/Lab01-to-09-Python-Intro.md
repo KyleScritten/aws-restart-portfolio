@@ -12,6 +12,8 @@ To open the VS Code IDE, I copy the `LabIDEURL` value from the panel to the left
   <img src="images/py-vs-code-ide.png" alt="Accessing the VS Code IDE” width="900">
 </p>
 
+The `LabIDEURL` I run in the new browser tab for the labs is `https://d3q9nv16za2lb6.cloudfront.net/?folder=/home/ec2-user/environment`.
+
 ## Labs 01 : Creating a Hello, World Program
 Welcome to Introduction to Programming. For the labs, I use the Python programming language. In this lab, I write my first Python program.
 
@@ -148,7 +150,7 @@ After completing this lab, I am able to:
 * Use the `tuple` data type
 * Use the `dictionary` data type
 
-Python file name: `collections.py`
+Python file name: `my-collections.py`
 
 #### Python code
 ```python
@@ -199,3 +201,141 @@ print(myFavoriteFruitDictionary["Paulo"])
 </p>
 
 *I have worked with the `list`, `tuple`, and `dictionary` data types in Python.*
+
+## Labs 05 : Categorizing Values
+With Python, I can mix types in a list. In this lab, I create a list with different types and print the values.
+
+After completing this lab, I am able to:
+* Use numeric data types
+* Use string data types
+* Use the `list` data type
+* Use a `for` loop
+* Use the `print()` function
+
+Python file name: `categorize-values.py`
+
+#### Python code
+```python
+# Exercise 1: Creating a mixed-type list
+myMixedTypeList = [45, 290578, 1.02, True, "My dog is on the bed.", "45"]
+for item in myMixedTypeList:
+    print("{} is of the data type {}".format(item,type(item)))
+```
+
+<p align="center">
+  <img src="images/py-05-practice.png" alt="Categorizing Values” width="900">
+</p>
+
+*This exercise reinforces the Python programming concepts covered in labs 1–4. In this exercise, I work with the `list` data type and learn about Python's support for mixing data types in a list declaration.*
+
+## Labs 06 : Working with Composite Data Types
+A composite data type is any data type comprising primitive data types. If I like food, I can visualize a composite data type as a turducken — a dish that consists of a chicken stuffed into a duck, which is stuffed into a turkey. In this lab, I create a data type that consists of a string in a dictionary, which is in a list.
+
+After completing this lab, I am able to:
+* Use numeric data types
+* Use string data types
+* Use the `dictionary` data type
+* Use the `list` data type
+* Use a `for` loop
+* Use the `print()` function
+* Use the `if` statement
+* Use the `else` statement
+* Use the `import` statement
+
+Python file name: `composite-data.py`
+
+Comma-separated values (CSV) file: `car_fleet.csv`
+
+#### CSV file data
+```csv
+# Creating a car inventory data
+vin,make,model,year,range,topSpeed,zeroSixty,mileage
+TMX20122,AnyCompany Motors, Coupe, 2012, 335, 155, 4.1, 50000
+TM320163,AnyCompany Motors, Sedan, 2016, 240, 140, 5.2, 20000
+TMX20121,AnyCompany Motors, SUV, 2012, 295, 155, 4.7, 100000
+TMX20204,AnyCompany Motors, Truck, 2020, 300, 155, 3.5, 0
+```
+
+#### Python code
+```python
+# Exercise 1: Creating a car inventory program
+# 1.1 Defining the dictionary
+import csv
+import copy
+
+# 1.2 Define a dictionary that will serve as the composite type for reading the tabular data
+myVehicle = {
+    "vin" : "<empty>",
+    "make" : "<empty>" ,
+    "model" : "<empty>" ,
+    "year" : 0,
+    "range" : 0,
+    "topSpeed" : 0,
+    "zeroSixty" : 0.0,
+    "mileage" : 0
+}
+
+for key, value in myVehicle.items():
+    print("{} : {}".format(key,value))
+
+# 1.3 Define an empty list to hold the car inventory 
+myInventoryList = []
+
+# You will be introduced to the `with open` syntax statement, which keeps a file open while you read data. 
+# It will automatically close the CSV file when the code inside the `with` block is finished running.
+
+# Exercise 2: Copying the CSV file into memory
+with open('car_fleet.csv') as csvFile:
+    csvReader = csv.reader(csvFile, delimiter=',')  
+    lineCount = 0  
+    for row in csvReader:
+        if lineCount == 0:
+            print(f'Column names are: {", ".join(row)}')  
+            lineCount += 1  
+        else:  
+            print(f'vin: {row[0]} make: {row[1]}, model: {row[2]}, year: {row[3]}, range: {row[4]}, topSpeed: {row[5]}, zeroSixty: {row[6]}, mileage: {row[7]}')  
+            currentVehicle = copy.deepcopy(myVehicle)  
+            currentVehicle["vin"] = row[0]  
+            currentVehicle["make"] = row[1]  
+            currentVehicle["model"] = row[2]  
+            currentVehicle["year"] = row[3]  
+            currentVehicle["range"] = row[4]  
+            currentVehicle["topSpeed"] = row[5]  
+            currentVehicle["zeroSixty"] = row[6]  
+            currentVehicle["mileage"] = row[7]  
+            myInventoryList.append(currentVehicle)  
+            lineCount += 1  
+    print(f'Processed {lineCount} lines.')
+
+# Exercise 3: Printing the car inventory
+for myCarProperties in myInventoryList:
+    for key, value in myCarProperties.items():
+        print("{} : {}".format(key,value))
+        print("-----")
+```
+
+<p align="center">
+  <img src="images/py-06-practice.png" alt="Working with Composite Data Types” width="900">
+</p>
+
+*In this lab, I worked with composite data types in Python, including reading tabular data from a CSV file.*
+
+> [!CAUTION]
+> **The error:** When I ran `composite-data.py`, the terminal returned an error indicating the file would not run. I investigated the issue further.
+>
+> **The cause of the error:** A file named `collections.py` exists in the `/home/ec2-user/environment` directory. When Python tries to `import csv`, the `csv` module internally needs `re` → `enum` → `functools` → `collections` (the real standard library module). But because the working directory is on the Python path first, Python finds the local `collections.py` file instead of the real standard library `collections` module — and since that file doesn't have `namedtuple` defined in it, the import fails.
+>
+> **The fix:**
+> 1. Look in the `environment` folder for a file called `collections.py`.
+> 2. Rename it to something else (e.g., `my_collections.py`) or delete it if it's not needed.
+
+
+
+
+
+
+
+
+
+
+
