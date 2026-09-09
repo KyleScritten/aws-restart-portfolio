@@ -95,19 +95,22 @@ print(str(myValue) + " is of the data type " + str(type(myValue)))
   <img src="images/py-02-practice.png" alt="Working with Numeric Data Types” width="900">
 </p>
 
+## Labs 03 : Working with the String Data Type
+In Python, a collection of letters and symbols is called a string. Strings are used often in Python for input and output.
 
+After completing this lab, I am able to:
+* Write Python code that uses the string data type
+* Concatenate strings
+* Use strings to get input
+* Format strings for output
 
+Python file name: `string-data-type.py`
 
-## Labs 03 : NAME
-
-Python file name: `PLACEHOLDER.py`
-
-#### Python file
+#### Python code
 ```python
-# Exercise NUMBER: EXERCISE
 PLACEHOLDER_CODE
 ```
 
 <p align="center">
-  <img src="images/py-02-practice.png" alt="NAME” width="900">
+  <img src="images/py-03-practice.png" alt="Working with the String Data Type” width="900">
 </p>
