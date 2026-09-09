@@ -61,6 +61,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 [ec2-user@ip-10-0-1-72 environment]$ 
 ```
 
+#### Python file
 ```python
 # Exercise 2: Introducing the int data type
 PLACEHOLDER_CODE
@@ -73,6 +74,8 @@ PLACEHOLDER_CODE
 ## Labs 03 : NAME
 
 Python file name: `PLACEHOLDER.py`
+
+#### Python file
 ```python
 # Exercise NUMBER: EXERCISE
 PLACEHOLDER_CODE
