@@ -25,6 +25,8 @@ print("Hello, World")
   <img src="images/py-01-practice.png" alt="Creating a Hello, World Program” width="900">
 </p>
 
+*I have written my first Python program called `hello-world.py`.*
+
 ## Labs 02 : Working with Numeric Data Types
 Python makes it easier to do math. In fact, Python is a popular language among data scientists, who must analyze large amounts of data. In this lab, I explore the basic data types used to store numeric values.
 
@@ -95,6 +97,8 @@ print(str(myValue) + " is of the data type " + str(type(myValue)))
   <img src="images/py-02-practice.png" alt="Working with Numeric Data Types” width="900">
 </p>
 
+*I have learned about Python's three numeric data types: `int`, `float`, and `complex`. I was also introduced to Python's "fake" data type called `bool`. Note that `bool` is actually the numerals 0 and 1, which represent the values `True` and `False`.*
+
 ## Labs 03 : Working with the String Data Type
 In Python, a collection of letters and symbols is called a string. Strings are used often in Python for input and output.
 
@@ -108,9 +112,32 @@ Python file name: `string-data-type.py`
 
 #### Python code
 ```python
-PLACEHOLDER_CODE
+# Exercise 1: Introducing the string data type
+myString = "This is a string."
+print(myString)
+print(type(myString))
+print(myString + " is of the data type " + str(type(myString)))
+
+# Exercise 2: Working with string concatenation
+firstString = "water"
+secondString = "fall"
+thirdString = firstString + secondString
+print(thirdString)
+
+# Exercise 3: Working with input strings
+name = input("What is your name? ")
+print(name)
+
+# Exercise 4: Formatting output strings
+color = input("What is your favorite color?  ")
+animal = input("What is your favorite animal?  ")
+print("{}, you like a {} {}!".format(name,color,animal))
 ```
 
 <p align="center">
   <img src="images/py-03-practice.png" alt="Working with the String Data Type” width="900">
 </p>
+
+*I have used Python to concatenate strings, take input from the user, and output a formatted string.*
+
+
