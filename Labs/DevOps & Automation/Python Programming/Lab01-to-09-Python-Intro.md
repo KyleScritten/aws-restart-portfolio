@@ -41,6 +41,7 @@ After completing this lab, I am able to:
 
 Python file name: `numeric-data.py`
 
+#### Terminal output
 ```bash
 # Exercise 1: Using the Python shell
 [ec2-user@ip-10-0-1-72 environment]$ pwd        # To display the present working directory
