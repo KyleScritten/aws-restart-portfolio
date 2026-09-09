@@ -367,7 +367,62 @@ else:
 
 *I have written a Python script that uses `if`, `elif`, and `else` statements.*
 
+## Labs 08 : Working with Loops
+A loop is a segment of code that repeats. I am introduced to two types of loops: the `while` loop and the `for` loop.
 
+After completing this lab, I am able to:
+* Use a `while` loop
+* Use a `for` loop
+
+Python file name: `while-loop.py`
+
+#### Python code
+```python
+import random
+# Exercise 1: Working with a while loop
+
+# 1.1 Printing the game rules
+print("Welcome to Guess the Number!")
+print("The rules are simple. I will think of a number, and you will try to guess it.")
+
+# 1.2 Importing random and writing a while loop
+number = random.randint(1,10)
+
+# 1.3 Track whether the user guessed your number by creating a variable 
+isGuessRight = False
+
+# 1.4 To handle the game logic using a while loop
+while isGuessRight != True:     # If the user has not guessed the correct answer, enter the loop.
+    guess = input("Guess a number between 1 and 10: ")      # Ask the user for a guess.
+    if int(guess) == number:        # Is the guess the correct number?
+        print("You guessed {}. That is correct! You win!".format(guess))    # If the correct guess, tell the user it was the correct guess and exit the loop.
+        isGuessRight = True
+    else:
+        print("You guessed {}. Sorry, that isn’t it. Try again.".format(guess))     # If the wrong guess, tell the user it was the wrong guess and continue the loop.
+```
+
+<p align="center">
+  <img src="images/py-08-practice.png" alt="Working with While Loops” width="900">
+</p>
+
+Python file name: `for-loop.py`
+
+#### Python code
+```python
+# Exercise 2: Informing the user about the script
+# 2.1 To inform the user about your script
+print("Count to 10!")
+
+# 2.2 Writing the for loop
+for x in range (0, 11):
+    print(x)
+```
+
+<p align="center">
+  <img src="images/py-09-practice.png" alt="Working with for Loops” width="900">
+</p>
+
+*In this exercise, I created a Python script that asks the user to correctly guess a number, working with `while` and `for` loops in Python. This involved printing the game rules, importing the `random` module and writing a `while` loop, writing pseudocode, informing the user about the script, and writing the `for` loop.*
 
 
 
