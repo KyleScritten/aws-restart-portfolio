@@ -321,13 +321,13 @@ for myCarProperties in myInventoryList:
 *In this lab, I worked with composite data types in Python, including reading tabular data from a CSV file.*
 
 > [!CAUTION]
-> **The error:** When I ran `composite-data.py`, the terminal returned an error indicating the file would not run. I investigated the issue further.
+> ***The error:*** When I ran `composite-data.py`, the terminal returned an error indicating the file would not run. I investigated the issue further.
 >
-> **The cause of the error:** A file named `collections.py` exists in the `/home/ec2-user/environment` directory. When Python tries to `import csv`, the `csv` module internally needs `re` → `enum` → `functools` → `collections` (the real standard library module). But because the working directory is on the Python path first, Python finds the local `collections.py` file instead of the real standard library `collections` module — and since that file doesn't have `namedtuple` defined in it, the import fails.
+> ***The cause of the error:*** A file named `collections.py` exists in the `/home/ec2-user/environment` directory. When Python tries to `import csv`, the `csv` module internally needs `re` → `enum` → `functools` → `collections` (the real standard library module). But because the working directory is on the Python path first, Python finds the local `collections.py` file instead of the real standard library `collections` module — and since that file doesn't have `namedtuple` defined in it, the import fails.
 >
-> **The fix:**
-> 1. Look in the `environment` folder for a file called `collections.py`.
-> 2. Rename it to something else (e.g., `my_collections.py`) or delete it if it's not needed.
+> ***The fix:***
+> 1. Located the `environment` folder for a file called `collections.py`.
+> 2. Renamed `collections.py` to something else, namely `my_collections.py`, the code now runs successfully.
 
 
 
