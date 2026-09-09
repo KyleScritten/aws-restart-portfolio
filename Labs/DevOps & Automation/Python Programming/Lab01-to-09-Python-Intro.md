@@ -424,8 +424,18 @@ for x in range (0, 11):
 
 *In this exercise, I created a Python script that asks the user to correctly guess a number, working with `while` and `for` loops in Python. This involved printing the game rules, importing the `random` module and writing a `while` loop, writing pseudocode, informing the user about the script, and writing the `for` loop.*
 
+## Labs 09 : Creating a Git Repository
+GitHub runs an instance of git, which is version-control software that runs in the cloud. GitHub is popular among open source projects and businesses.
 
+After completing this lab, I am able to:
+* Download solutions for the earlier labs
+* Sign in to my GitHub account
+* Create a sub-directory in my Python Programming repository for my labs
+* Upload the local files to my new sub-directory in the AWS re/Start repository
 
+You can find all python scripts here: [Python Scripts](./python-scripts)
+
+You can find all .csv files here: [Files](./files)
 
 
 
