@@ -145,7 +145,7 @@ StackResources[?ResourceType == 'AWS::EC2::Instance'].LogicalResourceId
 ## Task 2: Troubleshooting and working with AWS CloudFormation stacks
 This task starts with an EC2 instance named `CLI Host`, which is already created for me, running in the public subnet of a VPC named `VPC2`. I first establish an SSH connection to the CLI Host so that I can work with the AWS CloudFormation service from there.
 
-### Task 2.1 for Windows: SSH to CLI Host Instance
+### Task 2.1 for macOS/Linux: SSH to CLI Host Instance
 
 In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
 
