@@ -207,18 +207,51 @@ aws configure
 ```
 
 ### Task 2.3: Attempt to create an AWS CloudFormation stack
+In this task, I try to create an AWS CloudFormation stack from a provided template using the AWS CLI. The template creates a VPC with a public subnet, an EC2 instance, a `WaitCondition` tied to the instance's userdata script, an S3 bucket, and a security group.
 
+After creating the stack, I monitor resource creation and notice that partway through, resources begin being deleted instead of completing. Investigating with `describe-stack-events`, I find the `WaitCondition` timed out waiting for a signal from the EC2 instance's userdata script.
+
+Since CloudFormation automatically rolls back and deletes all resources when one fails, `describe-stacks` confirms the stack status is `ROLLBACK_COMPLETE`. The stack object itself still exists, so I delete it with `aws cloudformation delete-stack --stack-name myStack`, which completes quickly since there are no resources left to roll back.
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
 
 ### Task 2.4: Avoid rollback on an AWS CloudFormation stack
+I run the `create-stack` command again, giving the stack the same name, but this time specifying `--on-failure DO_NOTHING` to prevent a rollback if the stack fails. This gives me time to introspect the EC2 instance logs once the failure occurs, since resources won't be automatically deleted.
 
+I run `describe-stack-resources` again and see that once the `WaitCondition` reaches `CREATE_FAILED`, the other resources retain their `CREATE_COMPLETE` status. `describe-stacks` confirms the overall stack status is `CREATE_FAILED`, but this time AWS CloudFormation does not roll back the stack. The `CREATE_FAILED` event details confirm it's the same `WaitCondition` timeout issue as before.
+
+With the EC2 instance still available, I use SSH to connect to the Web Server instance created by the stack. From the CLI Host terminal, I run `describe-instances` to get the public IP address, then open a new terminal window and connect to the Web Server instance using that IP.
+
+I check `cloud-init-output.log` and find "No package http available," along with a warning that the userdata script (`part-001`) failed to run. Since the script uses the `-e` flag to stop immediately on any command failure, the missing `http` package causes it to fail outright — meaning the wait condition never receives its success signal, and the stack creation ultimately times out and fails.
+
+I then exit the SSH session by entering `exit` and close the terminal window.
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
 
 ### Task 2.5: Fix the issue and successfully create the AWS CloudFormation stack
+Back in the terminal connected to the CLI Host instance, I update the AWS CloudFormation template by running `vim template1.yaml`. I navigate to line 128 in the UserData section of the EC2 resource, and change `"http"` to `"httpd"` — the actual name of the Apache web server package — then save and exit the file.
 
+I confirm the update by running `cat template1.yaml | grep httpd`, which returns three matching lines. I then delete the failed stack with `aws cloudformation delete-stack --stack-name myStack`, and once `describe-stacks` confirms it's gone, I run `create-stack` again with the corrected template.
 
+I run `describe-stack-resources` and wait until no resources remain in `CREATE_IN_PROGRESS`. Running `describe-stacks` this time confirms the stack was created successfully, with a `StackStatus` of `CREATE_COMPLETE`. I notice the **Outputs** section includes the public IP address of the web server and the name of the S3 bucket that was created:
 
+```bash
+PUBLIC_IP_ADDRESS
+```
 
+I test the web server by opening a browser tab and entering the IP address.
 
+<p align="center">
+  <img src="images/web-server-test.png" alt="Test the web server" width="900">
+</p>
 
+*A "Hello from your web server!" message displays. I have successfully discovered the root cause of the problem by examining log files on the EC2 instance, and resolved it to create the stack successfully.*
 
 
 ## Task 3: Make manual modifications and detect drift
@@ -299,15 +332,17 @@ I notice that the `StackStatus` shows `DELETE_FAILED`.
 > [!NOTE]
 > The `StackStatusReason` reads: "The following resource(s) failed to delete: [MyBucket]." CloudFormation will not delete a bucket that has objects in it. This helps guard against accidental data loss.
 
+## Challenge: Keep the file in the S3 bucket, but Still Delete the Stack
+One approach to this issue would be to manually delete or move the file object in the S3 bucket and then run the `delete-stack` command again. However, this approach may not be appropriate if people in the organization have already started storing a large number of files in the bucket, and other systems now depend on the bucket name and location remaining unchanged.
 
+My challenge is to:
+* Figure out how to keep the bucket and the file in it, while still successfully deleting the stack so that the stack status becomes `DELETE_COMPLETE`
+* Use the AWS CLI to solve the problem (avoiding the AWS Management Console)
 
-
-
-
-
-
-
-
+#### Solution from Terminal output
+```bash
+PLACEHOLDER
+```
 
 ## Business case solution
 *Update from Café:*
