@@ -25,7 +25,7 @@ In this activity, I take on the role of Sofîa. I create a deployment of a web s
 In this first task, I practice using the JMESPath JSON query language to return results from a JSON document.
 
 1. I open a new browser window and go to [jmespath.org/](http://jmespath.org/).
-2. On the JMESPath website, in the document window that currently displays the locations JSON document, I copy the following JSON document, replacing the ****locations*** document:
+2. On the JMESPath website, in the document window that currently displays the locations JSON document, I copy the following JSON document, replacing the ***locations*** document:
 
 ```json
 {
