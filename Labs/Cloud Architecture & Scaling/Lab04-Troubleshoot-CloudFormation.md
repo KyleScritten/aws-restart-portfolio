@@ -231,10 +231,14 @@ When resources created by AWS CloudFormation need to be modified, it is a best p
 1. I arrange the AWS Management Console tab so that it displays alongside these instructions, ideally with both browser tabs visible at the same time to make it easier to follow the lab steps.
 2. I open the AWS Management Console in a new browser tab, and from the **Services** menu, choose **EC2**.
 3. I click **Instances**, then select **Web Server**.
-4. I click the **Security** tab, followed by the **WebServerSG** security group.
+4. I click the **Security** tab, followed by the `WebServerSG` security group.
 5. I click the **Inbound rules** tab, then click **Edit inbound rules**.
 6. I modify the existing SSH inbound rule. To modify the rule, in the **Source** column of the row that applies to port 22, I click **Custom** and select **My IP**.
 7. I click **Save rules**.
+
+<p align="center">
+  <img src="images/manual-sg-mods.png" alt="Make manual modifications to the security groups” width="900">
+</p>
 
 ### Task 3.2: Add an object to the S3 bucket
 From the terminal connected to the CLI Host, I query the bucket name, assign it to a variable named `bucketName`, and echo the result to the terminal by running the command provided in the lab. 
@@ -246,8 +250,20 @@ I then create an empty file, and copy it to the bucket using the `aws s3 cp` com
 PLACEHOLDER
 ```
 
+### Task 3.3: Detect drift
+To start drift detection on my stack, I run the `detect-stack-drift` command, which returns a `StackDriftDetectionId`. I monitor the status of the drift detection by running a follow-up command using this ID, and notice that the output shows `"StackDriftStatus": "DRIFTED"`.
 
+Finally, I describe the resources that drifted by running the `describe-stack-resource-drifts` command. Since the output from this command is extensive, I try a different approach, running a `describe-stack-resources` command with a query parameter that returns only the resource type, resource status, and drift status. 
 
+>[!Note]
+> The `PropertyDifferences` section of the output, which shows that port 22 is now open only to my IP address, instead of the `0.0.0.0/0` Classless Inter-Domain Routing (CIDR) block defined in the AWS CloudFormation template.
+
+I then try updating the stack, and the output indicates that an error occurred — this is expected. The `update-stack` command does not automatically resolve drift, even though drift has occurred; I must manually resolve these issues to eliminate the drift.
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
 
 ## Task 4: Attempt to delete the stack
 There might be occasions when I want to completely delete a stack, such as when I finish running tests in a test environment I no longer need, or when I want to save on costs by not maintaining environment resources I don't need for a while. In such situations, I know that if I need these resources again, I can re-create them using my proven template to create a new stack.
