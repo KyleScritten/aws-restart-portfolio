@@ -142,21 +142,77 @@ StackResources[?ResourceType == 'AWS::EC2::Instance'].LogicalResourceId
 
 *I notice that the instructions often include AWS CLI commands with `--query` or `--filter` parameters. These parameters use JMESPath expressions to filter the output returned by an AWS CLI command.*
 
-
-
-
-
-
-
-
-
-
 ## Task 2: Troubleshooting and working with AWS CloudFormation stacks
+This task starts with an EC2 instance named `CLI Host`, which is already created for me, running in the public subnet of a VPC named `VPC2`. I first establish an SSH connection to the CLI Host so that I can work with the AWS CloudFormation service from there.
+
+### Task 2.1 for Windows: SSH to CLI Host Instance
+
+In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
+
+I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP `PLACEHOLDER` From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
+
+#### Connect to the EC2 Instance
+```bash
+kylescritten@Kyles-MacBook-Air ~ % cd ~/Downloads
+kylescritten@Kyles-MacBook-Air Downloads % chmod 400 labsuser.pem
+kylescritten@Kyles-MacBook-Air Downloads % ssh -i labsuser.pem ec2-user@35.165.155.183
+The authenticity of host '35.165.155.183 (35.165.155.183)' can't be established.
+ED25519 key fingerprint is: SHA256:fWpOX1gJ8RjphiEFsT590duiOy8aqQoBYpzBlgp3JUs
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+```
+
+#### Terminal Output
+```bash
+Warning: Permanently added '35.165.155.183' (ED25519) to the list of known hosts.
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-10-0-10-134 ~]$ 
+```
+
+### Task 2.2: Configure the AWS CLI
+The AWS CLI is preconfigured on the Command Host instance.
+
+1. To confirm that the Region in which the Command Host instance is running matches the lab's Region (`us-west-2`), I run the following command:
+```bash
+curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+```
+
+2. To update the AWS CLI software with the correct credentials, I run the following command:
+```bash
+aws configure
+```
+
+3. At the prompts, I enter the following information:
+   * **AWS Access Key ID:** `<Lab Public Access Key>`
+   * **AWS Secret Access Key:** `<Lab Secret Access Key>`
+   * **Default region name:** Enter the Region name of where your EC2 instances are running.
+   * **Default output format:** Enter `json`
+
+#### Terminal Output
+```bash
+
+```
+
+### Task 2.3: Attempt to create an AWS CloudFormation stack
 
 
+### Task 2.4: Avoid rollback on an AWS CloudFormation stack
 
 
-
+### Task 2.5: Fix the issue and successfully create the AWS CloudFormation stack
 
 
 
@@ -166,12 +222,29 @@ StackResources[?ResourceType == 'AWS::EC2::Instance'].LogicalResourceId
 
 
 ## Task 3: Make manual modifications and detect drift
+In this task, I intentionally modify a resource that was created by AWS CloudFormation, but I modify the resource manually in the AWS Management Console.
 
+When resources created by AWS CloudFormation need to be modified, it is a best practice to update the AWS CloudFormation template and then run the `update-stack` command. However, it is common for other AWS account users to be unaware of this best practice, or to forget how important it is to follow it. This task gives me hands-on practice noticing when these situations have occurred.
 
+### Task 3.1: Make manual modifications to the security groups
 
+1. I arrange the AWS Management Console tab so that it displays alongside these instructions, ideally with both browser tabs visible at the same time to make it easier to follow the lab steps.
+2. I open the AWS Management Console in a new browser tab, and from the **Services** menu, choose **EC2**.
+3. I click **Instances**, then select **Web Server**.
+4. I click the **Security** tab, followed by the **WebServerSG** security group.
+5. I click the **Inbound rules** tab, then click **Edit inbound rules**.
+6. I modify the existing SSH inbound rule. To modify the rule, in the **Source** column of the row that applies to port 22, I click **Custom** and select **My IP**.
+7. I click **Save rules**.
 
+### Task 3.2: Add an object to the S3 bucket
+From the terminal connected to the CLI Host, I query the bucket name, assign it to a variable named `bucketName`, and echo the result to the terminal by running the command provided in the lab. 
 
+I then create an empty file, and copy it to the bucket using the `aws s3 cp` command, which references the `bucketName` variable I defined. Finally, I verify that the file is in the bucket by running `aws s3 ls $bucketName/`.
 
+#### Terminal output
+```bash
+PLACEHOLDER
+```
 
 
 
