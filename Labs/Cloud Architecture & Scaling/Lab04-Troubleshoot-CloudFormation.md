@@ -25,10 +25,25 @@ In this activity, I take on the role of Sofîa. I create a deployment of a web s
 In this first task, I practice using the JMESPath JSON query language to return results from a JSON document.
 
 1. I open a new browser window and go to [jmespath.org/](http://jmespath.org/).
-2. On the JMESPath website, in the document window that currently displays the locations JSON document, I copy the following JSON document, replacing the locations document:
+2. On the JMESPath website, in the document window that currently displays the locations JSON document, I copy the following JSON document, replacing the ****locations*** document:
 
 ```json
-PASTE_FROM_LAB
+{
+  "desserts": [
+    {
+      "name": "Chocolate cake",
+      "price": "20.00"
+    },
+    {
+      "name": "Ice cream",
+      "price": "15.00"
+    },
+    {
+      "name": "Carrot cake",
+      "price": "22.00"
+    }
+  ]
+}
 ```
 
 3. In the **Expression** search box above the document, I delete all the text and enter `desserts`. The expression is immediately evaluated.
@@ -45,51 +60,74 @@ In the **Result** panel below the document, I notice that all the content in the
 
 4. I add `[1]` to the expression:
 
-```bash
-desserts[1]
+#### Result panel
+```json
+PLACEHOLDER
 ```
 
-Only the second dessert element is displayed. The `[]` notation is used with an index, enabling me to refer to a specific element of an array. Because JMESPath considers the first position in an array to be 0, `1` returns the second element.
+Only the second dessert element is displayed. 
 
-5. To retrieve only the value of the `name` attribute for the chocolate cake element, I enter:
+> [!NOTE]
+> The `[]` notation is used with an index, enabling me to refer to a specific element of an array. Because JMESPath considers the first position in an array to be 0, `1` returns the second element.
 
-```bash
-desserts[0].name
+5. To retrieve only the value of the `name` attribute for the chocolate cake element, I enter `desserts[0].name`:
+
+#### Result panel
+```json
+PLACEHOLDER
 ```
 
-   The name of the first dessert element, "Chocolate cake", is returned.
+The name of the first dessert element, "Chocolate cake", is returned.
 
 > [!NOTE]
 > The `.` notation allows me to specify the name of an attribute in the document.
 
-6. To retrieve the values of both the `name` and `price` attributes of the chocolate cake element, I enter:
+6. To retrieve the values of both the `name` and `price` attributes of the chocolate cake element, I enter `desserts[0].[name,price]`:
 
-```bash
-desserts[0].[name,price]
+#### Result panel
+```json
+PLACEHOLDER
 ```
 
-   The name and price of the chocolate cake dessert are displayed. The `[]` notation can also be used to define a list of attributes to return.
+The name and price of the chocolate cake dessert are displayed. The `[]` notation can also be used to define a list of attributes to return.
 
-7. To return the values of the `name` attribute for all three dessert elements, without the prices, I enter:
+7. To return the values of the `name` attribute for all three dessert elements, without the prices, I enter `desserts[].name`:
 
-```bash
-desserts[].name
+#### Result panel
+```json
+PLACEHOLDER
 ```
 
-   An empty array index `[]`, or one with an asterisk `[*]`, refers to all of the elements in an array.
+An empty array index `[]`, or one with an asterisk `[*]`, refers to all of the elements in an array.
 
-8. Now, instead of referring to elements by their position, I use a filter to return the attributes of the carrot cake element:
+8. Now, instead of referring to elements by their position, I use a filter to return the attributes of the carrot cake element by running `desserts[?name=='Carrot cake']`:
 
-```bash
-desserts[?name=='Carrot cake']
+#### Result panel
+```json
+PLACEHOLDER
 ```
 
-   I did not need to know the index of the element I was searching for. The filter expression `[? <expression>]` returns the elements in the document that match the specified expression condition.
+I did not need to know the index of the element I was searching for. The filter expression `[? <expression>]` returns the elements in the document that match the specified expression condition.
 
 9. Lastly, I replace the JSON document with the following document, which describes resources in an AWS CloudFormation stack:
 
 ```json
-PASTE_FROM_LAB
+{
+    "StackResources": [
+        {
+            "LogicalResourceId": "VPC",
+            "ResourceType": "AWS::EC2::VPC"
+        },
+        {
+            "LogicalResourceId": "PublicSubnet1",
+            "ResourceType": "AWS::EC2::Subnet"
+        },
+        {
+            "LogicalResourceId": "CliHostInstance",
+            "ResourceType": "AWS::EC2::Instance"
+        }
+    ]
+}
 ```
 
 10. To determine the correct JMESPath expression to retrieve the `LogicalResourceId` of the EC2 instance resource, I run the following query:
@@ -98,7 +136,11 @@ PASTE_FROM_LAB
 StackResources[?ResourceType == 'AWS::EC2::Instance'].LogicalResourceId
 ```
 
-When I complete the other tasks in this activity, I notice that the instructions often include AWS CLI commands with `--query` or `--filter` parameters. These parameters use JMESPath expressions to filter the output returned by an AWS CLI command.
+<p align="center">
+  <img src="images/JSMESPath-snapshot.png" alt="JSMESPath Webpage” width="900">
+</p>
+
+*I notice that the instructions often include AWS CLI commands with `--query` or `--filter` parameters. These parameters use JMESPath expressions to filter the output returned by an AWS CLI command.*
 
 
 
