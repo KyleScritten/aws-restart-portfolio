@@ -145,11 +145,78 @@ StackResources[?ResourceType == 'AWS::EC2::Instance'].LogicalResourceId
 
 
 
+
+
+
+
+
+
 ## Task 2: Troubleshooting and working with AWS CloudFormation stacks
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Task 3: Make manual modifications and detect drift
 
+
+
+
+
+
+
+
+
+
 ## Task 4: Attempt to delete the stack
+There might be occasions when I want to completely delete a stack, such as when I finish running tests in a test environment I no longer need, or when I want to save on costs by not maintaining environment resources I don't need for a while. In such situations, I know that if I need these resources again, I can re-create them using my proven template to create a new stack.
+
+In this last task, I try to delete the stack. The attempt fails, and I am then given a challenge to resolve the issue.
+
+1. I try deleting the stack by running the following command:
+
+```bash
+aws cloudformation delete-stack --stack-name myStack
+```
+
+2. I observe the results by running the `describe-stack-resources` command:
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
+
+I observe how the status of each resource changes. Most of the resources are successfully deleted. However, one resource fails to delete: the S3 bucket.
+
+Once all resources have a status of either `DELETE_COMPLETE` or `DELETE_FAILED`, I use the `Ctrl-C` keyboard combination to exit the watch command.
+
+3. I run the `describe-stacks` command to see the stack status:
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
+
+I notice that the `StackStatus` shows `DELETE_FAILED`.
+
+> [!NOTE]
+> The `StackStatusReason` reads: "The following resource(s) failed to delete: [MyBucket]." CloudFormation will not delete a bucket that has objects in it. This helps guard against accidental data loss.
+
+
+
+
+
+
+
+
 
 
 
