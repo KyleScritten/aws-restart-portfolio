@@ -14,7 +14,7 @@ I then manually modify a resource created by the AWS CloudFormation stack, outsi
 *A new request from the Café leadership team:*
 
 <p align="center">
-  <img src="images/cafe-logo-cf.png" alt="Cafe Business Logo" width="900">
+  <img src="images/cafe-logo-cf.png" alt="Cafe Business Logo" width="400">
 </p>
 
 Sofîa is discussing the AWS deployment used by the Café with Olivia. Sofîa mentions that Martha and Frank would like both her and Nikhil to have the skills to build infrastructure as code (IaC). Olivia suggests that as a first attempt, Sofîa should try working on a proof of concept (POC).
@@ -115,7 +115,7 @@ When I complete the other tasks in this activity, I notice that the instructions
 *Update from Café:*
 
 <p align="center">
-  <img src="images/cafe-logo-cf.png" alt="Cafe Business Logo" width="900">
+  <img src="images/cafe-logo-cf.png" alt="Cafe Business Logo" width="400">
 </p>
 
 When Sofîa went into work the next morning at the Café, she was excited to tell Nikhil and the others about the proof of concept work she had done the night before using CloudFormation.
