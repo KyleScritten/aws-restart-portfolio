@@ -98,7 +98,7 @@ The terminal output displays the following message: "An error occurred (InvalidA
 
 After I fix the issue, the `run-instances` command succeeds, and a public IPv4 address is assigned to the new instance.
 
-#### Terminal output:
+#### Terminal output
 ```bash
 PLACEHOLDER
 ```
@@ -180,3 +180,9 @@ On an Amazon Linux instance, the `cloud-init` service runs the commands in the u
 After completing this activity, I am able to:
 * Launch an EC2 instance using the AWS CLI
 * Troubleshoot AWS CLI commands and Amazon EC2 service settings using basic troubleshooting tips and the open-source `nmap` utility
+
+## Additional resources
+
+* [Launching, Listing, and Terminating Amazon EC2 Instances](https://docs.aws.amazon.com/cli/latest/userguide/cli-services-ec2-instances.html)
+* [Connect to Your Linux Instance Using EC2 Instance Connect](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html)
+* [User Data and Shell Scripts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
