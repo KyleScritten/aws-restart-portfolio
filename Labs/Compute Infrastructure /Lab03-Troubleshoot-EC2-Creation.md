@@ -9,7 +9,7 @@ When creating the instance, I reference a user data script to configure it with 
 The same user data file deploys website files and runs database configuration scripts on the instance, resulting in an instance that hosts the Café Web Application.
 
 <p align="center">
-  <img src="images/troubleshoot-create-ec2.png" alt="Troubleshooting the Creation of an EC2 Instance Architecture" width="900">
+  <img src="images/troubleshoot-create-ec2.png" alt="Troubleshooting the Creation of an EC2 Instance Architecture" width="1000">
 </p>
 
 *The following diagram shows the architecture I create in this activity.*
