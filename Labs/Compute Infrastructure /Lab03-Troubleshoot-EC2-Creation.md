@@ -112,7 +112,7 @@ The attempt fails. There must be another issue, so I need to resolve Issue #2.
 The `run-instances` command succeeded, and a public IP address was assigned to the new instance. However, I cannot load the test webpage.
 
 1. I connect to the new LAMP instance using EC2 Instance Connect, the same method I used to connect to the CLI Host instance.
-2. In the terminal window for the CLI Host instance, I run the following command to install `nmap`, a port scanning tool:
+2. In the terminal window for the CLI Host instance, I run the command to install `nmap`, a port scanning tool.
 
 ```bash
 sudo yum install -y nmap
@@ -136,7 +136,7 @@ PLACEHOLDER
 4. After I identify and resolve the issue, in a browser, I navigate to the following address with the Public IPv4 address of the new instance I created: `http://<public-ip>`
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/test-user-data-script.png" alt="Test of the user data script" width="900">
 </p>
 
 *If I resolved Issue #2 successfully, I see the following message: "**Hello From Your Web Server!"***
