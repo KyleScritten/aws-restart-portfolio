@@ -93,7 +93,66 @@ PLACEHOLDER
 
 ### Task 3.3: Troubleshoot issues
 
+#### Issue #1
+The terminal output displays the following message: "An error occurred (InvalidAMIID.NotFound) when calling the RunInstances operation: The image id '[ami-xxxxxxxxxx]' does not exist".
 
+After I fix the issue, the `run-instances` command succeeds, and a public IPv4 address is assigned to the new instance.
+
+#### Terminal output:
+```bash
+PLACEHOLDER
+```
+
+#### Try to connect to the webpage
+In a browser, I navigate to the Public IPv4 address of the new instance I created: `http://<public-ip>`
+
+The attempt fails. There must be another issue, so I need to resolve Issue #2.
+
+#### Issue #2
+The `run-instances` command succeeded, and a public IP address was assigned to the new instance. However, I cannot load the test webpage.
+
+1. I connect to the new LAMP instance using EC2 Instance Connect, the same method I used to connect to the CLI Host instance.
+2. In the terminal window for the CLI Host instance, I run the following command to install `nmap`, a port scanning tool:
+
+```bash
+sudo yum install -y nmap
+```
+
+3. Next, I run the following command with the actual public IPv4 address of my LAMP instance:
+
+```bash
+nmap -Pn <public-ip>
+```
+
+*The output from this command shows which ports are accessible.*
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
+
+#### Test whether the user data script ran
+
+4. After I identify and resolve the issue, in a browser, I navigate to the following address with the Public IPv4 address of the new instance I created: `http://<public-ip>`
+
+<p align="center">
+  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+</p>
+
+*If I resolved Issue #2 successfully, I see the following message: "**Hello From Your Web Server!"***
+
+5. Lastly, I check the log file to see whether the user data script ran as expected. In the terminal window for the LAMP instance, I run the following command to view the log file entries as they are written:
+
+```bash
+sudo tail -f /var/log/cloud-init-output.log
+```
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
+
+On an Amazon Linux instance, the `cloud-init` service runs the commands in the user data file. I observe the log file entries, noting the messages related to the installation of MariaDB and PHP — there are no error messages. I also see messages related to the Café Web Application files that were downloaded and extracted to this instance, such as "Create Database script completed".
 
 ## Task 4: Verifying the functionality of the website
 
