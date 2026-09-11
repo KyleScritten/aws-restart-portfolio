@@ -53,7 +53,20 @@ In this first task, I practice using the JMESPath JSON query language to return 
 
 #### Result panel
 ```json
-PLACEHOLDER
+[
+  {
+    "name": "Chocolate cake",
+    "price": "20.00"
+  },
+  {
+    "name": "Ice cream",
+    "price": "15.00"
+  },
+  {
+    "name": "Carrot cake",
+    "price": "22.00"
+  }
+]
 ```
 
 In the **Result** panel below the document, I notice that all the content in the desserts part of the document is returned.
@@ -62,7 +75,10 @@ In the **Result** panel below the document, I notice that all the content in the
 
 #### Result panel
 ```json
-PLACEHOLDER
+{
+  "name": "Ice cream",
+  "price": "15.00"
+}
 ```
 
 Only the second dessert element is displayed. 
@@ -74,19 +90,19 @@ Only the second dessert element is displayed.
 
 #### Result panel
 ```json
-PLACEHOLDER
+"Chocolate cake"
 ```
 
-The name of the first dessert element, "Chocolate cake", is returned.
-
-> [!NOTE]
-> The `.` notation allows me to specify the name of an attribute in the document.
+The name of the first dessert element is returned. The `.` notation allows me to specify the name of an attribute in the document.
 
 6. To retrieve the values of both the `name` and `price` attributes of the chocolate cake element, I enter `desserts[0].[name,price]`:
 
 #### Result panel
 ```json
-PLACEHOLDER
+[
+  "Chocolate cake",
+  "20.00"
+]
 ```
 
 The name and price of the chocolate cake dessert are displayed. The `[]` notation can also be used to define a list of attributes to return.
@@ -95,7 +111,11 @@ The name and price of the chocolate cake dessert are displayed. The `[]` notatio
 
 #### Result panel
 ```json
-PLACEHOLDER
+[
+  "Chocolate cake",
+  "Ice cream",
+  "Carrot cake"
+]
 ```
 
 An empty array index `[]`, or one with an asterisk `[*]`, refers to all of the elements in an array.
@@ -104,10 +124,13 @@ An empty array index `[]`, or one with an asterisk `[*]`, refers to all of the e
 
 #### Result panel
 ```json
-PLACEHOLDER
+[
+  {
+    "name": "Carrot cake",
+    "price": "22.00"
+  }
+]
 ```
-
-I did not need to know the index of the element I was searching for. The filter expression `[? <expression>]` returns the elements in the document that match the specified expression condition.
 
 9. Lastly, I replace the JSON document with the following document, which describes resources in an AWS CloudFormation stack:
 
@@ -149,22 +172,22 @@ This task starts with an EC2 instance named `CLI Host`, which is already created
 
 In this task, I will connect to a Amazon Linux EC2 instance. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
 
-I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP `PLACEHOLDER` From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
+I downloaded the file labsuser.pem from the lab environment and saved the PublicIP address, which for my lab is PublicIP `35.95.44.63` From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
 
 #### Connect to the EC2 Instance
 ```bash
-kylescritten@Kyles-MacBook-Air ~ % cd ~/Downloads
-kylescritten@Kyles-MacBook-Air Downloads % chmod 400 labsuser.pem
-kylescritten@Kyles-MacBook-Air Downloads % ssh -i labsuser.pem ec2-user@35.165.155.183
-The authenticity of host '35.165.155.183 (35.165.155.183)' can't be established.
-ED25519 key fingerprint is: SHA256:fWpOX1gJ8RjphiEFsT590duiOy8aqQoBYpzBlgp3JUs
+kylescritten@MacBookAir ~ % cd ~/Downloads
+kylescritten@MacBookAir Downloads % chmod 400 labsuser.pem
+kylescritten@MacBookAir Downloads % ssh -i labsuser.pem ec2-user@35.95.44.63
+The authenticity of host '35.95.44.63 (35.95.44.63)' can't be established.
+ED25519 key fingerprint is: SHA256:4M6tSGr+zuC18ZC+BP8rqx0IllMLRnYTrZHLbkyVVmU
 This key is not known by any other names.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 ```
 
 #### Terminal Output
 ```bash
-Warning: Permanently added '35.165.155.183' (ED25519) to the list of known hosts.
+Warning: Permanently added '35.95.44.63' (ED25519) to the list of known hosts.
 ** WARNING: connection is not using a post-quantum key exchange algorithm.
 ** This session may be vulnerable to "store now, decrypt later" attacks.
 ** The server may need to be upgraded. See https://openssh.com/pq.html
@@ -176,10 +199,10 @@ Warning: Permanently added '35.165.155.183' (ED25519) to the list of known hosts
    ~~       V~' '->
     ~~~         /    A newer version of Amazon Linux is available!
       ~~._.   _/
-         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
        _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
 
-[ec2-user@ip-10-0-10-134 ~]$ 
+[ec2-user@cli-host ~]$ 
 ```
 
 ### Task 2.2: Configure the AWS CLI
@@ -203,7 +226,17 @@ aws configure
 
 #### Terminal Output
 ```bash
-
+[ec2-user@cli-host ~]$ curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   477  100   477    0     0   136k      0 --:--:-- --:--:-- --:--:--  155k
+  "region" : "us-west-2",
+[ec2-user@cli-host ~]$ aws configure
+AWS Access Key ID [None]: <Lab Public Access Key>
+AWS Secret Access Key [None]: <Lab Secret Access Key>
+Default region name [None]: us-west-2
+Default output format [None]: json
+[ec2-user@cli-host ~]$ 
 ```
 
 ### Task 2.3: Attempt to create an AWS CloudFormation stack
