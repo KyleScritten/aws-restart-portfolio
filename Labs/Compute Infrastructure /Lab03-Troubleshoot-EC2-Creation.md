@@ -40,7 +40,58 @@ In this task, I configure the AWS CLI using the configuration parameters made av
 PASTE_FROM_LAB
 ```
 
+## Task 3: Creating an EC2 instance using the AWS CLI
+In this task, I observe and run a shell script provided to me to create an EC2 LAMP instance using AWS CLI commands. The script intentionally contains issues, and my challenge is to find and resolve them. As I resolve each issue, I rerun the script to check that it has been fixed.
 
+### Task 3.1: Observe the script details
+First, I create a backup of the script I will edit in a later step.
+
+1. To change to the directory where the script file exists and create a backup of it, I run the following commands:
+
+```bash
+cd ~/sysops-activity-files/starters
+
+cp create-lamp-instance-v2.sh create-lamp-instance.backup
+```
+
+2. I open the `create-lamp-instance-v2.sh` script file, using the `view` command in read-only mode using the VI command line text editor.
+
+3. I analyze the contents of the script, displaying line numbers by typing `:set number` and pressing Enter:
+   * **Line 1:** This is a bash file, so the first line contains `#!/bin/bash`.
+   * **Lines 7–11:** The instance size is set to `t3.small`, which should be large enough to run the database and web server.
+   * **Lines 16–29:** The script invokes the AWS CLI `describe-regions` command to get a list of all AWS Regions. In each Region, it queries for an existing VPC named `Cafe VPC`. After finding the VPC, it captures the VPC ID and Region, and breaks out of the `while` loop — this is the VPC where the LAMP instance for the Café Web Application should be deployed.
+   * **Lines 31–55:** The script invokes AWS CLI commands to look up the subnet ID, key pair name, and AMI ID values needed to create the EC2 instance. I notice line 32 ends with a backslash (`\`) character, which wraps a single command onto another line — a technique used throughout the script to improve readability.
+   * **Lines 57–122:** The script cleans up the AWS account for situations where it has already run and is being run again. It checks whether an instance named `cafeserver` already exists, and whether a security group including `cafeSG` in its name already exists. If either resource is found, the script prompts me to delete them.
+   * **Lines 124–152:** The script creates a new security group with ports 22 and 80 open.
+   * **Lines 154–168:** The script creates a new EC2 instance, using values set in lines 8 and 10 along with values collected in lines 16–57. I notice a reference to the user data file, which I review in a later step. The entire call to create the instance is captured in a variable named `instanceDetails`, whose contents are echoed to the terminal on line 177 and formatted for easier viewing using a Python JSON tool.
+   * **Lines 179–188:** The `instanceId` value is parsed out of the `instanceDetails` variable. A `while` loop then checks every 10 seconds to see if a public IP address has been assigned to the instance, and once the check succeeds, the public IP address is written to the terminal.
+
+4. I exit the VI text editor by entering `:q!`.
+5. To display the contents of the user data script, I run the following command:
+
+```bash
+cat create-lamp-instance-userdata-v2.txt
+```
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
+
+*I notice how the user data script runs a series of commands on the instance after it is launched. These commands install a web server, PHP, and a database server.*
+
+### Task 3.2: Try to run the script
+
+Now that I have an idea of what the shell script is designed to do, I try to run it using `./create-lamp-instance-v2.sh` :
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
+
+*The script fails and exits without successfully completing. This behavior is expected.*
+
+### Task 3.3: Troubleshoot issues
 
 
 
