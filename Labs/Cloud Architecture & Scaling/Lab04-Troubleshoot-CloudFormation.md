@@ -683,7 +683,7 @@ Every 5.0s: aws cloudformation describe-stack-resources --stack-name myStack --q
 +-------------------------------------------+----------------------+
 |  AWS::EC2::InternetGateway                |  CREATE_COMPLETE     |
 |  AWS::EC2::VPC                            |  CREATE_COMPLETE     |
-|  AWS::S3::Bucket                          |  DELETE_FAILED	     |
+|  AWS::S3::Bucket                          |  DELETE_FAILED	    |
 |  AWS::EC2::Route                          |  DELETE_COMPLETE     |
 |  AWS::EC2::RouteTable                     |  DELETE_COMPLETE     |
 |  AWS::EC2::SubnetRouteTableAssociation    |  DELETE_COMPLETE     |
