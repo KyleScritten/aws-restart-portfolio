@@ -513,7 +513,7 @@ I test the web server by opening a browser tab and entering the IP address:
 ```
 
 <p align="center">
-  <img src="images/web-server-test.png" alt="Test the web server" width="900">
+  <img src="images/web-server-test.png" alt="Test the web server" width="1000">
 </p>
 
 *A "Hello from your web server!" message displays. I have successfully discovered the root cause of the problem by examining log files on the EC2 instance, and resolved it to create the stack successfully.*
