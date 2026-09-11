@@ -54,7 +54,7 @@ cd ~/sysops-activity-files/starters
 cp create-lamp-instance-v2.sh create-lamp-instance.backup
 ```
 
-2. I open the `create-lamp-instance-v2.sh` script file, using the `view` command in read-only mode using the VI command line text editor.
+2. I open the `create-lamp-instance-v2.sh` script file, using the `view` command in read-only mode using the `VI` command line text editor.
 
 3. I analyze the contents of the script, displaying line numbers by typing `:set number` and pressing Enter:
    * **Line 1:** This is a bash file, so the first line contains `#!/bin/bash`.
@@ -66,7 +66,7 @@ cp create-lamp-instance-v2.sh create-lamp-instance.backup
    * **Lines 154–168:** The script creates a new EC2 instance, using values set in lines 8 and 10 along with values collected in lines 16–57. I notice a reference to the user data file, which I review in a later step. The entire call to create the instance is captured in a variable named `instanceDetails`, whose contents are echoed to the terminal on line 177 and formatted for easier viewing using a Python JSON tool.
    * **Lines 179–188:** The `instanceId` value is parsed out of the `instanceDetails` variable. A `while` loop then checks every 10 seconds to see if a public IP address has been assigned to the instance, and once the check succeeds, the public IP address is written to the terminal.
 
-4. I exit the VI text editor by entering `:q!`.
+4. I exit the `VI` text editor by entering `:q!`.
 5. To display the contents of the user data script, I run the following command:
 
 ```bash
