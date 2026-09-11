@@ -32,14 +32,29 @@ ORIGIN
 //
 ```
 
+## Exercise 2: Obtaining the protein sequence of human insulin
 
+Insulin is obtained from preproinsulin through a series of cut-and-paste procedures.
 
+**Insulin formation process:**
+- Insulin is produced from preproinsulin through a series of cut-and-paste (processing) steps.
+- Preproinsulin consists of:
+  - A 24 amino acid (aa) signal sequence
+  - An 86 amino acid proinsulin molecule
+- During processing:
+  - The signal sequence (aa 1–24) is removed
+  - The remaining molecule becomes proinsulin
+- Further processing of proinsulin produces the final insulin:
+  - Amino acids 25–54 → form part of the insulin molecule
+  - Amino acids 90–110 → form another part of the insulin molecule
 
+I use the Python code [analyze-insulin.py](./python-scripts/analyze-insulin.py) to retrieve only the amino acids in the sequence that compose insulin.
 
+<p align="center">
+  <img src="images/py-10-analyze-insulin.png" alt="Obtaining the protein sequence of human insulin” width="900">
+</p>
 
-
-
-
+*Through the completion of this lab, I have prepared data for further processing. Manually preparing these files helps me appreciate the automation that Python can provide.*
 
 ## Conclusion
 
@@ -47,4 +62,20 @@ ORIGIN
 
 Automating my work versus working manually is a dilemma for computer programmers. Too much automation wastes time on coding, whereas too little restricts the scope of the program. I try to balance automation with manual work in an effort to create a program with the most scope for the least time spent coding. In this case, it is probably not worth the extra coding time to programmatically clean `insulin-seq.txt` to `insulin-seq-clean.txt`. However, if I needed to download thousands or millions of files and perform the same task, automation would be worth exploring.
 
-Through the completion of this lab, I have prepared data for further processing. Manually preparing these files helps me appreciate the automation that Python can provide.
+## Visualize full processing pathway
+This is how preproinsulin becomes insulin.
+
+```
+Preproinsulin (110 aa total)
+│
+├── Signal peptide (1–24) → removed
+│
+└── Proinsulin (25–110)
+    │
+    ├── B chain (25–54)
+    ├── C-peptide (55–89) → removed
+    └── A chain (90–110)
+           ↓
+Final product:
+B chain + A chain = Insulin
+```
