@@ -4,7 +4,7 @@
 
 In this activity, I use the AWS Command Line Interface (AWS CLI) to launch Amazon Elastic Compute Cloud (Amazon EC2) instances.
 
-When creating the instance, I reference a user data script to configure it with an Apache web server, a MariaDB relational database (a fork of the MySQL relational database), and PHP. Together, these software packages installed on a single machine are often referred to as a LAMP stack (**L**inux, **A**pache web server, **M**ySQL, and **P**HP) — a common way to create a website with a database backend on a single machine.
+When creating the instance, I reference a user data script to configure it with an Apache web server, a MariaDB relational database (a fork of the MySQL relational database), and PHP. Together, these software packages installed on a single machine are often referred to as a ***LAMP*** stack (**L**inux, **A**pache web server, **M**ySQL, and **P**HP) — a common way to create a website with a database backend on a single machine.
 
 The same user data file deploys website files and runs database configuration scripts on the instance, resulting in an instance that hosts the Café Web Application.
 
@@ -14,3 +14,14 @@ The same user data file deploys website files and runs database configuration sc
 
 *The following diagram shows the architecture I create in this activity.*
 
+
+
+
+
+
+
+## Conclusion
+
+After completing this activity, I am able to:
+* Launch an EC2 instance using the AWS CLI
+* Troubleshoot AWS CLI commands and Amazon EC2 service settings using basic troubleshooting tips and the open-source `nmap` utility
