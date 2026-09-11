@@ -545,7 +545,20 @@ I then create an empty file, and copy it to the bucket using the `aws s3 cp` com
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host ~]$ bucketName=$(\
+> aws cloudformation describe-stacks \
+> --stack-name myStack \
+> --query "Stacks[*].Outputs[?OutputKey \
+> == 'BucketName'].[OutputValue]" \
+> --output text)
+[ec2-user@cli-host ~]$ echo "bucketName = "$bucketName
+bucketName = mystack-mybucket-9ajlgd7daghf
+[ec2-user@cli-host ~]$ touch myfile
+[ec2-user@cli-host ~]$ aws s3 cp myfile s3://$bucketName/
+upload: ./myfile to s3://mystack-mybucket-9ajlgd7daghf/myfile
+[ec2-user@cli-host ~]$ aws s3 ls $bucketName/
+2026-09-11 01:02:42          0 myfile
+[ec2-user@cli-host ~]$ 
 ```
 
 ### Task 3.3: Detect drift
@@ -560,7 +573,92 @@ I then try updating the stack, and the output indicates that an error occurred �
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host ~]$ aws cloudformation detect-stack-drift --stack-name myStack
+{
+    "StackDriftDetectionId": "c522d3e0-ad7c-11f1-9f24-02643ff88d0d"
+}
+[ec2-user@cli-host ~]$ 
+[ec2-user@cli-host ~]$ aws cloudformation describe-stack-drift-detection-status \
+> --stack-drift-detection-id c522d3e0-ad7c-11f1-9f24-02643ff88d0d
+{
+    "StackId": "arn:aws:cloudformation:us-west-2:876186143163:stack/myStack/7ca82b40-ad79-11f1-9ba9-0a4a3583017b", 
+    "StackDriftDetectionId": "c522d3e0-ad7c-11f1-9f24-02643ff88d0d", 
+    "StackDriftStatus": "DRIFTED", 
+    "Timestamp": "2026-09-11T01:04:42.014Z", 
+    "DetectionStatus": "DETECTION_COMPLETE", 
+    "DriftedStackResourceCount": 1
+}
+[ec2-user@cli-host ~]$ aws cloudformation describe-stack-resource-drifts \
+> --stack-name myStack
+{
+    "StackResourceDrifts": [
+        {
+            "StackId": "arn:aws:cloudformation:us-west-2:876186143163:stack/myStack/7ca82b40-ad79-11f1-9ba9-0a4a3583017b", 
+            "ActualProperties": "{\"Tags\":[{\"Key\":\"Name\",\"Value\":\"Lab IGW\"}]}", 
+            "ResourceType": "AWS::EC2::InternetGateway", 
+            "Timestamp": "2026-09-11T01:04:42.870Z", 
+            "PhysicalResourceId": "igw-0c7e68481ca7ac443", 
+            "StackResourceDriftStatus": "IN_SYNC", 
+            "ExpectedProperties": "{\"Tags\":[{\"Value\":\"Lab IGW\",\"Key\":\"Name\"}]}", 
+            "PropertyDifferences": [], 
+            "LogicalResourceId": "IGW"
+        }, 
+        
+        ...
+        
+[ec2-user@cli-host ~]$ aws cloudformation describe-stack-resources \
+> --stack-name myStack \
+> --query 'StackResources[*].[ResourceType,ResourceStatus,DriftInformation.StackResourceDriftStatus]' \
+> --output table
+--------------------------------------------------------------------------------
+|                            DescribeStackResources                            |
++-------------------------------------------+------------------+---------------+
+|  AWS::EC2::InternetGateway                |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::EC2::VPC                            |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::S3::Bucket                          |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::EC2::Route                          |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::EC2::RouteTable                     |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::EC2::SubnetRouteTableAssociation    |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::EC2::Subnet                         |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::EC2::VPCGatewayAttachment           |  CREATE_COMPLETE |  IN_SYNC      |
+|  AWS::CloudFormation::WaitCondition       |  CREATE_COMPLETE |  NOT_CHECKED  |
+|  AWS::CloudFormation::WaitConditionHandle |  CREATE_COMPLETE |  NOT_CHECKED  |
+|  AWS::EC2::SecurityGroup                  |  CREATE_COMPLETE |  MODIFIED     |
+|  AWS::EC2::Instance                       |  CREATE_COMPLETE |  IN_SYNC      |
++-------------------------------------------+------------------+---------------+
+[ec2-user@cli-host ~]$ aws cloudformation describe-stack-resource-drifts \
+> --stack-name myStack \
+> --stack-resource-drift-status-filters MODIFIED
+{
+    "StackResourceDrifts": [
+        {
+            "StackId": "arn:aws:cloudformation:us-west-2:876186143163:stack/myStack/7ca82b40-ad79-11f1-9ba9-0a4a3583017b", 
+            "ActualProperties": "{\"GroupDescription\":\"Enable access to web server\",\"GroupName\":\"WebServerSG\",\"VpcId\":\"vpc-08086cb6ce9727a34\",\"SecurityGroupIngress\":[{\"CidrIp\":\"0.0.0.0/0\",\"FromPort\":80,\"IpProtocol\":\"tcp\",\"ToPort\":80},{\"CidrIp\":\"152.110.48.104/32\",\"FromPort\":22,\"IpProtocol\":\"tcp\",\"ToPort\":22}],\"Tags\":[{\"Value\":\"WebServerSG\",\"Key\":\"Name\"}]}", 
+            "ResourceType": "AWS::EC2::SecurityGroup", 
+            "Timestamp": "2026-09-11T01:04:44.538Z", 
+            "PhysicalResourceId": "sg-0eacbc5c044acce10", 
+            "StackResourceDriftStatus": "MODIFIED", 
+            "ExpectedProperties": "{\"GroupName\":\"WebServerSG\",\"GroupDescription\":\"Enable access to web server\",\"VpcId\":\"vpc-08086cb6ce9727a34\",\"SecurityGroupIngress\":[{\"CidrIp\":\"0.0.0.0/0\",\"FromPort\":22,\"ToPort\":22,\"IpProtocol\":\"tcp\"},{\"CidrIp\":\"0.0.0.0/0\",\"FromPort\":80,\"IpProtocol\":\"tcp\",\"ToPort\":80}],\"Tags\":[{\"Value\":\"WebServerSG\",\"Key\":\"Name\"}]}", 
+            "PropertyDifferences": [
+                {
+                    "PropertyPath": "/SecurityGroupIngress/0/CidrIp", 
+                    "ActualValue": "152.110.48.104/32", 
+                    "ExpectedValue": "0.0.0.0/0", 
+                    "DifferenceType": "NOT_EQUAL"
+                }
+            ], 
+            "LogicalResourceId": "WebSecurityGroup"
+        }
+    ]
+}
+[ec2-user@cli-host ~]$ 
+[ec2-user@cli-host ~]$ aws cloudformation update-stack \
+> --stack-name myStack \
+> --template-body file://template1.yaml \
+> --parameters ParameterKey=KeyName,ParameterValue=vockey
+
+An error occurred (ValidationError) when calling the UpdateStack operation: No updates are to be performed.
+[ec2-user@cli-host ~]$ 
 ```
 
 ## Task 4: Attempt to delete the stack
@@ -578,7 +676,24 @@ aws cloudformation delete-stack --stack-name myStack
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+Every 5.0s: aws cloudformation describe-stack-resources --stack-name myStack --query StackResources[*].[ResourceType,ResourceStatus] --output table                               Fri Sep 11 01:12:12 2026
+
+--------------------------------------------------------------------
+|                      DescribeStackResources                      |
++-------------------------------------------+----------------------+
+|  AWS::EC2::InternetGateway                |  CREATE_COMPLETE     |
+|  AWS::EC2::VPC                            |  CREATE_COMPLETE     |
+|  AWS::S3::Bucket                          |  DELETE_FAILED	     |
+|  AWS::EC2::Route                          |  DELETE_COMPLETE     |
+|  AWS::EC2::RouteTable                     |  DELETE_COMPLETE     |
+|  AWS::EC2::SubnetRouteTableAssociation    |  DELETE_COMPLETE     |
+|  AWS::EC2::Subnet                         |  CREATE_COMPLETE     |
+|  AWS::EC2::VPCGatewayAttachment           |  DELETE_IN_PROGRESS  |
+|  AWS::CloudFormation::WaitCondition       |  DELETE_COMPLETE     |
+|  AWS::CloudFormation::WaitConditionHandle |  CREATE_COMPLETE     |
+|  AWS::EC2::SecurityGroup                  |  CREATE_COMPLETE     |
+|  AWS::EC2::Instance                       |  DELETE_IN_PROGRESS  |
++-------------------------------------------+----------------------+
 ```
 
 I observe how the status of each resource changes. Most of the resources are successfully deleted. However, one resource fails to delete: the S3 bucket.
@@ -589,7 +704,59 @@ Once all resources have a status of either `DELETE_COMPLETE` or `DELETE_FAILED`,
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host ~]$ aws cloudformation delete-stack --stack-name myStack
+[ec2-user@cli-host ~]$ 
+[ec2-user@cli-host ~]$ watch -n 5 -d \
+> aws cloudformation describe-stack-resources \
+> --stack-name myStack \
+> --query 'StackResources[*].[ResourceType,ResourceStatus]' \
+> --output table
+[ec2-user@cli-host ~]$ 
+[ec2-user@cli-host ~]$ aws cloudformation describe-stacks \
+> --stack-name myStack \
+> --output table
+---------------------------------------------------------------------------------------------------------------------------------------
+|                                                           DescribeStacks                                                            |
++-------------------------------------------------------------------------------------------------------------------------------------+
+||                                                              Stacks                                                               ||
+|+-----------------------------+-----------------------------------------------------------------------------------------------------+|
+||  CreationTime               |  2026-09-11T00:41:11.989Z                                                                           ||
+||  DeletionTime               |  2026-09-11T01:11:18.502Z                                                                           ||
+||  Description                |  Lab template                                                                                       ||
+||  DisableRollback            |  False                                                                                              ||
+||  EnableTerminationProtection|  False                                                                                              ||
+||  StackId                    |  arn:aws:cloudformation:us-west-2:876186143163:stack/myStack/7ca82b40-ad79-11f1-9ba9-0a4a3583017b   ||
+||  StackName                  |  myStack                                                                                            ||
+||  StackStatus                |  DELETE_FAILED                                                                                      ||
+||  StackStatusReason          |  The following resource(s) failed to delete: [MyBucket].                                            ||
+|+-----------------------------+-----------------------------------------------------------------------------------------------------+|
+|||                                                          Capabilities                                                           |||
+||+---------------------------------------------------------------------------------------------------------------------------------+||
+|||  CAPABILITY_NAMED_IAM                                                                                                           |||
+||+---------------------------------------------------------------------------------------------------------------------------------+||
+|||                                                        DriftInformation                                                         |||
+||+--------------------------------------------------------+------------------------------------------------------------------------+||
+|||  LastCheckTimestamp                                    |  2026-09-11T01:04:42.335Z                                              |||
+|||  StackDriftStatus                                      |  DRIFTED                                                               |||
+||+--------------------------------------------------------+------------------------------------------------------------------------+||
+|||                                                             Outputs                                                             |||
+||+-------------------------------------+-------------------------------------------------------------------------------------------+||
+|||              OutputKey              |                                        OutputValue                                        |||
+||+-------------------------------------+-------------------------------------------------------------------------------------------+||
+|||  BucketName                         |  mystack-mybucket-9ajlgd7daghf                                                            |||
+|||  PublicIP                           |  184.32.146.117                                                                           |||
+||+-------------------------------------+-------------------------------------------------------------------------------------------+||
+|||                                                           Parameters                                                            |||
+||+----------------------+----------------------------------------------------------------------------+-----------------------------+||
+|||     ParameterKey     |                              ParameterValue                                |        ResolvedValue        |||
+||+----------------------+----------------------------------------------------------------------------+-----------------------------+||
+|||  KeyName             |  vockey                                                                    |                             |||
+|||  LabVpcCidr          |  10.0.0.0/20                                                               |                             |||
+|||  PublicSubnetCidr    |  10.0.0.0/24                                                               |                             |||
+|||  AmazonLinuxAMIID    |  /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2             |  ami-0ffe11670d32a14ac      |||
+||+----------------------+----------------------------------------------------------------------------+-----------------------------+||
+[ec2-user@cli-host ~]$ 
+
 ```
 
 I notice that the `StackStatus` shows `DELETE_FAILED`.
@@ -600,14 +767,12 @@ I notice that the `StackStatus` shows `DELETE_FAILED`.
 ## Challenge: Keep the file in the S3 bucket, but Still Delete the Stack
 One approach to this issue would be to manually delete or move the file object in the S3 bucket and then run the `delete-stack` command again. However, this approach may not be appropriate if people in the organization have already started storing a large number of files in the bucket, and other systems now depend on the bucket name and location remaining unchanged.
 
-My challenge is to:
+***My challenge is to:***
 * Figure out how to keep the bucket and the file in it, while still successfully deleting the stack so that the stack status becomes `DELETE_COMPLETE`
 * Use the AWS CLI to solve the problem (avoiding the AWS Management Console)
 
-#### Solution from Terminal output
-```bash
-PLACEHOLDER
-```
+***Here's how to solve this challenge using the AWS CLI:***
+CloudFormation has a `DeletionPolicy` attribute you can set on a resource. Setting it to `Retain` tells CloudFormation to leave that resource in place (not delete it) when the stack is deleted — instead of deleting the underlying AWS resource, CloudFormation just "forgets" about it and removes it from the stack's management.
 
 ## Business case solution
 *Update from Café:*
