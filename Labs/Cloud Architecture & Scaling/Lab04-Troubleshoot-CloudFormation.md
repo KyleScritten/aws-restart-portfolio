@@ -246,10 +246,33 @@ After creating the stack, I monitor resource creation and notice that partway th
 
 Since CloudFormation automatically rolls back and deletes all resources when one fails, `describe-stacks` confirms the stack status is `ROLLBACK_COMPLETE`. The stack object itself still exists, so I delete it with `aws cloudformation delete-stack --stack-name myStack`, which completes quickly since there are no resources left to roll back.
 
+#### Terminal `--output table`
+```bash
+Every 5.0s: aws cloudformation describe-stack-resources --stack-name myStack --query StackResources[*].[ResourceType,ResourceStatus] --output table                               Fri Sep 11 00:08:43 2026
+
+--------------------------------------------------------------------
+|                      DescribeStackResources                      |
++-------------------------------------------+----------------------+
+|  AWS::EC2::InternetGateway                |  CREATE_COMPLETE     |
+|  AWS::EC2::VPC                            |  CREATE_COMPLETE     |
+|  AWS::S3::Bucket                          |  CREATE_COMPLETE     |
+|  AWS::EC2::Route                          |  CREATE_COMPLETE     |
+|  AWS::EC2::RouteTable                     |  CREATE_COMPLETE     |
+|  AWS::EC2::SubnetRouteTableAssociation    |  CREATE_COMPLETE     |
+|  AWS::EC2::Subnet                         |  CREATE_COMPLETE     |
+|  AWS::EC2::VPCGatewayAttachment           |  CREATE_COMPLETE     |
+|  AWS::CloudFormation::WaitConditionHandle |  CREATE_COMPLETE     |
+|  AWS::EC2::SecurityGroup                  |  CREATE_COMPLETE     |
+|  AWS::EC2::Instance                       |  CREATE_IN_PROGRESS  |
++-------------------------------------------+----------------------+
+```
+
 #### Terminal output
 ```bash
 PLACEHOLDER
 ```
+
+
 
 ### Task 2.4: Avoid rollback on an AWS CloudFormation stack
 I run the `create-stack` command again, giving the stack the same name, but this time specifying `--on-failure DO_NOTHING` to prevent a rollback if the stack fails. This gives me time to introspect the EC2 instance logs once the failure occurs, since resources won't be automatically deleted.
