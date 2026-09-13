@@ -697,7 +697,7 @@ Done running create-instance.sh at 2026-09-13 20:22:44
 4. After I identify and resolve the issue, in a browser, I navigate to the following address with the Public IPv4 address of the new instance I created: `34.223.248.201`
 
 <p align="center">
-  <img src="images/test-user-data-script.png" alt="Test of the user data script" width="900">
+  <img src="images/test-user-data-script.png" alt="Test of the user data script" width="1000">
 </p>
 
 *If I resolved Issue #2 successfully, I see the following message: "**Hello From Your Web Server!"***
@@ -730,7 +730,7 @@ Cloud-init v. 19.3-46.amzn2.0.7 finished at Sun, 13 Sep 2026 19:18:35 +0000. Dat
 1. I verify that the website is deployed. In a browser, I navigate to the following address: `http://34.223.248.201/cafe`
 
 <p align="center">
-  <img src="images/verify-web-deploy.png" alt="Verify that the website deploys" width="900">
+  <img src="images/verify-web-deploy.png" alt="Verify that the website deploys" width="1000">
 </p>
 
 *If successful, I see the home page for the café website.*
@@ -741,7 +741,7 @@ Cloud-init v. 19.3-46.amzn2.0.7 finished at Sun, 13 Sep 2026 19:18:35 +0000. Dat
    * I place another order for different items, then choose the **Order History** page, and confirm that the details of both orders were captured.
 
 <p align="center">
-  <img src="images/order-history-test.png" alt="Website order history page" width="900">
+  <img src="images/order-history-test.png" alt="Website order history page" width="1000">
 </p>
 
 *The order details are being captured and stored in the database running on the LAMP instance I launched.*
