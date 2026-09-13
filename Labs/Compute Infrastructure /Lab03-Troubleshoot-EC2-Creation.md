@@ -723,11 +723,11 @@ Application Parameter Setup script completed.
 Cloud-init v. 19.3-46.amzn2.0.7 finished at Sun, 13 Sep 2026 19:18:35 +0000. Datasource DataSourceEc2.  Up 31.65 seconds
 ```
 
-On an Amazon Linux instance, the `cloud-init` service runs the commands in the user data file. I observe the log file entries, noting the messages related to the installation of MariaDB and PHP — there are no error messages. I also see messages related to the Café Web Application files that were downloaded and extracted to this instance, such as "Create Database script completed".
+*On an Amazon Linux instance, the `cloud-init` service runs the commands in the user data file. I observe the log file entries, noting the messages related to the installation of MariaDB and PHP — there are no error messages. I also see messages related to the Café Web Application files that were downloaded and extracted to this instance, such as "Create Database script completed".*
 
 ## Task 4: Verifying the functionality of the website
 
-1. I verify that the website is deployed. In a browser, I navigate to the following address: `http://<public-ip>/cafe`
+1. I verify that the website is deployed. In a browser, I navigate to the following address: `http://34.223.248.201/cafe`
 
 <p align="center">
   <img src="images/verify-web-deploy.png" alt="Verify that the website deploys" width="900">
@@ -736,7 +736,7 @@ On an Amazon Linux instance, the `cloud-init` service runs the commands in the u
 *If successful, I see the home page for the café website.*
 
 2. I now test whether I can order items through the website.
-   * I choose the **Menu** link, and a new page loads at `http://<public-ip>/cafe/menu.php`.
+   * I choose the **Menu** link, and a new page loads at `http://34.223.248.201/cafe/menu.php`.
    * I choose a few desserts to order, then choose **Submit Order**. The **Order Confirmation** page displays with line-item details.
    * I place another order for different items, then choose the **Order History** page, and confirm that the details of both orders were captured.
 
