@@ -37,7 +37,23 @@ In this task, I configure the AWS CLI using the configuration parameters made av
 
 #### Terminal output
 ```bash
-PASTE_FROM_LAB
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@cli-host ~]$ aws configure
+AWS Access Key ID [None]: <AWS Lab AccessKey>
+AWS Secret Access Key [None]: <AWS Lab SecretKey>
+Default region name [None]: us-west-2
+Default output format [None]: json
+[ec2-user@cli-host ~]$ 
 ```
 
 ## Task 3: Creating an EC2 instance using the AWS CLI
@@ -75,7 +91,58 @@ cat create-lamp-instance-userdata-v2.txt
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host ~]$ cd ~/sysops-activity-files/starters
+[ec2-user@cli-host starters]$ cp create-lamp-instance-v2.sh create-lamp-instance.backup
+[ec2-user@cli-host starters]$ 
+[ec2-user@cli-host starters]$ view create-lamp-instance-v2.sh
+[ec2-user@cli-host starters]$ 
+[ec2-user@cli-host starters]$ cat create-lamp-instance-userdata-v2.txt
+#!/bin/bash
+yum -y update
+amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+yum -y install httpd mariadb-server
+
+systemctl enable httpd
+systemctl start httpd
+
+systemctl enable mariadb
+systemctl start mariadb
+
+echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
+find /var/www -type d -exec chmod 2775 {} \;
+find /var/www -type f -exec chmod 0664 {} \;
+echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+
+usermod -a -G apache ec2-user
+chown -R ec2-user:apache /var/www
+chmod 2775 /var/www
+
+#Check /var/log/cloud-init-output.log after this runs to see errors, if any.
+
+#
+# Download and unzip the Cafe application files.
+#
+
+# Database scripts
+wget https://aws-tc-largeobjects.s3.amazonaws.com/CUR-TF-100-RESTRT-1/173-activity-JAWS-troubleshoot-instance/db-v2.tar.gz
+tar -zxvf db-v2.tar.gz
+
+# Web application files
+wget https://aws-tc-largeobjects.s3.amazonaws.com/CUR-TF-100-RESTRT-1/173-activity-JAWS-troubleshoot-instance/cafe-v2.tar.gz
+tar -zxvf cafe-v2.tar.gz -C /var/www/html/
+
+#
+# Run the scripts to set the database root password, and create and populate the application database.
+# Check the following logs to make sure there are no errors:
+#
+#       /db/set-root-password.log
+#       /db/create-db.log
+#
+cd db
+./set-root-password.sh
+./create-db.sh
+hostnamectl set-hostname web-server
+[ec2-user@cli-host starters]$ 
 ```
 
 *I notice how the user data script runs a series of commands on the instance after it is launched. These commands install a web server, PHP, and a database server.*
@@ -86,7 +153,32 @@ Now that I have an idea of what the shell script is designed to do, I try to run
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host starters]$ ./create-lamp-instance-v2.sh
+
+Running create-instance.sh on 2026-09-13 19:42:45
+
+Instance Type: t3.small
+Profile: default
+
+Looking up account values...
+
+VPC: vpc-0f7b42287f5f45ac1
+Region: us-west-2
+VPC: vpc-0f7b42287f5f45ac1
+Subnet Id: subnet-0669be92719362cd6
+Key: vockey
+AMI ID: ami-0ffe11670d32a14ac
+
+Creating a new security group...
+Security Group: sg-02b0e3b0c01743f71
+
+Opening port 22 in the new security group
+Opening port 80 in the new security group
+
+Creating an EC2 instance in us-west-2
+
+An error occurred (InvalidAMIID.NotFound) when calling the RunInstances operation: The image id '[ami-0ffe11670d32a14ac]' does not exist
+[ec2-user@cli-host starters]$ 
 ```
 
 *The script fails and exits without successfully completing. This behavior is expected.*
@@ -96,22 +188,187 @@ PLACEHOLDER
 #### Issue #1
 The terminal output displays the following message: "An error occurred (InvalidAMIID.NotFound) when calling the RunInstances operation: The image id '[ami-xxxxxxxxxx]' does not exist".
 
+>[!CAUTION]
+> **The region error:** line 160 hardcodes the Region as us-east-1, instead of using the $region variable that was correctly detected earlier (us-west-2). Since the AMI ID (ami-0ffe11670d32a14ac) was looked up in us-west-2, but the run-instances command is trying to launch the instance in us-east-1, that AMI ID doesn't exist there — hence the InvalidAMIID.NotFound error.
+
 After I fix the issue, the `run-instances` command succeeds, and a public IPv4 address is assigned to the new instance.
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host starters]$ view create-lamp-instance-v2.sh
+[ec2-user@cli-host starters]$ ./create-lamp-instance-v2.sh
+
+Running create-instance.sh on 2026-09-13 20:01:45
+
+Instance Type: t3.small
+Profile: default
+
+Looking up account values...
+
+VPC: vpc-0f7b42287f5f45ac1
+Region: us-west-2
+VPC: vpc-0f7b42287f5f45ac1
+Subnet Id: subnet-0669be92719362cd6
+Key: vockey
+AMI ID: ami-0ffe11670d32a14ac
+
+WARNING: Found existing security group with name sg-02b0e3b0c01743f71.
+This script will not succeed if it already exists. 
+Would you like to delete it? [Y/N]
+>>
+Y
+
+Deleting the existing security group...
+
+Creating a new security group...
+Security Group: sg-032ad725fd1b297c2
+
+Opening port 22 in the new security group
+Opening port 80 in the new security group
+
+Creating an EC2 instance in us-west-2
+
+Instance Details....
+{
+    "Groups": [],
+    "Instances": [
+        {
+            "AmiLaunchIndex": 0,
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [],
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+            },
+            "ClientToken": "b724cd81-35c5-4dd6-9a21-26d55bdac8e6",
+            "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 2
+            },
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::507851086169:instance-profile/LabInstanceProfile",
+                "Id": "AIPAXMPSITFMZKYTJPY27"
+            },
+            "ImageId": "ami-0ffe11670d32a14ac",
+            "InstanceId": "i-0865f523359ced503",
+            "InstanceType": "t3.small",
+            "KeyName": "vockey",
+            "LaunchTime": "2026-09-13T20:04:06.000Z",
+            "MetadataOptions": {
+                "HttpEndpoint": "enabled",
+                "HttpPutResponseHopLimit": 1,
+                "HttpTokens": "optional",
+                "State": "pending"
+            },
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "NetworkInterfaces": [
+                {
+                    "Attachment": {
+                        "AttachTime": "2026-09-13T20:04:06.000Z",
+                        "AttachmentId": "eni-attach-014d7caace03f9af6",
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": 0,
+                        "Status": "attaching"
+                    },
+                    "Description": "",
+                    "Groups": [
+                        {
+                            "GroupId": "sg-032ad725fd1b297c2",
+                            "GroupName": "cafeSG"
+                        }
+                    ],
+                    "InterfaceType": "interface",
+                    "Ipv6Addresses": [],
+                    "MacAddress": "02:ff:c6:56:48:6d",
+                    "NetworkInterfaceId": "eni-0295aa33b96e954fe",
+                    "OwnerId": "507851086169",
+                    "PrivateIpAddress": "10.200.0.130",
+                    "PrivateIpAddresses": [
+                        {
+                            "Primary": true,
+                            "PrivateIpAddress": "10.200.0.130"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Status": "in-use",
+                    "SubnetId": "subnet-0669be92719362cd6",
+                    "VpcId": "vpc-0f7b42287f5f45ac1"
+                }
+            ],
+            "Placement": {
+                "AvailabilityZone": "us-west-2a",
+                "GroupName": "",
+                "Tenancy": "default"
+            },
+            "PrivateDnsName": "ip-10-200-0-130.us-west-2.compute.internal",
+            "PrivateIpAddress": "10.200.0.130",
+            "ProductCodes": [],
+            "PublicDnsName": "",
+            "RootDeviceName": "/dev/xvda",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+                {
+                    "GroupId": "sg-032ad725fd1b297c2",
+                    "GroupName": "cafeSG"
+                }
+            ],
+            "SourceDestCheck": true,
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "StateReason": {
+                "Code": "pending",
+                "Message": "pending"
+            },
+            "StateTransitionReason": "",
+            "SubnetId": "subnet-0669be92719362cd6",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "cafeserver"
+                }
+            ],
+            "VirtualizationType": "hvm",
+            "VpcId": "vpc-0f7b42287f5f45ac1"
+        }
+    ],
+    "OwnerId": "507851086169",
+    "ReservationId": "r-0134c11b3e35282c4"
+}
+instanceId=i-0865f523359ced503
+
+Waiting for a public IP for the new instance...
+
+The public IP of your LAMP instance is: 52.89.200.210
+
+Download the Key Pair from the Vocareum page.
+
+Then connect using this command (with .pem or .ppk added to the end of the keypair name):
+ssh -i path-to/vockey ec2-user@52.89.200.210
+
+The website should also become available at
+http://52.89.200.210/cafe/
+
+
+Done running create-instance.sh at 2026-09-13 20:04:17
+
+[ec2-user@cli-host starters]$ 
 ```
 
 #### Try to connect to the webpage
-In a browser, I navigate to the Public IPv4 address of the new instance I created: `http://<public-ip>`
+In a browser, I navigate to the Public IPv4 address of the new instance I created: `http://52.89.200.210/cafe/`
 
 The attempt fails. There must be another issue, so I need to resolve Issue #2.
 
 #### Issue #2
 The `run-instances` command succeeded, and a public IP address was assigned to the new instance. However, I cannot load the test webpage.
 
-1. I connect to the new LAMP instance using EC2 Instance Connect, the same method I used to connect to the CLI Host instance.
+1. I connect to the new LAMP instance `cafe server` using EC2 Instance Connect, the same method I used to connect to the CLI Host instance.
 2. In the terminal window for the CLI Host instance, I run the command to install `nmap`, a port scanning tool.
 
 ```bash
@@ -121,15 +378,74 @@ sudo yum install -y nmap
 3. Next, I run the following command with the actual public IPv4 address of my LAMP instance:
 
 ```bash
-nmap -Pn <public-ip>
+nmap -Pn 52.89.200.210
 ```
 
 *The output from this command shows which ports are accessible.*
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@web-server ~]$ sudo yum install -y nmap
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+Resolving Dependencies
+--> Running transaction check
+---> Package nmap.x86_64 2:6.40-19.amzn2.0.1 will be installed
+--> Processing Dependency: nmap-ncat = 2:6.40-19.amzn2.0.1 for package: 2:nmap-6.40-19.amzn2.0.1.x86_64
+--> Running transaction check
+---> Package nmap-ncat.x86_64 2:6.40-19.amzn2.0.1 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==============================================================================================================================================================
+ Package                            Arch                            Version                                         Repository                           Size
+==============================================================================================================================================================
+Installing:
+ nmap                               x86_64                          2:6.40-19.amzn2.0.1                             amzn2-core                          4.0 M
+Installing for dependencies:
+ nmap-ncat                          x86_64                          2:6.40-19.amzn2.0.1                             amzn2-core                          204 k
+
+Transaction Summary
+==============================================================================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 4.2 M
+Installed size: 16 M
+Downloading packages:
+(1/2): nmap-ncat-6.40-19.amzn2.0.1.x86_64.rpm                                                                                          | 204 kB  00:00:00     
+(2/2): nmap-6.40-19.amzn2.0.1.x86_64.rpm                                                                                               | 4.0 MB  00:00:00     
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                          28 MB/s | 4.2 MB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 2:nmap-ncat-6.40-19.amzn2.0.1.x86_64                                                                                                       1/2 
+  Installing : 2:nmap-6.40-19.amzn2.0.1.x86_64                                                                                                            2/2 
+  Verifying  : 2:nmap-6.40-19.amzn2.0.1.x86_64                                                                                                            1/2 
+  Verifying  : 2:nmap-ncat-6.40-19.amzn2.0.1.x86_64                                                                                                       2/2 
+
+Installed:
+  nmap.x86_64 2:6.40-19.amzn2.0.1                                                                                                                             
+
+Dependency Installed:
+  nmap-ncat.x86_64 2:6.40-19.amzn2.0.1                                                                                                                        
+
+Complete!
+[ec2-user@web-server ~]$ nmap -Pn 52.89.200.210
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2026-09-13 20:10 UTC
+Nmap scan report for ec2-52-89-200-210.us-west-2.compute.amazonaws.com (52.89.200.210)
+Host is up (0.00034s latency).
+Not shown: 998 filtered ports
+PORT     STATE  SERVICE
+22/tcp   open   ssh
+8080/tcp closed http-proxy
+
+Nmap done: 1 IP address (1 host up) scanned in 6.34 seconds
+[ec2-user@web-server ~]$ 
 ```
+# SOLUTION TO ISSUE #2
 
 #### Test whether the user data script ran
 
@@ -149,7 +465,17 @@ sudo tail -f /var/log/cloud-init-output.log
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@cli-host starters]$ sudo tail -f /var/log/cloud-init-output.log
+    "Version": 1
+}
+{
+    "Tier": "Standard", 
+    "Version": 1
+}
+
+Application Parameter Setup script completed.
+
+Cloud-init v. 19.3-46.amzn2.0.7 finished at Sun, 13 Sep 2026 19:18:35 +0000. Datasource DataSourceEc2.  Up 31.65 seconds
 ```
 
 On an Amazon Linux instance, the `cloud-init` service runs the commands in the user data file. I observe the log file entries, noting the messages related to the installation of MariaDB and PHP — there are no error messages. I also see messages related to the Café Web Application files that were downloaded and extracted to this instance, such as "Create Database script completed".
