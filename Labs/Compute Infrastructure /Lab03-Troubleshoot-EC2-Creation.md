@@ -381,6 +381,8 @@ Done running create-instance.sh at 2026-09-13 20:04:17
 [ec2-user@cli-host starters]$ 
 ```
 
+*The public IP of my LAMP instance is: `52.89.200.210`*
+
 #### Try to connect to the webpage
 In a browser, I navigate to the Public IPv4 address of the new instance I created: `52.89.200.210`
 
@@ -683,7 +685,7 @@ Done running create-instance.sh at 2026-09-13 20:22:44
 [ec2-user@cli-host starters]$
 ```
 
-*The website should also become available at `http://34.223.248.201/cafe/`*
+*The public IP of my new LAMP instance is: `34.223.248.201`.*
 
 >[!Note]
 > The previous instance `cafeserver` and associated security group created needed to be deleted to create a new instance `cafeserver` and associated security group with both the fixes for ***Issue #1*** and ***#2*** implemented.
