@@ -189,7 +189,28 @@ An error occurred (InvalidAMIID.NotFound) when calling the RunInstances operatio
 The terminal output displays the following message: "An error occurred (InvalidAMIID.NotFound) when calling the RunInstances operation: The image id '[ami-xxxxxxxxxx]' does not exist".
 
 >[!CAUTION]
-> **The region error:** line 160 hardcodes the Region as us-east-1, instead of using the $region variable that was correctly detected earlier (us-west-2). Since the AMI ID (ami-0ffe11670d32a14ac) was looked up in us-west-2, but the run-instances command is trying to launch the instance in us-east-1, that AMI ID doesn't exist there — hence the InvalidAMIID.NotFound error.
+> **The region error:** line 160 hardcodes the Region as `us-east-1`, instead of using the $region variable that was correctly detected earlier (`us-west-2`). Since the AMI ID (`ami-0ffe11670d32a14ac`) was looked up in `us-west-2`, but the run-instances command is trying to launch the instance in `us-east-1`, that AMI ID doesn't exist there — hence the `InvalidAMIID.NotFound` error.
+
+#### The Issue #1 Fix
+```bash
+# 1. Reopen the script in the VI editor:
+vi create-lamp-instance-v2.sh
+
+# 2. Jump to line 160:
+:160
+
+# 3. Press `I` to enter insert mode, the locate this line:
+--region us-east-1 \
+
+# 4. Change it to:
+--region $region \
+
+# 5. Press Esc, then save and force quit:
+:wq!
+
+# 6. Then rerun the script:
+./create-lamp-instance-v2.sh
+```
 
 After I fix the issue, the `run-instances` command succeeds, and a public IPv4 address is assigned to the new instance.
 
@@ -361,7 +382,7 @@ Done running create-instance.sh at 2026-09-13 20:04:17
 ```
 
 #### Try to connect to the webpage
-In a browser, I navigate to the Public IPv4 address of the new instance I created: `http://52.89.200.210/cafe/`
+In a browser, I navigate to the Public IPv4 address of the new instance I created: `52.89.200.210`
 
 The attempt fails. There must be another issue, so I need to resolve Issue #2.
 
@@ -381,7 +402,7 @@ sudo yum install -y nmap
 nmap -Pn 52.89.200.210
 ```
 
-*The output from this command shows which ports are accessible.*
+The output from this command shows which ports are accessible.
 
 #### Terminal output
 ```bash
@@ -445,11 +466,233 @@ PORT     STATE  SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 6.34 seconds
 [ec2-user@web-server ~]$ 
 ```
-# SOLUTION TO ISSUE #2
+
+>[!Caution]
+> **The port error:** Looking at the `nmap` scan, `port 22` (SSH) is ***open***, but `port 8080` is ***closed***, and `port 80` (HTTP) doesn't even show up (it's filtered/blocked). The web server runs on `port 80`, but my script opened `port 8080` instead of `port 80` in the security group.
+
+#### The Issue #2 Fix
+```bash
+# 1. Reopen the script in the VI editor:
+vi create-lamp-instance-v2.sh
+
+# 2. Jump to line 149:
+:149
+
+# 3. Press `I` to enter insert mode,  then locate this line:
+--port 8080 \
+
+# 4. Change it to:
+--port 80 \
+
+# 5. Press Esc, then save and force quit:
+:wq!
+
+# 6. Then rerun the script:
+./create-lamp-instance-v2.sh
+```
+
+After I fix the issue, the `run-instances` command succeeds, and a public IPv4 address is assigned to the new instance.
+
+#### Terminal output
+```bash
+ec2-user@cli-host starters]$ view create-lamp-instance-v2.sh
+[ec2-user@cli-host starters]$ ./create-lamp-instance-v2.sh
+
+Running create-instance.sh on 2026-09-13 20:20:51
+
+Instance Type: t3.small
+Profile: default
+
+Looking up account values...
+
+VPC: vpc-0f7b42287f5f45ac1
+Region: us-west-2
+VPC: vpc-0f7b42287f5f45ac1
+Subnet Id: subnet-0669be92719362cd6
+Key: vockey
+AMI ID: ami-0ffe11670d32a14ac
+
+WARNING: Found existing running EC2 instance with instance ID i-0865f523359ced503.
+This script will not succeed if it already exists. 
+Would you like to delete it? [Y/N]
+>>
+Y
+
+Deleting the existing instance...
+{
+    "TerminatingInstances": [
+        {
+            "InstanceId": "i-0865f523359ced503", 
+            "CurrentState": {
+                "Code": 32, 
+                "Name": "shutting-down"
+            }, 
+            "PreviousState": {
+                "Code": 16, 
+                "Name": "running"
+            }
+        }
+    ]
+}
+
+WARNING: Found existing security group with name sg-032ad725fd1b297c2.
+This script will not succeed if it already exists. 
+Would you like to delete it? [Y/N]
+>>
+Y
+
+Deleting the existing security group...
+
+Creating a new security group...
+Security Group: sg-000b1bef0289f3ebe
+
+Opening port 22 in the new security group
+Opening port 80 in the new security group
+
+Creating an EC2 instance in us-west-2
+
+Instance Details....
+{
+    "Groups": [],
+    "Instances": [
+        {
+            "AmiLaunchIndex": 0,
+            "Architecture": "x86_64",
+            "BlockDeviceMappings": [],
+            "CapacityReservationSpecification": {
+                "CapacityReservationPreference": "open"
+            },
+            "ClientToken": "22ff491d-e6ae-4eac-ac98-58bf117aaa33",
+            "CpuOptions": {
+                "CoreCount": 1,
+                "ThreadsPerCore": 2
+            },
+            "EbsOptimized": false,
+            "EnaSupport": true,
+            "Hypervisor": "xen",
+            "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::507851086169:instance-profile/LabInstanceProfile",
+                "Id": "AIPAXMPSITFMZKYTJPY27"
+            },
+            "ImageId": "ami-0ffe11670d32a14ac",
+            "InstanceId": "i-02235c131ba12872a",
+            "InstanceType": "t3.small",
+            "KeyName": "vockey",
+            "LaunchTime": "2026-09-13T20:22:33.000Z",
+            "MetadataOptions": {
+                "HttpEndpoint": "enabled",
+                "HttpPutResponseHopLimit": 1,
+                "HttpTokens": "optional",
+                "State": "pending"
+            },
+            "Monitoring": {
+                "State": "disabled"
+            },
+            "NetworkInterfaces": [
+                {
+                    "Attachment": {
+                        "AttachTime": "2026-09-13T20:22:33.000Z",
+                        "AttachmentId": "eni-attach-07811a65c763c25de",
+                        "DeleteOnTermination": true,
+                        "DeviceIndex": 0,
+                        "Status": "attaching"
+                    },
+                    "Description": "",
+                    "Groups": [
+                        {
+                            "GroupId": "sg-000b1bef0289f3ebe",
+                            "GroupName": "cafeSG"
+                        }
+                    ],
+                    "InterfaceType": "interface",
+                    "Ipv6Addresses": [],
+                    "MacAddress": "02:ff:e6:69:7b:15",
+                    "NetworkInterfaceId": "eni-07fd48cc91e014c86",
+                    "OwnerId": "507851086169",
+                    "PrivateIpAddress": "10.200.0.248",
+                    "PrivateIpAddresses": [
+                        {
+                            "Primary": true,
+                            "PrivateIpAddress": "10.200.0.248"
+                        }
+                    ],
+                    "SourceDestCheck": true,
+                    "Status": "in-use",
+                    "SubnetId": "subnet-0669be92719362cd6",
+                    "VpcId": "vpc-0f7b42287f5f45ac1"
+                }
+            ],
+            "Placement": {
+                "AvailabilityZone": "us-west-2a",
+                "GroupName": "",
+                "Tenancy": "default"
+            },
+            "PrivateDnsName": "ip-10-200-0-248.us-west-2.compute.internal",
+            "PrivateIpAddress": "10.200.0.248",
+            "ProductCodes": [],
+            "PublicDnsName": "",
+            "RootDeviceName": "/dev/xvda",
+            "RootDeviceType": "ebs",
+            "SecurityGroups": [
+                {
+                    "GroupId": "sg-000b1bef0289f3ebe",
+                    "GroupName": "cafeSG"
+                }
+            ],
+            "SourceDestCheck": true,
+            "State": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "StateReason": {
+                "Code": "pending",
+                "Message": "pending"
+            },
+            "StateTransitionReason": "",
+            "SubnetId": "subnet-0669be92719362cd6",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "cafeserver"
+                }
+            ],
+            "VirtualizationType": "hvm",
+            "VpcId": "vpc-0f7b42287f5f45ac1"
+        }
+    ],
+    "OwnerId": "507851086169",
+    "ReservationId": "r-0ff136bb6e8acbe4b"
+}
+instanceId=i-02235c131ba12872a
+
+Waiting for a public IP for the new instance...
+
+The public IP of your LAMP instance is: 34.223.248.201
+
+Download the Key Pair from the Vocareum page.
+
+Then connect using this command (with .pem or .ppk added to the end of the keypair name):
+ssh -i path-to/vockey ec2-user@34.223.248.201
+
+The website should also become available at
+http://34.223.248.201/cafe/
+
+
+Done running create-instance.sh at 2026-09-13 20:22:44
+
+[ec2-user@cli-host starters]$
+```
+
+*The website should also become available at `http://34.223.248.201/cafe/`*
+
+>[!Note]
+> The previous instance `cafeserver` and associated security group created needed to be deleted to create a new instance `cafeserver` and associated security group with both the fixes for ***Issue #1*** and ***#2*** implemented.
+>
+>At the prompts in the terminal, I inserted `Y` to confirmed that the CLI can delete both the instance and security group.
 
 #### Test whether the user data script ran
 
-4. After I identify and resolve the issue, in a browser, I navigate to the following address with the Public IPv4 address of the new instance I created: `http://<public-ip>`
+4. After I identify and resolve the issue, in a browser, I navigate to the following address with the Public IPv4 address of the new instance I created: `34.223.248.201`
 
 <p align="center">
   <img src="images/test-user-data-script.png" alt="Test of the user data script" width="900">
