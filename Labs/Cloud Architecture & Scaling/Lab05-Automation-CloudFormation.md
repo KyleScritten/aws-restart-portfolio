@@ -15,10 +15,38 @@ I started by downloading the provided [task1.yaml](./files/task1.yaml) template 
 - [Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html)
 - [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)
 
-The Parameters section defined CIDR blocks for networking, the Resources section described the VPC and Security Group, and the Outputs section exposed useful information about the created resources.
+>[!Note]
+> The Parameters section defined CIDR blocks for networking, the Resources section described the VPC and Security Group, and the Outputs section exposed useful information about the created resources.
+> The template is written in a format called YAML, which is commonly used for configuration files. The format of the file is important, including the indents and hyphens. CloudFormation templates can also be written in JSON.
 
-The template is written in a format called YAML, which is commonly used for configuration files. The format of the file is important, including the indents and hyphens. CloudFormation templates can also be written in JSON.
+1. I navigated to the **AWS CloudFormation Management Console**.
+2. I click **Create stack**, then:
+   * Click **Upload a template file**
+   * Click **Browse** or **Choose file** and upload the template file I downloaded earlier
+   * Click **Next**
+3. On the **Specify Details** page, I configure:
+   * **Stack name:** `Lab`
+>[!Note]
+> In the **Parameters** section, I see that CloudFormation is prompting for the IP address (CIDR) range for the VPC and Subnet. A default value has been specified by the template, so there is no need to modify these values. I click **Next**.
+4. On the **Options** page, which can be used to specify additional parameters, I browse the page but leave settings at their default values, then click **Next**.
+5. On the **Review** page, a summary of all settings is displayed. Some of the resources are defined with custom names, which can lead to naming conflicts — CloudFormation therefore prompts for an acknowledgement that custom names are being used.
+6. I click **Create stack**. The stack now enters the `CREATE_IN_PROGRESS` status.
+7. I click the **Events** tab and scroll through the listing. This listing shows, in reverse order, the activities performed by CloudFormation, such as starting to create a resource and then completing the resource creation. Any errors encountered during the creation of the stack are listed in this tab.
+8. I click the **Resources** tab. This listing shows the resources being created.
 
+<p align="center">
+  <img src="images/cf-stack-events.png" alt="Stack events monitoring" width="900">
+</p>
+
+*CloudFormation determines the optimal order for resources to be created, such as creating the VPC before the subnet.*
+
+9. I wait until the status changes to `CREATE_COMPLETE`.
+
+<p align="center">
+  <img src="images/cf-create-complete.png" alt="Stack create complete" width="900">
+</p>
+
+*I click **Refresh** occasionally to update the display.*
 
 ## Task 2: Add an Amazon S3 Bucket to the Stack
 
