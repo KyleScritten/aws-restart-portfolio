@@ -2,9 +2,27 @@
 
 
 
+## Task 1: Deploy a CloudFormation Stack
+
+*I begin by deploying a CloudFormation stack that creates a VPC as shown in this diagram:*
+
+<p align="center">
+  <img src="images/cf-stack-vpc-diagram.png" alt="Automating Deployments with AWS CloudFormation Architecture” width="900">
+</p>
+
+I started by downloading the provided [task1.yaml](./files/task1.yaml) template and examining its structure. The file contained three main sections: 
+- [Parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html)
+- [Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html)
+- [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)
 
 
+## Task 2: Add an Amazon S3 Bucket to the Stack
 
+
+## Task 3: Add an Amazon EC2 Instance to the Stack
+
+
+## Task 4: Delete the Stack
 
 
 ## Conclusion
