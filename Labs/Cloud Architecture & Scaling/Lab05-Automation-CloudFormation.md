@@ -30,7 +30,7 @@ In the **Parameters** section, I see that CloudFormation is prompting for the IP
 
 4. On the **Options** page, which can be used to specify additional parameters, I browse the page but leave settings at their default values, then click **Next**.
 5. On the **Review** page, a summary of all settings is displayed. Some of the resources are defined with custom names, which can lead to naming conflicts — CloudFormation therefore prompts for an acknowledgement that custom names are being used.
-6. I click **Create stack**. The stack now enters the `CREATE_IN_PROGRESS` status.
+6. I click **Submit** on the **Create stack** page. The stack now enters the `CREATE_IN_PROGRESS` status.
 7. I click the **Events** tab and scroll through the listing. This listing shows, in reverse order, the activities performed by CloudFormation, such as starting to create a resource and then completing the resource creation. Any errors encountered during the creation of the stack are listed in this tab.
 8. I click the **Resources** tab. This listing shows the resources being created.
 
