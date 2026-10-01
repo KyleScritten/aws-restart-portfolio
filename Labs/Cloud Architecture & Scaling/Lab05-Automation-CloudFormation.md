@@ -1,6 +1,6 @@
 # Automating Deployments with AWS CloudFormation
 
-
+Amazon Web Services (AWS) provides infrastructure automation capabilities through services such as CloudFormation, enabling consistent and repeatable deployments. In this lab, I explore how infrastructure can be defined as code using YAML templates and deployed automatically. The lab focuses on creating, modifying, and deleting a CloudFormation stack while integrating core AWS resources such as a Virtual Private Cloud (VPC), Security Groups, Amazon S3 buckets, and Amazon EC2 instances. This approach reduces manual configuration errors and improves deployment efficiency.
 
 ## Task 1: Deploy a CloudFormation Stack
 
@@ -14,6 +14,10 @@ I started by downloading the provided [task1.yaml](./files/task1.yaml) template 
 - [Parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html)
 - [Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html)
 - [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)
+
+The Parameters section defined CIDR blocks for networking, the Resources section described the VPC and Security Group, and the Outputs section exposed useful information about the created resources.
+
+The template is written in a format called YAML, which is commonly used for configuration files. The format of the file is important, including the indents and hyphens. CloudFormation templates can also be written in JSON.
 
 
 ## Task 2: Add an Amazon S3 Bucket to the Stack
