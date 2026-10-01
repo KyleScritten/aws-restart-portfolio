@@ -1,4 +1,4 @@
-# Automation with CloudFormation
+# Automating Deployments with AWS CloudFormation
 
 
 
