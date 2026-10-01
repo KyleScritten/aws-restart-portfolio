@@ -53,7 +53,7 @@ In the **Parameters** section, I see that CloudFormation is prompting for the IP
 Next, I modified the existing YAML template to include an Amazon S3 bucket. Based on the [Amazon S3 Template Snippets documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-s3.html), 
 I added a minimal resource definition under the Resources section using only the required type declaration:
 
-#### Add Amazon S3 bucket to task1.yaml template
+#### Update task1.yaml template
 ```yaml
 Resources:
 
@@ -77,10 +77,63 @@ After saving the changes, I updated the existing CloudFormation stack by uploadi
   <img src="images/cf-s3-bucket-created.png" alt="S3 bucket created” width="900">
 </p>
 
-*Here is the updated YAML file with the S3 bucket resources included:* [task2.yaml](./files/task2.yaml) 
+*Here is the updated YAML file with the S3 bucket resources included:* [task1.yaml](./files/task2.yaml) 
 
 ## Task 3: Add an Amazon EC2 Instance to the Stack
 
+In this task, I extend the template further by **adding an EC2 instance to the template**, then update the stack with the revised template. First, I introduce a new parameter to dynamically retrieve the latest Amazon Linux 2 AMI using **AWS Systems Manager Parameter Store**.
+
+#### Update task1.yaml template
+```yaml
+  AmazonLinuxAMIID:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+```
+
+>[!Note]
+> This parameter uses the AWS Systems Manager Parameter Store to retrieve the latest AMI (specified in the Default parameter, which in this case is Amazon Linux 2) for the stack's region. This makes it easy to deploy stacks in different regions without having to manually specify an AMI ID for every region.
+
+Then, I define the EC2 instance resource under the **Resources** section. This requires specifying several properties, including:
+* **ImageId:** Refer to `AmazonLinuxAMIID`, the parameter added in the previous step
+* **InstanceType:** `t3.micro`
+* **SecurityGroupIds:** Refer to `AppSecurityGroup`, defined in the template
+* **SubnetId:** Refer to `PublicSubnet`, defined in the template
+* **Tags**
+
+I use the `!Ref` function to reference existing resources such as the security group and subnet.
+
+#### Update task1.yaml template
+```yaml
+###########
+# EC2 Instance
+###########
+
+  EC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AmazonLinuxAMIID
+      InstanceType: t3.micro
+      SecurityGroupIds: 
+        - !Ref AppSecurityGroup
+      SubnetId: !Ref PublicSubnet
+      Tags:
+        - Key: Name
+          Value: App Server
+```
+
+After updating the template ([task1.yaml](./files/task3.yaml)) to its final version, I perform another stack update.
+
+<p align="center">
+  <img src="images/cf-ec2-preview.png" alt="EC2 preview changes" width="900">
+</p>
+
+*The preview confirms that only the EC2 instance will be added.*
+
+<p align="center">
+  <img src="images/cf-ec2-created.png" alt="EC2 instance created" width="900">
+</p>
+
+*Once the update completes, I verify that the EC2 instance was successfully created and listed among the stack resources.*
 
 ## Task 4: Delete the Stack
 
