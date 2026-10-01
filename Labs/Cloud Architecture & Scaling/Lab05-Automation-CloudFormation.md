@@ -53,8 +53,12 @@ In the **Parameters** section, I see that CloudFormation is prompting for the IP
 Next, I modified the existing YAML template to include an Amazon S3 bucket. Based on the [Amazon S3 Template Snippets documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-s3.html), 
 I added a minimal resource definition under the Resources section using only the required type declaration:
 
-#### S3 Bucket
+#### task1.yaml
 ```yaml
+###########
+# S3 Bucket
+###########
+
   MyBucket:
     Type: AWS::S3::Bucket
 ```
@@ -62,14 +66,16 @@ I added a minimal resource definition under the Resources section using only the
 After saving the changes, I updated the existing CloudFormation stack by uploading the modified template. During the update process, I reviewed the change set preview, which indicated that a new S3 bucket would be added without affecting existing resources.
 
 <p align="center">
-  <img src="images/yaml-update-preview.png" alt="Stack update preview changes” width="900">
+  <img src="images/yaml-stack-update-preview.png" alt="Stack update preview changes” width="900">
 </p>
 
-The update completed successfully, and I confirmed that the new S3 bucket appeared in the **Resources** tab with an automatically generated name.
+*The update completed successfully, and I confirmed that the new S3 bucket appeared in the **Resources** tab with an automatically generated name.*
 
 <p align="center">
   <img src="images/cf-s3-bucket-created.png" alt="S3 bucket created” width="900">
 </p>
+
+*Here is the updated YAML file with the S3 bucket resources included:* [task2.yaml](./files/task2.yaml) 
 
 ## Task 3: Add an Amazon EC2 Instance to the Stack
 
