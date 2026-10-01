@@ -121,7 +121,7 @@ I use the `!Ref` function to reference existing resources such as the security g
           Value: App Server
 ```
 
-After updating the template ([task1.yaml](./files/task3.yaml)) to its final version, I perform another stack update.
+After updating the template [task1.yaml](./files/task3.yaml) to its final version, I perform another stack update.
 
 <p align="center">
   <img src="images/cf-ec2-preview.png" alt="EC2 preview changes" width="900">
