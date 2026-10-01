@@ -7,7 +7,7 @@ Amazon Web Services (AWS) provides infrastructure automation capabilities throug
 *I begin by deploying a CloudFormation stack that creates a VPC as shown in this diagram:*
 
 <p align="center">
-  <img src="images/cf-stack-vpc-diagram.png" alt="Automating Deployments with AWS CloudFormation Architecture” width="900">
+  <img src="images/cf-stack-vpc-diagram.png" alt="Automating Deployments with AWS CloudFormation Architecture” width="800">
 </p>
 
 I started by downloading the provided [task1.yaml](./files/task1.yaml) template and examining its structure. The file contained three main sections: 
@@ -68,13 +68,13 @@ Resources:
 After saving the changes, I updated the existing CloudFormation stack by uploading the modified template. During the update process, I reviewed the change set preview, which indicated that a new S3 bucket would be added without affecting existing resources.
 
 <p align="center">
-  <img src="images/yaml-stack-update-preview.png" alt="Stack update preview changes” width="900">
+  <img src="images/yaml-stack-update-preview.png" alt="Stack update preview changes” width="800">
 </p>
 
 *The update completed successfully, and I confirmed that the new S3 bucket appeared in the **Resources** tab with an automatically generated name.*
 
 <p align="center">
-  <img src="images/cf-s3-bucket-created.png" alt="S3 bucket created” width="900">
+  <img src="images/cf-s3-bucket-created.png" alt="S3 bucket created” width="800">
 </p>
 
 *Here is the updated YAML file with the S3 bucket resources included:* [task1.yaml](./files/task2.yaml) 
