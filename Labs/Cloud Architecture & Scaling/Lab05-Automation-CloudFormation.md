@@ -7,7 +7,7 @@ Amazon Web Services (AWS) provides infrastructure automation capabilities throug
 *I begin by deploying a CloudFormation stack that creates a VPC as shown in this diagram:*
 
 <p align="center">
-  <img src="images/cf-stack-vpc-diagram.png" alt="Automating Deployments with AWS CloudFormation Architecture” width="800">
+  <img src="images/cf-stack-vpc-diagram.png" alt="Automating Deployments with AWS CloudFormation Architecture” width="900">
 </p>
 
 I started by downloading the provided [task1.yaml](./files/task1.yaml) template and examining its structure. The file contained three main sections: 
@@ -35,7 +35,7 @@ In the **Parameters** section, I see that CloudFormation is prompting for the IP
 8. I click the **Resources** tab. This listing shows the resources being created.
 
 <p align="center">
-  <img src="images/cf-stack-events.png" alt="Stack events monitoring" width="900">
+  <img src="images/cf-stack-events.png" alt="Stack events monitoring" width="1000">
 </p>
 
 *CloudFormation determines the optimal order for resources to be created, such as creating the VPC before the subnet.*
@@ -43,7 +43,7 @@ In the **Parameters** section, I see that CloudFormation is prompting for the IP
 9. I wait until the status changes to `CREATE_COMPLETE`.
 
 <p align="center">
-  <img src="images/cf-create-complete.png" alt="Stack create complete" width="900">
+  <img src="images/cf-create-complete.png" alt="Stack create complete" width="1000">
 </p>
 
 *I click **Refresh** occasionally to update the display.*
@@ -68,13 +68,13 @@ Resources:
 After saving the changes, I updated the existing CloudFormation stack by uploading the modified template. During the update process, I reviewed the change set preview, which indicated that a new S3 bucket would be added without affecting existing resources.
 
 <p align="center">
-  <img src="images/yaml-stack-update-preview.png" alt="Stack update preview changes” width="800">
+  <img src="images/yaml-stack-update-preview.png" alt="Stack update preview changes” width="900">
 </p>
 
 *The update completed successfully, and I confirmed that the new S3 bucket appeared in the **Resources** tab with an automatically generated name.*
 
 <p align="center">
-  <img src="images/cf-s3-bucket-created.png" alt="S3 bucket created” width="800">
+  <img src="images/cf-s3-bucket-created.png" alt="S3 bucket created” width="900">
 </p>
 
 *Here is the updated YAML file with the S3 bucket resources included:* [task1.yaml](./files/task2.yaml) 
@@ -124,13 +124,13 @@ I use the `!Ref` function to reference existing resources such as the security g
 After updating the template [task1.yaml](./files/task3.yaml) to its final version, I perform another stack update. The preview confirms that only the EC2 instance will be added.
 
 <p align="center">
-  <img src="images/cf-ec2-preview-resources.png" alt="EC2 preview changes" width="900">
+  <img src="images/cf-ec2-preview-resources.png" alt="EC2 preview changes" width="1000">
 </p>
 
 *Once the update completes, I verify that the EC2 instance was successfully created and listed among the stack resources.*
 
 <p align="center">
-  <img src="images/cf-ec2-instance-created.png" alt="EC2 instance created" width="900">
+  <img src="images/cf-ec2-instance-created.png" alt="EC2 instance created" width="1000">
 </p>
 
 *I navigate to the **EC2 Management Console**, select the **Instance** tab. Under the **Tags** tab I confirm that the EC2 Instance had the resources added.* 
