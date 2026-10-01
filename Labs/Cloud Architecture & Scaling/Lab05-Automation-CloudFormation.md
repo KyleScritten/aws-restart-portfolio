@@ -91,7 +91,7 @@ In this task, I extend the template further by **adding an EC2 instance to the t
 ```
 
 >[!Note]
-> This parameter uses the AWS Systems Manager Parameter Store to retrieve the latest AMI (specified in the Default parameter, which in this case is Amazon Linux 2) for the stack's region. This makes it easy to deploy stacks in different regions without having to manually specify an AMI ID for every region.
+> This parameter uses the ***AWS Systems Manager Parameter Store*** to retrieve the latest AMI *(specified in the Default parameter, which in this case is Amazon Linux 2)* for the stack's region. This makes it easy to deploy stacks in different regions without having to manually specify an AMI ID for every region.
 
 Then, I define the EC2 instance resource under the **Resources** section. This requires specifying several properties, including:
 * **ImageId:** Refer to `AmazonLinuxAMIID`, the parameter added in the previous step
@@ -121,19 +121,19 @@ I use the `!Ref` function to reference existing resources such as the security g
           Value: App Server
 ```
 
-After updating the template [task1.yaml](./files/task3.yaml) to its final version, I perform another stack update.
+After updating the template [task1.yaml](./files/task3.yaml) to its final version, I perform another stack update. The preview confirms that only the EC2 instance will be added.
 
 <p align="center">
-  <img src="images/cf-ec2-preview.png" alt="EC2 preview changes" width="900">
-</p>
-
-*The preview confirms that only the EC2 instance will be added.*
-
-<p align="center">
-  <img src="images/cf-ec2-created.png" alt="EC2 instance created" width="900">
+  <img src="images/cf-ec2-preview-resources.png" alt="EC2 preview changes" width="900">
 </p>
 
 *Once the update completes, I verify that the EC2 instance was successfully created and listed among the stack resources.*
+
+<p align="center">
+  <img src="images/cf-ec2-instance-created.png" alt="EC2 instance created" width="900">
+</p>
+
+*I navigate to the **EC2 Management Console**, select the **Instance** tab. Under the **Tags** tab I confirm that the EC2 Instance had the resources added.* 
 
 ## Task 4: Delete the Stack
 
