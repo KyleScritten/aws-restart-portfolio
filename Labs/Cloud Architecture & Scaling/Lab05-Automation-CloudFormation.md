@@ -53,7 +53,7 @@ In the **Parameters** section, I see that CloudFormation is prompting for the IP
 Next, I modified the existing YAML template to include an Amazon S3 bucket. Based on the [Amazon S3 Template Snippets documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/quickref-s3.html), 
 I added a minimal resource definition under the Resources section using only the required type declaration:
 
-#### YAML
+#### S3 Bucket
 ```yaml
   MyBucket:
     Type: AWS::S3::Bucket
