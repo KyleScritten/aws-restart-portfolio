@@ -137,6 +137,21 @@ After updating the template [task1.yaml](./files/task3.yaml) to its final versio
 
 ## Task 4: Delete the Stack
 
+Finally, I delete the CloudFormation stack. This process automatically removes all associated resources, including the VPC, S3 bucket, and EC2 instance.
+
+In the **AWS CloudFormation console**, select `Lab`. Click **Delete stack**. Then at the prompt, click **Delete stack**.
+
+<p align="center">
+  <img src="images/cf-delete-in-progress.png" alt="Stack deletion complete" width="900">
+</p>
+
+*I monitor the deletion process until the stack status changes to `DELETE_COMPLETE`.*
+
+<p align="center">
+  <img src="images/cf-delete-complete.png" alt="Stack deletion complete" width="900">
+</p>
+
+*Then navigate to the **Resources** tab and confirm that all the resources were removed.*
 
 ## Conclusion
 
