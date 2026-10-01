@@ -142,13 +142,13 @@ Finally, I delete the CloudFormation stack. This process automatically removes a
 In the **AWS CloudFormation console**, select `Lab`. Click **Delete stack**. Then at the prompt, click **Delete stack**.
 
 <p align="center">
-  <img src="images/cf-delete-in-progress.png" alt="Stack deletion complete" width="900">
+  <img src="images/cf-delete-in-progress.png" alt="Stack deletion complete" width="1000">
 </p>
 
 *I monitor the deletion process until the stack status changes to `DELETE_COMPLETE`.*
 
 <p align="center">
-  <img src="images/cf-delete-complete.png" alt="Stack deletion complete" width="900">
+  <img src="images/cf-delete-complete.png" alt="Stack deletion complete" width="1000">
 </p>
 
 *Then navigate to the **Resources** tab and confirm that all the resources were removed.*
