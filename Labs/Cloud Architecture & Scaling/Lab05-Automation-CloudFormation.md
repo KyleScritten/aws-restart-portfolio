@@ -17,6 +17,7 @@ I started by downloading the provided [task1.yaml](./files/task1.yaml) template 
 
 >[!Note]
 > The Parameters section defined CIDR blocks for networking, the Resources section described the VPC and Security Group, and the Outputs section exposed useful information about the created resources.
+>
 > The template is written in a format called YAML, which is commonly used for configuration files. The format of the file is important, including the indents and hyphens. CloudFormation templates can also be written in JSON.
 
 1. I navigated to the **AWS CloudFormation Management Console**.
@@ -26,8 +27,9 @@ I started by downloading the provided [task1.yaml](./files/task1.yaml) template 
    * Click **Next**
 3. On the **Specify Details** page, I configure:
    * **Stack name:** `Lab`
->[!Note]
-> In the **Parameters** section, I see that CloudFormation is prompting for the IP address (CIDR) range for the VPC and Subnet. A default value has been specified by the template, so there is no need to modify these values. I click **Next**.
+
+In the **Parameters** section, I see that CloudFormation is prompting for the IP address (CIDR) range for the VPC and Subnet. A default value has been specified by the template, so there is no need to modify these values. I click **Next**.
+
 4. On the **Options** page, which can be used to specify additional parameters, I browse the page but leave settings at their default values, then click **Next**.
 5. On the **Review** page, a summary of all settings is displayed. Some of the resources are defined with custom names, which can lead to naming conflicts — CloudFormation therefore prompts for an acknowledgement that custom names are being used.
 6. I click **Create stack**. The stack now enters the `CREATE_IN_PROGRESS` status.
