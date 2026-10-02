@@ -54,8 +54,10 @@ aws cloudformation describe-stack-resources \
 --output table
 ```
 
+#### Terminal output
+
 <p align="center">
-  <img src="images/cf-challenge-stack-monitor.png" alt="Stack Monitoring” width="900">
+  <img src="images/cf-challenge-stack-monitor.png" alt="Stack Monitoring” width="800">
 </p>
 
 *This helped me track resource creation in real time.*
@@ -67,8 +69,10 @@ aws cloudformation describe-stacks \
 --stack-name myStack
 ```
 
+#### Terminal output
+
 <p align="center">
-  <img src="images/cf-challenge-stack-status.png" alt="Stack Status” width="900">
+  <img src="images/cf-challenge-stack-status.png" alt="Stack Status” width="800">
 </p>
 
 *I waited until it reached `CREATE_COMPLETE`.*
@@ -81,7 +85,7 @@ Finally, I verified that all the following components were successfully deployed
 * An Amazon EC2 instance launched (a `t3.micro`) within the private subnet
 
 <p align="center">
-  <img src="images/cf-successful-deployment.png" alt="Successful Deployment” width="900">
+  <img src="images/cf-successful-deployment.png" alt="Successful Deployment” width="800">
 </p>
 
 *I built and tested the lab, iterating on my solution until all components built successfully without error.*
