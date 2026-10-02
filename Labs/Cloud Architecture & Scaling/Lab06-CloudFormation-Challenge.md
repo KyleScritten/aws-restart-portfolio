@@ -20,7 +20,7 @@ eee_W_6371970@runweb254541:~$ aws sts get-caller-identity
     "UserId": "AROA32AAZYYGE3VMS74DQ:user5168917=Kyle_Scritten",                                     
     "Account": "811750508044",                                                                       
     "Arn": "arn:aws:sts::811750508044:assumed-role/voclabs/user5168917=Kyle_Scritten"                
-}                                                                                                                                                                                               
+}                   
 ````
 
 After confirming access, I wrote the CloudFormation template and uploaded it to the lab environment successfully.
@@ -37,14 +37,9 @@ aws cloudformation create-stack \
 ```
 
 #### Terminal output
-```bash
-eee_W_6371970@runweb254541:~$ aws cloudformation create-stack \                                                                                                                                                
-> --stack-name myStack \                                                                                                                                                                                       
-> --template-body file://template.yaml \                                                                                                                                                                       
-> --parameters ParameterKey=KeyName,ParameterValue=vockey                                                                                                                                                      
-{                                                                                                                                                                                                              
-    "StackId": "arn:aws:cloudformation:us-west-2:811750508044:stack/myStack/4d61                                                                                                                               
-63715c5dea5"                                                                                                                                                                                                   
+```bash                                                            
+{                                                                  
+    "StackId": "arn:aws:cloudformation:us-west-2:811750508044:stack/myStack/4d6163715c5dea5"
 }
 ```
 
@@ -72,61 +67,7 @@ aws cloudformation describe-stacks \
 --stack-name myStack
 ```
 
-#### Terminal output
-```bash
-eee_W_6371970@runweb254541:~$ aws cloudformation describe-stacks \                                                                                                                                             
-> --stack-name myStack                                                                                                                                                                                         
-{                                                                                                                                                                                                              
-    "Stacks": [                                                                                                                                                                                                
-        {                                                                                                                                                                                                      
-            "StackId": "arn:aws:cloudformation:us-west-2:811750508044:stack/mySt                                                                                                                               
-1-8f35-063715c5dea5",                                                                                                                                                                                          
-            "StackName": "myStack",                                                                                                                                                                            
-            "Description": "Template for the CloudFormation Challenge Lab",                                                                                                                                    
-            "Parameters": [                                                                                                                                                                                    
-                {                                                                                                                                                                                              
-                    "ParameterKey": "KeyName",                                                                                                                                                                 
-                    "ParameterValue": "vockey"                                                                                                                                                                 
-                },                                                                                                                                                                                             
-                {                                                                                                                                                                                              
-                    "ParameterKey": "LabVpcCidr",                                                                                                                                                              
-                    "ParameterValue": "10.0.0.0/20"                                                                                                                                                            
-                },                                                                                                                                                                                             
-                {                                                                                                                                                                                              
-                    "ParameterKey": "PublicSubnetCidr",                                                                                                                                                        
-                    "ParameterValue": "10.0.0.0/24"                                                                                                                                                            
-                },                                                                                                                                                                                             
-                {                                                                                                                                                                                              
-                    "ParameterKey": "AmazonLinuxAMIID",                                                                                                                                                        
-                    "ParameterValue": "/aws/service/ami-amazon-linux-latest/amzn                                                                                                                               
-,                                                                                                                                                                                                              
-                    "ResolvedValue": "ami-01477f93b365aa11a"                                                                                                                                                   
-                }                                                                                                                                                                                              
-            ],                                                                                                                                                                                                 
-            "CreationTime": "2026-10-01T23:46:20.398000+00:00",                                                                                                                                                
-            "RollbackConfiguration": {},                                                                                                                                                                       
-            "StackStatus": "CREATE_COMPLETE",                                                                                                                                                                  
-            "DisableRollback": false,                                                                                                                                                                          
-            "NotificationARNs": [],                                                                                                                                                                            
-            "Outputs": [                                                                                                                                                                                       
-                {                                                                                                                                                                                              
-                    "OutputKey": "BucketName",                                                                                                                                                                 
-                    "OutputValue": "mystack-mybucket-pojnskfyeogj"                                                                                                                                             
-                },                                                                                                                                                                                             
-                {                                                                                                                                                                                              
-                    "OutputKey": "PublicIP",                                                                                                                                                                   
-                    "OutputValue": "34.217.93.234"                                                                                                                                                             
-                }                                                                                                                                                                                              
-            ],                                                                                                                                                                                                 
-            "Tags": [],                                                                                                                                                                                        
-            "EnableTerminationProtection": false,                                                                                                                                                              
-            "DriftInformation": {                                                                                                                                                                              
-                "StackDriftStatus": "NOT_CHECKED"                                                                                                                                                              
-            }                                                                                                                                                                                                  
-        }                                                                                                                                                                                                      
-    ]                                                                                                                                                                                                          
-}
-```
+PLACEHOLDER IMAGE OF TERMINAL
 
 I waited until it reached `CREATE_COMPLETE`.
 
