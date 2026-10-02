@@ -84,6 +84,8 @@ Finally, I verified that all the following components were successfully deployed
 * Security groups for accessing the VPC, has been configured to allow SSH from anywhere
 * An Amazon EC2 instance launched (a `t3.micro`) within the private subnet
 
+#### Terminal output
+
 <p align="center">
   <img src="images/cf-successful-deployment.png" alt="Successful Deployment” width="800">
 </p>
