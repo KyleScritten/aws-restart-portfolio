@@ -1,5 +1,7 @@
 # Using AWS CloudFormation to create an AWS VPC and Amazon EC2 instance
 
+## Lab Overview
+
 This lab focused on using AWS CloudFormation to deploy infrastructure as code (IaC) in order to create a basic AWS environment. 
 The environment consisted of a Virtual Private Cloud (VPC), Internet Gateway, subnet configuration, security group rules, and an EC2 instance deployed inside the network.
 
@@ -27,7 +29,7 @@ After confirming access, I wrote the CloudFormation template and uploaded it to 
 
 *Here is the final version:* [template.yaml](./files/template.yaml).
 
-I then proceeded to create the CloudFormation stack using the AWS CLI:
+Then proceeded to create the CloudFormation stack using the AWS CLI:
 
 ```bash
 aws cloudformation create-stack \
@@ -43,7 +45,7 @@ aws cloudformation create-stack \
 }
 ```
 
-During deployment, I monitored the stack progress using CloudFormation commands and JMESPath filtering:
+During deployment, I monitored the stack progress using **CloudFormation commands** and **JMESPath filtering**:
 
 ```bash
 aws cloudformation describe-stack-resources \
@@ -52,43 +54,43 @@ aws cloudformation describe-stack-resources \
 --output table
 ```
 
-This helped me track resource creation in real time.
-
-![Stack Monitoring](./images/EX-05-stack-monitor.png)
-
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/cf-challenge-stack-monitor.png" alt="Stack Monitoring” width="900">
 </p>
 
-I also validated the overall stack status:
+*This helped me track resource creation in real time.*
+
+Then, I validated the overall stack status:
 
 ```bash
 aws cloudformation describe-stacks \
 --stack-name myStack
 ```
 
-PLACEHOLDER IMAGE OF TERMINAL
+<p align="center">
+  <img src="images/cf-challenge-stack-status.png" alt="Stack Status” width="900">
+</p>
 
-I waited until it reached `CREATE_COMPLETE`.
+*I waited until it reached `CREATE_COMPLETE`.*
 
-Finally, I verified that all resources were successfully deployed:
+Finally, I verified that all the following components were successfully deployed with the CloudFormation template created:
 
-* VPC created successfully
-* Internet Gateway attached
-* Security group configured for SSH access
-* EC2 instance launched in the VPC
-
-![Successful Deployment](./images/EX-05-successful-deployment.png)
+* An Amazon Virtual Private Cloud (VPC) created successfully
+* An Internet Gateway attached to the VPC
+* Security groups for accessing the VPC, has been configured to allow SSH from anywhere
+* An Amazon EC2 instance launched (a `t3.micro`) within the private subnet
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION” width="900">
+  <img src="images/cf-successful-deployment.png" alt="Successful Deployment” width="900">
 </p>
+
+*I built and tested the lab, iterating on my solution until all components built successfully without error.*
 
 ## Conclusion
 
-In this lab, I learned how to deploy and troubleshoot AWS infrastructure using CloudFormation and the AWS CLI. I gained experience identifying template validation errors, correcting configuration issues, and monitoring stack deployment using CLI commands.
+In this lab, I learned how to design and deploy AWS infrastructure using a CloudFormation template, including a VPC, Internet Gateway, security groups, a private subnet, and an EC2 instance. I gained experience iterating on the template to resolve validation errors and configuration issues, and used the AWS CLI to monitor the stack's deployment status until it built successfully.
 
-I also learned how small syntax mistakes in a CloudFormation template can prevent deployment and how iterative debugging is essential for successful infrastructure creation. By the end of the lab, I was able to successfully deploy a complete AWS environment using infrastructure as code.
+I also learned how small syntax mistakes in a CloudFormation template can prevent deployment, and how iterative debugging is essential for successful infrastructure creation. By the end of the lab, I was able to successfully deploy a complete AWS environment using infrastructure as code.
 
 ## Additional Resources
 
