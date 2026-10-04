@@ -29,7 +29,7 @@ I choose **Run** and wait for the **Overall status** to change to **Success**, o
 > Since the instance was created from a Linux AMI, if I instead see a precondition skip message referencing `createDownloadFolder`, I check **Step 2 - Output** instead — this is expected and can be safely ignored.
 
 <p align="center">
-  <img src="images/package-cmd-config.png" alt="Successful CloudWatch agent installation output" width="900">
+  <img src="images/package-cmd-config.png" alt="Successful CloudWatch agent installation output" width="1000">
 </p>
 
 I now configure the CloudWatch agent to collect the desired log information. Since the instance has a web server installed, I configure the agent to collect the web server logs and general system metrics, storing the configuration file in AWS Systems Manager Parameter Store so the CloudWatch agent can retrieve it. 
@@ -109,7 +109,7 @@ In the left navigation pane, I choose **Parameter Store**, then **Create paramet
 This configuration defines two web server log files to be collected and sent to CloudWatch Logs, along with CPU, disk, and memory metrics to be sent to CloudWatch Metrics. I choose **Create parameter**; this parameter is referenced when starting the CloudWatch agent.
 
 <p align="center">
-  <img src="images/mi-parameter-store-config.png" alt="Parameter Store configuration for CloudWatch agent" width="900">
+  <img src="images/mi-parameter-store-config.png" alt="Parameter Store configuration for CloudWatch agent" width="1000">
 </p>
 
 I now use another Run Command to start the CloudWatch agent on the web server. In the left navigation pane, I choose **Run Command**, then **Run command**, and filter by **Document name prefix : Equals : AmazonCloudWatch-ManageAgent**. Before running the command, I view its definition by choosing **AmazonCloudWatch-ManageAgent**, which opens a new tab showing the command's details. On the **Content** tab, I see the script that runs on the target instance, which references AWS Systems Manager Parameter Store to retrieve the CloudWatch agent configuration I defined earlier. I close this tab and return to the **Run a command** tab.
@@ -117,7 +117,7 @@ I now use another Run Command to start the CloudWatch agent on the web server. I
 I select the button next to **AmazonCloudWatch-ManageAgent**, and in the **Command parameters** section, set **Action** to configure, **Mode** to ec2, **Optional Configuration Source** to ssm, **Optional Configuration Location** to `Monitor-Web-Server`, and **Optional Restart** to yes — configuring the agent to use the configuration I previously stored in Parameter Store. In the **Targets** section, I select **Choose instances manually**, select the check box next to **Web Server**, and choose **Run**.
 
 <p align="center">
-  <img src="images/cw-mngmnt-cmd-config.png" alt="AmazonCloudWatch-ManageAgent command configuration" width="900">
+  <img src="images/cw-mngmnt-cmd-config.png" alt="AmazonCloudWatch-ManageAgent command configuration" width="1000">
 </p>
 
 I wait for the **Overall status** to change to **Success**, occasionally refreshing to check progress. The CloudWatch agent is now running on the instance and sending log and metric data to CloudWatch.
@@ -127,7 +127,7 @@ I wait for the **Overall status** to change to **Success**, occasionally refresh
 In this task, I generate log data on the Web Server and then monitor the logs using CloudWatch Logs.
 
 <p align="center">
-  <img src="images/mi-cw-generate-data-diagram.png" alt="Generate Log Data CloudWatch Diagram" width="900">
+  <img src="images/mi-cw-generate-data-diagram.png" alt="Generate Log Data CloudWatch Diagram" width="1000">
 </p>
 
 >[!Note]
@@ -142,25 +142,25 @@ I begin by accessing the web server.
 I choose the **Details** dropdown menu above these instructions, choose **Show**, and copy the `WebServerIP` value. I open a new web browser tab, paste `35.91.110.87`, confirming I see a web server Test Page.
 
 <p align="center">
-  <img src="images/webserver-test-pg.png" alt="web server Test Page" width="900">
+  <img src="images/webserver-test-pg.png" alt="web server Test Page" width="1000">
 </p>
 
 I now generate log data by attempting to access a page that does not exist. I append `/start` to the browser URL and press Enter, receiving an error message since the page is not found — this is expected, and it generates data in the access logs being sent to CloudWatch Logs.
 
 <p align="center">
-  <img src="images/webserver-404.png" alt="404 error page generated for log data" width="900">
+  <img src="images/webserver-404.png" alt="404 error page generated for log data" width="1000">
 </p>
 
 I keep this tab open, but return to the AWS Management Console tab. From the **Services** menu, I choose **CloudWatch**, then in the left navigation pane, choose **Log Management**, where I see two logs listed: `HttpAccessLog` and `HttpErrorLog`.
 
 <p align="center">
-  <img src="images/cw-log-groups.png" alt="CloudWatch Log groups showing HttpAccessLog and HttpErrorLog" width="900">
+  <img src="images/cw-log-groups.png" alt="CloudWatch Log groups showing HttpAccessLog and HttpErrorLog" width="1000">
 </p>
 
 I choose **HttpAccessLog**, then in the **Log streams** section, choose the log stream in the table — it shares the same ID as the EC2 instance the log is attached to. Log data is displayed, consisting of GET requests sent to the web server, and I can view additional information by expanding each line to see details about the computer and browser that made the request. I find a line with my `/start` request showing a code of 404, confirming the page was not found.
 
 <p align="center">
-  <img src="images/cw-log-stream-404.png" alt="CloudWatch Log stream showing the 404 request" width="900">
+  <img src="images/cw-log-stream-404.png" alt="CloudWatch Log stream showing the 404 request" width="1000">
 </p>
 
 This demonstrates how log files can be automatically shipped from an EC2 instance or an on-premises server to CloudWatch Logs. The log data is accessible without having to log in to each individual server, and can also be collected from multiple servers, such as an Auto Scaling fleet of web servers.
@@ -188,7 +188,7 @@ I choose **Next**, and in the **Create filter name** section, enter `404Errors` 
 I choose **Next** (clicking an empty text field first if the button isn't enabled, to shift focus), then on the **Review and create** page, choose **Create metric filter**. 
 
 <p align="center">
-  <img src="images/mi-metric-filter-404Errors.png" alt="Metric filter creation - 404Errors" width="900">
+  <img src="images/mi-metric-filter-404Errors.png" alt="Metric filter creation - 404Errors" width="1000">
 </p>
 
 This metric filter can now be used in an alarm.
@@ -202,7 +202,7 @@ In the `404Errors` panel, I select the check box in the top-right corner, then i
 In the **Notification** section, I select **Create new topic** for the SNS Topic, enter an email address I can access from the classroom as the endpoint, choose **Create topic**, then **Next**. For **Name and description**, I enter `404 Errors` as the **Alarm name** and `Alert when too many 404s detected on an instance` as the **Alarm description**, then choose **Next** and **Create alarm**.
 
 <p align="center">
-  <img src="images/alarm-filter-create.png" alt="Create an alarm using the filter" width="900">
+  <img src="images/alarm-filter-create.png" alt="Create an alarm using the filter" width="1000">
 </p>
 
 I go to my email, find the confirmation message, and select the **Confirm subscription** link. Returning to the AWS Management Console, I choose **CloudWatch** at the top of the left navigation pane, and notice my alarm appears in orange, indicating **Insufficient data** since no data has been received in the past minute.
@@ -212,7 +212,7 @@ I now access the web server to generate log data by returning to the web browser
 I wait 1–2 minutes for the alarm to trigger, occasionally refreshing the AWS Management Console to update the status. The graph on the CloudWatch page turns red, indicating it is now in the **Alarm** state.
 
 <p align="center">
-  <img src="images/mi-cw-in-alarm-state.png" alt="CloudWatch alarm in Alarm state" width="900">
+  <img src="images/mi-cw-in-alarm-state.png" alt="CloudWatch alarm in Alarm state" width="1000">
 </p>
 
 I check my email and confirm I received a message with the subject "ALARM: 404 Errors."
@@ -228,7 +228,7 @@ This task demonstrates how I can create an alarm from application log data and r
 In this task, I use metrics that CloudWatch provides.
 
 <p align="center">
-  <img src="images/mi-metrics-cw-diagram.png" alt="Monitoring instance metrics using CloudWatch" width="900">
+  <img src="images/mi-metrics-cw-diagram.png" alt="Monitoring instance metrics using CloudWatch" width="1000">
 </p>
 
 >[!Note]
@@ -237,19 +237,19 @@ In this task, I use metrics that CloudWatch provides.
 On the EC2 Management Console, I select the **Web Server** instance and check the **Monitoring** tab, where CloudWatch captures metrics about CPU, disk, and network usage. These metrics view the instance from the outside as a virtual machine, but don't give insight into what's running inside it, such as free memory or free disk space. I can get that visibility instead through the CloudWatch agent, which runs inside the instance to collect these deeper metrics.
 
 <p align="center">
-  <img src="images/cw-ec2-monitoring-tab.png" alt="EC2 instance Monitoring tab" width="900">
+  <img src="images/cw-ec2-monitoring-tab.png" alt="EC2 instance Monitoring tab" width="1000">
 </p>
 
 In CloudWatch, under **Metrics > All metrics**, I see the various metrics CloudWatch has collected — some automatically generated by AWS, and others collected by the CloudWatch agent. Selecting **CWAgent**, then **device, fstype, host, path**, shows the disk space metrics the agent is capturing.
 
 <p align="center">
-  <img src="images/CWAgent-disk-data.png" alt="CloudWatch Metrics showing CWAgent disk space data" width="900">
+  <img src="images/CWAgent-disk-data.png" alt="CloudWatch Metrics showing CWAgent disk space data" width="1000">
 </p>
 
 I explore the other metrics CloudWatch is capturing — these are automatically generated from the AWS services used in this account — and select the ones I want to appear on the graph.
 
 <p align="center">
-  <img src="images/cw-all-metrics.png" alt="CloudWatch Metrics overview of all available metrics" width="900">
+  <img src="images/cw-all-metrics.png" alt="CloudWatch Metrics overview of all available metrics" width="1000">
 </p>
 
 ## Task 4: Creating real-time notifications
@@ -257,7 +257,7 @@ I explore the other metrics CloudWatch is capturing — these are automatically 
 In this task, I create a real-time notification that informs me when an instance is stopped or terminated.
 
 <p align="center">
-  <img src="images/mi-tr-notification-diagram.png" alt="Creating Real-Time Notifications Diagram" width="900">
+  <img src="images/mi-tr-notification-diagram.png" alt="Creating Real-Time Notifications Diagram" width="1000">
 </p>
 
 >[!Note]
@@ -279,7 +279,7 @@ In the **Select target(s)** section, for **Target 1**, I set **Target types** to
 On the **Review and create** page, I choose **Create rule**.
 
 <p align="center">
-  <img src="images/cw-event-rule-created.png" alt="CloudWatch Events rule created" width="900">
+  <img src="images/cw-event-rule-created.png" alt="CloudWatch Events rule created" width="1000">
 </p>
 
 ### Configure a real-time notification
@@ -292,19 +292,19 @@ This task demonstrates how to receive real-time notifications when infrastructur
 On the **Services** menu, I choose **Simple Notification Service**, then **Topics** in the left navigation pane, and select the link in the **Name** column. I see a single subscription associated with my email address — the topic I configured in Task 2.
 
 <p align="center">
-  <img src="images/mi-sns-topic-details.png" alt="SNS topic subscription details" width="900">
+  <img src="images/mi-sns-topic-details.png" alt="SNS topic subscription details" width="1000">
 </p>
 
 On the **Services** menu, I choose **EC2**, then **Instances**, select the check box next to **Web Server**, and choose **Instance state > Stop instance > Stop**. The Web Server instance enters the **Stopping** state, and after a minute, enters the **Stopped** state.
 
 <p align="center">
-  <img src="images/mi-ws-instance-stopped.png" alt="Web Server instance in Stopped state" width="900">
+  <img src="images/mi-ws-instance-stopped.png" alt="Web Server instance in Stopped state" width="1000">
 </p>
 
 I then receive an email with details about the instance that was stopped. The message is formatted in JSON — to receive a more readable message, I could create an AWS Lambda function triggered by CloudWatch Events, which could format a more readable message and send it via Amazon SNS.
 
 <p align="center">
-  <img src="images/email-sns-instance-stopped.png" alt="SNS email notification for stopped instance" width="900">
+  <img src="images/email-sns-instance-stopped.png" alt="SNS email notification for stopped instance" width="1000">
 </p>
 
 ## Task 5: Monitoring for infrastructure compliance
@@ -327,7 +327,7 @@ Once evaluation completes, I review the compliance results for each rule. Among 
 * **ec2-volume-inuse-check:** One compliant volume (attached to an instance) and one non-compliant volume (not attached to an instance)
 
 <p align="center">
-  <img src="images/mi-aws-config-rules.png" alt="AWS Config rule compliance results" width="900">
+  <img src="images/mi-aws-config-rules.png" alt="AWS Config rule compliance results" width="1000">
 </p>
 
 >[!Note]
