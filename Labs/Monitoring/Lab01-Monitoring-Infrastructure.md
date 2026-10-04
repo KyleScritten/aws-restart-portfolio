@@ -251,7 +251,7 @@ I explore the other metrics CloudWatch is capturing — these are automatically 
 In this task, I create a real-time notification that informs me when an instance is stopped or terminated.
 
 <p align="center">
-  <img src="images/mi-tr-notification.png" alt="Creating Real-Time Notifications Diagram" width="900">
+  <img src="images/mi-tr-notification-diagram.png" alt="Creating Real-Time Notifications Diagram" width="900">
 </p>
 
 >[!Note]
