@@ -36,10 +36,6 @@ To open JupyterLab:
 2. From the navigation menu on the left, I expand the **Applications and IDEs** section, choose **Notebooks**, then choose the **Notebook instances** tab from the lower pane.
 3. I look for the notebook instance named `MyNotebook`, and open the JupyterLab notebook instance by going to the end of the row and choosing **Open JupyterLab**.
 
-<p align="center">
-  <img src="images/ml-sagemaker-notebook.png" alt="SageMaker Notebook" width="900">
-</p>
-
 ## Task 2: Opening a notebook in my notebook instance
 
 In this task, I open the notebook for this lab:
