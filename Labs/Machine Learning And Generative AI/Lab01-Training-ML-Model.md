@@ -232,7 +232,7 @@ I use the **estimator** function to set up the model.
 >[!Note]
 > A few parameters of interest:
 >* **instance_count** — defines how many instances will be used for training; I use one instance
->* * **instance_type** — defines the instance type for training; in this case, it's `ml.m4.xlarge`
+>* **instance_type** — defines the instance type for training; in this case, it's `ml.m4.xlarge`
 
 ```python
 from sagemaker.train import ModelTrainer
