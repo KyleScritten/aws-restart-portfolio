@@ -33,7 +33,9 @@ I choose **Run** and wait for the **Overall status** to change to **Success**, o
   <img src="images/NAME.png" alt="Successful CloudWatch agent installation output" width="900">
 </p>
 
-I now configure the CloudWatch agent to collect the desired log information. Since the instance has a web server installed, I configure the agent to collect the web server logs and general system metrics, storing the configuration file in AWS Systems Manager Parameter Store so the CloudWatch agent can retrieve it. In the left navigation pane, I choose **Parameter Store**, then **Create parameter**, and set **Name** to `Monitor-Web-Server`, **Description** to `Collect web logs and system metrics`, and paste the following configuration as the **Value**:
+I now configure the CloudWatch agent to collect the desired log information. Since the instance has a web server installed, I configure the agent to collect the web server logs and general system metrics, storing the configuration file in AWS Systems Manager Parameter Store so the CloudWatch agent can retrieve it. 
+
+In the left navigation pane, I choose **Parameter Store**, then **Create parameter**, and set **Name** to `Monitor-Web-Server`, **Description** to `Collect web logs and system metrics`, and paste the following configuration as the **Value**:
 
 ```json
 {
