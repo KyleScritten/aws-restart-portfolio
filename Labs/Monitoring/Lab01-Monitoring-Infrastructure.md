@@ -202,17 +202,17 @@ In the `404Errors` panel, I select the check box in the top-right corner, then i
 In the **Notification** section, I select **Create new topic** for the SNS Topic, enter an email address I can access from the classroom as the endpoint, choose **Create topic**, then **Next**. For **Name and description**, I enter `404 Errors` as the **Alarm name** and `Alert when too many 404s detected on an instance` as the **Alarm description**, then choose **Next** and **Create alarm**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="CloudWatch alarm configuration for 404 errors" width="900">
+  <img src="images/alarm-filter-create.png" alt="Create an alarm using the filter" width="900">
 </p>
 
 I go to my email, find the confirmation message, and select the **Confirm subscription** link. Returning to the AWS Management Console, I choose **CloudWatch** at the top of the left navigation pane, and notice my alarm appears in orange, indicating **Insufficient data** since no data has been received in the past minute.
 
-I now access the web server to generate log data by returning to the web browser tab with the web server (or reopening it using the `WebServerIP` from the **Details** dropdown if needed), and attempt to access pages that do not exist by appending a page name to the IP address — for example, `http://192.0.2.0/start2` — repeating this at least five times to generate separate log entries.
+I now access the web server to generate log data by returning to the web browser tab with the web server (or reopening it using the `35.91.110.87` from the **Details** dropdown if needed), and attempt to access pages that do not exist by appending a page name to the IP address — for example, `http://35.91.110.87/start2` — repeating this at least five times to generate separate log entries.
 
 I wait 1–2 minutes for the alarm to trigger, occasionally refreshing the AWS Management Console to update the status. The graph on the CloudWatch page turns red, indicating it is now in the **Alarm** state.
 
 <p align="center">
-  <img src="images/NAME.png" alt="CloudWatch alarm in Alarm state" width="900">
+  <img src="images/mi-cw-in-alarm-state.png" alt="CloudWatch alarm in Alarm state" width="900">
 </p>
 
 I check my email and confirm I received a message with the subject "ALARM: 404 Errors."
