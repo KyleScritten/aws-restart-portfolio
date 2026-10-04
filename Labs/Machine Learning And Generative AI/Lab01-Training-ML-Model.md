@@ -1,7 +1,5 @@
 # Training a Machine Learning Model
 
-## Lab overview
-
 In this lab, I continue exploring the biomechanical vertebral column dataset. I split the dataset into three separate datasets:
 * **Training Set** — used to train the model
 * **Validation Set** — used during training to validate the model
