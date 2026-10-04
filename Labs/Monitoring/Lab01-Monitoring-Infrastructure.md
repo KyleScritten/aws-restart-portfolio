@@ -11,7 +11,7 @@ This lab shows me how to use Amazon CloudWatch Metrics, Amazon CloudWatch Logs, 
 In this task, I use Systems Manager to install the CloudWatch agent on an EC2 instance, and configure it to collect both application and system metrics.
 
 <p align="center">
-  <img src="images/mi-lab-diagram.png" alt="Lab Diagram” width="900">
+  <img src="images/mi-sys-mng-diagram.png" alt="Using Systems Manager to install the CloudWatch agent on an EC2 instance Diagram” width="900">
 </p>
 
 >[!Note]
@@ -251,7 +251,7 @@ I explore the other metrics CloudWatch is capturing — these are automatically 
 In this task, I create a real-time notification that informs me when an instance is stopped or terminated.
 
 <p align="center">
-  <img src="images/NAME.png" alt="DESCRIPTION" width="900">
+  <img src="images/mi-tr-notification.png" alt="Creating Real-Time Notifications Diagram" width="900">
 </p>
 
 >[!Note]
@@ -339,13 +339,6 @@ Once evaluation completes, I review the compliance results for each rule. Among 
 
 AWS Config has a large library of pre-defined compliance checks, and I can create additional checks by writing my own AWS Config rule using Lambda.
 
-## Additional resources
-
-* [StatsD](https://github.com/statsd/statsd)
-* [collectd](https://collectd.org)
-* [Amazon SNS: Sending SMS Messages to Phone Numbers](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html)
-
-
 ## Conclusion
 
 After completing this lab, I am able to successfully:
@@ -355,3 +348,10 @@ After completing this lab, I am able to successfully:
 * Monitor system metrics using the CloudWatch agent and CloudWatch Metrics
 * Create real-time notifications using CloudWatch Events
 * Track infrastructure compliance using AWS Config
+
+
+## Additional resources
+
+* [StatsD](https://github.com/statsd/statsd)
+* [collectd](https://collectd.org)
+* [Amazon SNS: Sending SMS Messages to Phone Numbers](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html)
