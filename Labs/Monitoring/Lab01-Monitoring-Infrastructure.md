@@ -211,6 +211,10 @@ I wait 1–2 minutes for the alarm to trigger, occasionally refreshing the AWS M
 
 I check my email and confirm I received a message with the subject "ALARM: 404 Errors."
 
+<p align="center">
+  <img src="images/mi-alarm-404-errors.png" alt="ALARM: 404 Errors” width="900">
+</p>
+
 This task demonstrates how I can create an alarm from application log data and receive alerts when unusual behavior is detected in the log file. The log file remains accessible within CloudWatch Logs for further analysis to diagnose the activities that triggered the alarm.
 
 
