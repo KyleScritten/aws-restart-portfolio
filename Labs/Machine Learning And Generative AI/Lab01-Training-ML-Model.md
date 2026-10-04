@@ -36,6 +36,10 @@ To open JupyterLab:
 2. From the navigation menu on the left, I expand the **Applications and IDEs** section, choose **Notebooks**, then choose the **Notebook instances** tab from the lower pane.
 3. I look for the notebook instance named `MyNotebook`, and open the JupyterLab notebook instance by going to the end of the row and choosing **Open JupyterLab**.
 
+<p align="center">
+  <img src="images/ml-sagemaker-notebook.png" alt="SageMaker Notebook" width="900">
+</p>
+
 ## Task 2: Opening a notebook in my notebook instance
 
 In this task, I open the notebook for this lab:
@@ -43,10 +47,58 @@ In this task, I open the notebook for this lab:
 2. I open the `en_us/3_4-machinelearning.ipynb` file by choosing it.
 3. For the remainder of the lab, I follow the instructions in the notebook.
 
+<p align="center">
+  <img src="images/ml-mynotebook.png" alt="MyNotebook in the JupyterLab" width="900">
+</p>
+
 ## Task 3: Working in the Jupyter Notebook
 
+### Data Import and Exploration
 
+I loaded the dataset from an external source and converted it into a pandas DataFrame.
 
+```python
+import warnings, requests, zipfile, io
+warnings.simplefilter('ignore')
+import pandas as pd
+from scipy.io import arff
+import boto3
+
+f_zip = 'http://archive.ics.uci.edu/ml/machine-learning-databases/00212/vertebral_column_data.zip'
+r = requests.get(f_zip, stream=True)
+Vertebral_zip = zipfile.ZipFile(io.BytesIO(r.content))
+Vertebral_zip.extractall()
+
+data = arff.loadarff('column_2C_weka.arff')
+df = pd.DataFrame(data[0])
+
+class_mapper = {b'Abnormal':1,b'Normal':0}
+df['class']=df['class'].replace(class_mapper)
+```
+
+I verified the dataset structure. First, use `shape` to examine the number of rows and columns.
+
+```python
+df.shape
+```
+
+#### Output
+```text
+(310, 7)
+```
+
+Next, get a list of the columns.
+
+```python
+df.columns
+```
+
+#### Output
+```text
+Index(['pelvic_incidence', 'pelvic_tilt', 'lumbar_lordosis_angle',
+       'sacral_slope', 'pelvic_radius', 'degree_spondylolisthesis', 'class'],
+      dtype='object')
+```
 
 ## Conclusion
 
