@@ -100,6 +100,183 @@ Index(['pelvic_incidence', 'pelvic_tilt', 'lumbar_lordosis_angle',
       dtype='object')
 ```
 
+### Moving the target column position
+
+XGBoost requires the training data to be in a single file, with the target value as the first column. 
+
+I get the target column and move it to the first position.
+
+```python
+cols = df.columns.tolist()
+cols = cols[-1:] + cols[:-1]
+df = df[cols]
+```
+
+I see that the `class` is now the first column.
+
+```python
+df.columns
+```
+
+#### Output
+```text
+Index(['class', 'pelvic_incidence', 'pelvic_tilt', 'lumbar_lordosis_angle',
+       'sacral_slope', 'pelvic_radius', 'degree_spondylolisthesis'],
+      dtype='object')
+```
+
+### Splitting the data
+
+I start by splitting the dataset into two datasets. I use one dataset for training, and split the other dataset again for use with validation and testing.
+
+Because I don't have a lot of data, I want to make sure the split datasets contain a representative amount of each class. Thus, I use the stratify switch. Finally, I use a random number so that I can repeat the splits.
+
+```python
+from sklearn.model_selection import train_test_split
+train, test_and_validate = train_test_split(df, test_size=0.2, random_state=42, stratify=df['class'])
+```
+
+Next, split the `test_and_validate` dataset into two equal parts.
+
+```python
+test, validate = train_test_split(test_and_validate, test_size=0.5, random_state=42, stratify=test_and_validate['class'])
+```
+
+Examine the three datasets.
+
+```python
+print(train.shape)
+print(test.shape)
+print(validate.shape)
+```
+
+#### Output
+```text
+(248, 7)
+(31, 7)
+(31, 7)
+```
+
+Now, I check the distribution of the classes.
+
+```python
+print(train['class'].value_counts())
+print(test['class'].value_counts())
+print(validate['class'].value_counts())
+```
+
+#### Output
+```text
+class
+1    168
+0     80
+Name: count, dtype: int64
+class
+1    21
+0    10
+Name: count, dtype: int64
+class
+1    21
+0    10
+Name: count, dtype: int64
+```
+
+### Uploading the data to Amazon S3
+
+XGBoost loads the data for training from Amazon Simple Storage Service (Amazon S3).
+
+I start by setting up some variables for the S3 bucket, then create a function to upload the CSV file to Amazon S3, which I can reuse.
+
+To write the `csv_buffer` to Amazon S3 as an object, I use the `put` operation on the `object`, which is a property of the `bucket`.
+
+```python
+bucket='c214215a5412524l17383492t1w434967665655-labbucket-too8epxnib7h'
+
+prefix='lab3'
+
+train_file='vertebral_train.csv'
+test_file='vertebral_test.csv'
+validate_file='vertebral_validate.csv'
+
+import os
+
+s3_resource = boto3.Session().resource('s3')
+def upload_s3_csv(filename, folder, dataframe):
+    csv_buffer = io.StringIO()
+    dataframe.to_csv(csv_buffer, header=False, index=False)
+    s3_resource.Bucket(bucket).Object(os.path.join(prefix, folder, filename)).put(Body=csv_buffer.getvalue())
+```
+
+I use the function I created to upload the three datasets.
+
+```python
+upload_s3_csv(train_file, 'train', train)
+upload_s3_csv(test_file, 'test', test)
+upload_s3_csv(validate_file, 'validate', validate)
+```
+
+### Training the model
+
+Now that the data is in Amazon S3, I can train a model.
+
+The first step is to get the XGBoost container URI.
+
+```python
+import boto3
+from sagemaker.core.image_uris import retrieve
+container = retrieve(framework='xgboost', region=boto3.Session().region_name, version='1.0-1')
+```
+
+Next, I set some hyperparameters for the model. Because this is the first time I am training the model, I use some values to get started.
+
+```python
+hyperparams={"num_round":"42",
+             "eval_metric": "auc",
+             "objective": "binary:logistic"}
+```
+
+I use the estimator function to set up the model. A few parameters of interest:
+
+* **instance_count** — defines how many instances will be used for training; I use one instance
+* **instance_type** — defines the instance type for training; in this case, it's `ml.m4.xlarge`
+
+```python
+from sagemaker.train import ModelTrainer
+from sagemaker.train.configs import Compute, OutputDataConfig, InputData
+from sagemaker.core.helper.session_helper import Session, get_execution_role
+
+s3_output_location="s3://{}/{}/output/".format(bucket,prefix)
+
+xgb_model = ModelTrainer(
+    training_image=container,
+    role=get_execution_role(),
+    compute=Compute(instance_type='ml.m5.4xlarge', instance_count=1),
+    output_data_config=OutputDataConfig(s3_output_path=s3_output_location),
+    hyperparameters=hyperparams,
+    sagemaker_session=Session())
+```
+
+The estimator needs channels to feed data into the model. For training, I use the `train_channel` and `validate_channel`.
+
+```python
+train_channel = InputData(
+    channel_name='train',
+    data_source="s3://{}/{}/train/".format(bucket,prefix,train_file),
+    content_type='text/csv')
+
+validate_channel = InputData(
+    channel_name='validation',
+    data_source="s3://{}/{}/validate/".format(bucket,prefix,validate_file),
+    content_type='text/csv')
+
+data_channels = [train_channel, validate_channel]
+
+xgb_model.train(input_data_config=data_channels, logs=False)
+```
+
+After the training is complete, I am ready to test and evaluate the model.
+
+
 ## Conclusion
 
 After completing this lab, I am able to:
