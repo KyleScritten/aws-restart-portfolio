@@ -139,24 +139,28 @@ In this task, I generate log data on the Web Server and then monitor the logs us
 
 I begin by accessing the web server.
 
-I choose the **Details** dropdown menu above these instructions, choose **Show**, and copy the `WebServerIP` value. I open a new web browser tab, paste the `WebServerIP` I copied, and press Enter, confirming I see a web server Test Page.
+I choose the **Details** dropdown menu above these instructions, choose **Show**, and copy the `WebServerIP` value. I open a new web browser tab, paste `35.91.110.87`, confirming I see a web server Test Page.
+
+<p align="center">
+  <img src="images/webserver-test-pg.png" alt="web server Test Page" width="900">
+</p>
 
 I now generate log data by attempting to access a page that does not exist. I append `/start` to the browser URL and press Enter, receiving an error message since the page is not found — this is expected, and it generates data in the access logs being sent to CloudWatch Logs.
 
 <p align="center">
-  <img src="images/NAME.png" alt="404 error page generated for log data" width="900">
+  <img src="images/webserver-404.png" alt="404 error page generated for log data" width="900">
 </p>
 
-I keep this tab open, but return to the AWS Management Console tab. From the **Services** menu, I choose **CloudWatch**, then in the left navigation pane, choose **Log groups**, where I see two logs listed: `HttpAccessLog` and `HttpErrorLog`.
+I keep this tab open, but return to the AWS Management Console tab. From the **Services** menu, I choose **CloudWatch**, then in the left navigation pane, choose **Log Management**, where I see two logs listed: `HttpAccessLog` and `HttpErrorLog`.
 
 <p align="center">
-  <img src="images/NAME.png" alt="CloudWatch Log groups showing HttpAccessLog and HttpErrorLog" width="900">
+  <img src="images/cw-log-groups.png" alt="CloudWatch Log groups showing HttpAccessLog and HttpErrorLog" width="900">
 </p>
 
 I choose **HttpAccessLog**, then in the **Log streams** section, choose the log stream in the table — it shares the same ID as the EC2 instance the log is attached to. Log data is displayed, consisting of GET requests sent to the web server, and I can view additional information by expanding each line to see details about the computer and browser that made the request. I find a line with my `/start` request showing a code of 404, confirming the page was not found.
 
 <p align="center">
-  <img src="images/NAME.png" alt="CloudWatch Log stream showing the 404 request" width="900">
+  <img src="images/cw-log-stream-404.png" alt="CloudWatch Log stream showing the 404 request" width="900">
 </p>
 
 This demonstrates how log files can be automatically shipped from an EC2 instance or an on-premises server to CloudWatch Logs. The log data is accessible without having to log in to each individual server, and can also be collected from multiple servers, such as an Auto Scaling fleet of web servers.
@@ -165,26 +169,29 @@ This demonstrates how log files can be automatically shipped from an EC2 instanc
 
 I now configure a filter to identify 404 errors in the log file. This error would normally indicate that the web server is generating invalid links that users are selecting.
 
-In the left navigation pane, I choose **Log groups**, select the check box next to **HttpAccessLog**, and from the **Actions** dropdown menu, select **Create metric filter**. A filter pattern defines the fields in the log file and filters the data for specific values, so I paste the following line into the **Filter pattern** box:
+In the left navigation pane, I choose **Log management**, select the check box next to **HttpAccessLog**, and from the **Actions** dropdown menu, select **Create metric filter**. A filter pattern defines the fields in the log file and filters the data for specific values, so I paste the following line into the **Filter pattern** box:
 
 ```bash
 [ip, id, user, timestamp, request, status_code=404, size]
 ```
 
-This line tells CloudWatch Logs how to interpret the fields in the log data and defines a filter to find lines only with `status_code=404`, indicating that a page was not found.
+>[!Note]
+> This line tells CloudWatch Logs how to interpret the fields in the log data and defines a filter to find lines only with `status_code=404`, indicating that a page was not found.
 
 In the **Test pattern** section, I use the dropdown menu to select the EC2 instance ID (similar to `i-0f07ab62aae4xxxx9`), choose **Test pattern**, then in the **Results** section, choose **Show test results**. I confirm at least one result with a `$status_code` of 404, indicating a page was requested that was not found.
-
-<p align="center">
-  <img src="images/NAME.png" alt="Metric filter test results showing 404 status code" width="900">
-</p>
 
 I choose **Next**, and in the **Create filter name** section, enter `404Errors` as the **Filter name**. In the **Metric details** section, I configure the following:
 * **Metric namespace:** `LogMetrics`
 * **Metric name:** `404Errors`
 * **Metric value:** `1`
 
-I choose **Next** (clicking an empty text field first if the button isn't enabled, to shift focus), then on the **Review and create** page, choose **Create metric filter**. This metric filter can now be used in an alarm.
+I choose **Next** (clicking an empty text field first if the button isn't enabled, to shift focus), then on the **Review and create** page, choose **Create metric filter**. 
+
+<p align="center">
+  <img src="images/mi-metric-filter-404Errors.png" alt="Metric filter creation - 404Errors" width="900">
+</p>
+
+This metric filter can now be used in an alarm.
 
 ### Create an alarm using the filter
 
