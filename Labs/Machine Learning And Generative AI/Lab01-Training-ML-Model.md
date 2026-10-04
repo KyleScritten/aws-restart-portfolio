@@ -183,7 +183,7 @@ Name: count, dtype: int64
 
 ### Uploading the data to Amazon S3
 
-XGBoost loads the data for training from Amazon Simple Storage Service (Amazon S3).
+XGBoost loads the data for training from Amazon Simple Storage Service (Amazon S3). 
 
 I start by setting up some variables for the S3 bucket, then create a function to upload the CSV file to Amazon S3, which I can reuse.
 
@@ -217,9 +217,7 @@ upload_s3_csv(validate_file, 'validate', validate)
 
 ### Training the model
 
-Now that the data is in Amazon S3, I can train a model.
-
-The first step is to get the XGBoost container URI.
+Now that the data is in Amazon S3, I can train a model. The first step is to get the XGBoost container URI:
 
 ```python
 import boto3
@@ -227,7 +225,7 @@ from sagemaker.core.image_uris import retrieve
 container = retrieve(framework='xgboost', region=boto3.Session().region_name, version='1.0-1')
 ```
 
-Next, I set some hyperparameters for the model. Because this is the first time I am training the model, I use some values to get started.
+Next, I set some *hyperparameters* for the model. Because this is the first time I am training the model, I use some values to get started.
 
 ```python
 hyperparams={"num_round":"42",
@@ -235,7 +233,7 @@ hyperparams={"num_round":"42",
              "objective": "binary:logistic"}
 ```
 
-I use the estimator function to set up the model. A few parameters of interest:
+I use the **estimator** function to set up the model. A few parameters of interest:
 
 * **instance_count** — defines how many instances will be used for training; I use one instance
 * **instance_type** — defines the instance type for training; in this case, it's `ml.m4.xlarge`
@@ -270,12 +268,15 @@ validate_channel = InputData(
     content_type='text/csv')
 
 data_channels = [train_channel, validate_channel]
+```
 
+Running **fit** will train the model. This process can take up to 5 minutes.
+
+```python
 xgb_model.train(input_data_config=data_channels, logs=False)
 ```
 
 After the training is complete, I am ready to test and evaluate the model.
-
 
 ## Conclusion
 
