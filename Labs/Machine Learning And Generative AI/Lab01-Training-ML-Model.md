@@ -43,7 +43,7 @@ In this task, I open the notebook for this lab:
 2. I open the `en_us/3_4-machinelearning.ipynb` file by choosing it.
 3. For the remainder of the lab, I follow the instructions in the notebook.
 
-## Task 3: 
+## Task 3: Working in the Jupyter Notebook
 
 
 
@@ -56,3 +56,6 @@ After completing this lab, I am able to:
 * Train an XGBoost model using Amazon SageMaker
 
 ## Additional resources
+
+* [train_test_split function](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+* [scikit-learn library](https://scikit-learn.org/stable/)
