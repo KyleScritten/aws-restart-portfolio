@@ -36,16 +36,16 @@ To open JupyterLab:
 2. From the navigation menu on the left, I expand the **Applications and IDEs** section, choose **Notebooks**, then choose the **Notebook instances** tab from the lower pane.
 3. I look for the notebook instance named `MyNotebook`, and open the JupyterLab notebook instance by going to the end of the row and choosing **Open JupyterLab**.
 
+<p align="center">
+  <img src="images/ml-sagemaker-notebook.png" alt="SageMaker Notebook" width="900">
+</p>
+
 ## Task 2: Opening a notebook in my notebook instance
 
 In this task, I open the notebook for this lab:
 1. In my JupyterLab environment, I go to the file browser in the left pane and locate the `3_4-machinelearning.ipynb` file.
 2. I open the `en_us/3_4-machinelearning.ipynb` file by choosing it.
 3. For the remainder of the lab, I follow the instructions in the [notebook](./files/3_4-machinelearning.ipynb).
-
-<p align="center">
-  <img src="images/ml-mynotebook.png" alt="MyNotebook in the JupyterLab" width="900">
-</p>
 
 ## Task 3: Working in the Jupyter Notebook
 
