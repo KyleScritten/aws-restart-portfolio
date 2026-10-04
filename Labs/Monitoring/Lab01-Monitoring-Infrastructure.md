@@ -265,10 +265,10 @@ In this task, I create a real-time notification that informs me when an instance
 >
 > CloudWatch Events respond to these operational changes and take corrective action as necessary by sending messages to respond to the environment, activating functions, making changes, and capturing state information. I can also use CloudWatch Events to schedule automated actions that self-trigger at certain times using cron or rate expressions.
 
+On the Amazon EventBridge console, I select **Event buses** in the left navigation pane. Under Default event bus section choose **default**, then **Create rule**.
+
 >[!Caution]
 > I created a rule in Amazon EventBridge (the old CloudWatch Events section is now part of Amazon EventBridge) to monitor EC2 instance state changes.
-
-On the Amazon EventBridge console, I select **Event buses** in the left navigation pane. Under Default event bus section choose **default**, then **Create rule**.
 
 In the **Define rule detail** section, I enter `Instance_Stopped_Terminated` as the **Name** and choose **Next**.
 
@@ -292,19 +292,19 @@ This task demonstrates how to receive real-time notifications when infrastructur
 On the **Services** menu, I choose **Simple Notification Service**, then **Topics** in the left navigation pane, and select the link in the **Name** column. I see a single subscription associated with my email address — the topic I configured in Task 2.
 
 <p align="center">
-  <img src="images/NAME.png" alt="SNS topic subscription details" width="900">
+  <img src="images/mi-sns-topic-details.png" alt="SNS topic subscription details" width="900">
 </p>
 
 On the **Services** menu, I choose **EC2**, then **Instances**, select the check box next to **Web Server**, and choose **Instance state > Stop instance > Stop**. The Web Server instance enters the **Stopping** state, and after a minute, enters the **Stopped** state.
 
 <p align="center">
-  <img src="images/NAME.png" alt="Web Server instance in Stopped state" width="900">
+  <img src="images/mi-ws-instance-stopped.png" alt="Web Server instance in Stopped state" width="900">
 </p>
 
 I then receive an email with details about the instance that was stopped. The message is formatted in JSON — to receive a more readable message, I could create an AWS Lambda function triggered by CloudWatch Events, which could format a more readable message and send it via Amazon SNS.
 
 <p align="center">
-  <img src="images/NAME.png" alt="SNS email notification for stopped instance" width="900">
+  <img src="images/email-sns-instance-stopped.png" alt="SNS email notification for stopped instance" width="900">
 </p>
 
 ## Task 5: Monitoring for infrastructure compliance
@@ -318,31 +318,20 @@ In this task, I activate AWS Config rules to ensure compliance of tagging and Am
 
 In the AWS Config console, I complete the initial setup wizard to activate the service for first use.
 
-<p align="center">
-  <img src="images/NAME.png" alt="AWS Config initial setup" width="900">
-</p>
-
 I add the AWS managed rule `required-tags`, configuring it to require a `project` tag on each resource. This rule looks for resources missing a project tag, and takes a few minutes to complete evaluation.
 
-<p align="center">
-  <img src="images/NAME.png" alt="required-tags rule configuration" width="900">
-</p>
-
 I also add the `ec2-volume-inuse-check` rule, which looks for EBS volumes that are not attached to EC2 instances.
-
-<p align="center">
-  <img src="images/NAME.png" alt="ec2-volume-inuse-check rule configuration" width="900">
-</p>
 
 Once evaluation completes, I review the compliance results for each rule. Among the findings:
 * **required-tags:** A compliant EC2 instance (since the Web Server has a project tag), and many non-compliant resources that do not have a project tag
 * **ec2-volume-inuse-check:** One compliant volume (attached to an instance) and one non-compliant volume (not attached to an instance)
 
 <p align="center">
-  <img src="images/NAME.png" alt="AWS Config rule compliance results" width="900">
+  <img src="images/mi-aws-config-rules.png" alt="AWS Config rule compliance results" width="900">
 </p>
 
-AWS Config has a large library of pre-defined compliance checks, and I can create additional checks by writing my own AWS Config rule using Lambda.
+>[!Note]
+> AWS Config has a large library of pre-defined compliance checks, and I can create additional checks by writing my own AWS Config rule using Lambda.
 
 ## Conclusion
 
