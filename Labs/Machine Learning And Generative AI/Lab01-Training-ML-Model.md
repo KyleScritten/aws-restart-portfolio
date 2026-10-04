@@ -35,7 +35,7 @@ To open JupyterLab:
 3. I look for the notebook instance named `MyNotebook`, and open the JupyterLab notebook instance by going to the end of the row and choosing **Open JupyterLab**.
 
 <p align="center">
-  <img src="images/ml-sagemaker-notebook.png" alt="SageMaker Notebook" width="900">
+  <img src="images/ml-sagemaker-notebook.png" alt="SageMaker Notebook" width="1000">
 </p>
 
 ## Task 2: Opening a notebook in my notebook instance
@@ -271,7 +271,7 @@ xgb_model.train(input_data_config=data_channels, logs=False)
 ```
 
 <p align="center">
-  <img src="images/ml-training-job-complete.png" alt="Training Job" width="900">
+  <img src="images/ml-training-job-complete.png" alt="Training Job" width="1000">
 </p>
 
 After the training is complete, I am ready to test and evaluate the model.
