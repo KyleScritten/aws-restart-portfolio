@@ -23,7 +23,10 @@ In this task, I use Systems Manager to install the CloudWatch agent on an EC2 in
 
 In the AWS Management Console, I select **Systems Manager** from the **Services** menu, then choose **Run Command** in the left navigation pane. I use Run Command to deploy a pre-written command that installs the CloudWatch agent, choosing **Run a Command** and selecting the button next to **AWS-ConfigureAWSPackage**. In the **Command parameters** section, I set **Action** to Install, **Name** to `AmazonCloudWatchAgent`, and **Version** to `latest`. In the **Targets** section, I select **Choose instances manually** and select the check box next to **Web Server**, installing the CloudWatch agent on the web server.
 
-I choose **Run** and wait for the **Overall status** to change to **Success**, occasionally refreshing the page to check progress. To confirm the job ran successfully, I choose the instance under **Targets and outputs**, click **View output**, and expand **Step 1 - Output**, where I see the message "Successfully installed arn:aws:ssm:::package/AmazonCloudWatchAgent." Since the instance was created from a Linux AMI, if I instead see a precondition skip message referencing `createDownloadFolder`, I check **Step 2 - Output** instead — this is expected and can be safely ignored.
+I choose **Run** and wait for the **Overall status** to change to **Success**, occasionally refreshing the page to check progress. To confirm the job ran successfully, I choose the instance under **Targets and outputs**, click **View output**, and expand **Step 1 - Output**, where I see the message "Successfully installed arn:aws:ssm:::package/AmazonCloudWatchAgent." 
+
+>[!Caution]
+> Since the instance was created from a Linux AMI, if I instead see a precondition skip message referencing `createDownloadFolder`, I check **Step 2 - Output** instead — this is expected and can be safely ignored.
 
 <p align="center">
   <img src="images/package-cmd-config.png" alt="Successful CloudWatch agent installation output" width="900">
@@ -106,7 +109,7 @@ In the left navigation pane, I choose **Parameter Store**, then **Create paramet
 This configuration defines two web server log files to be collected and sent to CloudWatch Logs, along with CPU, disk, and memory metrics to be sent to CloudWatch Metrics. I choose **Create parameter**; this parameter is referenced when starting the CloudWatch agent.
 
 <p align="center">
-  <img src="images/NAME.png" alt="Parameter Store configuration for CloudWatch agent" width="900">
+  <img src="images/mi-parameter-store-config.png" alt="Parameter Store configuration for CloudWatch agent" width="900">
 </p>
 
 I now use another Run Command to start the CloudWatch agent on the web server. In the left navigation pane, I choose **Run Command**, then **Run command**, and filter by **Document name prefix : Equals : AmazonCloudWatch-ManageAgent**. Before running the command, I view its definition by choosing **AmazonCloudWatch-ManageAgent**, which opens a new tab showing the command's details. On the **Content** tab, I see the script that runs on the target instance, which references AWS Systems Manager Parameter Store to retrieve the CloudWatch agent configuration I defined earlier. I close this tab and return to the **Run a command** tab.
@@ -114,7 +117,7 @@ I now use another Run Command to start the CloudWatch agent on the web server. I
 I select the button next to **AmazonCloudWatch-ManageAgent**, and in the **Command parameters** section, set **Action** to configure, **Mode** to ec2, **Optional Configuration Source** to ssm, **Optional Configuration Location** to `Monitor-Web-Server`, and **Optional Restart** to yes — configuring the agent to use the configuration I previously stored in Parameter Store. In the **Targets** section, I select **Choose instances manually**, select the check box next to **Web Server**, and choose **Run**.
 
 <p align="center">
-  <img src="images/NAME.png" alt="AmazonCloudWatch-ManageAgent command configuration" width="900">
+  <img src="images/cw-mngmnt-cmd-config.png" alt="AmazonCloudWatch-ManageAgent command configuration" width="900">
 </p>
 
 I wait for the **Overall status** to change to **Success**, occasionally refreshing to check progress. The CloudWatch agent is now running on the instance and sending log and metric data to CloudWatch.
