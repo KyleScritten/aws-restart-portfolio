@@ -45,7 +45,7 @@ To open JupyterLab:
 In this task, I open the notebook for this lab:
 1. In my JupyterLab environment, I go to the file browser in the left pane and locate the `3_4-machinelearning.ipynb` file.
 2. I open the `en_us/3_4-machinelearning.ipynb` file by choosing it.
-3. For the remainder of the lab, I follow the instructions in the notebook.
+3. For the remainder of the lab, I follow the instructions in the [notebook](./files/3_4-machinelearning.ipynb).
 
 <p align="center">
   <img src="images/ml-mynotebook.png" alt="MyNotebook in the JupyterLab" width="900">
@@ -275,6 +275,10 @@ Running **fit** will train the model. This process can take up to 5 minutes.
 ```python
 xgb_model.train(input_data_config=data_channels, logs=False)
 ```
+
+<p align="center">
+  <img src="images/ml-training-job-complete.png" alt="Training Job" width="900">
+</p>
 
 After the training is complete, I am ready to test and evaluate the model.
 
