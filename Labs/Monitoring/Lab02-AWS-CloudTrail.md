@@ -206,7 +206,6 @@ download: s3://monitoring0622/AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/
 
 
 
-
 ### Task 3.3: Analyze the logs using grep
 
 In this section of the activity, I use the Linux `grep` utility to analyze the CloudTrail logs.
