@@ -49,6 +49,8 @@ I play the role of Sofîa, becoming a detective to discover the culprit.
 
 *I notice the website looks normal — for example, the photos are all appropriate for a bakery café.*
 
+
+
 ## Task 2: Creating a CloudTrail log and observing the hacked website
 
 In this task, I create a CloudTrail trail in my AWS account, and soon after creating it, I notice that the Café website has been hacked.
@@ -60,7 +62,7 @@ In the AWS Management Console, select **CloudTrail** and then in the left naviga
 I choose **Create trail** and configure it as follows:
 
 * **Trail name:** `monitor` (***important*** — I verify this is set exactly to `monitor`, or the activity will not work as intended)
-* **Trail log bucket and folder:** I select **Create a new S3 bucket**, and enter `monitoring####` (where `####` is four random digits)
+* **Trail log bucket and folder:** I select **Create a new S3 bucket**, and enter `monitoring####` (where `####` is four random digits = 0622)
 * **AWS KMS alias:** My initials followed by `-KMS` (for example, `kc-KMS`)
 
 I choose **Next**, leave the **Choose log events** page at its defaults and choose **Next** again. Then on the **Review and create** page, choose **Create trail**. 
@@ -91,7 +93,87 @@ I observe the `Café Web Server` instance details, checking for anything suspici
 
 
 
+## Task 3: Analyzing the CloudTrail logs using grep
 
+In this task, I analyze the CloudTrail logs using the `grep` Linux utility to see if I can figure out who hacked the website.
+
+### Task 3.1: Connect to the Café Web Server host EC2 instance using SSH
+
+In this task, I connect to the Café Web Server EC2 instance using SSH. I run macOS and will use an SSH utility to perform all of these operations. The Amazon EC2 instance is configured as part of this lab environment. 
+
+I downloaded the file labsuser.pem from the lab environment and saved the PublicIP from the Café Web Server EC2 instance, which for my lab is the Public IPv4 address `35.88.131.167`.
+
+From my terminal, I changed the permissions on the key to be read-only using my PublicIP allowing the first connection to this remote SSH server. 
+
+#### Connect to the Café Web Server Instance
+
+```bash
+kylescritten@MacBookAir ~ % cd ~/Downloads
+kylescritten@MacBookAir Downloads % chmod 400 labsuser.pem
+kylescritten@MacBookAir Downloads % ssh -i labsuser.pem ec2-user@35.88.131.167
+The authenticity of host '35.88.131.167 (35.88.131.167)' can't be established.
+ED25519 key fingerprint is: SHA256:s23CcMc65fYJSDybVxyJufwLnzaCN4tYJ9nCjIgCz2k
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+```
+
+#### Terminal Output
+```text
+Warning: Permanently added '35.88.131.167' (ED25519) to the list of known hosts.
+** WARNING: connection is not using a post-quantum key exchange algorithm.
+** This session may be vulnerable to "store now, decrypt later" attacks.
+** The server may need to be upgraded. See https://openssh.com/pq.html
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2026-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2029-06-30.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@web-server ~]$
+```
+
+### Task 3.2: Download and extract the CloudTrail logs
+
+I verify that my terminal is connected via SSH to the `Café Web Server` EC2 instance.
+
+I run the following command to create a local directory on the web server to download the CloudTrail log files to, then change into that directory:
+```bash
+mkdir ctraillogs
+
+cd ctraillogs
+```
+
+The following command is run to list the buckets and recall the bucket name:
+```bash
+aws s3 ls
+```
+
+Then I run the following command to download the CloudTrail logs, substituting my actual bucket name:
+```bash
+aws s3 cp s3://<monitoring####>/ . --recursive
+```
+
+If successful, I see a few log files downloaded. I use `cd` and `ls` repeatedly as necessary to navigate to the subdirectory where the logs were downloaded, located at `AWSLogs/<account-num>/CloudTrail/<Region>/<yyyy>/<mm>/<dd>`.
+
+>[!Note]
+> Notice that the log files end in `json.gz`, which indicates that they are compressed as GNU zip files.
+
+I run the following command to extract the logs:
+```bash
+gunzip *.gz
+```
+
+I run `ls` again and notice that all files are now extracted.
+
+#### Terminal output
+```bash
+PLACEHOLDER
+```
 
 
 
