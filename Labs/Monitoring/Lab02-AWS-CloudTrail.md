@@ -207,6 +207,93 @@ download: s3://monitoring0622/AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/
 
 
 
+### Task 3.3: Analyze the logs using grep
+
+In this section of the activity, I use the Linux `grep` utility to analyze the CloudTrail logs.
+
+
+The log files are in `json` format. To improve readability, I used a Python utility to format the content:
+```bash
+cat 303699737741_CloudTrail_us-west-2_20261006T0400Z_jUblzVyB1ixHwspZ.json | python -m json.tool
+````
+
+This made it easier to understand the structure of the log entries. Each entry contains standard fields such as `awsRegion`, `eventName`, `eventSource`, 
+`eventTime`, `requestParameters`, `sourceIPAddress`, and `userIdentity`.
+
+However, even a single log file contains a large number of entries. Since multiple log files are generated over time, analyzing them manually 
+becomes inefficient.
+
+To search across multiple files and filter relevant information, I used Linux commands such as `grep`. I filtered log entries based on `sourceIPAddress` 
+and `eventName` to identify suspicious activity. This approach helped narrow down actions related to the security group modifications.
+```bash
+[ec2-user@web-server 06]$ ip=35.88.131.167
+[ec2-user@web-server 06]$ for i in $(ls); do echo $i && cat $i | python -m json.tool | grep sourceIPAddress ; done
+303699737741_CloudTrail_us-west-2_20261006T0345Z_QtWGk5sk4v1DR8Qa.json
+            "sourceIPAddress": "35.88.131.167",
+            "sourceIPAddress": "35.88.131.167",
+            "sourceIPAddress": "35.88.131.167",
+            "sourceIPAddress": "34.214.221.197",
+            ...
+[ec2-user@web-server 06]$ for i in $(ls); do echo $i && cat $i | python -m json.tool | grep eventName ; done
+303699737741_CloudTrail_us-west-2_20261006T0345Z_QtWGk5sk4v1DR8Qa.json
+            "eventName": "CreateSecurityGroup",
+            "eventName": "AuthorizeSecurityGroupIngress",
+            "eventName": "DescribeInstances",
+            "eventName": "DescribeSecurityGroups",
+            ...
+303699737741_CloudTrail_us-west-2_20261006T0420Z_9Izun3df7U2QhQQd.json
+            "eventName": "GenerateDataKey",
+            "eventName": "ListInstanceAssociations",
+            "eventName": "UpdateInstanceInformation",
+            "eventName": "GetParametersByPath",
+           ...
+[ec2-user@web-server 06]$ 
+```
+
+### Task 3.4: Analyze the logs using AWS CLI CloudTrail commands
+
+Another approach I can use to analyze CloudTrail logs is to use AWS CLI CloudTrail commands.
+
+A more effective approach was to use AWS CLI CloudTrail commands to analyze the logs. I used the `lookup-events` command to investigate EC2 
+security group modifications and identify the user responsible for the changes.
+
+First, I checked for console login activity:
+```bash
+[ec2-user@web-server 06]$ aws cloudtrail lookup-events --lookup-attributes AttributeKey=EventName,AttributeValue=ConsoleLogin
+{
+    "Events": []
+}
+```
+
+The result returned no events, indicating that the actions were not performed through the AWS Management Console.
+
+Next, I retrieved the AWS Region and the security group ID associated with the `Café Web Server` instance:
+```bash
+[ec2-user@web-server 06]$ region=$(curl http://169.254.169.254/latest/dynamic/instance-identity/document|grep region | cut -d '"' -f4)
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   474  100   474    0     0   326k      0 --:--:-- --:--:-- --:--:--  462k
+[ec2-user@web-server 06]$ sgId=$(aws ec2 describe-instances --filters "Name=tag:Name,Values='Cafe Web Server'" --query 'Reservations[*].Instances[*].SecurityGroups[*].[GroupId]' --region $region --output text)
+[ec2-user@web-server 06]$ echo $sgId
+sg-0f5929f22e8dedcf1
+[ec2-user@web-server 06]$ echo $region
+us-west-2
+```
+
+Using this information, I filtered CloudTrail events related to security group changes:
+```bash
+aws cloudtrail lookup-events \
+--lookup-attributes AttributeKey=ResourceType,AttributeValue=AWS::EC2::SecurityGroup \
+--region $region --output text | grep $sgId
+```
+
+
+
+
+
+
+
+
 ## Conclusion
 
 After completing this activity, I am able to:
