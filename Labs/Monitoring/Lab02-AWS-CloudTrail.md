@@ -158,7 +158,7 @@ Then I run the following command to download the CloudTrail logs, substituting m
 aws s3 cp s3://<monitoring####>/ . --recursive
 ```
 
-If successful, I see a few log files downloaded. I use `cd` and `ls` repeatedly as necessary to navigate to the subdirectory where the logs were downloaded, located at `AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06` (AWSLogs/<account-num>/CloudTrail/<Region>/<yyyy>/<mm>/<dd>).
+If successful, I see a few log files downloaded. I use `cd` and `ls` repeatedly as necessary to navigate to the subdirectory where the logs were downloaded, located at `AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06` which is `AWSLogs/<account-num>/CloudTrail/<Region>/<yyyy>/<mm>/<dd>`.
 
 >[!Note]
 > Notice that the log files end in `json.gz`, which indicates that they are compressed as GNU zip files.
