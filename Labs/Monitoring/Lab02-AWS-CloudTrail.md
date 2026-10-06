@@ -155,7 +155,7 @@ aws s3 ls
 
 Then I run the following command to download the CloudTrail logs, substituting my actual bucket name:
 ```bash
-aws s3 cp s3://<monitoring####>/ . --recursive
+aws s3 cp s3://<monitoring0622>/ . --recursive
 ```
 
 If successful, I see a few log files downloaded. I use `cd` and `ls` repeatedly as necessary to navigate to the subdirectory where the logs were downloaded, located at `AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06` which is `AWSLogs/<account-num>/CloudTrail/<Region>/<yyyy>/<mm>/<dd>`.
@@ -172,7 +172,36 @@ I run `ls` again and notice that all files are now extracted.
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@web-server ~]$ mkdir ctraillogs
+[ec2-user@web-server ~]$ cd ctraillogs
+[ec2-user@web-server ctraillogs]$ aws s3 ls
+2026-10-06 03:04:31 cafeimagefiles59019
+2026-10-06 03:42:37 monitoring0622
+[ec2-user@web-server ctraillogs]$
+[ec2-user@web-server ctraillogs]$ aws s3 cp s3://monitoring0622/ . --recursive
+...
+download: s3://monitoring0622/AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06/303699737741_CloudTrail_us-west-2_20261006T0425Z_FOxeSdQBJhzxQrbz.json.gz to AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06/303699737741_CloudTrail_us-west-2_20261006T0425Z_FOxeSdQBJhzxQrbz.json.gz
+download: s3://monitoring0622/AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06/303699737741_CloudTrail_us-west-2_20261006T0355Z_wksdaafyWVr2FQsU.json.gz to AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06/303699737741_CloudTrail_us-west-2_20261006T0355Z_wksdaafyWVr2FQsU.json.gz
+[ec2-user@web-server ctraillogs]$ 
+[ec2-user@web-server ctraillogs]$ ls AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06
+303699737741_CloudTrail_us-west-2_20261006T0345Z_QtWGk5sk4v1DR8Qa.json.gz  303699737741_CloudTrail_us-west-2_20261006T0400Z_TrZcYsVQdXg2BR0t.json.gz
+303699737741_CloudTrail_us-west-2_20261006T0350Z_onS1VMGKDiTcsHlo.json.gz  303699737741_CloudTrail_us-west-2_20261006T0405Z_pwPmdEMVsxwNOMok.json.gz
+303699737741_CloudTrail_us-west-2_20261006T0350Z_ZSIXLpTWR3OpXYG5.json.gz  303699737741_CloudTrail_us-west-2_20261006T0410Z_jmUvC4LZKdoKkPoh.json.gz
+303699737741_CloudTrail_us-west-2_20261006T0355Z_48UkvbSdqdh4gdin.json.gz  303699737741_CloudTrail_us-west-2_20261006T0410Z_Wfqqzrdj7S1HvaCV.json.gz
+303699737741_CloudTrail_us-west-2_20261006T0355Z_wksdaafyWVr2FQsU.json.gz  303699737741_CloudTrail_us-west-2_20261006T0420Z_9Izun3df7U2QhQQd.json.gz
+303699737741_CloudTrail_us-west-2_20261006T0400Z_jUblzVyB1ixHwspZ.json.gz  303699737741_CloudTrail_us-west-2_20261006T0425Z_FOxeSdQBJhzxQrbz.json.gz
+[ec2-user@web-server ctraillogs]$ 
+[ec2-user@web-server ctraillogs]$ cd AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/06
+[ec2-user@web-server 06]$ gunzip *.gz
+[ec2-user@web-server 06]$
+[ec2-user@web-server 06]$ ls
+303699737741_CloudTrail_us-west-2_20261006T0345Z_QtWGk5sk4v1DR8Qa.json  303699737741_CloudTrail_us-west-2_20261006T0400Z_TrZcYsVQdXg2BR0t.json
+303699737741_CloudTrail_us-west-2_20261006T0350Z_onS1VMGKDiTcsHlo.json  303699737741_CloudTrail_us-west-2_20261006T0405Z_pwPmdEMVsxwNOMok.json
+303699737741_CloudTrail_us-west-2_20261006T0350Z_ZSIXLpTWR3OpXYG5.json  303699737741_CloudTrail_us-west-2_20261006T0410Z_jmUvC4LZKdoKkPoh.json
+303699737741_CloudTrail_us-west-2_20261006T0355Z_48UkvbSdqdh4gdin.json  303699737741_CloudTrail_us-west-2_20261006T0410Z_Wfqqzrdj7S1HvaCV.json
+303699737741_CloudTrail_us-west-2_20261006T0355Z_wksdaafyWVr2FQsU.json  303699737741_CloudTrail_us-west-2_20261006T0420Z_9Izun3df7U2QhQQd.json
+303699737741_CloudTrail_us-west-2_20261006T0400Z_jUblzVyB1ixHwspZ.json  303699737741_CloudTrail_us-west-2_20261006T0425Z_FOxeSdQBJhzxQrbz.json
+[ec2-user@web-server 06]$
 ```
 
 
