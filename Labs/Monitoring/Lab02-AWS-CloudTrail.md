@@ -204,8 +204,6 @@ download: s3://monitoring0622/AWSLogs/303699737741/CloudTrail/us-west-2/2026/10/
 [ec2-user@web-server 06]$
 ```
 
-
-
 ### Task 3.3: Analyze the logs using grep
 
 In this section of the activity, I use the Linux `grep` utility to analyze the CloudTrail logs.
@@ -287,11 +285,70 @@ aws cloudtrail lookup-events \
 ```
 
 
+## Task 4: Analyzing the CloudTrail logs using Athena
 
+As I experienced in the previous task, it can be difficult to find specific information within a very large dataset. CloudTrail logs are verbose for a reason — I might want to know every relevant detail about a particular action taken in my AWS account — but using command line tools to filter the logs can be tedious.
 
+It would be convenient if all the log data were in a database, where I could use structured query language (SQL) queries to search for the log entries I'm most interested in. Athena provides such a solution — it's an interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL.
 
+In this task, I use Athena to analyze my CloudTrail logs.
 
+### Task 4.1: Create the Athena table
 
+From the AWS Management Console **Services** menu, I choose **CloudTrail**, then choose **Event history**. I notice that CloudTrail provides this event history interface, where I can apply filters and conduct a basic search based on parameters such as Event name or Resource type. The Event history page can be a useful tool worth exploring, but in this activity, I use Athena instead.
+
+From the Event history page, I click **Create Athena table**, and for **Storage location**, choose the `monitoring0622` S3 bucket where I configured CloudTrail to store log files. After analyzing the CREATE TABLE details, I choose **Create table**. 
+
+<p align="center">
+  <img src="images/athena-create-table-config.png" alt="Athena CREATE TABLE configuration" width="900">
+</p>
+
+*The table is created with a default name that includes the name of the S3 bucket.*
+
+From the **Services** menu, I choose **Analytics**, then the **Athena** service.
+
+### Task 4.2: Analyze logs using Athena
+
+The advantage of using Athena is that I can now run SQL queries over my log data using the **Athena Query Editor** on a selected table.
+
+I run queries to extract key fields such as:
+* `useridentity.userName`
+* `eventtime`
+* `eventsource`
+* `eventname`
+* `requestparameters`
+
+#### Query 1
+
+<p align="center">
+  <img src="images/athena-simple-query.png" alt="Running a simple query on Log Data" width="900">
+</p>
+
+*This query returns five rows of data.*
+
+#### Query 2
+
+<p align="center">
+  <img src="images/athena-specific-query.png" alt="Run a new query that selects only certain columns" width="900">
+</p>
+
+*I am now able to find out who modified the security group associated with the `Café Web Server` instance.*
+
+### Challenge: Identifying the Hacker
+
+By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identified:
+* **The Event Name:** `AuthorizeSecurityGroupIngress`
+* **The IAM user responsible for the security group modification:** `chaos`
+* **The timestamp of the malicious activity:** `2026-04-27T08:05:00Z`
+* **The source IP address used for access:** `34.216.153.22`
+* **Action:** Opened port 22 (SSH) to `0.0.0.0/0`
+* **The method of access (programmatic or console):** AWS CLI based on user agent
+
+<p align="center">
+  <img src="images/ct-chaos-hacker.png" alt="Challenge: Chaos is the Hacker" width="900">
+</p>
+
+8This confirmed that the IAM user `chaos` was responsible for modifying the security group and introducing the security vulnerability.8
 
 ## Conclusion
 
