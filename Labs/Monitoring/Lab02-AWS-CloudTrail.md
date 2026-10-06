@@ -344,11 +344,120 @@ By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identi
 * **Action:** Opened port 22 (SSH) to `0.0.0.0/0`
 * **The method of access (programmatic or console):** AWS CLI based on user agent
 
+#### Hacker Query
 <p align="center">
   <img src="images/ct-chaos-hacker.png" alt="Challenge: Chaos is the Hacker" width="900">
 </p>
 
-8This confirmed that the IAM user `chaos` was responsible for modifying the security group and introducing the security vulnerability.8
+*This confirmed that the IAM user `chaos` was responsible for modifying the security group and introducing the security vulnerability.*
+
+## Task 5: Analyzing the hack further and improving security
+
+### Task 5.1: Check the OS users
+
+### Task 5.2: Update SSH security
+
+<p align="center">
+  <img src="images/ssh-security-fix.png" alt="SSH Configuration Fix" width="900">
+</p>
+
+
+### Task 5.3: Fix the website
+
+<p align="center">
+  <img src="images/NAME.png" alt="Fix the website” width="900">
+</p>
+
+### Task 5.4: Delete the AWS hacker user
+
+<p align="center">
+  <img src="images/iam-delete-chaos.png" alt="Delete the AWS hacker user” width="900">
+</p>
+
+*That chaos user shouldn't be causing any trouble in the AWS account anymore.*
+
+
+
+# TASK 5 BASH
+
+```bash
+[ec2-user@web-server 06]$ sudo aureport --auth
+
+Authentication Report
+============================================
+# date time acct host term exe success event
+============================================
+1. 06/10/2026 03:43:58 chaos-user ec2-34-214-221-197.us-west-2.compute.amazonaws.com ssh /usr/sbin/sshd yes 151
+2. 06/10/2026 03:43:58 chaos-user 34.214.221.197 ssh /usr/sbin/sshd yes 154
+3. 06/10/2026 04:01:51 ec2-user 152.110.64.154 ? /usr/sbin/sshd yes 191
+4. 06/10/2026 04:01:51 ec2-user 152.110.64.154 ? /usr/sbin/sshd yes 192
+5. 06/10/2026 04:01:51 ec2-user 152.110.64.154 ssh /usr/sbin/sshd yes 195
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ who
+chaos-user pts/0        2026-10-06 03:43 (ec2-34-214-221-197.us-west-2.compute.amazonaws.com)
+ec2-user pts/1        2026-10-06 04:01 (152.110.64.154)
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ sudo userdel -r chaos-user
+userdel: user chaos-user is currently used by process 5094
+[ec2-user@web-server 06]$ sudo kill -9 5094
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ who
+ec2-user pts/1        2026-10-06 04:01 (152.110.64.154)
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ sudo userdel -r chaos-user
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ sudo cat /etc/passwd | grep -v nologin
+root:x:0:0:root:/root:/bin/bash
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ sudo ls -l /etc/ssh/sshd_config
+-rw------- 1 root root 3957 Oct  6 03:04 /etc/ssh/sshd_config
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ sudo vi /etc/ssh/sshd_config
+[ec2-user@web-server 06]$ sudo vi /etc/ssh/sshd_config
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ sudo service sshd restart
+Redirecting to /bin/systemctl restart sshd.service
+[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$ cd /var/www/html/cafe/images/
+[ec2-user@web-server images]$ ls -l
+total 5732
+-rwxrwxrwx 1 root root 647353 Apr  2  2019 Cake-Vitrine.jpg
+-rwxrwxrwx 1 root root 480820 Apr  2  2019 Chocolate-Chip-Cookies.jpg
+-rwxrwxrwx 1 1001 root 486325 Apr  2  2019 Coffee-and-Pastries.backup
+-rw-r--r-- 1 1001 root 260603 Oct  6 03:04 Coffee-and-Pastries.jpg
+-rwxrwxrwx 1 root root 631884 Apr  3  2019 Coffee.jpg
+-rwxrwxrwx 1 root root  17528 Apr  6  2021 Coffee-Shop.png
+-rwxrwxrwx 1 root root 429183 Apr  2  2019 Cookies.jpg
+-rwxrwxrwx 1 root root 351781 Apr  2  2019 Croissants.jpg
+-rwxrwxrwx 1 root root 316090 Apr  2  2019 Cup-of-Hot-Chocolate.jpg
+-rwxrwxrwx 1 root root  94341 Apr  2  2019 default-image.jpg
+-rwxrwxrwx 1 root root 380753 Apr  2  2019 Donuts.jpg
+-rwxrwxrwx 1 root root 411014 Apr  2  2019 Frank-Martha.jpg
+-rwxrwxrwx 1 root root 319081 Apr  2  2019 Latte.jpg
+-rwxrwxrwx 1 root root 243718 Apr  2  2019 Muffins.jpg
+-rwxrwxrwx 1 root root 290697 Apr  2  2019 Strawberry-Blueberry-Tarts.jpg
+-rwxrwxrwx 1 root root 479213 Apr  2  2019 Strawberry-Tarts.jpg
+[ec2-user@web-server images]$ 
+[ec2-user@web-server images]$ 
+[ec2-user@web-server images]$ sudo mv Coffee-and-Pastries.backup Coffee-and-Pastries.jpg
+[ec2-user@web-server images]$ 
+```
+
+## Business case feedback
+
+#### Update from Café
+
+<p align="center">
+  <img src="images/ct-cafe-logo.png" alt="Cafe Logo" width="900">
+</p>
+
+Everyone at the Café is relieved that I was able to uncover the identity of the person who committed the hack and remove their access to the web server and to the AWS account.
+
+In the end, the team was lucky that it looks like the hacker was just trying to have fun. However, everyone knows the hacker could have caused serious damage. The whole team at the Café who participates in updating and maintaining the website now understands how important it is to keep the site secure, and they are definitely going to continue using CloudTrail as a key tool for auditing activity on their AWS account.
 
 ## Conclusion
 
