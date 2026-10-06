@@ -41,7 +41,7 @@ I play the role of Sofîa, becoming a detective to discover the culprit.
 > [!NOTE]
 > I confirm that the `TCP port 22` access is open only to my IP address. The entry should show a Classless Inter-Domain Routing (CIDR) block with a particular IP address followed by `/32`, not open to all IP addresses (which would be shown by `0.0.0.0/0`).
 
-5. I observe the Café website: in **Instances**, I select the **Café Web Server** instance, click the **Details** tab, and copy the **Public IPv4 address** value. I open a new browser tab and navigate to `http://<WebServerIP>/cafe/`.
+5. I observe the Café website: in **Instances**, I select the **Café Web Server** instance, click the **Details** tab, and copy the **Public IPv4 address** `35.88.131.167`. I open a new browser tab and navigate to `http://35.88.131.167/cafe/`.
 
 <p align="center">
   <img src="images/initial-cafe-web-load.png" alt="Café website homepage appearing normal" width="900">
@@ -49,7 +49,45 @@ I play the role of Sofîa, becoming a detective to discover the culprit.
 
 *I notice the website looks normal — for example, the photos are all appropriate for a bakery café.*
 
+## Task 2: Creating a CloudTrail log and observing the hacked website
 
+In this task, I create a CloudTrail trail in my AWS account, and soon after creating it, I notice that the Café website has been hacked.
+
+### Task 2.1: Create a CloudTrail log
+
+In the AWS Management Console, select **CloudTrail** and then in the left navigation pane, I choose **Trails**.
+
+I choose **Create trail** and configure it as follows:
+
+* **Trail name:** `monitor` (***important*** — I verify this is set exactly to `monitor`, or the activity will not work as intended)
+* **Trail log bucket and folder:** I select **Create a new S3 bucket**, and enter `monitoring####` (where `####` is four random digits)
+* **AWS KMS alias:** My initials followed by `-KMS` (for example, `kc-KMS`)
+
+I choose **Next**, leave the **Choose log events** page at its defaults and choose **Next** again. Then on the **Review and create** page, choose **Create trail**. 
+
+<p align="center">
+  <img src="images/ct-config.png" alt="CloudTrail trail configuration" width="900">
+</p>
+
+*I verify that my new trail appears on the **Trails** page.*
+
+### Task 2.2: Observe the hacked website
+
+I return to the browser tab with the Café website open and refresh the page — it may take up to a minute for the hack to occur, and since the browser may be caching images, I hold Shift while clicking refresh to force the latest version to load.
+
+I notice the website has been hacked — an incorrect image has appeared where it shouldn't be. It's now up to me to figure out who hacked the website, and it's fortunate I enabled CloudTrail just before this happened, since it can provide valuable information about what users have been doing in my account.
+
+<p align="center">
+  <img src="images/hacked-cafe-web.png" alt="Hacked Café website showing unexpected image" width="900">
+</p>
+
+I observe the `Café Web Server` instance details, checking for anything suspicious. In the **Security** tab, I choose the `sg-xxxxxxxxxx` security group again, then the **Inbound rules** tab, and notice an unexpected extra entry. While I still see the rule I created earlier — opening `port 22` to only my IP address — there's now an additional inbound rule allowing SSH access from anywhere (`0.0.0.0/0`).
+
+<p align="center">
+  <img src="images/sg-unauth-rule.png" alt="Security group showing unauthorized inbound rule for SSH access from anywhere" width="900">
+</p>
+
+*Someone added this security hole, and I need to search the CloudTrail logs to find out who.*
 
 
 
