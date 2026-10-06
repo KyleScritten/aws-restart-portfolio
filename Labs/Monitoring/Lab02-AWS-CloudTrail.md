@@ -66,7 +66,7 @@ I choose **Create trail** and configure it as follows:
 I choose **Next**, leave the **Choose log events** page at its defaults and choose **Next** again. Then on the **Review and create** page, choose **Create trail**. 
 
 <p align="center">
-  <img src="images/ct-config.png" alt="CloudTrail trail configuration" width="900">
+  <img src="images/ct-trail-config.png" alt="CloudTrail trail configuration" width="900">
 </p>
 
 *I verify that my new trail appears on the **Trails** page.*
