@@ -16,7 +16,7 @@ I first observe that the website looks normal. Soon after creating a trail with 
 
 ## Business case relevance
 
-### A new request from the Café leadership team
+#### A new request from the Café leadership team
 
 <p align="center">
   <img src="images/ct-cafe-logo.png" alt="Cafe Logo" width="900">
