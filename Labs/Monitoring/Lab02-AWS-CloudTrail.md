@@ -364,9 +364,6 @@ By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identi
 
 ### Task 5.3: Fix the website
 
-<p align="center">
-  <img src="images/NAME.png" alt="Fix the website” width="900">
-</p>
 
 ### Task 5.4: Delete the AWS hacker user
 
