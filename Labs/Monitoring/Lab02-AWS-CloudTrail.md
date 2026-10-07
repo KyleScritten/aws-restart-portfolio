@@ -364,10 +364,7 @@ sudo aureport --auth
 
 There is evidence that a user other than `ec2-user` has logged in — `chaos-user`
 
-I run the `who` command to figure out who is currently logged in:
-```bash
-who
-```
+I run the `who` command to figure out who is currently logged in.
 
 The user is still logged in, so I need to remove them from this instance right away. I run the following command to try to remove the `chaos-user` OS user:
 ```bash
@@ -375,25 +372,18 @@ sudo userdel -r chaos-user
 ```
 
 This doesn't work because they are still logged in, but it returns the process number they are connected as. I replace `ProcNum` with that process number and run the following command to stop the process with the active `chaos-user` login session:
-
 ```bash
 sudo kill -9 ProcNum
 ```
 
-I run the `who` command again to verify that the `chaos-user` OS user is no longer connected:
-
-```bash
-who
-```
+I run the `who` command again to verify that the `chaos-user` OS user is no longer connected.
 
 Now I (the `ec2-user`) am the only user connected. I run the following command to try to delete `chaos-user` again:
-
 ```bash
 sudo userdel -r chaos-user
 ```
 
 This time it succeeds. I run the following command to verify there are no other suspicious OS users who can log in:
-
 ```bash
 sudo cat /etc/passwd | grep -v nologin
 ```
@@ -456,7 +446,6 @@ I move my cursor to the `PasswordAuthentication yes` line and comment it out by 
 </p>
 
 I run the following command to restart the SSH service so the changes take effect:
-
 ```bash
 sudo service sshd restart
 ```
