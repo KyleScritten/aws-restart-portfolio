@@ -44,7 +44,7 @@ I play the role of Sofîa, becoming a detective to discover the culprit.
 5. I observe the Café website: in **Instances**, I select the **Café Web Server** instance, click the **Details** tab, and copy the **Public IPv4 address** `35.88.131.167`. I open a new browser tab and navigate to `http://35.88.131.167/cafe/`.
 
 <p align="center">
-  <img src="images/initial-cafe-web-load.png" alt="Café website homepage appearing normal" width="900">
+  <img src="images/initial-cafe-web-load.png" alt="Café website homepage appearing normal" width="1000">
 </p>
 
 *I notice the website looks normal — for example, the photos are all appropriate for a bakery café.*
@@ -68,7 +68,7 @@ I choose **Create trail** and configure it as follows:
 I choose **Next**, leave the **Choose log events** page at its defaults and choose **Next** again. Then on the **Review and create** page, choose **Create trail**. 
 
 <p align="center">
-  <img src="images/ct-trail-config.png" alt="CloudTrail trail configuration" width="900">
+  <img src="images/ct-trail-config.png" alt="CloudTrail trail configuration" width="1000">
 </p>
 
 *I verify that my new trail appears on the **Trails** page.*
@@ -80,13 +80,13 @@ I return to the browser tab with the Café website open and refresh the page —
 I notice the website has been hacked — an incorrect image has appeared where it shouldn't be. It's now up to me to figure out who hacked the website, and it's fortunate I enabled CloudTrail just before this happened, since it can provide valuable information about what users have been doing in my account.
 
 <p align="center">
-  <img src="images/hacked-cafe-web.png" alt="Hacked Café website showing unexpected image" width="900">
+  <img src="images/hacked-cafe-web.png" alt="Hacked Café website showing unexpected image" width="1000">
 </p>
 
 I observe the `Café Web Server` instance details, checking for anything suspicious. In the **Security** tab, I choose the `sg-xxxxxxxxxx` security group again, then the **Inbound rules** tab, and notice an unexpected extra entry. While I still see the rule I created earlier — opening `port 22` to only my IP address — there's now an additional inbound rule allowing SSH access from anywhere (`0.0.0.0/0`).
 
 <p align="center">
-  <img src="images/sg-unauth-rule.png" alt="Security group showing unauthorized inbound rule for SSH access from anywhere" width="900">
+  <img src="images/sg-unauth-rule.png" alt="Security group showing unauthorized inbound rule for SSH access from anywhere" width="1000">
 </p>
 
 *Someone added this security hole, and I need to search the CloudTrail logs to find out who.*
@@ -300,7 +300,7 @@ From the AWS Management Console **Services** menu, I choose **CloudTrail**, then
 From the Event history page, I click **Create Athena table**, and for **Storage location**, choose the `monitoring0622` S3 bucket where I configured CloudTrail to store log files. After analyzing the CREATE TABLE details, I choose **Create table**. 
 
 <p align="center">
-  <img src="images/athena-create-table-config.png" alt="Athena CREATE TABLE configuration" width="900">
+  <img src="images/athena-create-table-config.png" alt="Athena CREATE TABLE configuration" width="1000">
 </p>
 
 *The table is created with a default name that includes the name of the S3 bucket.*
@@ -321,7 +321,7 @@ I run queries to extract key fields such as:
 #### Query 1
 
 <p align="center">
-  <img src="images/athena-simple-query.png" alt="Running a simple query on Log Data" width="900">
+  <img src="images/athena-simple-query.png" alt="Running a simple query on Log Data" width="1000">
 </p>
 
 *This query returns five rows of data.*
@@ -329,7 +329,7 @@ I run queries to extract key fields such as:
 #### Query 2
 
 <p align="center">
-  <img src="images/athena-specific-query.png" alt="Run a new query that selects only certain columns" width="900">
+  <img src="images/athena-specific-query.png" alt="Run a new query that selects only certain columns" width="1000">
 </p>
 
 *I am now able to find out who modified the security group associated with the `Café Web Server` instance.*
@@ -346,7 +346,7 @@ By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identi
 
 #### Hacker Query
 <p align="center">
-  <img src="images/ct-chaos-hacker.png" alt="Challenge: Chaos is the Hacker" width="900">
+  <img src="images/ct-chaos-hacker.png" alt="Challenge: Chaos is the Hacker" width="1000">
 </p>
 
 *This confirmed that the IAM user `chaos` was responsible for modifying the security group and introducing the security vulnerability.*
@@ -358,7 +358,7 @@ By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identi
 ### Task 5.2: Update SSH security
 
 <p align="center">
-  <img src="images/ssh-security-fix.png" alt="SSH Configuration Fix" width="900">
+  <img src="images/ssh-security-fix.png" alt="SSH Configuration Fix" width="1000">
 </p>
 
 
