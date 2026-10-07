@@ -485,7 +485,7 @@ sudo mv Coffee-and-Pastries.backup Coffee-and-Pastries.jpg
 To test the fix, I reload `http://35.88.131.167/cafe` in the browser, pressing and holding `Shift` while clicking refresh to force the latest version to load. 
 
 <p align="center">
-  <img src="images/initial-cafe-web-load.png" alt="Café website restored to its original state" width="900">
+  <img src="images/initial-cafe-web-load.png" alt="Café website restored to its original state" width="1000">
 </p>
 
 *The website now looks correct again.*
