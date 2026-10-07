@@ -353,30 +353,54 @@ By combining results from CloudTrail logs, AWS CLI, and Athena queries, I identi
 
 ## Task 5: Analyzing the hack further and improving security
 
+In this last task, I work to secure both my AWS account and the web server instance.
+
 ### Task 5.1: Check the OS users
 
-### Task 5.2: Update SSH security
+In the terminal where I have an active SSH session to the web server instance, I run the following command to find out who has recently logged into this operating system (OS):
+```bash
+sudo aureport --auth
+```
 
-<p align="center">
-  <img src="images/ssh-security-fix.png" alt="SSH Configuration Fix" width="1000">
-</p>
+There is evidence that a user other than `ec2-user` has logged in — `chaos-user`
 
+I run the `who` command to figure out who is currently logged in:
+```bash
+who
+```
 
-### Task 5.3: Fix the website
+The user is still logged in, so I need to remove them from this instance right away. I run the following command to try to remove the `chaos-user` OS user:
+```bash
+sudo userdel -r chaos-user
+```
 
+This doesn't work because they are still logged in, but it returns the process number they are connected as. I replace `ProcNum` with that process number and run the following command to stop the process with the active `chaos-user` login session:
 
-### Task 5.4: Delete the AWS hacker user
+```bash
+sudo kill -9 ProcNum
+```
 
-<p align="center">
-  <img src="images/iam-delete-chaos.png" alt="Delete the AWS hacker user” width="900">
-</p>
+I run the `who` command again to verify that the `chaos-user` OS user is no longer connected:
 
-*That chaos user shouldn't be causing any trouble in the AWS account anymore.*
+```bash
+who
+```
 
+Now I (the `ec2-user`) am the only user connected. I run the following command to try to delete `chaos-user` again:
 
+```bash
+sudo userdel -r chaos-user
+```
 
-# TASK 5 BASH
+This time it succeeds. I run the following command to verify there are no other suspicious OS users who can log in:
 
+```bash
+sudo cat /etc/passwd | grep -v nologin
+```
+
+The `grep` part of this command filters out the OS users who do not have a login. The `root`, `sync`, `shutdown`, and `halt` users are all standard OS users in Amazon Linux, so there are no other concerning user logins on this instance.
+
+#### Terminal output
 ```bash
 [ec2-user@web-server 06]$ sudo aureport --auth
 
@@ -409,16 +433,76 @@ sync:x:5:0:sync:/sbin:/bin/sync
 shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
 halt:x:7:0:halt:/sbin:/sbin/halt
 ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
-[ec2-user@web-server 06]$ 
+```
+
+### Task 5.2: Update SSH security
+
+I've removed the OS user who hacked into the instance, but I still need to figure out how they managed to connect to the EC2 instance using SSH in the first place — so I check the SSH settings on this instance.
+```bash
+sudo ls -l /etc/ssh/sshd_config
+```
+
+I notice the last modified timestamp for the file — it was modified today, which is concerning. I run the following command to edit the SSH configuration file in the VI editor:
+```bash
+sudo vi /etc/ssh/sshd_config
+```
+
+I analyze the details of this file, entering `:set number` to see the line numbers. On line 61, I notice that password authentication is enabled — this is definitely not a security best practice, since it means anyone who knows (or can correctly guess) the username and password combination of an OS user can remotely access this instance without using an SSH key pair. This setting needs to be corrected.
+
+I move my cursor to the `PasswordAuthentication yes` line and comment it out by entering `a` to enter edit mode in VI and adding a `#` character at the start of the line. I then move my cursor to the `#PasswordAuthentication no` line (line 63) and uncomment it by removing the `#` character. I press Esc to exit edit mode, then save the changes and exit the VI editor using the `:wq` command.
+
+<p align="center">
+  <img src="images/ssh-security-fix.png" alt="SSH Configuration Fix" width="1000">
+</p>
+
+I run the following command to restart the SSH service so the changes take effect:
+
+```bash
+sudo service sshd restart
+```
+
+Finally, in the EC2 console, I return to the Web Server security group settings, go to the **Inbound** tab with the security group selected, and choose **Edit**. I delete the inbound rule that allows port 22 access from `0.0.0.0/0` — the one the hacker created — and save the change.
+
+I have now kicked the hacker out of this instance and removed the login account they used. I've also updated the SSH settings so that only users with the correct key pair and the same source IP address as mine can connect to it.
+
+#### Terminal output
+```bash
 [ec2-user@web-server 06]$ sudo ls -l /etc/ssh/sshd_config
 -rw------- 1 root root 3957 Oct  6 03:04 /etc/ssh/sshd_config
 [ec2-user@web-server 06]$ 
 [ec2-user@web-server 06]$ sudo vi /etc/ssh/sshd_config
-[ec2-user@web-server 06]$ sudo vi /etc/ssh/sshd_config
 [ec2-user@web-server 06]$ 
 [ec2-user@web-server 06]$ sudo service sshd restart
 Redirecting to /bin/systemctl restart sshd.service
-[ec2-user@web-server 06]$ 
+[ec2-user@web-server 06]$
+```
+
+### Task 5.3: Fix the website
+
+Now that the hacker no longer has access to this instance, I can fix the issue with the website.
+
+I run the following command to navigate to the directory where the website image files are held and review the contents:
+```bash
+cd /var/www/html/cafe/images/
+
+ls -l
+```
+
+It looks like the hacker created a backup of the original file. I run the following command to restore the original graphic on the website:
+```bash
+sudo mv Coffee-and-Pastries.backup Coffee-and-Pastries.jpg
+```
+
+To test the fix, I reload `http://35.88.131.167/cafe` in the browser, pressing and holding `Shift` while clicking refresh to force the latest version to load. 
+
+<p align="center">
+  <img src="images/initial-cafe-web-load.png" alt="Café website restored to its original state" width="900">
+</p>
+
+*The website now looks correct again.*
+
+#### Terminal output
+```bash
 [ec2-user@web-server 06]$ cd /var/www/html/cafe/images/
 [ec2-user@web-server images]$ ls -l
 total 5732
@@ -439,10 +523,20 @@ total 5732
 -rwxrwxrwx 1 root root 290697 Apr  2  2019 Strawberry-Blueberry-Tarts.jpg
 -rwxrwxrwx 1 root root 479213 Apr  2  2019 Strawberry-Tarts.jpg
 [ec2-user@web-server images]$ 
-[ec2-user@web-server images]$ 
 [ec2-user@web-server images]$ sudo mv Coffee-and-Pastries.backup Coffee-and-Pastries.jpg
-[ec2-user@web-server images]$ 
 ```
+
+### Task 5.4: Delete the AWS hacker user
+
+The hacker not only accessed the EC2 instance hosting the website but also managed to run an AWS CLI command that opened port 22 in the security group to the entire internet. In this step, I remove the `chaos` AWS Identity and Access Management (IAM) user from the account.
+
+In the AWS Management Console, I choose **IAM**. Then select the **Users** link, select the check box next to the `chaos` user, choose **Delete**.
+
+<p align="center">
+  <img src="images/iam-delete-chaos.png" alt="Delete the AWS hacker user” width="900">
+</p>
+
+*That `chaos` user shouldn't be causing any trouble in the AWS account anymore.*
 
 ## Business case feedback
 
