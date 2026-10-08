@@ -291,7 +291,7 @@ nano change-resource-tags.sh
 ```
 
 <p align="center">
-  <img src="images/change-resource-tags-file.png" alt="change-resource-tags.sh Bash Terminal Screenshot" width="900">
+  <img src="images/change-resource-tags-file.png" alt="change-resource-tags.sh Bash Terminal Screenshot" width="1000">
 </p>
 
 I close the nano editor and run this command from the Linux command prompt:
