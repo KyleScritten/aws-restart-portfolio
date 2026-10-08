@@ -79,7 +79,30 @@ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-5-0-100 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].InstanceId'
+[
+    [
+        "i-05a85de6d9fb6285d"
+    ], 
+    [
+        "i-0ec3a9e433529c861"
+    ], 
+    [
+        "i-0615a40e7c96ad8ff"
+    ], 
+    [
+        "i-060219fe71f1a628f"
+    ], 
+    [
+        "i-0b0adc44474c18274"
+    ], 
+    [
+        "i-0183d43308bebd837"
+    ], 
+    [
+        "i-0278679e9a5745ca5"
+    ]
+]
 ```
 
 I run the following command to include both the instance ID and the Availability Zone of each instance in my return result:
@@ -94,7 +117,58 @@ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-5-0-100 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value}'
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-05a85de6d9fb6285d"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-0ec3a9e433529c861"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-0615a40e7c96ad8ff"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-060219fe71f1a628f"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-0b0adc44474c18274"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-0183d43308bebd837"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "AZ": "us-west-2a", 
+            "ID": "i-0278679e9a5745ca5"
+        }
+    ]
+]
 ```
 
 I run the following command to also include the Environment and Version tags in my output:
@@ -104,18 +178,106 @@ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-5-0-100 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "production", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-05a85de6d9fb6285d"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0ec3a9e433529c861"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "production", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0615a40e7c96ad8ff"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-060219fe71f1a628f"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0b0adc44474c18274"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0183d43308bebd837"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0278679e9a5745ca5"
+        }
+    ]
+]
+
 ```
 
-Finally, I add a second tag filter to see only the instances associated with the ERPSystem project that also belong to the `development` environment:
+Finally, I add a second tag filter to see only the instances associated with the `ERPSystem` project that also belong to the `development` environment:
 ```bash
 aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
 ```
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-5-0-100 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-060219fe71f1a628f"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0b0adc44474c18274"
+        }
+    ]
+]
 ```
+
+*I should see only two instances returned by this command, both with a Project tag value of `ERPSystem` and an Environment tag value of `development`.*
 
 ### Changing Version Tag for Development Process
 
@@ -144,10 +306,77 @@ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 
 
 #### Terminal output
 ```bash
-PLACEHOLDER
+[ec2-user@ip-10-5-0-100 ~]$ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 'Reservations[*].Instances[*].{ID:InstanceId, AZ:Placement.AvailabilityZone, Project:Tags[?Key==`Project`] |[0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+[
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "production", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-05a85de6d9fb6285d"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0ec3a9e433529c861"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "production", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0615a40e7c96ad8ff"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.1", 
+            "ID": "i-060219fe71f1a628f"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "development", 
+            "AZ": "us-west-2a", 
+            "Version": "1.1", 
+            "ID": "i-0b0adc44474c18274"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0183d43308bebd837"
+        }
+    ], 
+    [
+        {
+            "Project": "ERPSystem", 
+            "Environment": "staging", 
+            "AZ": "us-west-2a", 
+            "Version": "1.0", 
+            "ID": "i-0278679e9a5745ca5"
+        }
+    ]
+]
 ```
 
+## Task 2: Stop and Start Resources by Tag
 
+In this task, I will use a pre-provided script to stop and start a set of instances tagged as `development` instances.  
 
 
 
