@@ -71,7 +71,7 @@ After optimization monthly costs:
 Overall monthly cost savings      $
 ```
 
-By removing the decommissioned local database and downsizing the Café instance type, the project will save about $ per month in AWS service costs.
+*By removing the decommissioned local database and downsizing the Café instance type, the project will save about $ per month in AWS service costs.*
 
 ## Conclusion
 
