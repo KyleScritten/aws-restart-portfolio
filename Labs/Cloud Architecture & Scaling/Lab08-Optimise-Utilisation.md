@@ -8,6 +8,22 @@
 
 *This diagram illustrates the topology of the Café web application runtime environment before and after the optimization.*
 
+## Task 1: Optimize the website to reduce costs
+
+### Task 1.1: Connect to the Café instance by using SSH
+
+### Task 1.2: Connect to the CLI Host instance by using SSH
+
+### Task 1.3: Uninstall MariaDB and resize the instance
+
+
+
+<p align="center">
+  <img src="images/cafe-website-downsized.png" alt="Downsized CafeInstance website” width="900">
+</p>
+
+*Exercise the website's functions to verify that it works properly. I have successfully uninstalled the decommissioned local database and downsized the Café instance.*
+
 ## Task 2: Use the AWS Pricing Calculator to estimate AWS service costs
 
 ### Task 2.1: Calculate the costs before optimization
