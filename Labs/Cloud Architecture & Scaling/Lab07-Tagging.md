@@ -21,7 +21,7 @@ The private instances have three custom tags applied to them:
 In the Task portion of this lab, I log in to the Command Host and run commands to find and change the Version tag on all development instances. I run several examples that show how I can use the JMESPath syntax supported by the AWS CLI `--query` option to return richly formatted output. I then use a set of pre-provided scripts to stop and re-start all instances tagged as belonging to the development environment.
 
 <p align="center">
-  <img src="images/tagging-resources-diagram.png" alt="Resources with Tagging Architecture" width="900">
+  <img src="images/tagging-resources-diagram.png" alt="Resources with Tagging Architecture" width="1000">
 </p>
 
 ## Task 1: Using Tags to Manage Resources
@@ -391,7 +391,7 @@ nano stopinator.php
 ```
 
 <p align="center">
-  <img src="images/stopinator-file.png" alt="Examine stopinator file in Nano editor" width="900">
+  <img src="images/stopinator-file.png" alt="Examine stopinator file in Nano editor" width="1000">
 </p>
 
 *The `stopinator.php` script is a simple script that uses the AWS SDK for PHP to stop and restart instances based on a set of tags. This enables scenarios such as shutting off development environment servers at the end of the day and restarting them the next morning.*
@@ -422,7 +422,8 @@ try {
 }
 ```
 
-I wrap the per-Region `describeInstances` call (and the corresponding `start`/`stop` calls) in a `try/catch` block, so that a denied Region is skipped gracefully instead of halting the script.
+>[!Note]
+> I wrap the per-Region `describeInstances` call (and the corresponding `start`/`stop` calls) in a `try/catch` block, so that a denied Region is skipped gracefully instead of halting the script.
 
 I run the `stopinator.php` script again:
 ```bash
@@ -452,10 +453,10 @@ Stopping identified instances in Array...
 In the **EC2 Management Console**, I click **Instances** and verify that two instances are stopping or have already been stopped.
 
 <p align="center">
-  <img src="images/stopping-ERPProject.png" alt="Verify instances stopped" width="900">
+  <img src="images/stopping-ERPProject.png" alt="Verify instances stopped" width="1000">
 </p>
 
-I return to the SSH session for Command Host, and from the Linux prompt, restart my instances with the following command:
+I return to the SSH session for `Command Host`, and from the Linux prompt, restart my instances with the following command:
 
 ```bash
 ./stopinator.php -t"Project=ERPSystem;Environment=development" -s
@@ -464,7 +465,7 @@ I return to the SSH session for Command Host, and from the Linux prompt, restart
 I return to the **EC2 Management Console** window and verify that the two instances that were previously shut down are now restarting.
 
 <p align="center">
-  <img src="images/restarting-ERPProject.png" alt="Verify instances restarting" width="900">
+  <img src="images/restarting-ERPProject.png" alt="Verify instances restarting" width="1000">
 </p>
 
 #### Terminal output
@@ -501,7 +502,7 @@ nano terminate-instances.php
 ```
 
 <p align="center">
-  <img src="images/terminate-instances-file.png" alt="terminate-instances.php file Nano editor" width="900">
+  <img src="images/terminate-instances-file.png" alt="terminate-instances.php file Nano editor" width="1000">
 </p>
 
 ### Configuring Environment to Test Script
