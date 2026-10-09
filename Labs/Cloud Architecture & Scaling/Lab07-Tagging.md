@@ -372,15 +372,170 @@ aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem" --query 
         }
     ]
 ]
-```
+``` 
 
 ## Task 2: Stop and Start Resources by Tag
 
-In this task, I will use a pre-provided script to stop and start a set of instances tagged as `development` instances.  
+In this task, I use a pre-provided script to stop and start a set of instances tagged as `development` instances.
 
+### Examining the Stopinator Script
 
+On the Command Host instance, I `cd` into the `aws-tools` directory in the home directory:
+```bash
+cd aws-tools
+```
 
+I open the file `stopinator.php` and examine its contents:
+```bash
+nano stopinator.php
+```
 
+<p align="center">
+  <img src="images/stopinator-file.png" alt="Examine stopinator file in Nano editor" width="900">
+</p>
+
+*The `stopinator.php` script is a simple script that uses the AWS SDK for PHP to stop and restart instances based on a set of tags. This enables scenarios such as shutting off development environment servers at the end of the day and restarting them the next morning.*
+
+I exit the nano editor.
+
+### Stopping and Restarting ERPProject Development Process
+
+In this task, I use the `stopinator.php` script to bring down and bring back up my development environment for the ERPSystem project.
+
+From the Linux shell, I run the `stopinator.php` script; however, the script fails to run:
+```bash
+./stopinator.php -t"Project=ERPSystem;Environment=development"
+```
+
+> [!CAUTION]
+> Looking at the `foreach ($regions['Regions'] as $region)` loop, there's no `try/catch` around the `$ec2Current->describeInstances($ec2DescribeArgs)` call. The script calls `describeRegions()`, which returns all AWS Regions globally (including ones like `ap-south-1` that my lab's SCP blocks), and then tries `describeInstances()` in every single one of them with no error handling.
+>
+> The very first Region that hits the SCP deny (`ap-south-1`) throws an uncaught `Ec2Exception`, which crashes the whole script (`PHP Fatal error: Uncaught...`) before it ever reaches `us-west-2`, where my actual instances are.
+
+#### The Fix
+```php
+try {
+    $result = $ec2Current->describeInstances($ec2DescribeArgs);
+} catch (Aws\Ec2\Exception\Ec2Exception $e) {
+    echo "\tSkipping region (access denied or unavailable): " . $region['RegionName'] . "\n";
+    continue;
+}
+```
+
+I wrap the per-Region `describeInstances` call (and the corresponding `start`/`stop` calls) in a `try/catch` block, so that a denied Region is skipped gracefully instead of halting the script.
+
+I run the `stopinator.php` script again:
+```bash
+./stopinator.php -t"Project=ERPSystem;Environment=development"
+```
+
+#### Terminal output
+```bash
+[ec2-user@ip-10-5-0-100 ~]$ cd aws-tools
+[ec2-user@ip-10-5-0-100 aws-tools]$ 
+[ec2-user@ip-10-5-0-100 aws-tools]$ nano stopinator.php
+[ec2-user@ip-10-5-0-100 aws-tools]$ 
+[ec2-user@ip-10-5-0-100 aws-tools]$ ./stopinator.php -t"Project=ERPSystem;Environment=development"
+Region is ap-south-1
+Skipping region (access denied or unavailable): ap-south-1
+...
+Region is us-west-1
+Skipping region (access denied or unavailable): us-west-1
+Region is us-west-2
+Identified instance i-060219fe71f1a628f
+Identified instance i-0b0adc44474c18274
+PHP Notice:  Array to string conversion in /home/ec2-user/aws-tools/stopinator.php on line 120
+
+Stopping identified instances in Array...
+```
+
+In the **EC2 Management Console**, I click **Instances** and verify that two instances are stopping or have already been stopped.
+
+<p align="center">
+  <img src="images/stopping-ERPProject.png" alt="Verify instances stopped" width="900">
+</p>
+
+I return to the SSH session for Command Host, and from the Linux prompt, restart my instances with the following command:
+
+```bash
+./stopinator.php -t"Project=ERPSystem;Environment=development" -s
+```
+
+I return to the **EC2 Management Console** window and verify that the two instances that were previously shut down are now restarting.
+
+<p align="center">
+  <img src="images/restarting-ERPProject.png" alt="Verify instances restarting" width="900">
+</p>
+
+#### Terminal output
+```bash
+[ec2-user@ip-10-5-0-100 aws-tools]$ ./stopinator.php -t"Project=ERPSystem;Environment=development" -s
+Region is ap-south-1
+	Skipping region (access denied or unavailable): ap-south-1
+...
+Region is us-west-1
+	Skipping region (access denied or unavailable): us-west-1
+Region is us-west-2
+	Identified instance i-060219fe71f1a628f
+	Identified instance i-0b0adc44474c18274
+PHP Notice:  Array to string conversion in /home/ec2-user/aws-tools/stopinator.php on line 110
+
+	Starting identified instances in Array...
+```
+
+## Task 3: Challenge: Terminate Non-Compliant Instances
+
+In this challenge, I am asked to find a way to terminate instances that do not conform to certain security guidelines.
+
+### Challenge Description
+
+My company wants me to create automated processes that will automatically terminate instances that might allow a possible security breach. I have identified a list of security risks and am now deciding how to implement them efficiently using either AWS CLI commands or the PHP SDK for AWS.
+
+**My first security task is simple:** find all instances in my private subnet that do not implement the `Environment` tag, and terminate them (a **"tag-or-terminate"** policy).
+
+### Task 3.1: Review the Tag-Or-Terminate Script
+
+I open the file `terminate-instances.php` with the nano editor:
+```bash
+nano terminate-instances.php
+```
+
+<p align="center">
+  <img src="images/terminate-instances-file.png" alt="terminate-instances.php file Nano editor" width="900">
+</p>
+
+### Configuring Environment to Test Script
+
+Before running the script, I need to alter a couple of instances in my lab so that they no longer have the `Environment` tag defined.
+
+I return to the EC2 Management Console and observe the instances running in my lab environment. I select one of the instances in my private subnet, go to the **Tags** tab, and click **Add/Edit Tags**. I find the `Environment` tag and click the remove icon, then click **Save**. I repeat this process for one other instance in my private subnet.
+
+### Run the Script
+
+In the EC2 Management Console, I select one of the instances in my private subnet. On the **Description** tab, I copy the **Availability zone** field (referred to as `region`) and the **Subnet ID** field (referred to as `subnet-id`).
+
+I return to my SSH session and run the `terminate-instances.php` script, replacing `<region>` with my region and `<subnet-id>` with my subnet ID:
+
+```bash
+./terminate-instances.php -region <region> -subnetid <subnet-id>
+```
+
+**Terminal output:**
+```bash
+[ec2-user@ip-10-5-0-100 aws-tools]$ ./terminate-instances.php -region us-west-2 -subnetid subnet-08f56790704ed31ad
+
+Checking i-05a85de6d9fb6285d
+Checking i-0ec3a9e433529c861
+Checking i-0615a40e7c96ad8ff
+Checking i-060219fe71f1a628f
+Checking i-0b0adc44474c18274
+Checking i-0183d43308bebd837
+Checking i-0278679e9a5745ca5
+Terminating instances...
+Instances terminated.
+```
+
+I see results similar to the output above.
 
 ## Conclusion
 
