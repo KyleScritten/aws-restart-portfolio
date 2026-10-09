@@ -59,3 +59,40 @@ After completing this activity, I am able to:
 * I optimized an Amazon Elastic Compute Cloud (Amazon EC2) instance to reduce costs.
 * I used the AWS Pricing Calculator to estimate AWS service costs.
 
+
+## Bash Commands
+
+```bash
+# Stop the MariaDB service on the CafeInstance
+sudo systemctl stop mariadb
+
+# Remove the MariaDB server package from the CafeInstance
+sudo yum -y remove mariadb-server
+
+# Retrieve the AWS region from the instance metadata
+curl http://169.254.169.254/latest/dynamic/instance-identity/document | grep region
+
+# Configure AWS CLI with credentials, region, and output format
+aws configure
+
+# Describe EC2 instances filtered by the CafeInstance tag to get the instance ID
+aws ec2 describe-instances \
+--filters "Name=tag:Name,Values= CafeInstance" \
+--query "Reservations[*].Instances[*].InstanceId"
+
+# Stop the CafeInstance EC2 instance (replace <instance-id> with actual ID)
+aws ec2 stop-instances --instance-ids <instance-id>
+
+# Modify the instance type to t3.micro (replace <instance-id> with actual ID)
+aws ec2 modify-instance-attribute \
+--instance-id <instance-id> \
+--instance-type "{\"Value\": \"t3.micro\"}"
+
+# Start the CafeInstance EC2 instance (replace <instance-id> with actual ID)
+aws ec2 start-instances --instance-ids <instance-id>
+
+# Check instance details including type, DNS, IP, and status (replace <instance-id>)
+aws ec2 describe-instances \
+--instance-ids <instance-id> \
+--query "Reservations[*].Instances[*].[InstanceType,PublicDnsName,PublicIpAddress,State.Name]"
+```
