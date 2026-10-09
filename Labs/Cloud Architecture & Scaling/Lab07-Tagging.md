@@ -536,7 +536,7 @@ Terminating instances...
 Instances terminated.
 ```
 
-I see results similar to the output above.
+*I see results similar to the output above.*
 
 ## Conclusion
 
@@ -546,3 +546,264 @@ After completing this lab, I am able to:
 * Find resources based on tags
 * Use the AWS CLI or AWS SDK for PHP to stop and terminate Amazon EC2 instances based on certain attributes of the resource
 
+## Bash Commands
+```bash
+# Describe all EC2 instances with the tag Project=ERPSystem
+aws ec2 describe-instances --filter "Name=tag:Project,Values=ERPSystem"
+
+# Retrieve only the Instance IDs of EC2 instances tagged with Project=ERPSystem
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].InstanceId'
+
+# Retrieve Instance IDs along with their Availability Zones
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone}'
+
+# Retrieve Instance details including custom tags: Project, Environment, and Version
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+# Retrieve only development instances within the ERPSystem project
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+# Store Instance IDs of development instances in a variable for reuse
+ids=$(aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" "Name=tag:Environment,Values=development" \
+  --query 'Reservations[*].Instances[*].InstanceId' \
+  --output text)
+
+# Update (or create) the Version tag to 1.1 for selected instances
+aws ec2 create-tags --resources $ids --tags 'Key=Version,Value=1.1'
+
+# Verify that tags have been updated correctly
+aws ec2 describe-instances \
+  --filter "Name=tag:Project,Values=ERPSystem" \
+  --query 'Reservations[*].Instances[*].{ID:InstanceId,AZ:Placement.AvailabilityZone,Project:Tags[?Key==`Project`] | [0].Value,Environment:Tags[?Key==`Environment`] | [0].Value,Version:Tags[?Key==`Version`] | [0].Value}'
+
+# Stop all instances matching specific tags using the provided PHP script
+./stopinator.php -t"Project=ERPSystem;Environment=development"
+
+# Start previously stopped instances matching the same tags
+./stopinator.php -t"Project=ERPSystem;Environment=development" -s
+
+# Terminate non-compliant instances (missing required tags) in a given region and subnet
+./terminate-instances.php -region <region> -subnetid <subnet-id>
+
+# (Optional) Directly terminate instances by specifying their Instance IDs
+aws ec2 terminate-instances --instance-ids <instance-id-1> <instance-id-2>
+```
+
+## Stopping Instances PHP
+```GNU nano 2.9.8 stopping-instances.php
+#!/usr/bin/php
+<?php
+# A simple PHP script to start all Amazon EC2 instances and Amazon RDS
+# databases within all regions.
+#
+# USAGE: stopinator.php [-t stop-tags] [-nt exclude-tags]
+#
+# If no arguments are supplied, stopinator stops every Amazon EC2 and 
+# Amazon RDS instance running in an account. 
+#
+# -t stop-tag: The tags to inspect to determine if a resource should be 
+# shut down. Format must follow the same format used by the AWS CLI.
+#
+# -e exclude-id: The instance ID of an Amazon EC2 instance NOT to terminate. Useful
+# when running the stopinator from an Amazon EC2 instance. 
+#
+# -p profile-name: The name of the AWS configuration section to use for 
+# credentials. Configuration sections are defines in your .aws/credentials file. 
+# If not supplied, will use the default profile. 
+#
+# -s start: If present, starts instead of stops instances.
+# PREREQUISITES
+# This app assumes that you have defined an .aws/credentials file. 
+
+require 'vendor/autoload.php';
+use Aws\Ec2\Ec2Client;
+
+date_default_timezone_set('UTC');
+
+# Obtain the profile name.
+$profile = "default"; 
+$opts = getopt('p::t::e::s::');
+if (array_key_exists('p', $opts)) { $profile = $opts['p']; }
+
+$excludeID = "";
+if (array_key_exists('e', $opts)) {
+        $excludeID = $opts['e'];
+}
+
+$start = false;
+if (array_key_exists('s', $opts)) {
+        $start = true;
+}
+
+$ec2DescribeArgs = array();
+if (array_key_exists('t', $opts))
+{
+        $tagArray = array();
+        foreach (explode(";", $opts['t']) as $pair) { 
+                $nameVal = explode("=", $pair);
+                array_push($tagArray, array(
+                        'Name' => "tag:" . $nameVal[0], 
+                        'Values' => array($nameVal[1])
+                        ));
+        }
+
+        $ec2DescribeArgs['Filters'] = $tagArray; 
+}
+
+# Iterate through all available AWS regions.
+$ec2 = Ec2Client::factory(array(
+        'profile' =>$profile,
+        'region' => 'us-east-1'
+));
+
+$regions = $ec2->describeRegions();
+foreach ($regions['Regions'] as $region) {
+        $instanceIds = array();
+
+        # Find resources in each region. 
+        echo 'Region is ' . $region['RegionName'] . "\n"; 
+        $ec2Current = Ec2Client::factory(array( 
+                'profile' => $profile, 
+                'region' => $region['RegionName']
+        ));
+	$result = $ec2Current->describeInstances($ec2DescribeArgs);
+        foreach ($result['Reservations'] as $reservation) {
+                foreach ($reservation['Instances'] as $instance) {
+                        # Check that this is not an excluded instance.  
+                        if (strlen($excludeID) > 0 && $excludeID == $instance['InstanceId']) {
+                                echo "\tExcluding instance " . $instance['InstanceId'] . "\n";
+                        } else { 
+                                # Is it a running instance?
+                                if ($start) {
+                                        if ($instance['State']['Code'] == 80) {
+                                                array_push($instanceIds, $instance['InstanceId']);
+                                                echo "\tIdentified instance " . $instance['InstanceId'] . "\n"; 
+                                        } else {
+                                                echo "\tInstance " . $instance['InstanceId'] . " - not stopped\n";  
+                                        }
+                                } else {
+                                        if ($instance['State']['Code'] == 16) {
+                                                array_push($instanceIds, $instance['InstanceId']); 
+                                                echo "\tIdentified instance " . $instance['InstanceId'] . "\n"; 
+                                        } else {
+                                                echo "\tInstance " . $instance['InstanceId'] . " - already stopped\n"; 
+                                        }
+                                }
+                        }
+                }
+        } 
+
+	if ($start) {
+                if (count($instanceIds) > 0) { 
+                        echo "\n\tStarting identified instances in " . $region . "...\n"; 
+                        $ec2Current->startInstances(array(
+                                "InstanceIds" => $instanceIds
+                        ));
+                } else {
+                        echo "\n\tNo instances to start in " . $region . "\n";  
+                } 
+        } else { 
+                # Stop all identified instances. 
+                if (count($instanceIds) > 0) {
+                        echo "\n\tStopping identified instances in " . $region . "...\n";
+                        $ec2Current->stopInstances(array(
+                                "InstanceIds" => $instanceIds
+                        ));
+                } else {
+                        echo "\n\tNo instances to stop in " . $region . ".\n"; 
+                }
+        } 
+}
+?>
+```
+
+## Terminate Instances PHP
+```GNU nano 2.9.8 terminate-instances.php
+#!/usr/bin/php
+
+<?php
+require 'vendor/autoload.php';
+use Aws\Ec2\Ec2Client;
+
+$region = "us-west-2";
+$subnetid = "";
+$profile = "default"; # Only needed if not using IAM roles
+
+# Necessary to quell a PHP error.
+date_default_timezone_set('America/Los_Angeles');
+
+array_shift($argv);
+if (count($argv>0)) {
+        do {
+            	$elem = array_shift($argv);
+                if ($elem == "-region") {
+                        $region = array_shift($argv);
+                } elseif ($elem == "-subnetid") {
+                        $subnetid = array_shift($argv);
+                }
+        } while (count($argv) > 0);
+}
+
+# Iterate through all available AWS regions.
+$ec2 = Ec2Client::factory(array(
+        'profile' =>$profile,
+        'region' => $region
+));
+
+# Obtain a list of all instances with the Environment tag set.
+$goodInstances = array();
+$terminateInstances = array();
+
+$tagArgs = array();
+array_push($tagArgs,  array(
+        'Name' => 'tag-key',
+        'Values' => array('Environment')
+));
+$ec2DescribeArgs['Filters'] = $tagArgs;
+
+$result = $ec2->describeInstances($ec2DescribeArgs);
+foreach ($result['Reservations'] as $reservation) {
+        foreach ($reservation['Instances'] as $instance) {
+                $goodInstances[$instance['InstanceId']] = 1;
+        }
+}
+# Obtain a list of all instances.
+$subnetArgs = array();
+array_push($subnetArgs, array(
+        'Name' => 'subnet-id',
+        'Values' => array($subnetid)
+));
+$ec2DescribeArgs['Filters'] = $subnetArgs;
+
+$result = $ec2->describeInstances($ec2DescribeArgs);
+foreach ($result['Reservations'] as $reservation) {
+        foreach ($reservation['Instances'] as $instance) {
+                echo "Checking " . $instance['InstanceId'] . "\n";
+                if (!array_key_exists($instance['InstanceId'], $goodInstances)) {
+                        $terminateInstances[$instance['InstanceId']] = 1;
+                }
+        }
+}
+
+# Terminate all identified instances.
+if (count($terminateInstances) > 0) {
+        echo "Terminating instances...\n";
+        $ec2->terminateInstances(array(
+                "InstanceIds" => array_keys($terminateInstances),
+                "Force" => true
+        ));
+	echo "Instances terminated.\n";
+} else {
+        echo "No instances to terminate.\n";
+}
+?>
+```
