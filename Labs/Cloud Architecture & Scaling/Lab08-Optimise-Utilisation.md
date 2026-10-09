@@ -29,12 +29,22 @@
 ### Task 2.1: Calculate the costs before optimization
 
 
+
+<p align="center">
+  <img src="images/calculator-before.png" alt=" AWS Calculator before optimization” width="900">
+</p>
+
 ```
 AWS Services Before Optimization Estimated Monthly Cost: $
 ```
 
 ### Task 2.2: Calculate the costs after optimization
 
+
+
+<p align="center">
+  <img src="images/calculator-after.png" alt="AWS Calculator after optimization” width="900">
+</p>
 
 ```
 AWS Services After Optimization Estimated Monthly Cost: $
