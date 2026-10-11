@@ -239,14 +239,14 @@ I use the following service list and configuration to describe the topology comp
 * **Region:** The Region where the Café instance EC2 instance is running
 * **Amazon EC2 instance:**
    * Instance type: `t3.small`
-   * Instance class: On-Demand
-   * Utilization: 100% per month
-   * Operating system: Linux
-   * Amazon EBS volume: General Purpose SSD (gp2), 40 GB (including 20 GB occupied by the local database)
+   * Instance class: `On-Demand`
+   * Utilization: `100% per month`
+   * Operating system: `Linux`
+   * Amazon EBS volume: `General Purpose SSD (gp2)`, `40` GB (including 20 GB occupied by the local database)
 * **Amazon RDS instance:**
    * Instance class: `db.t3.micro`
-   * Engine: MariaDB
-   * Allocated storage: 20 GB
+   * Engine: `MariaDB`
+   * Allocated storage: `20` GB
 
 <p align="center">
   <img src="images/calculator-before.png" alt=" AWS Calculator before optimization” width="900">
@@ -262,7 +262,7 @@ Next, I calculate the costs of running the website after the Café instance was 
 
 * **Amazon EC2 instance:**
    * Instance type: `t3.micro` (reduced size)
-   * Amazon Elastic Block Store (Amazon EBS): `General Purpose SSD (gp2), 20 GB` (reduced from 40 GB because the local database was removed)
+   * Amazon Elastic Block Store (Amazon EBS): `General Purpose SSD (gp2)`, `20` GB (reduced from 40 GB because the local database was removed)
 * **Amazon RDS instance:**
    * No changes are made.
 
