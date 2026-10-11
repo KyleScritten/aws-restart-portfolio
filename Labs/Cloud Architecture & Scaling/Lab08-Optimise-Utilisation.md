@@ -253,19 +253,25 @@ I use the following service list and configuration to describe the topology comp
 </p>
 
 ```
-AWS Services Before Optimization Estimated Monthly Cost: $
+AWS Services Before Optimization Estimated Monthly Cost: $ 74.04
 ```
 
 ### Task 2.2: Calculate the costs after optimization
 
+Next, I calculate the costs of running the website after the Café instance was optimized. I modify the following entries in the calculator to reflect the effects of the optimization:
 
+* **Amazon EC2 instance:**
+   * Instance type: `t3.micro` (reduced size)
+   * Amazon Elastic Block Store (Amazon EBS): `General Purpose SSD (gp2), 20 GB` (reduced from 40 GB because the local database was removed)
+* **Amazon RDS instance:**
+   * No changes are made.
 
 <p align="center">
   <img src="images/calculator-after.png" alt="AWS Calculator after optimization” width="900">
 </p>
 
 ```
-AWS Services After Optimization Estimated Monthly Cost: $
+AWS Services After Optimization Estimated Monthly Cost: $ 64.45
 ```
 
 ### Task 2.3: Estimate the projected cost savings for Café
@@ -274,22 +280,32 @@ I calculated the costs of the AWS services that were needed to run the Café web
 
 ```
 Before optimization monthly costs:
-    - Amazon EC2 service         $ 
-    - Amazon RDS service         $
+    - Amazon EC2 service         $ 19.18
+    - Amazon RDS service         $ 54.86
                                 --------
-    Total                        $
+    Total                        $ 74.04
 
 After optimization monthly costs:
-    - Amazon EC2 service         $  
-    - Amazon RDS service         $
+    - Amazon EC2 service         $ 9.59
+    - Amazon RDS service         $ 54.86
                                 --------
-    Total                        $
+    Total                        $ 64.45
 
 
-Overall monthly cost savings      $
+Overall monthly cost savings      $ 9.59
 ```
 
-*By removing the decommissioned local database and downsizing the Café instance type, the project will save about $ per month in AWS service costs.*
+*By removing the decommissioned local database and downsizing the Café instance type, the project will save about $9.59 per month in AWS service costs.*
+
+## Business case feedback
+
+### Update from Café
+
+<p align="center">
+  <img src="images/cafe-logo.png" alt="Cafe Logo” width="900">
+</p>
+
+Martha and Frank are very happy that Sofîa's initiative resulted in cost savings for the business. The amount of savings might be small, but it still helps the business!
 
 ## Conclusion
 
