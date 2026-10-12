@@ -12,7 +12,7 @@ The Python files for this lab are:
 
 These programs calculate the molecular weight of insulin using data stored in a JSON file.
 
-### How it works
+### How the Program works
 
 - Reads insulin data (A chain, B chain, amino acid weights, and actual molecular weight) from `insulin.json`
 - Combines the A and B chains to form the full insulin sequence
