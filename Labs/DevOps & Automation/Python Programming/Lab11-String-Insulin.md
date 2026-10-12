@@ -9,7 +9,7 @@ I apply what I have learned to the real-world application of human insulin. I st
 The full script for this lab is available here: [string-insulin.py](./python-scripts/string-insulin.py)
 
 <p align="center">
-  <img src="images/py-11-string-insulin.png" alt="String Sequence and Numeric Weight of Insulin" width="900">
+  <img src="images/py-11-string-insulin.png" alt="String Sequence and Numeric Weight of Insulin" width="1000">
 </p>
 
 ## Conclusion
