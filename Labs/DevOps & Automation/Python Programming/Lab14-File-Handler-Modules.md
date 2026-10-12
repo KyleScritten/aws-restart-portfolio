@@ -21,7 +21,7 @@ These programs calculate the molecular weight of insulin using data stored in a 
 - Compares the result with the actual value and computes the percent error
 
 <p align="center">
-  <img src="images/PY14-FileHandler-insulin.png" alt="File Handlers and Modules for Retrieving Information about Insulin" width="900">
+  <img src="images/py-14-file-handler-insulin.png" alt="File Handlers and Modules for Retrieving Information about Insulin" width="1000">
 </p>
 
 ## Conclusion
