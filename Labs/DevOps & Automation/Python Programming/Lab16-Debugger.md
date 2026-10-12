@@ -6,6 +6,8 @@ A *software bug* is an error, flaw, or failure in a computer program that causes
 
 ## Solution
 
+The VS Code IDE provides an interactive source code debugger for several programming languages, including Python. In this exercise, I learned some of the basic commands for debugging a Python file.
+
 The full script for this lab is available here: [debugger.py](./python-scripts/debugger.py)
 
 <p align="center">
