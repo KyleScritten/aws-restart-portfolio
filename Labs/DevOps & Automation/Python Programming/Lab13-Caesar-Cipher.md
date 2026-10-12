@@ -30,7 +30,7 @@ The Caesar cipher is a substitution cipher where each letter in a message is shi
 - The same key is used for both operations
 
 <p align="center">
-  <img src="images/py-13-Caesar-Cipher.png" alt="Caesar Cipher" width="1000">
+  <img src="images/py-13-caesar-cipher.png" alt="Caesar Cipher" width="1000">
 </p>
 
 ## Conclusion
