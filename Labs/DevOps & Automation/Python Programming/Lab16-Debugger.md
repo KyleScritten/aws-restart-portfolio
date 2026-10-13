@@ -2,7 +2,9 @@
 
 ## Lab overview
 
-A *software bug* is an error, flaw, or failure in a computer program that causes an incorrect or unexpected result. A *debugger* is a computer program that I can use to test and find bugs (debug) in other programs. I can use a debugger to step through my code and examine how it executes. The Python Debugger (pdb) is an interactive source code debugger for Python programs. In this lab, I used `pdb` to step through the scripts I wrote in previous labs.
+A *software bug* is an error, flaw, or failure in a computer program that causes an incorrect or unexpected result. A *debugger* is a computer program that I can use to test and find bugs (debug) in other programs. I can use a debugger to step through my code and examine how it executes. The Python Debugger (pdb) is an interactive source code debugger for Python programs. 
+
+In this lab, I used `pdb` to step through the scripts I wrote in previous labs.
 
 ## Solution
 
