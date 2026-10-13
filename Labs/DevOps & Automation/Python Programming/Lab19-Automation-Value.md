@@ -24,6 +24,8 @@ Even though build automation is useful, it can be difficult to implement correct
 
 ## Topic 2: Test Automation
 
+Test automation uses logic tests to ensure software runs the way I intended after changes are made. I use the internet to research answers to the following questions:
+
 ### 4. What are some test automation tools?
 
 There are many tools used for automating software testing. Some of the most popular include Selenium, JUnit, TestNG, Postman, and Cypress.
@@ -38,6 +40,8 @@ Despite its benefits, test automation can be challenging to set up and maintain.
 
 
 ## Topic 3: Deployment Automation
+
+Deployment automation is a way to get my code to a usable format, either for testing or for use. I use the internet to research answers to the following questions:
 
 ### 7. What are some deployment automation tools?
 
