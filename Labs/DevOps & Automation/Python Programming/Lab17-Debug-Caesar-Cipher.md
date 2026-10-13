@@ -59,7 +59,7 @@ However, no explanation of the issue is provided. To investigate the bug, I exec
 
 ## Caesar Cipher Program Bug #3
 
-The Caesar Cipher Program [debug-caesar-3.py](./python-scripts/debug-caesar-3.py) returns an incorrect decrypted message, indicating a bug in the decryption function.
+The buggy Caesar Cipher Program [debug-caesar-3.py](./python-scripts/debug-caesar-3.py) returns an incorrect decrypted message, indicating a bug in the decryption function.
 ```bash
 Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Alphabet2: ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -81,7 +81,7 @@ def decryptMessage(message, cipherKey, alphabet):
 
 ## Caesar Cipher Program Bug #4
 
-The Caesar Cipher Program [debug-caesar-4.py](./python-scripts/debug-caesar-4.py) produces a decrypted output that is the same as the encrypted message, indicating a bug in the decryption logic.
+The buggy Caesar Cipher Program [debug-caesar-4.py](./python-scripts/debug-caesar-4.py) produces a decrypted output that is the same as the encrypted message, indicating a bug in the decryption logic.
 ```bash
 Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
 Alphabet2: ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
