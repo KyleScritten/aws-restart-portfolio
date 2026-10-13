@@ -32,7 +32,7 @@ There are many tools used for automating software testing. Some of the most popu
 
 Test automation improves the overall quality and reliability of software by allowing tests to run quickly and repeatedly. It helps teams identify bugs early, reduces manual testing effort, and makes it easier to reuse test cases. Over time, it also increases test coverage, which gives developers more confidence when making changes.
 
-### What are the challenges and problems with implementing test automaton?
+### What are the challenges and problems with implementing test automation?
 
 Despite its benefits, test automation can be challenging to set up and maintain. Creating the initial test framework requires time and skill, and test scripts often need updates when the application changes. Some automated tests can become unreliable or flaky, and not all types of testing are suitable for automation, especially those involving user experience.
 
@@ -56,8 +56,8 @@ Deployment automation can be complex because it often involves many systems work
 
 ### What is the value of automation?
 
-Automation in DevOps is extremely valuable because it improves speed, consistency, and reliability in software delivery. It reduces repetitive manual tasks, lowers the risk of human error, and allows development teams to focus on more creative and important work. In general, it helps organizations deliver software faster and with higher quality.
+Automation in DevOps is extremely valuable because it improves speed, consistency, and reliability in software delivery. Across the three areas I researched, this value shows up in different ways — build automation speeds up compilation and catches errors early, test automation improves software quality by enabling fast and repeatable testing, and deployment automation makes releases safer and more consistent while reducing downtime. Together, these reduce repetitive manual tasks, lower the risk of human error, and allow development teams to focus on more creative and important work. In general, automation helps organizations deliver software faster and with higher quality.
 
 ### Why should you not automate every process in DevOps?
 
-Even though automation is powerful, it should not be applied everywhere. Some tasks still require human judgment, especially when making important decisions like approving releases or handling unexpected system behavior. Automation also takes time and effort to build and maintain, so it is not always worth it for small or frequently changing processes. In some cases, keeping human control ensures more flexibility and reduces the risk of automated failures spreading quickly.
+Even though automation is powerful, it should not be applied everywhere. Some tasks still require human judgment, especially when making important decisions like approving releases or handling unexpected system behavior. As I found in my research, automation also takes time and effort to build and maintain — build systems require ongoing upkeep, test scripts need updates as applications change, and deployment tools demand careful configuration and security management due to their high level of access. So it is not always worth automating small or frequently changing processes. In some cases, keeping human control ensures more flexibility and reduces the risk of automated failures spreading quickly.
