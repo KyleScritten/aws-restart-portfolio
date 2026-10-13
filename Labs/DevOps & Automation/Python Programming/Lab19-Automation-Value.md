@@ -2,7 +2,7 @@
 
 ## Lab overview
 
-Automation is the technology by which a process or procedure is performed with minimal human assistance. In software, automation technology is used to control and monitor the production and delivery of various goods and services. In this lab, I participate in a group to research a topic on automation and present the results to the class.
+Automation is the technology by which a process or procedure is performed with minimal human assistance. In software, automation technology is used to control and monitor the production and delivery of various goods and services. In this lab, I research a topic on automation independently and present my findings.
 
 
 ## Topic 1: Build Automation
