@@ -61,7 +61,7 @@ This directory documents the practical exercises I completed during my AWS re/St
 | [Databases & Data Services](./Labs/Databases%20&%20Data%20Services/) | Introduces AWS database services, relational and non-relational databases, and data management concepts. |
 | [DevOps & Automation](./Labs/DevOps%20&%20Automation/) | Explores development tools, automation, scripting, and practices that support efficient software delivery and infrastructure management. |
 | [Linux & Systems](./Labs/Linux%20&%20Systems/) | Covers Linux commands, file management, system administration, Python programming, and process management. |
-| [Machine Learning and Generative AI](./Labs/Machine%20Learning%20and%20Generative%20AI/) | Introduces artificial intelligence, machine learning concepts, and AWS AI services. |
+| [Machine Learning and Generative AI](./Labs/Machine%20Learning%20And%20Generative%20AI/) | Introduces artificial intelligence, machine learning concepts, and AWS AI services. |
 | [Monitoring](./Labs/Monitoring/) | Explores monitoring, logging, troubleshooting, and visibility into AWS resources and workloads. |
 | [Networking](./Labs/Networking/) | Covers Amazon VPC, subnets, route tables, gateways, network security, and connectivity concepts. |
 | [Security](./Labs/Security/) | Explores AWS security principles, identity and access management, the Shared Responsibility Model, and security best practices. |
