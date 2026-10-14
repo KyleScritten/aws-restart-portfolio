@@ -64,4 +64,6 @@ PLACEHOLDER_TABLE
 
 ## Summary
 
+This repository documents my learning journey through the AWS re/Start programme, covering cloud computing fundamentals, AWS services, and hands-on cloud infrastructure exercises. It showcases my developing technical skills in cloud infrastructure management, Linux system administration, networking, security, Python programming, and automation. Through practical labs and technical documentation, I have applied cloud computing concepts, explored AWS services, and built a foundation for further development in cloud engineering and related technical fields.
+
 ---
