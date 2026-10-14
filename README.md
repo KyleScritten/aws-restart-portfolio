@@ -53,6 +53,9 @@ Certifications and digital badges earned through my AWS re/Start journey and ind
 | AWS Cloud Foundations badge | AWS Training | Month YYYY | [View badge](https://...) |
 | Machine Learning and Generative AI learning badge | AWS Skill Builder | Month YYYY | [View badge](https://...) |
 
+<!-- | AWS Certified Cloud Practitioner | AWS | Month YYYY | [View on Credly](https://www.credly.com/...) | -->
+<!-- | AWS Certified Machine Learning & AI | AWS | Month YYYY | [View on Credly](https://www.credly.com/...) | -->
+
 **In progress:** AWS Certified Cloud Practitioner (exam preparation underway)
 
 ---
@@ -89,7 +92,14 @@ This directory documents the practical exercises I completed during my AWS re/St
 
 ---
 
-## Projects
+## 🚀 Projects
+
+End-to-end projects where I applied AWS services to build and deploy working solutions.
+
+| Project | Overview | AWS Services | Links |
+|---|---|---|---|
+| [3D E-commerce](./Projects/3D-ecommerce/) | One or two sentences on what it does and the problem it solves. | e.g. EC2, S3, RDS, VPC | [Repo folder](./Projects/3D-ecommerce/) |
+| [S3 Website](./Projects/S3-Website/) | One or two sentences on what it hosts and how it's deployed. | e.g. S3, CloudFront, Route 53 | [Live site](https://...) |
 
 ---
 
@@ -126,11 +136,11 @@ This repository documents my learning journey through the AWS re/Start programme
 
 ---
 
-## Repository Structure
+## 🗂️ Repository Structure
 
 The repository was organized into the following learning areas:
 
-```
+```text
 aws-restart-portfolio/
 │
 ├── Certifications & Badges/
@@ -146,7 +156,7 @@ aws-restart-portfolio/
 |   |   ├── System Operations
 |   |   └── Tooling & Automation  
 │   ├── Linux & Systems/
-│   ├── Machine Learning and Generative AI/
+│   ├── Machine Learning And Generative AI/
 |   |   └── Portfolio
 │   ├── Monitoring/
 │   ├── Networking/
