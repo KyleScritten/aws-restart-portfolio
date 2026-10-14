@@ -54,19 +54,19 @@ PLACEHOLDER_TABLE
 
 This directory documents the practical exercises I completed during my AWS re/Start learning journey, Hands-on labs formed the core of the learning experience.
 
-| Category | File Path |
+| Category | Overview |
 |---|---|
-| Cloud Architecture & Scaling | [Follow this link](./Labs/Cloud%20Architecture%20&%20Scaling/) |
-| Compute Infrastructure | [Follow this link](./Labs/Compute%20Infrastructure/) |
-| Databases & Data Services | [Follow this link](./Labs/Databases%20&%20Data%20Services/) |
-| DevOps & Automation | [Follow this link](./Labs/DevOps%20&%20Automation/) |
-| Linux & Systems | [Follow this link](./Labs/Linux%20&%20Systems/) |
-| Machine Learning and Generative AI | [Follow this link](./Labs/Machine%20Learning%20and%20Generative%20AI/) |
-| Monitoring | [Follow this link](./Labs/Monitoring/) |
-| Networking | [Follow this link](./Labs/Networking/) |
-| Security | [Follow this link](./Labs/Security/) |
-| Serverless & Containers | [Follow this link](./Labs/Serverless%20&%20Containers/) |
-| Storage & Archiving | [Follow this link](./Labs/Storage%20&%20Archiving/) |
+| [Cloud Architecture & Scaling](./Labs/Cloud%20Architecture%20&%20Scaling/) | Covers cloud architecture principles, scalability, high availability, fault tolerance, and resilient AWS workloads. |
+| [Compute Infrastructure](./Labs/Compute%20Infrastructure/) | Explores Amazon EC2, instance configuration, instance types, storage, and compute resource management. |
+| [Databases & Data Services](./Labs/Databases%20&%20Data%20Services/) | Introduces AWS database services, relational and non-relational databases, and data management concepts. |
+| [DevOps & Automation](./Labs/DevOps%20&%20Automation/) | Explores development tools, automation, scripting, and practices that support efficient software delivery and infrastructure management. |
+| [Linux & Systems](./Labs/Linux%20&%20Systems/) | Covers Linux commands, file management, system administration, Python programming, and process management. |
+| [Machine Learning and Generative AI](./Labs/Machine%20Learning%20and%20Generative%20AI/) | Introduces artificial intelligence, machine learning concepts, and AWS AI services. |
+| [Monitoring](./Labs/Monitoring/) | Explores monitoring, logging, troubleshooting, and visibility into AWS resources and workloads. |
+| [Networking](./Labs/Networking/) | Covers Amazon VPC, subnets, route tables, gateways, network security, and connectivity concepts. |
+| [Security](./Labs/Security/) | Explores AWS security principles, identity and access management, the Shared Responsibility Model, and security best practices. |
+| [Serverless & Containers](./Labs/Serverless%20&%20Containers/) | Introduces serverless computing, containerisation, and related AWS services and deployment concepts. |
+| [Storage & Archiving](./Labs/Storage%20&%20Archiving/) | Covers AWS storage services, storage types, lifecycle management, backup, and data archiving. |
 
 ---
 
