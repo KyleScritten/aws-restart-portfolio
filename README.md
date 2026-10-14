@@ -54,7 +54,7 @@ PLACEHOLDER_TABLE
 
 This directory documents the practical exercises I completed during my AWS re/Start learning journey, Hands-on labs formed the core of the learning experience.
 
-| Folder Category | Overview |
+| Folder Directory | Overview |
 |---|---|
 | [Cloud Architecture & Scaling](./Labs/Cloud%20Architecture%20&%20Scaling/) | Covers cloud architecture principles, scalability, high availability, fault tolerance, and resilient AWS workloads. |
 | [Compute Infrastructure](./Labs/Compute%20Infrastructure/) | Explores Amazon EC2, instance configuration, instance types, storage, and compute resource management. |
