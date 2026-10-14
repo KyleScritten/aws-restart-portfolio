@@ -54,7 +54,7 @@ PLACEHOLDER_TABLE
 
 This directory documents the practical exercises I completed during my AWS re/Start learning journey, Hands-on labs formed the core of the learning experience.
 
-| Category | File |
+| Category | File Path |
 |---|---|
 | Cloud Architecture & Scaling | [Follow this link](./Labs/Cloud%20Architecture%20&%20Scaling/) |
 | Compute Infrastructure | [Follow this link](./Labs/Compute%20Infrastructure/) |
