@@ -76,8 +76,7 @@ This directory documents the practical exercises I completed during my AWS re/St
 
 ## ☁️ AWS Services & Technologies
 
-> [!NOTE]
-> This list reflects AWS services and technologies covered during my Cloud Practitioner studies and AWS re/Start learning journey. My individual lab repositories document specific hands-on exercises and practical experience.
+The AWS services, tools, and technologies that make up my cloud skill set, grouped by category.
 
 | Category | Services & Technologies |
 |---|---|
@@ -96,6 +95,9 @@ This directory documents the practical exercises I completed during my AWS re/St
 | **Developer Tools** | AWS CLI, AWS CodeBuild, AWS CodePipeline, AWS X-Ray, Git, GitHub, Visual Studio Code |
 | **Programming & Automation** | Python, Bash, APIs, Infrastructure as Code (IaC) |
 | **Operating Systems** | Linux |
+
+> [!NOTE]
+> This list reflects AWS services and technologies covered during my Cloud Practitioner studies and AWS re/Start learning journey. My individual lab repositories document specific hands-on exercises and practical experience.
 
 ---
 
