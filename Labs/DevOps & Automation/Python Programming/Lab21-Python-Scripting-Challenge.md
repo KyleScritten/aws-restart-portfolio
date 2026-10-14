@@ -133,6 +133,11 @@ First I check that the number of rows of the file is equal to the total number o
 
 Then, I open the file and manually check the results:
 ```bash
+cat results.txt
+```
+
+#### Terminal output
+```bash
 [ec2-user@ip-10-1-11-229 python]$ cat results.txt
 2
 3
