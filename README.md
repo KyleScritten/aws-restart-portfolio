@@ -57,7 +57,7 @@ This directory documents the practical exercises I completed during my AWS re/St
 | Folder Directory | Overview |
 |---|---|
 | [Cloud Architecture & Scaling](./Labs/Cloud%20Architecture%20&%20Scaling/) | Covers cloud architecture principles, scalability, high availability, fault tolerance, and resilient AWS workloads. |
-| [Compute Infrastructure](./Labs/Compute%20Infrastructure/) | Explores Amazon EC2, instance configuration, instance types, storage, and compute resource management. |
+| [Compute Infrastructure](./Labs/Compute%20Infrastructure%20/) | Explores Amazon EC2, instance configuration, instance types, storage, and compute resource management. |
 | [Databases & Data Services](./Labs/Databases%20&%20Data%20Services/) | Introduces AWS database services, relational and non-relational databases, and data management concepts. |
 | [DevOps & Automation](./Labs/DevOps%20&%20Automation/) | Explores development tools, automation, scripting, and practices that support efficient software delivery and infrastructure management. |
 | [Linux & Systems](./Labs/Linux%20&%20Systems/) | Covers Linux commands, file management, system administration, Python programming, and process management. |
