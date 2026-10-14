@@ -155,7 +155,8 @@ The repository was organized into the following learning areas:
 aws-restart-portfolio/
 │
 ├── Certifications & Badges/
-│   ├── images/
+│   ├── Badges/
+│   ├── SimuLearn/
 │   └── readme.md
 │
 ├── Labs/
