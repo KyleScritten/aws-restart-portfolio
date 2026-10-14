@@ -42,8 +42,8 @@ I research the topic of automation and orchestration, looking out for the follow
 
 ## Compare and Contrast
 
-Automation handles individual, repetitive tasks efficiently, while orchestration coordinates those automated tasks into larger, more complex workflows. This distinction became clear while classifying keywords such as Python Script, unit test, and thread creation as automation, since each represents a single, specific task, whereas terms like Terraform, provisioning, and workflow fell under orchestration, since they involve coordinating multiple resources or steps together.
+**_Automation_** handles individual, repetitive tasks efficiently, while orchestration coordinates those automated tasks into larger, more complex workflows. This distinction became clear while classifying keywords such as Python Script, unit test, and thread creation as automation, since each represents a single, specific task, whereas terms like Terraform, provisioning, and workflow fell under orchestration, since they involve coordinating multiple resources or steps together.
 
-At the same time, several keywords — including management, code, version control, and increase reliability — applied to both categories, reinforcing that automation and orchestration are not separate disciplines but complementary layers of the same process. Automation provides the building blocks, while orchestration arranges those blocks into reliable, repeatable systems.
+At the same time, several keywords — including management, code, version control, and increase reliability — applied to both categories, reinforcing that automation and orchestration are not separate disciplines but complementary layers of the same process. **_Automation_** provides the building blocks, while orchestration arranges those blocks into reliable, repeatable systems.
 
 Together, they enable scalable, reliable, and efficient IT operations: automation reduces manual effort and human error at the task level, while orchestration ensures those automated tasks work together correctly across infrastructure and teams, ultimately decreasing IT costs and increasing overall productivity.
