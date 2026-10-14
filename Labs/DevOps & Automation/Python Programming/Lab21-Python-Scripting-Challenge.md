@@ -70,7 +70,7 @@ pwd
 nano prime_numbers.py
 ```
 
-I create the program [prime_numbers.py](./python-scripts/prime-numbers.py) through the nano editor, so that the location of my python script is `/home/ec2-user/python`.
+I create the program [prime-numbers.py](./python-scripts/prime-numbers.py) through the nano editor, so that the location of my python script is `/home/ec2-user/python`.
 
 ```python
 # ----------------------------------------------------------------------------------
