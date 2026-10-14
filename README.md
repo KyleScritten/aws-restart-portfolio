@@ -114,7 +114,10 @@ End-to-end projects where I applied AWS services to build and deploy working sol
 
 ## ☁️ AWS Services & Technologies
 
-The AWS services, tools, and technologies that make up my cloud skill set, grouped by category.
+<details>
+<summary><b>View full list of services & technologies</b></summary>
+
+<br>
 
 | Category | Services & Technologies |
 |---|---|
@@ -133,6 +136,8 @@ The AWS services, tools, and technologies that make up my cloud skill set, group
 | **Developer Tools** | AWS CLI, AWS CodeBuild, AWS CodePipeline, AWS X-Ray, Git, GitHub, Visual Studio Code |
 | **Programming & Automation** | Python, Bash, APIs, Infrastructure as Code (IaC) |
 | **Operating Systems** | Linux |
+
+</details>
 
 > [!NOTE]
 > This list reflects AWS services and technologies covered during my Cloud Practitioner studies and AWS re/Start learning journey. My individual lab repositories document specific hands-on exercises and practical experience.
