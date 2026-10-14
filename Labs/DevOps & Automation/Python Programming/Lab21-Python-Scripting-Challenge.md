@@ -116,7 +116,7 @@ To run the code, while in the folder `python`, I run the following command on te
 python3 prime-numbers.py
 ```
 
-The program returns the following output on screen:
+#### Terminal output
 ```bash
 [ec2-user@ip-10-1-11-229 python]$ python3 prime-numbers.py
 There are 53 prime numbers between 2 and 250
