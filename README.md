@@ -130,9 +130,11 @@ The AWS services, tools, and technologies that make up my cloud skill set, group
 
 ---
 
-## Summary
+## 📌 Summary
 
-This repository documents my learning journey through the AWS re/Start programme, covering cloud computing fundamentals, AWS services, and hands-on cloud infrastructure exercises. It showcases my developing technical skills in cloud infrastructure management, Linux system administration, networking, security, Python programming, and automation. Through practical labs and technical documentation, I have applied cloud computing concepts, explored AWS services, and built a foundation for further development in cloud engineering and related technical fields.
+This repository is a record of my AWS re/Start journey and of how my technical skills have developed along the way. Starting from the fundamentals of AWS, I moved on to building and configuring real infrastructure, working across Linux system administration, networking, security, storage, databases, Python programming, and automation. Each lab and project is documented so that the reasoning behind my choices is visible, not just the finished result.
+
+Beyond the labs, the portfolio includes projects where I brought these skills together to build and deploy working solutions, along with learning records that show my progress over time. I'm currently preparing for the AWS Certified Cloud Practitioner exam to formalise what I've learned, and my next step is to move into a cloud engineering role where I can keep building on this foundation.
 
 ---
 
