@@ -44,9 +44,28 @@ This repository reflects that growth — capturing not just what I've learned, b
 
 ---
 
-## Certifications & Badges
+## 🎓 Certifications & Badges
 
-PLACEHOLDER_TABLE
+Certifications and digital badges earned through my AWS re/Start journey and independent study.
+
+| Credential | Issuer | Earned | Verification |
+|---|---|---|---|
+| AWS Cloud Foundations badge | AWS Training | Month YYYY | [View badge](https://...) |
+| Machine Learning and Generative AI learning badge | AWS Skill Builder | Month YYYY | [View badge](https://...) |
+
+**In progress:** AWS Certified Cloud Practitioner (exam preparation underway)
+
+---
+
+## 🎮 AWS SimuLearn Completions
+
+Scenario-based, hands-on training completed through AWS SimuLearn as part of my AWS re/Start journey.
+
+| Assignment | Focus Area | Completed | Evidence |
+|---|---|---|---|
+| Assignment name | e.g. Compute, Networking, Security | Month YYYY | [View certificate](https://...) |
+| Assignment name | e.g. Databases, Storage | Month YYYY | [View certificate](https://...) |
+| Assignment name | e.g. Machine Learning | Month YYYY | [View certificate](https://...) |
 
 ---
 
