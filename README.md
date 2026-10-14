@@ -52,6 +52,22 @@ PLACEHOLDER_TABLE
 
 ## Labs
 
+This directory documents the practical exercises I completed during my AWS re/Start learning journey, Hands-on labs formed the core of the learning experience.
+
+| Category | File |
+|---|---|
+| Cloud Architecture & Scaling | [Follow this link](./Labs/Cloud Architecture & Scaling/) |
+| Compute Infrastructure | [Follow this link](./Labs/Compute Infrastructure/) |
+| Databases & Data Services | [Follow this link](./Labs/Databases & Data Services/) |
+| DevOps & Automation | [Follow this link](./Labs/DevOps & Automation/) |
+| Linux & Systems | [Follow this link](./Labs/Linux & Systems/) |
+| Machine Learning and Generative AI | [Follow this link](./Labs/Machine Learning and Generative AI/) |
+| Monitoring | [Follow this link](./Labs/Monitoring/) |
+| Networking | [Follow this link](./Labs/Networking/) |
+| Security | [Follow this link](./Labs/Security/) |
+| Serverless & Containers | [Follow this link](./Labs/Serverless & Containers/) |
+| Storage & Archiving | [Follow this link](./Labs/Storage & Archiving/) |
+
 ---
 
 ## Projects
