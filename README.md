@@ -52,7 +52,7 @@ PLACEHOLDER_TABLE
 
 ## Labs
 
-This directory documents the practical exercises I completed during my AWS re/Start learning journey, Hands-on labs formed the core of the learning experience.
+This directory documents the practical exercises I completed during my AWS re/Start learning journey, hands-on labs formed the core of the learning experience.
 
 | Folder Directory | Overview |
 |---|---|
