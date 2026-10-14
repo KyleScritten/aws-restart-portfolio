@@ -72,6 +72,8 @@ nano prime_numbers.py
 
 I create the program [prime-numbers.py](./python-scripts/prime-numbers.py) through the nano editor, so that the location of my python script is `/home/ec2-user/python`.
 
+*This is the full script for this lab here:*
+
 ```python
 # ----------------------------------------------------------------------------------
 #                  PRIME NUMBERS BETWEEN 1 AND 250
