@@ -85,3 +85,39 @@ PLACEHOLDER_TABLE
 This repository documents my learning journey through the AWS re/Start programme, covering cloud computing fundamentals, AWS services, and hands-on cloud infrastructure exercises. It showcases my developing technical skills in cloud infrastructure management, Linux system administration, networking, security, Python programming, and automation. Through practical labs and technical documentation, I have applied cloud computing concepts, explored AWS services, and built a foundation for further development in cloud engineering and related technical fields.
 
 ---
+
+## Repository Structure
+
+The repository was organized into the following learning areas:
+
+```
+aws-restart-portfolio/
+│
+├── Certifications & Badges/
+│   ├── images/
+│   └── readme.md
+│
+├── Labs/
+│   ├── Cloud Architecture & Scaling/
+│   ├── Compute Infrastructure/
+│   ├── Databases & Data Services/
+│   ├── DevOps & Automation/
+|   |   ├── Python Programming
+|   |   ├── System Operations
+|   |   └── Tooling & Automation  
+│   ├── Linux & Systems/
+│   ├── Machine Learning and Generative AI/
+|   |   └── Portfolio
+│   ├── Monitoring/
+│   ├── Networking/
+│   ├── Security/
+│   ├── Serverless & Containers/
+│   ├── Storage & Archiving/
+│   └── readme.md
+│
+├── Projects/
+│   ├── 3D-ecommerce/
+│   └── S3-Website/
+│
+└── README.md
+```
