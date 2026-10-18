@@ -168,4 +168,4 @@ Traffic spikes may no longer be isolated to one region; they could be **global a
 | **Cost Optimization** | Auto Scaling, serverless Lambda, managed services and Trusted Advisor prevent over-provisioning during calm weather. |
 | **Sustainability** | Auto-scaling reduces idle resources, and managed services optimize energy efficiency in AWS data centers. |
 
-_You can view the Final Report Submission here:_ [EcoFlow_Architecture_171026.pdf](./Projects/3D-ecommerce/Documentation/EcoFlow_Architecture_171026.pdf)
+_You can view the Final Report Submission here:_ [EcoFlow_Architecture_171026.pdf](./Documentation/EcoFlow_Architecture_171026.pdf)
