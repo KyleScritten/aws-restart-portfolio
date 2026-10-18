@@ -33,7 +33,7 @@ Alongside the working website, the team designed a phased AWS architecture that 
 2. **Reliable:** S3 hosting removes the need for a server to maintain, and versioning protects against accidental changes.
 3. **Scalable:** serverless services can be added only when the business needs them.
 
-_You can view the Assignment Brief here:_ [Project_1_Building_a_Static_Website_and_Presenting_AWS_Migration_Benefits.pdf](./Documentation/Project_1_Building_a_Static_Website_and_Presenting_AWS_Migration_Benefits.pdf)
+_You can view the Assignment Brief here:_ [Project 1 Building a Static Website and Presenting AWS Migration Benefits.pdf](./Documentation/Project_1_Building_a_Static_Website_and_Presenting_AWS_Migration_Benefits.pdf)
 
 ---
 
@@ -135,7 +135,7 @@ The team held a planning session on **11 July 2026**. By that point the website 
 4. **Benefits of Cloud Migration:** why moving to the cloud suits the business.
 5. **Cost Analysis:** a comparison of the cloud solution against the business's operating costs before migration, using the AWS Pricing Calculator.
 
-_You can view the planning notes here:_ [Project_01_Planning_Meeting.pdf](./Documentation/Project_01_Planning_Meeting.pdf)
+_You can view the planning notes here:_ [Project 01 Planning Meeting.pdf](./Documentation/Project01_Planning_Meeting.pdf)
 
 ---
 
@@ -143,4 +143,4 @@ _You can view the planning notes here:_ [Project_01_Planning_Meeting.pdf](./Docu
 
 By combining secure authentication, monitoring, scalable serverless services and low-cost storage, the Ubuntu Braai & Lounge solution addresses the identified business and technical challenges while remaining affordable for a small business. The selected AWS services provide a practical foundation that can be expanded as the restaurant grows.
 
-_You can view the Final Report Submission here:_ [Ubuntu_Website_architecture.pdf](./Documentation/Ubuntu_Website_architecture.pdf)
+_You can view the Final Report Submission here:_ [Ubuntu Website Architecture.pdf](./Documentation/Ubuntu_Website_architecture.pdf)
