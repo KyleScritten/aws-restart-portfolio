@@ -23,7 +23,7 @@
 <a name="1-executive-summary"></a>
 ## 📋 1. Executive Summary
 
-### 🎯 Architecture Core Goals & Business Case
+### Architecture Core Goals & Business Case
 Our team is launching a next-generation 3D e-commerce platform specializing in **EcoFlow Portable Power & Solar Systems**. We chose this product line because severe weather and power grid instability are global phenomena intensified by the **2026 El Niño** (hurricanes in the US, typhoons in Asia, load-shedding in Africa, winter storms in Europe).
 
 When outages hit, they trigger sudden, unpredictable traffic surges from panicked buyers. Furthermore, high-ticket battery spec sheets and heavy solar manuals require real bandwidth. This business case justifies our need for AWS Auto Scaling, heavy S3/CloudFront asset caching, and AWS WAF bot defense for high-value orders.
@@ -103,7 +103,7 @@ Security is integrated at every layer, following the AWS Shared Responsibility M
 ### 💸 CapEx vs. OpEx Transformation
 By leveraging AWS cloud services, we eliminate large upfront Capital Expenditure (CapEx) for physical servers, shifting to a variable Operational Expenditure (OpEx) model. We only pay for what we use.
 
-### 📉 Cost Efficiency Drivers
+### Cost Efficiency Drivers
 - **Auto-Scaling:** avoids over-provisioning by scaling down in calm weather and scaling up only when storms hit.
 - **CloudFront Caching:** serving 90%+ of heavy solar manuals from the edge significantly reduces data transfer costs and backend compute load.
 - **Serverless (Lambda):** pay only for compute time used for event-driven tasks such as pre-warming, eliminating idle server costs.
@@ -127,7 +127,7 @@ By leveraging AWS cloud services, we eliminate large upfront Capital Expenditure
 
 The current El Niño is forecast to be one of the strongest on record, peaking around December 2026. For the EcoFlow platform this is a **stress test** for the architecture and a significant business opportunity.
 
-### 📈 The Direct Impact: A Surge in Global Demand
+### The Direct Impact: A Surge in Global Demand
 
 | Region | Possible conditions |
 | :--- | :--- |
@@ -138,7 +138,7 @@ The current El Niño is forecast to be one of the strongest on record, peaking a
 
 Traffic spikes may no longer be isolated to one region; they could be **global and simultaneous**.
 
-### 🛡️ How Our Architecture Responds
+### How Our Architecture Responds
 
 1. **Edge Layer (Route 53 & CloudFront):** When a storm hits the US East Coast, CloudFront serves buyers from the closest edge location, absorbing 90%+ of the demand for 50MB wiring diagrams before it reaches the backend, while Route 53 latency routing sends dynamic requests to the closest healthy region.
 2. **Pre-Warming Layer (EventBridge & Lambda):** The **proactive** advantage: on a severe weather warning, Lambda pre-warms the Auto Scaling Groups so EC2 capacity is ready *before* landfall, avoiding cold starts.
@@ -146,7 +146,7 @@ Traffic spikes may no longer be isolated to one region; they could be **global a
 4. **Data Layer (Aurora & DynamoDB):** The multi-region database setup keeps reads fast worldwide, accepts DynamoDB writes in both regions, and supports failover if a region has issues.
 5. **Security Layer (WAF & Shield):** Emergency sales are a prime target for scalper bots. WAF blocks malicious traffic at the edge so legitimate customers can complete purchases.
 
-### 🎯 Proactive Adjustments for Peak Season (Nov 2026 - Jan 2027)
+### Proactive Adjustments for Peak Season (Nov 2026 - Jan 2027)
 - **Refine pre-warming triggers:** tie EventBridge rules to the most reliable weather alert APIs for high-risk regions.
 - **Stress-test Auto Scaling:** run load tests simulating a 1000% increase in concurrent users to validate scaling policies.
 - **Monitor database replication:** configure CloudWatch Alarms to alert on cross-region replication latency.
