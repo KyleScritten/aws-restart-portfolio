@@ -1,4 +1,4 @@
-# ☁️ Global 3D E-Commerce Platform Architecture ☁️
+# Global 3D E-Commerce Platform Architecture 
 ## Selling EcoFlow Portable Power & Solar Systems
 
 <div align="center">
