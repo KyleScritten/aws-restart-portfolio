@@ -107,6 +107,8 @@ This directory documents the practical exercises I completed during my AWS re/St
 
 End-to-end projects where I applied AWS services to build and deploy working solutions.
 
+> 📁 **[Browse Full Projects Directories →](./Projects/)**
+
 | Project | Overview | AWS Services | Links |
 |---|---|---|---|
 | [3D E-commerce](./Projects/3D-ecommerce/) | One or two sentences on what it does and the problem it solves. | e.g. EC2, S3, RDS, VPC | [Repo folder](./Projects/3D-ecommerce/) |
