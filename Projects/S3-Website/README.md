@@ -52,6 +52,8 @@ _You can view the Assignment Brief here:_ [Project 1 Building a Static Website a
 >[!Caution]
 > The Admin dashboard is password protected, when prompted insert: `ubuntu2026`
 
+[![Ubuntu Braai & Lounge Admin Dashboard](./images/ubuntu-braai-admin.png)](http://ubuntu-braai.s3-website.eu-north-1.amazonaws.com/admin.html)
+
 The website was fully coded and deployed to an Amazon S3 bucket in the **eu-north-1 (Stockholm)** region.
 
 ---
