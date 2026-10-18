@@ -137,7 +137,7 @@ The team held a planning session on **11 July 2026**. By that point the website 
 4. **Benefits of Cloud Migration:** why moving to the cloud suits the business.
 5. **Cost Analysis:** a comparison of the cloud solution against the business's operating costs before migration, using the AWS Pricing Calculator.
 
-_You can view the planning notes here:_ [Project 01 Planning Meeting.pdf](./Documentation/Project01_Planning_Meeting.pdf)
+_You can view the planning notes here:_ [Project 01 Planning Meeting.pdf](./Documentation/Project_01_Planning_Meeting.pdf)
 
 ---
 
