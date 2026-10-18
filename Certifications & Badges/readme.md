@@ -2,7 +2,7 @@
 
 [← Back to the main portfolio](../README.md)
 
-Certifications and digital badges earned through my AWS re/Start journey and independent study.
+This page brings together the digital badges and training records I've earned through my AWS re/Start journey and independent study, with a link to verify each one. They show my progress from cloud fundamentals towards the AWS Certified Cloud Practitioner exam, which I'm currently preparing for.
 
 | Badge | Credential | Issuer | Verification |
 |---|---|---|---|
