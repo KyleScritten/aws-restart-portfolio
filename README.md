@@ -47,7 +47,7 @@ This repository reflects that growth — capturing not just what I've learned, b
 
 ## 🎓 Certifications & Badges
 
-Certifications and digital badges earned through my AWS re/Start journey and independent study.
+Certifications and digital badges earned through my AWS re/Start journey and independent study, with a link to verify each one.
 
 | Credential | Issuer | Earned | Verification |
 |---|---|---|---|
