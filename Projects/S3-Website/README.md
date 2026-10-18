@@ -47,7 +47,10 @@ _You can view the Assignment Brief here:_ [Project_1_Building_a_Static_Website_a
 | Page | Link |
 | :--- | :--- |
 | **Customer website** | [Open the Ubuntu Braai & Lounge website](http://ubuntu-braai.s3-website.eu-north-1.amazonaws.com/index.html) |
-| **Admin dashboard** | [Open the admin dashboard](http://ubuntu-braai.s3-website.eu-north-1.amazonaws.com/admin.html) (Password Protected: `ubuntu2026` ) |
+| **Admin dashboard** | [Open the admin dashboard](http://ubuntu-braai.s3-website.eu-north-1.amazonaws.com/admin.html) (Password Protected) |
+
+>[!Caution]
+> The Admin dashboard is password protected, when prompted insert: `ubuntu2026`
 
 The website was fully coded and deployed to an Amazon S3 bucket in the **eu-north-1 (Stockholm)** region.
 
