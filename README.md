@@ -64,7 +64,7 @@ Certifications and digital badges earned through my AWS re/Start journey and ind
 
 Scenario-based, hands-on training completed through AWS SimuLearn as part of my AWS re/Start journey.
 
-| Assignment | Focus Area | Completed | Evidence |
+| Assignment | Focus Area | Completed | Verification |
 |---|---|---|---|
 | Cloud First Steps | **Cloud Fundamentals** | June 2, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Cloud_First_Steps.pdf) |
 | Cloud Computing Essentials | **Cloud Fundamentals** | June 3, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Cloud_Computing_Essentials.pdf) |
