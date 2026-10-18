@@ -105,9 +105,9 @@ This directory documents the practical exercises I completed during my AWS re/St
 
 ## 🚀 Projects
 
-End-to-end projects where I applied AWS services to build and deploy working solutions.
-
 > 📁 **[Browse Full Projects Directories →](./Projects/)**
+ 
+End-to-end projects where I applied AWS services to build and deploy working solutions.
 
 | Project | Overview | AWS Services | Links |
 |---|---|---|---|
