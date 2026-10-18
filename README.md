@@ -188,7 +188,12 @@ aws-restart-portfolio/
 │
 ├── Projects/
 │   ├── 3D-ecommerce/
-│   └── S3-Website/
+|   |   └── Documentation
+|   |   └── images
+│   ├── S3-Website/
+|   |   └── Documentation
+|   |   └── images
+│   └── readme.md
 │
 └── README.md
 ```
