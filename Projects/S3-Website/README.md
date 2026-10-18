@@ -14,7 +14,7 @@
 
 > [!NOTE]
 > **📋 Project:** AWS re/Start Special Project 1: Building a Static Website for a Restaurant and Presenting AWS Migration Benefits  
-> **👨‍💻 Prepared By:** AWS re/Start Project Team
+> **👨‍💻 Prepared By:** AWS re/Start Cloud Architecture Mini Team
 
 ---
 
