@@ -36,6 +36,8 @@ The architecture meets five core requirements:
 4. **Security:** Defense-in-depth to protect high-value transactions from scalper bots.
 5. **Cost Optimization:** Auto-scaling and managed services to avoid over-provisioning during calm weather periods.
 
+_You can view the Assignment Brief here:_ [Design a 3D architecture.pdf](./Documentation/Design%20a%203D%20architecture.pdf)
+
 ---
 
 <a name="2-high-level-architecture-diagram"></a>
@@ -165,3 +167,5 @@ Traffic spikes may no longer be isolated to one region; they could be **global a
 | **Performance Efficiency** | CloudFront edge caching absorbs traffic spikes, Route 53 Latency Routing directs buyers to the closest region, and ElastiCache speeds up database queries. |
 | **Cost Optimization** | Auto Scaling, serverless Lambda, managed services and Trusted Advisor prevent over-provisioning during calm weather. |
 | **Sustainability** | Auto-scaling reduces idle resources, and managed services optimize energy efficiency in AWS data centers. |
+
+_You can view the Final Report Submission here:_ [EcoFlow_Architecture_171026.pdf](./Projects/3D-ecommerce/Documentation/EcoFlow_Architecture_171026.pdf)
