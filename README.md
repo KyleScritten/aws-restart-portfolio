@@ -109,7 +109,7 @@ This directory documents the practical exercises I completed during my AWS re/St
  
 End-to-end projects where I applied AWS services to build and deploy working solutions.
 
-| Project | Overview | Core Stack |
+| re/Start Project | Overview | Core Stack |
 |---|---|---|
 | [3D E-commerce](./Projects/3D-ecommerce/README.md) | A multi-region AWS architecture design for a global 3D e-commerce platform selling EcoFlow portable power and solar systems. It handles unpredictable, weather-driven traffic surges while staying highly available, secure, and cost-efficient. | `Route 53` `CloudFront` `S3` `WAF & Shield` `ALB` `EC2 Auto Scaling` `Lambda` `EventBridge` `Aurora` `DynamoDB` `ElastiCache` `CloudWatch` |
 | [S3 Website](./Projects/S3-Website/) | One or two sentences on what it hosts and how it's deployed. | e.g. S3, CloudFront, Route 53 |
