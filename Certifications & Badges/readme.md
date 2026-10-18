@@ -7,7 +7,7 @@ This page brings together the digital badges and training records I've earned th
 | Badge | Credential | Issuer | Verification |
 |---|---|---|---|
 | [<img src="./Badges/aws-simulearn-cloud-practitioner-training-badge.png" alt="AWS SimuLearn Cloud Practitioner Trained Badge" width="100"/>](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a/public_url) | AWS SimuLearn: Cloud Practitioner Trained | AWS Training & Certification | [View on Credly](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a/public_url) |
-| [<img src="./Badges/aws-re-start-graduate.png" alt="AWS re/Start Graduate Badge" width="100"/>](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url) | AWS re/Start Graduate | AWS Training & Certification | [View on Credly](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url) | 
+<!-- | [<img src="./Badges/aws-re-start-graduate.png" alt="AWS re/Start Graduate Badge" width="100"/>](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url) | AWS re/Start Graduate | AWS Training & Certification | [View on Credly](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url) | -->
 
 **In progress:** AWS Certified Cloud Practitioner (exam preparation underway)
 
@@ -15,7 +15,7 @@ This page brings together the digital badges and training records I've earned th
 
 ## 🎮 AWS SimuLearn Completions
 
-Scenario-based, hands-on training completed through AWS SimuLearn as part of my AWS re/Start journey.
+AWS SimuLearn is AWS's scenario-based training, where each assignment sets a realistic business problem to solve with AWS services. I completed 14 assignments, grouped below by focus area from cloud fundamentals through compute, storage, databases, networking and security to machine learning and AI, and each one links to its completion certificate.
 
 | Assignment | Focus Area | Completed | Evidence |
 |---|---|---|---|
