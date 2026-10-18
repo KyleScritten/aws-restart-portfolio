@@ -100,7 +100,7 @@ Security is integrated at every layer, following the AWS Shared Responsibility M
 <a name="5-cost-benefit--financial-optimization"></a>
 ## 💰 5. Cost-Benefit & Financial Optimization
 
-### 💸 CapEx vs. OpEx Transformation
+### CapEx vs. OpEx Transformation
 By leveraging AWS cloud services, we eliminate large upfront Capital Expenditure (CapEx) for physical servers, shifting to a variable Operational Expenditure (OpEx) model. We only pay for what we use.
 
 ### Cost Efficiency Drivers
