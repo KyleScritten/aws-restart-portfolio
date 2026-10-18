@@ -1,10 +1,13 @@
 # Welcome to my **AWS re/Start Program Portfolio**!
 
-<p align="center">
-  <img src="https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS" width="150">
-  <img src="https://img.shields.io/badge/Linux-System%20Administration-black?style=for-the-badge&logo=linux" alt="Linux" width="350">
-  <img src="https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python" alt="Python" width="250">
-</p>
+<div align="center">
+
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-System_Administration-black?style=for-the-badge&logo=linux)
+![Python](https://img.shields.io/badge/Python-Automation-blue?style=for-the-badge&logo=python)
+![Cloud Practitioner](https://img.shields.io/badge/AWS_Certified_Cloud_Practitioner-In_Progress-yellow?style=for-the-badge)
+
+</div>
 
 ## 👋 Introduction
 
