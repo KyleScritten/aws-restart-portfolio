@@ -111,7 +111,7 @@ End-to-end projects where I applied AWS services to build and deploy working sol
 
 | Project | Overview | Core Stack |
 |---|---|---|
-| [3D E-commerce](./Projects/3D-ecommerce/README.md) | A multi-region AWS architecture design for a global 3D e-commerce platform selling EcoFlow portable power and solar systems. It handles unpredictable, weather-driven traffic surges while staying highly available, secure, and cost-efficient. | `Route 53` `CloudFront` `S3` `WAF & Shield` `ALB` `EC2 Auto Scaling` `Lambda` `EventBridge` `Aurora` `DynamoDB` `ElastiCache` `CloudWatch` |
+| [3D E-commerce](./Projects/3D-ecommerce%20/README.md) | A multi-region AWS architecture design for a global 3D e-commerce platform selling EcoFlow portable power and solar systems. It handles unpredictable, weather-driven traffic surges while staying highly available, secure, and cost-efficient. | `Route 53` `CloudFront` `S3` `WAF & Shield` `ALB` `EC2 Auto Scaling` `Lambda` `EventBridge` `Aurora` `DynamoDB` `ElastiCache` `CloudWatch` |
 | [S3 Website](http://ubuntu-braai.s3-website.eu-north-1.amazonaws.com/index.html) | A static website for Ubuntu Braai & Lounge, hosted on Amazon S3, where customers can browse the menu, place orders and make reservations. It replaces a mixed-up manual booking process with a low-cost solution, backed by a planned serverless architecture for future growth. | `S3` `HTML5` `CSS3` `JavaScript` `Cognito` `API Gateway` `Lambda` `DynamoDB` `SES` `SQS` `CloudFront` |
 
 ---
