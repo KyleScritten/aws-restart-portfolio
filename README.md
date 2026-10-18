@@ -111,7 +111,7 @@ End-to-end projects where I applied AWS services to build and deploy working sol
 
 | Project | Overview | Core Stack | Links |
 |---|---|---|---|
-| [3D E-commerce](./Projects/3D-ecommerce/) | One or two sentences on what it does and the problem it solves. | e.g. EC2, S3, RDS, VPC | [Repo folder](./Projects/3D-ecommerce/) |
+| [3D E-commerce](./Projects/3D-ecommerce/README.md) | One or two sentences on what it does and the problem it solves. | e.g. EC2, S3, RDS, VPC | [Repo folder](./Projects/3D-ecommerce/) |
 | [S3 Website](./Projects/S3-Website/) | One or two sentences on what it hosts and how it's deployed. | e.g. S3, CloudFront, Route 53 | [Live site](https://...) |
 
 ---
