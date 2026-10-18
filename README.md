@@ -66,7 +66,7 @@ Certifications and digital badges earned through my AWS re/Start journey and ind
 
 ## 🎮 AWS SimuLearn Completions
 
-Scenario-based, hands-on training completed through AWS SimuLearn as part of my AWS re/Start journey.
+AWS SimuLearn is AWS's scenario-based training, where each assignment sets a realistic business problem to solve with AWS services. I completed 14 assignments, grouped below by focus area from cloud fundamentals through compute, storage, databases, networking and security to machine learning and AI, and each one links to its completion certificate.
 
 | Assignment | Focus Area | Completed | Verification |
 |---|---|---|---|
@@ -113,7 +113,7 @@ This directory documents the practical exercises I completed during my AWS re/St
 
 > 📁 **[Browse Full Projects Directories →](./Projects/)**
  
-End-to-end projects where I applied AWS services to build and deploy working solutions.
+These projects show how I apply AWS services to real business problems, from designing a multi-region architecture that can handle unpredictable traffic to building and hosting a working website for a small restaurant. Each project has its own documentation covering the problem, the AWS services chosen and why, and the trade-offs and challenges along the way.
 
 | Project | Overview | Core Stack |
 |---|---|---|
