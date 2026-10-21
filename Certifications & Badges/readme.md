@@ -15,7 +15,7 @@ This page brings together the digital badges and training records I've earned th
 
 ## 🎮 AWS SimuLearn Completions
 
-AWS SimuLearn is AWS's scenario-based training, where each assignment sets a realistic business problem to solve with AWS services. I completed 14 assignments, grouped below by focus area from cloud fundamentals through compute, storage, databases, networking and security to machine learning and AI, and each one links to its completion certificate.
+AWS SimuLearn is AWS's scenario-based training, where each assignment sets a realistic business problem to solve with AWS services. I completed 15 assignments, grouped below by focus area from cloud fundamentals through compute, storage, databases, networking and security to machine learning and AI, and each one links to its completion certificate.
 
 | Assignment | Focus Area | Completed | Evidence |
 |---|---|---|---|
