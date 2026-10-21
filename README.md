@@ -84,6 +84,7 @@ AWS SimuLearn is AWS's scenario-based training, where each assignment sets a rea
 | Core Security Concepts | **Security** | August 20, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Security_Concepts.pdf) |
 | Use AI Services with Amazon SageMaker | **Machine Learning & AI** | September 20, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_AI_Services_SM.pdf) |
 | Create an AI Smart Assistant | **Machine Learning & AI** | September 20, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Create_Smart_Assistant.pdf) |
+| Explore the Amazon Bedrock Playgrounds | **Machine Learning & AI** | October 21, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Explore_Amazon_Bedrock.pdf) |
 
 ---
 
