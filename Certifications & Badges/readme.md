@@ -15,7 +15,7 @@ This page brings together the digital badges and training records I've earned th
 
 ## 🎮 AWS SimuLearn Completions
 
-AWS SimuLearn is AWS's scenario-based training, where each assignment sets a realistic business problem to solve with AWS services. I completed 17 assignments, grouped below by focus area from cloud fundamentals through compute, storage, databases, networking and security to machine learning and AI, and each one links to its completion certificate.
+AWS SimuLearn is AWS's scenario-based training, where each assignment sets a realistic business problem to solve with AWS services. I completed 18 assignments, grouped below by focus area from cloud fundamentals through compute, storage, databases, networking and security to machine learning and AI, and each one links to its completion certificate.
 
 | Assignment | Focus Area | Completed | Evidence |
 |---|---|---|---|
@@ -36,3 +36,4 @@ AWS SimuLearn is AWS's scenario-based training, where each assignment sets a rea
 | Explore the Amazon Bedrock Playgrounds | **Machine Learning & AI** | October 21, 2026 | [View certificate](./SimuLearn/CC_Explore_Amazon_Bedrock.pdf) |
 | Generate Code for a Webpage | **Machine Learning & AI** | October 21, 2026 | [View certificate](./SimuLearn/CC_Generate_Code_Webpage.pdf) |
 | Get Started with Generative AI | **Machine Learning & AI** | October 21, 2026 | [View certificate](./SimuLearn/CC_Gen_AI_Get_Started.pdf) |
+| Secure Conversational AI with Guardrails | **Machine Learning & AI** | October 22, 2026 | [View certificate](./SimuLearn/CC_Secure_Conversational_AI_Guardrails.pdf) |
