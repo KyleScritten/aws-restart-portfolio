@@ -87,6 +87,7 @@ AWS SimuLearn is AWS's scenario-based training, where each assignment sets a rea
 | Explore the Amazon Bedrock Playgrounds | **Machine Learning & AI** | October 21, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Explore_Amazon_Bedrock.pdf) |
 | Generate Code for a Webpage | **Machine Learning & AI** | October 21, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Generate_Code_Webpage.pdf) |
 | Get Started with Generative AI | **Machine Learning & AI** | October 21, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Gen_AI_Get_Started.pdf) |
+| Secure Conversational AI with Guardrails | **Machine Learning & AI** | October 22, 2026 | [View certificate](./Certifications%20%26%20Badges/SimuLearn/CC_Secure_Conversational_AI_Guardrails.pdf) |
 
 ---
 
