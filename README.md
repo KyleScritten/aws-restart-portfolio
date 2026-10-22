@@ -135,21 +135,21 @@ These projects show how I apply AWS services to real business problems, from des
 
 | Category | Services & Technologies |
 |---|---|
-| **Compute** | Amazon EC2, AWS Lambda, AWS Elastic Beanstalk, Amazon Lightsail |
-| **Containers** | Amazon ECS, Amazon EKS, AWS Fargate |
-| **Storage** | Amazon S3, Amazon EBS, Amazon EFS, Amazon S3 Glacier, AWS Storage Gateway |
-| **Networking & Content Delivery** | Amazon VPC, Amazon Route 53, Amazon CloudFront, Elastic Load Balancing, Internet Gateways, NAT Gateways, Security Groups, Network ACLs, AWS Direct Connect, AWS VPN |
-| **Databases** | Amazon RDS, Amazon Aurora, Amazon DynamoDB, Amazon Redshift, Amazon ElastiCache, Amazon Neptune |
-| **Security & Identity** | AWS IAM, AWS IAM Identity Center, AWS CloudTrail, AWS Config, Amazon GuardDuty, Amazon Inspector, Amazon Macie, AWS KMS, AWS Shield, AWS WAF, AWS Artifact |
-| **Monitoring & Management** | Amazon CloudWatch, AWS Systems Manager, AWS CloudFormation, AWS Trusted Advisor, AWS Organizations, AWS Control Tower, AWS Health Dashboard |
-| **Application Integration & Serverless** | Amazon SQS, Amazon SNS, Amazon EventBridge, AWS Step Functions, Amazon API Gateway |
-| **Analytics** | Amazon Athena, Amazon Kinesis, AWS Glue, Amazon QuickSight |
-| **Artificial Intelligence & Machine Learning** | Amazon SageMaker AI, Amazon Rekognition, Amazon Comprehend, Amazon Lex, Amazon Polly, Amazon Textract, Amazon Transcribe, Amazon Translate, Amazon Q |
-| **Migration & Data Transfer** | AWS Database Migration Service (AWS DMS), AWS Application Migration Service, AWS Migration Hub, AWS DataSync |
-| **Cost Management & Support** | AWS Cost Explorer, AWS Budgets, AWS Pricing Calculator, AWS Cost and Usage Reports, AWS Support, AWS Marketplace |
-| **Developer Tools** | AWS CLI, AWS CodeBuild, AWS CodePipeline, AWS X-Ray, Git, GitHub, Visual Studio Code |
-| **Programming & Automation** | Python, Bash, APIs, Infrastructure as Code (IaC) |
-| **Operating Systems** | Linux |
+| **Compute** | `Amazon EC2` `AWS Lambda` `AWS Elastic Beanstalk` `Amazon Lightsail` |
+| **Containers** | `Amazon ECS` `Amazon EKS` `AWS Fargate` |
+| **Storage** | `Amazon S3` `Amazon EBS` `Amazon EFS` `Amazon S3 Glacier` `AWS Storage Gateway` |
+| **Networking & Content Delivery** | `Amazon VPC` `Amazon Route 53` `Amazon CloudFront` `Elastic Load Balancing` `Internet Gateways` `NAT Gateways` `Security Groups` `Network ACLs` `AWS Direct Connect` `AWS VPN` |
+| **Databases** | `Amazon RDS` `Amazon Aurora` `Amazon DynamoDB` `Amazon Redshift` `Amazon ElastiCache` `Amazon Neptune` |
+| **Security & Identity** | `AWS IAM` `AWS IAM Identity Center` `AWS CloudTrail` `AWS Config` `Amazon GuardDuty` `Amazon Inspector` `Amazon Macie` `AWS KMS` `AWS Shield` `AWS WAF` `AWS Artifact` |
+| **Monitoring & Management** | `Amazon CloudWatch` `AWS Systems Manager` `AWS CloudFormation` `AWS Trusted Advisor` `AWS Organizations` `AWS Control Tower` `AWS Health Dashboard` |
+| **Application Integration & Serverless** | `Amazon SQS` `Amazon SNS` `Amazon EventBridge` `AWS Step Functions` `Amazon API Gateway` |
+| **Analytics** | `Amazon Athena` `Amazon Kinesis` `AWS Glue` `Amazon QuickSight` |
+| **Artificial Intelligence & Machine Learning** | `Amazon SageMaker AI` `Amazon Rekognition` `Amazon Comprehend` `Amazon Lex` `Amazon Polly` `Amazon Textract` `Amazon Transcribe` `Amazon Translate` `Amazon Q` |
+| **Migration & Data Transfer** | `AWS Database Migration Service (AWS DMS)` `AWS Application Migration Service` `AWS Migration Hub` `AWS DataSync` |
+| **Cost Management & Support** | `AWS Cost Explorer` `AWS Budgets` `AWS Pricing Calculator` `AWS Cost and Usage Reports` `AWS Support` `AWS Marketplace` |
+| **Developer Tools** | `AWS CLI` `AWS CodeBuild` `AWS CodePipeline` `AWS X-Ray` `Git` `GitHub` `Visual Studio Code` |
+| **Programming & Automation** | `Python` `Bash` `APIs` `Infrastructure as Code (IaC)` |
+| **Operating Systems** | `Linux` |
 
 </details>
 
