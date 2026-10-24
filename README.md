@@ -49,9 +49,11 @@ This repository reflects that growth — capturing not just what I've learned, b
 
 Certifications and digital badges earned through my AWS re/Start journey and independent study, with a link to verify each one.
 
-| Credential | Issuer | Earned | Verification |
-|---|---|---|---|
-| AWS SimuLearn Cloud Practitioner badge | AWS Training | September 29, 2026 | [View Credly](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a) |
+| Badge | Credential | Issuer | Earned | Verification |
+|---|---|---|---|---|
+| [<img src="./Badges/aws-re-start-graduate.png" alt="AWS re/Start Graduate Badge" width="100"/>](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url) | AWS re/Start Graduate | AWS Training & Certification | Month YYYY | [View on Credly](https://www.credly.com/badges/fee7e849-146d-41c3-8c61-e13a63e83073/public_url) |
+| [<img src="./Badges/aws-simulearn-cloud-practitioner-training-badge.png" alt="AWS SimuLearn Cloud Practitioner Trained Badge" width="100"/>](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a/public_url) | AWS SimuLearn: Cloud Practitioner Trained Badge | AWS Training & Certification | September 29, 2026 | [View on Credly](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a/public_url) |
+| [<img src="./Badges/aws-simulearn-ai-practitioner-training-badge.png" alt="AWS SimuLearn AI Practitioner Trained Badge" width="100"/>](https://www.credly.com/badges/418e85e7-ec2c-4189-85e6-18fbdbea2815/public_url) | AWS SimuLearn: AI Practitioner Trained Badge | AWS Training & Certification | October 24, 2026 | [View on Credly](https://www.credly.com/badges/418e85e7-ec2c-4189-85e6-18fbdbea2815/public_url) · [Certificate](./SimuLearn/SimuLearn_AI_Prac.pdf) |
 
 
 
