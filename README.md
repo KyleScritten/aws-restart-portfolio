@@ -59,8 +59,6 @@ Certifications and digital badges earned through my AWS re/Start journey and ind
 <!-- | AWS Certified Cloud Practitioner | AWS | Month YYYY | [View on Credly](https://www.credly.com/...) | -->
 <!-- | AWS Certified Machine Learning & AI | AWS | Month YYYY | [View on Credly](https://www.credly.com/...) | -->
 
-[<img src="./Certifications & Badges/Badges/aws-simulearn-cloud-practitioner-training-badge.png" alt="AWS SimuLearn Cloud Practitioner Trained Badge" width="150"/>](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a/public_url)
-
 **In progress:** AWS Certified Cloud Practitioner (exam preparation underway)
 
 ---
