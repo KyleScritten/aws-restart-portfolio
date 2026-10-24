@@ -53,7 +53,7 @@ Certifications and digital badges earned through my AWS re/Start journey and ind
 |---|---|---|---|
 | AWS SimuLearn Cloud Practitioner badge | AWS Training | September 29, 2026 | [View Credly](https://www.credly.com/badges/281e7218-2e16-45af-9e9d-ea57e87d4e6a) |
 
-<!-- | Machine Learning and Generative AI learning badge | AWS Skill Builder | Month YYYY | [View Credly](https://...) | -->
+
 
 <!-- | AWS Certified Cloud Practitioner | AWS | Month YYYY | [View on Credly](https://www.credly.com/...) | -->
 <!-- | AWS Certified Machine Learning & AI | AWS | Month YYYY | [View on Credly](https://www.credly.com/...) | -->
